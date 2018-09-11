@@ -1,0 +1,17 @@
+<%= form_for(@performamce) do |f| %>
+  <% if @performamce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@performamce.errors.count, "error") %> prohibited this performamce from being saved:</h2>
+
+      <ul>
+      <% @performamce.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
