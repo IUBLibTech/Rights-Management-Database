@@ -1,0 +1,81 @@
+<h2>RMD Start Page</h2>
+<p>Start workflow based on the various scenarios determined by Sherri and Naz</p>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">By Spreadsheet List</a></li>
+    <li><a href="#tabs-2">By Unit</a></li>
+    <li><a href="#tabs-3">By Collection</a></li>
+    <li><a href="#tabs-4">By???</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>Upload a spreadsheet to create a working set of physical objects to apply access decisions to.</p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <input type="file" value="Select a File" accept=".csv,.xslx">
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Upload File"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tabs-2">
+    <p><b><i>still to be discussed...</i></b></p>
+    <table>
+      <tbody>
+      <tr>
+        <th>Select Unit</th>
+        <td>
+          <input type="text" id="unit_autocomplete">
+        </td>
+        <td><input type="submit" value="Go"></td>
+      </tr>
+      <tr>
+        <th>Or Create New Unit</th>
+        <td>
+          <input type="submit" value="Create New Unit">
+        </td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tabs-3">
+    <p><b><i>still to be discussed...</i></b></p>
+    <table>
+      <tbody>
+      <tr>
+        <th>Select a Collection</th>
+        <td>
+          <input type="text" id="collection_autocomplete">
+        </td>
+        <td><input type="submit" value="Go"></td>
+      </tr>
+      <tr>
+        <th>Or Create New Collection</th>
+        <td><input type="text"></td>
+        <td><input type="submit" value="Create"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tabs-4">
+    <p>what else?</p>
+  </div>
+</div>
+<script>
+  var units = ["B-IULMIA", "B-AAAMC", "B-ARCHIVES", "B-ATM", "B-BFCA", "B-CEDIR", "B-FINEARTS", "B-GBL", "B-IUAM", "B-KINSEY", "B-LIBERIA", "B-LILLY", "B-MATHERS"];
+  var collections = ["Indiana University Audio-Visual Center", "Lane Education Service District", "Chester Gleim", "Edward and Naomi Feil", "South Bend", "Mid-Hudson Library System", "Hal and Kathryn Stewart", "Department of Near Eastern Languages and Cultures", "Vivian Euzent", "Robert Petranoff", "Robert Young", "Academic Film Archive of North America", "Pratt Institute", "Loyola Marymount University", "Pennsylvania State Archives", "Middle Tennessee State University", "SUNY New Paltz", "Indiana University Environmental Health and Safety", "Barry Allen", "African Studies Program", "CLIO Awards", "University of Arizona", "Wisconsin Center for Film and Theatre Research", "Brian Durham", "Agency for Instructional Technology", "IU Cinema", "James Morrison", "Peter Batty", "Senator Vance Hartke", "Jesus Dapena", "J. Fred MacDonald", "Frink Film Studios", "University of Illinois Film Center", "Thomas Stathes", "Thomas Stathes", "To Be Determined", "Eileen V. Brennan", "Thomas G. Smith", "Pat Wetmore", "University of Nebraska", "Myrtle McGraw", "Rob Mobley", "Quattrochi", "Rebecca Decker", "University Archives", "Bernadine Bailey", "Donald Bixler", "Indiana University Radio and Television  Services", "Center for Disability and Referral"]
+  $(document).ready(function() {
+      $( "#tabs" ).tabs();
+      $('#unit_autocomplete').autocomplete({
+          source: units
+      });
+      $('#collection_autocomplete').autocomplete({
+          source: collections
+      });
+  });
+</script>
