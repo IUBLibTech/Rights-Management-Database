@@ -22,5 +22,6 @@ module Rmd
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    Rails.configuration.rmd = HashWithIndifferentAccess.new(YAML.load_file("/run/secrets/rmd_config.yml")[Rails.env])
   end
 end
