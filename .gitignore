@@ -15,8 +15,6 @@ db/*.sqlite3-journal
 log/*
 !/log/.keep
 tmp
-config/database.yml
-config/pod_db.yml
 
 # files for rubymine
 .idea/*
@@ -26,16 +24,5 @@ passenger.*
 
 db/schema.rb
 
-# settings contains the service credentials for push/pull pod/filmdb accounts, so don't include
-config/settings/development.yml
-config/settings/test.yml
-config/settings/production.yml
-config/secrets.yml
-config/cedar.yml
-
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
-config/master.key
 public/
 .byebug_history

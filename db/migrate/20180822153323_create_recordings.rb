@@ -11,7 +11,7 @@ class CreateRecordings < ActiveRecord::Migration
       t.boolean :iu_produced_recording
       t.date :creation_end_date
       t.string :format
-      t.integer :mdpi_barcode
+      t.integer :mdpi_barcode, limit: 8
       t.string :authority_source
       t.string :access_determination
       t.boolean :in_copyright

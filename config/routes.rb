@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :recording_contributors
   resources :recordings
 
+  get '/services/mco', to: 'service#mco_push', as: 'mco_service'
+
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
