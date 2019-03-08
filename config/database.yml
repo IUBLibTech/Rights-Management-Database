@@ -2,16 +2,16 @@ development:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: <%= Rails.configuration.rmd[:db_name] %>
-  username: <%= Rails.configuration.rmd[:username] %>
-  password: <%= Rails.configuration.rmd[:password] %>
-  host: <%= Rails.configuration.rmd[:host] %>
+  database: <%= Rails.application.secrets[:db_name] %>
+  username: <%= Rails.application.secrets[:username] %>
+  password: <%= Rails.application.secrets[:password] %>
+  host: <%= Rails.application.secrets[:host] %>
 
 test:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: <%= Rails.configuration.rmd[:db_name] %>
-  username: <%= Rails.configuration.rmd[:username] %>
-  password: <%= Rails.configuration.rmd[:password] %>
-  host: <%= Rails.configuration.rmd[:host] %>
+  database: <%= Rails.application.secrets[:db_name] %>
+  username: <%= Rails.application.secrets[:username] %>
+  password: <%= Rails.application.secrets[:password] %>
+  host: <%= Rails.application.secrets[:host] %>

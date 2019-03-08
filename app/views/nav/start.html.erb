@@ -1,26 +1,30 @@
-<h2>RMD Start Page</h2>
-<p>Start workflow based on the various scenarios determined by Sherri and Naz</p>
+<p>Find Recordings by</p>
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">By Spreadsheet List</a></li>
+    <li><a href="#tabs-1">MDPI Barcode</a></li>
     <li><a href="#tabs-2">By Unit</a></li>
     <li><a href="#tabs-3">By Collection</a></li>
     <li><a href="#tabs-4">By???</a></li>
   </ul>
   <div id="tabs-1">
-    <p>Upload a spreadsheet to create a working set of physical objects to apply access decisions to.</p>
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <input type="file" value="Select a File" accept=".csv,.xslx">
-          </td>
-        </tr>
-        <tr>
-          <td><input type="submit" value="Upload File"></td>
-        </tr>
-      </tbody>
-    </table>
+    <%= form_tag '/nav/search', id: 'mdpi_barcode_form' do %>
+      <p>Enter the MDPI barcode of the recording you wish to load</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>
+              MDPI Barcode
+            </th>
+            <td>
+              <%= text_field_tag :mdpi_barcode %>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Search"></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   </div>
   <div id="tabs-2">
     <p><b><i>still to be discussed...</i></b></p>

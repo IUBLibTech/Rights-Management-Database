@@ -69,6 +69,6 @@ class RecordingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recording_params
-      params.fetch(:recording, {})
+      params.require(:recording).permit(:access_determination)
     end
 end

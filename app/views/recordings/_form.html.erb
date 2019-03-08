@@ -10,8 +10,32 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div id="">
+  <table>
+    <tbody>
+    <tr>
+      <th>Title</th>
+      <td>
+        <%= f.text_field :title %>
+      </td>
+    </tr>
+    <tr>
+      <th>MDPI Barcode</th>
+      <td>
+        <%= @recording.mdpi_barcode %>
+      </td>
+    </tr>
+    <tr>
+      <th>Access Decision</th>
+      <td>
+        <%= f.select :access_determination, options_for_select(Recording::ACCESS_DECISIONS, @recording.access_determination) %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 <% end %>

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :recording_contributors
   resources :recordings
 
-  get '/services/mco', to: 'service#mco_push', as: 'mco_service'
+  post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
+
+  get '/services/access_decision/:mdpi_barcode', to: 'services#access_decision', as: 'access_decision'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

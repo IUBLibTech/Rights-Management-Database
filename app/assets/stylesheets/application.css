@@ -15,5 +15,54 @@
  *= require_self
  */
 body {
-    text-align: left;
+    font-family: sans-serif;
+}
+
+div.branding {
+    font-size: 3em;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #007ffa;
+}
+.env_div {
+    text-align: center;
+}
+.env_p {
+    background: red;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    width: 200px;
+    margin: auto;
+}
+
+.nav_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2a415a;
+}
+.nav_li {
+    float: left;
+    height: 20px;
+    padding: 5px 20px;
+}
+a {
+    font-weight: bold;
+    color: #D07A00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFC200;
+}
+
+.search {
+    float: right;
+}
+
+.orange {
+    color: #D07A00;
 }
