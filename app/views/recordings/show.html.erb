@@ -17,6 +17,10 @@
     </td>
   </tr>
   <tr>
+    <th>Fedora ID</th>
+    <td><%= @recording.fedora_item_id %></td>
+  </tr>
+  <tr>
     <th>Access Decision</th>
     <td><%= @recording.access_determination %></td>
   </tr>
@@ -30,4 +34,11 @@
   <div id="iucat_link_div">
     <a href="https://iucat.iu.edu/catalog/<%= @recording.catalog_key %>" target="_blank">IUCAT Record</a>
   </div>
+<% end %>
+<% if @recording.fedora_item_id.blank? %>
+  <div>
+    No Fedora ID in the database...
+  </div>
+<% else %>
+  <%= link_to "MCO Item", "#" %>
 <% end %>

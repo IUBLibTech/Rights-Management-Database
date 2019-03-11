@@ -14,6 +14,13 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'mysql2', '~> 0.3.20'
 
+gem 'pundit'
+
+# handle ADS group lookup through LDAP
+gem 'ldap_groups_lookup'
+
+gem 'net-scp'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # jquery UI asset pipeline

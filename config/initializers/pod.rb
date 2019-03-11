@@ -1,1 +1,0 @@
-POD = HashWithIndifferentAccess.new(YAML.load_file("/run/secrets/pod_config.yml"))[Rails.env]
