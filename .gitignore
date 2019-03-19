@@ -9,27 +9,24 @@ db/*.sqlite3-journal
 # Ignore all logfiles and tempfiles.
 log/*
 !/log/.keep
-tmp
+
+tmp/*
+
 config/database.yml
 config/pod_db.yml
-
-# files for rubymine
-.idea/*
-
-# files from Passenger
-passenger.*
-
-db/schema.rb
-
-# settings contains the service credentials for push/pull pod/filmdb accounts, so don't include
+config/secrets.yml
 config/settings/development.yml
 config/settings/test.yml
 config/settings/production.yml
-config/secrets.yml
-
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 
+db/schema.rb
+
+# files for rubymine
+.idea/*
+# files from Passenger
+passenger.*
 public/
 .byebug_history
