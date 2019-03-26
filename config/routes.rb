@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :performances
   resources :policies
   resources :recording_contributors
-  resources :recordings
+  resources :recordings do
+    member do
+      post 'mark_needs_review'
+      post 'mark_reviewed'
+    end
+  end
 
   post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
 

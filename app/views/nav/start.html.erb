@@ -1,85 +1,52 @@
-<p>Find Recordings by</p>
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">MDPI Barcode</a></li>
-    <li><a href="#tabs-2">By Unit</a></li>
-    <li><a href="#tabs-3">By Collection</a></li>
-    <li><a href="#tabs-4">By???</a></li>
-  </ul>
-  <div id="tabs-1">
-    <%= form_tag '/nav/search', id: 'mdpi_barcode_form' do %>
-      <p>Enter the MDPI barcode of the recording you wish to load</p>
-      <table>
-        <tbody>
-          <tr>
-            <th>
-              MDPI Barcode
-            </th>
-            <td>
-              <%= text_field_tag :mdpi_barcode %>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="submit" value="Search"></td>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-  <div id="tabs-2">
-    <p><b><i>still to be discussed...</i></b></p>
+<h4>Recording Search</h4>
+<div id="tabs-1">
+  <%= form_tag '/nav/search', id: 'mdpi_barcode_form' do %>
+    <p>Enter the MDPI barcode of the recording you wish to load</p>
     <table>
       <tbody>
-      <tr>
-        <th>Select Unit</th>
-        <td>
-          <input type="text" id="unit_autocomplete">
-        </td>
-        <td><input type="submit" value="Go"></td>
-      </tr>
-      <tr>
-        <th>Or Create New Unit</th>
-        <td>
-          <input type="submit" value="Create New Unit">
-        </td>
-        <td></td>
-      </tr>
+        <tr>
+          <th>
+            MDPI Barcode
+          </th>
+          <td>
+            <%= text_field_tag :mdpi_barcode %>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Search"></td>
+        </tr>
       </tbody>
     </table>
-  </div>
-  <div id="tabs-3">
-    <p><b><i>still to be discussed...</i></b></p>
-    <table>
-      <tbody>
-      <tr>
-        <th>Select a Collection</th>
-        <td>
-          <input type="text" id="collection_autocomplete">
-        </td>
-        <td><input type="submit" value="Go"></td>
-      </tr>
-      <tr>
-        <th>Or Create New Collection</th>
-        <td><input type="text"></td>
-        <td><input type="submit" value="Create"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="tabs-4">
-    <p>what else?</p>
-  </div>
+  <% end %>
 </div>
-<script>
-  var units = ["B-IULMIA", "B-AAAMC", "B-ARCHIVES", "B-ATM", "B-BFCA", "B-CEDIR", "B-FINEARTS", "B-GBL", "B-IUAM", "B-KINSEY", "B-LIBERIA", "B-LILLY", "B-MATHERS"];
-  var collections = ["Indiana University Audio-Visual Center", "Lane Education Service District", "Chester Gleim", "Edward and Naomi Feil", "South Bend", "Mid-Hudson Library System", "Hal and Kathryn Stewart", "Department of Near Eastern Languages and Cultures", "Vivian Euzent", "Robert Petranoff", "Robert Young", "Academic Film Archive of North America", "Pratt Institute", "Loyola Marymount University", "Pennsylvania State Archives", "Middle Tennessee State University", "SUNY New Paltz", "Indiana University Environmental Health and Safety", "Barry Allen", "African Studies Program", "CLIO Awards", "University of Arizona", "Wisconsin Center for Film and Theatre Research", "Brian Durham", "Agency for Instructional Technology", "IU Cinema", "James Morrison", "Peter Batty", "Senator Vance Hartke", "Jesus Dapena", "J. Fred MacDonald", "Frink Film Studios", "University of Illinois Film Center", "Thomas Stathes", "Thomas Stathes", "To Be Determined", "Eileen V. Brennan", "Thomas G. Smith", "Pat Wetmore", "University of Nebraska", "Myrtle McGraw", "Rob Mobley", "Quattrochi", "Rebecca Decker", "University Archives", "Bernadine Bailey", "Donald Bixler", "Indiana University Radio and Television  Services", "Center for Disability and Referral"]
-  $(document).ready(function() {
-      $( "#tabs" ).tabs();
-      $('#unit_autocomplete').autocomplete({
-          source: units
-      });
-      $('#collection_autocomplete').autocomplete({
-          source: collections
-      });
-  });
-</script>
+<% if @needs_review.size > 0 %>
+  <h4 class="m_top_25">Recordings Needing Review</h4>
+  <table>
+    <tbody>
+    <tr>
+      <th>Title</th>
+      <th>Access Decision</th>
+      <th>MDPI Barcode</th>
+      <th>Fedora Item</th>
+      <th>IUCAT Record</th>
+    </tr>
+    <% @needs_review.each do |recording| %>
+      <tr>
+        <td><%= link_to "#{recording.title.blank? ? "No Title!" : recording.title}", recording_path(recording), class: (recording.title.blank? ? 'blank_title' : '') %></td>
+        <td><%= recording.access_determination %></td>
+        <td><%= recording.mdpi_barcode %></td>
+        <td>
+          <% unless recording.fedora_item_id.blank? %>
+            <a href="#">MCO Item</a>
+          <% end %>
+        </td>
+        <td>
+          <% unless recording.catalog_key.blank? %>
+            <a href="https://iucat.iu.edu/catalog/<%= recording.catalog_key %>" target="_blank">IUCAT Record</a>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

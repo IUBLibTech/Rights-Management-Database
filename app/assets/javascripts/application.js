@@ -15,3 +15,10 @@
 //= require turbolinks
 //= require jquery-ui
 //= require_tree .
+$(document).ready(function() {
+   $(".decodeURI").on("paste", function(e) {
+       e.preventDefault();
+       var unencoded = decodeURIComponent(e.originalEvent.clipboardData.getData('text'));
+       $(this).val(unencoded);
+   });
+});

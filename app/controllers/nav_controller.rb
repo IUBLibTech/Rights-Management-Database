@@ -1,7 +1,7 @@
 class NavController < ApplicationController
 
   def start
-
+    @needs_review = Recording.where(needs_review: true)
   end
 
   def mdpi_barcode_search

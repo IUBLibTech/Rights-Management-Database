@@ -18,12 +18,22 @@ body {
     font-family: sans-serif;
 }
 
+h4 {
+    margin: 0;
+    padding: 0;
+    background: rgba(9, 155, 231, 0.4);
+}
+
 div.branding {
     font-size: 3em;
     padding: 5px;
     text-align: center;
     font-weight: bold;
     color: #007ffa;
+}
+.left {
+    float: left;
+    padding: 0 5px;
 }
 .env_div {
     text-align: center;
@@ -49,14 +59,26 @@ div.branding {
     height: 20px;
     padding: 5px 20px;
 }
-a {
+.nav_li > a, .nav_li > a:visited, .nav_li > a:hover {
+    color: rgb(157, 193, 193);
+    background-color: #2a415a;
+}
+.nav_li > a:hover {
+    color: #7f3000;
+}
+
+a, a:visited {
     font-weight: bold;
     color: #D07A00;
     text-decoration: none;
 }
 
 a:hover {
-    color: #FFC200;
+    background-color: #fff;
+    color: #7f3000;
+}
+a.blank_title {
+    color: red;
 }
 
 .search {
@@ -66,3 +88,37 @@ a:hover {
 .orange {
     color: #D07A00;
 }
+
+.clear {
+    clear: both;
+}
+
+ul.decisions {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.57);
+}
+
+li.first {
+    font-style: italic;
+    color: #000000;
+}
+
+.m_top_10 {
+margin-top: 10px
+}
+
+.m_top_25 {
+margin-top: 25px;
+}
+
+.w_400 {
+    width: 400px;
+}
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+

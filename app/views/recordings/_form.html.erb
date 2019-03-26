@@ -1,4 +1,5 @@
 <%= form_for(@recording) do |f| %>
+  <%= f.hidden_field :last_updated_by, value: User.current_username %>
   <% if @recording.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@recording.errors.count, "error") %> prohibited this recording from being saved:</h2>
