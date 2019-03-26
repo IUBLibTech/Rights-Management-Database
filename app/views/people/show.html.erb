@@ -1,4 +1,41 @@
 <p id="notice"><%= notice %></p>
-
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
+<table class="w_400">
+  <tbody>
+  <tr>
+    <th>Name</th>
+    <td>
+      <%= @person.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>Date of Birth</th>
+    <td><%= @person.date_of_birth %></td>
+  </tr>
+  <tr>
+    <th>Date of Death</th>
+    <td><%= @person.date_of_death %></td>
+  </tr>
+  <tr>
+    <th>Place of Birth</th>
+    <td><%= @person.place_of_birth %></td>
+  </tr>
+  <tr>
+    <th>Authority Source</th>
+    <td><%= @person.authority_source %></td>
+  </tr>
+  <tr>
+    <th>Authority Source URL</th>
+    <td><%= link_to "#{@person.authority_source_url}", @person.authority_source_url, target: '_blank' unless @person.authority_source_url.blank?%></td>
+  </tr>
+  <tr>
+    <th>AKA</th>
+    <td><%= @person.aka %></td>
+  </tr>
+  </tbody>
+</table>
+<div class="notes w_400">
+  <h4 class="m_top_10">Notes</h4>
+  <%= @person.notes%>
+</div>

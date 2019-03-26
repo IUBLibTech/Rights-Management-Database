@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy]
+  before_action :set_recording, only: [:show, :edit, :update, :destroy, :mark_needs_review, :mark_reviewed]
 
   # GET /recordings
   # GET /recordings.json
@@ -61,14 +61,26 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def mark_needs_review
+    @recording.needs_review = true
+    @recording.save!
+    redirect_to recording_path(@recording)
+  end
+
+  def mark_reviewed
+    @recording.needs_review = false
+    @recording.save!
+    redirect_to recording_path(@recording)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recording
-      @recording = Recording.find(params[:id])
+      @recording = Recording.includes(:past_access_decisions).order('past_access_decisions.created_at DESC').find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recording_params
-      params.fetch(:recording, {})
+      params.require(:recording).permit(:access_determination, :title, :last_updated_by)
     end
 end

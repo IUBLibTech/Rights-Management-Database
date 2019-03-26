@@ -10,7 +10,44 @@
       </ul>
     </div>
   <% end %>
-
+  <table class="w_400">
+    <tbody>
+    <tr>
+      <th>Name</th>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+    </tr>
+    <tr>
+      <th>Date of Birth</th>
+      <td><%= f.text_field :date_of_birth %></td>
+    </tr>
+    <tr>
+      <th>Date of Death</th>
+      <td><%= f.text_field :date_of_death %></td>
+    </tr>
+    <tr>
+      <th>Place of Birth</th>
+      <td><%= f.text_field :place_of_birth %></td>
+    </tr>
+    <tr>
+      <th>Authority Source</th>
+      <td><%= f.text_field :authority_source %></td>
+    </tr>
+    <tr>
+      <th>Authority Source URL</th>
+      <td><%= f.text_field :authority_source_url, class: 'decodeURI' %></td>
+    </tr>
+    <tr>
+      <th>AKA</th>
+      <td><%= f.text_field :aka %></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="notes w_400">
+    <h4 class="m_top_10">Notes</h4>
+    <%= f.text_area :notes, class: 'boxsizingBorder w_400' %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

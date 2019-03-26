@@ -1,0 +1,13 @@
+
+#recording_table {
+    float: left;
+    margin-left: 20px;
+}
+#iucat_link_div {
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+}
+#iucat_link_div > a {
+    text-decoration: none;
+}

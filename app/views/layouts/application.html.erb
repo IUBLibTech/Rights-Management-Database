@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Rmd</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div class="branding">
+  Rights Management Database
+</div>
+<% if Rails.env != 'production'  %>
+  <div class="env_div"><p class="env_p"><%= Rails.env.upcase %> Database</p></div>
+<% end %>
+<div class="nav">
+  <ul class="nav_ul">
+    <li class="nav_li">
+      <%= link_to "Recordings", root_path %>
+    </li>
+    <li class="nav_li search">
+      <%= form_tag mdpi_barcode_search_path do %>
+        <b class="orange">MDPI Barcode Search</b> <%= text_field_tag :mdpi_barcode %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+<div class="content">
+  <%= yield %>
+</div>
 </body>
 </html>

@@ -4,7 +4,28 @@ Rails.application.routes.draw do
   resources :performances
   resources :policies
   resources :recording_contributors
-  resources :recordings
+  resources :recordings do
+    member do
+      post 'mark_needs_review'
+      post 'mark_reviewed'
+    end
+  end
+
+  post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
+
+  get '/services/access_decision_by_barcode/:mdpi_barcode', to: 'services#access_decision_by_barcode', as: 'access_decision_by_barcode'
+  get '/services/access_decision_by_fedora_id/:fid', to: 'services#access_decision_by_fedora_id', as: 'access_decision_by_fedora_id'
+  get '/services/access_decisions_by_barcodes', to: 'services#access_decisions_by_barcodes', as: 'access_decisions_by_barcodes'
+  get '/services/access_decisions_by_fedora_ids', to: 'services#access_decisions_by_fedora_ids', as: 'access_decisions_by_fedora_ids'
+
+  match '/signin', to: 'sessions#new', via: :get
+  match '/signout', to: 'sessions#destroy', via: :delete
+
+  resources :sessions, only: [:new, :destroy] do
+    get :validate_login, on: :collection
+  end
+
+  get '/user/ldap_lookup', to: 'user#ldap_lookup', as: 'ldap_lookup'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,17 +1,28 @@
+<%= link_to 'New Person', new_person_path %>
 <p id="notice"><%= notice %></p>
-
 <h1>Listing People</h1>
-
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Date of Death</th>
+      <th>Place of Birth</th>
+      <th>Authority Source</th>
+      <th>Authority Source URL</th>
+      <th>AKA</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @people.each do |person| %>
-      <tr>
+    <% @people.each_with_index do |person, i| %>
+      <tr class=<%= "#{i.odd? ? 'odd' : 'even'}" %>>
+        <td><%= person.name %></td>
+        <td><%= person.date_of_birth %></td>
+        <td><%= person.date_of_death %></td>
+        <td><%= person.place_of_birth %></td>
+        <td><%= person.authority_source %></td>
+        <td><%= link_to "#{person.authority_source_url}", person.authority_source_url unless person.authority_source_url.blank? %></td>
+        <td></td>
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -22,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Person', new_person_path %>
+

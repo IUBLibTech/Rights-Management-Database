@@ -1,0 +1,6 @@
+<p><b><%= User.current_username %></b> belongs to the following ADS groups</p>
+<ul>
+<% @user.ldap_groups.each do |g| %>
+  <li><%= g %></li>
+<% end %>
+</ul>

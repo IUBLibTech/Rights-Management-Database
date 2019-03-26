@@ -1,4 +1,51 @@
 <p id="notice"><%= notice %></p>
-
 <%= link_to 'Edit', edit_work_path(@work) %> |
 <%= link_to 'Back', works_path %>
+<table>
+  <tbody>
+  <tr>
+    <th>Title</th>
+    <td><%= @work.title %></td>
+  </tr>
+  <tr>
+    <th>Access Determination</th>
+    <td><%= @work.access_determination %></td>
+  </tr>
+  <tr>
+    <th>Traditional</th>
+    <td><%= @work.traditional? ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Contemporary Work in Copyright</th>
+    <td><%= @work.contemporary_work_in_copyright? ? 'Yes':'No' %></td>
+  </tr>
+  <tr>
+    <th>Restored Copyright</th>
+    <td><%= @work.restored_copyright? ? 'Yes':'No'%></td>
+  </tr>
+  <tr>
+    <th>Alternative Titles</th>
+    <td><%= @work.alternative_titles %></td>
+  </tr>
+  <tr>
+    <th>Publication Date</th>
+    <td><%= @work.publication_date %></td>
+  </tr>
+  <tr>
+    <th>Copyright End Date</th>
+    <td><%= @work.copyright_end_date %></td>
+  </tr>
+  <tr>
+    <th>Authority Source</th>
+    <td><%= @work.authority_source %></td>
+  </tr>
+  <tr>
+    <th>Authority Source URL</th>
+    <td><%= link_to "#{@work.authority_source_url}", @work.authority_source_url, target: '_blank' unless @work.authority_source_url.blank? %></td>
+  </tr>
+  </tbody>
+</table>
+<div class="notes w_400">
+  <h4 class="m_top_10">Notes</h4>
+  <%= @work.notes%>
+</div>
