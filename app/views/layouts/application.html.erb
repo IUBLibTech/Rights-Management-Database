@@ -16,7 +16,13 @@
 <div class="nav">
   <ul class="nav_ul">
     <li class="nav_li">
-      <%= link_to "Recordings", root_path %>
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class="nav_li">
+      <%= link_to "Recordings", recordings_path %>
+    </li>
+    <li class="nav_li">
+      <%= link_to "Users", users_path %>
     </li>
     <li class="nav_li search">
       <%= form_tag mdpi_barcode_search_path do %>

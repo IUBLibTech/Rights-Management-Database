@@ -1,1 +1,1 @@
-json.array! @performamces, partial: 'performances/performamce', as: :performamce
+json.array! @performances, partial: 'performances/performance', as: :performance

@@ -47,12 +47,17 @@
     <%= link_to "MCO Item", "#" %>
   <% end %>
 </div>
+<% unless @recording.last_copyright_librarian_decision.nil? %>
+<div class="lef">
+      <b>Copyright Librarian Access Determination:</b> <%=  @recording.last_copyright_librarian_decision.decision  %>
+</div>
+<% end %>
 <% if @recording.past_access_decisions.size > 0 %>
   <div class="left">
     <h4 class="m_top_10">Previous Access Decisions</h4>
     <ul class="decisions">
       <% @recording.past_access_decisions.each_with_index do |ad, i| %>
-      <li class="<%= i == 0 ? 'first' : '' %>"><b><%= ad.decision %></b> (<%= ad.changed_by %>/<%= ad.created_at.strftime("%B %d, %Y") %>)</li>
+      <li class="<%= i == 0 ? 'first' : '' %><%= ad.copyright_librarian? ? 'cl' : '' %>"><b><%= ad.decision %></b> (<%= ad.changed_by %>/<%= ad.created_at.strftime("%B %d, %Y") %>)</li>
       <% end %>
     </ul>
   </div>

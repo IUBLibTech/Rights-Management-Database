@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     get :validate_login, on: :collection
   end
 
+  get '/users/', to: 'user#index', as: 'users'
+  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   get '/user/ldap_lookup', to: 'user#ldap_lookup', as: 'ldap_lookup'
 
   root 'nav#start'
