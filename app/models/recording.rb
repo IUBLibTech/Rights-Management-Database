@@ -1,17 +1,21 @@
 class Recording < ActiveRecord::Base
   has_many :recording_performances
   has_many :performances, through: :recording_performances
+  has_many :recording_contributor_people
   has_many :past_access_decisions
 
+
+  belongs_to :atom_feed_read
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
+
 
   DEFAULT_ACCESS = "Default IU Access - Not Reviewed"
   IU_ACCESS = "IU Access - Reviewed"
   WORLD_WIDE_ACCESS = "World Wide Access"
   RESTRICTED_ACCESS = "Restricted Access"
   ACCESS_DECISIONS = [DEFAULT_ACCESS, IU_ACCESS, WORLD_WIDE_ACCESS, RESTRICTED_ACCESS]
-
+  ORDERED_ACCESS_DECISIONS = [RESTRICTED_ACCESS, IU_ACCESS, DEFAULT_ACCESS, WORLD_WIDE_ACCESS]
   # default access is the highest rank so that it is omitted from subsequent access requests - any access determination
   # after the default value is considered 'reviewed'
   ACCESS_RANKING = {
@@ -60,6 +64,15 @@ class Recording < ActiveRecord::Base
       end
       allowed
     end
+  end
+
+  def self.most_restrictive_access(args)
+    actual = nil
+    args.each do |a|
+      raise "Not a valid Access Decision - #{a}" unless ACCESS_DECISIONS.include? a
+      actual = a if actual.nil? || ORDERED_ACCESS_DECISIONS.find_index(a) < ORDERED_ACCESS_DECISIONS.find_index(actual)
+    end
+    actual
   end
 
 

@@ -11,6 +11,7 @@
 
   <tbody>
     <tr>
+      <th>Unit</th>
       <th>Title</th>
       <th>MDPI Barcode</th>
       <th>Unit</th>
@@ -19,6 +20,7 @@
     </tr>
     <% @recordings.each do |recording| %>
       <tr>
+        <td><%= recording.unit %></td>
         <td>
           <% if User.belongs_to_unit?(recording.unit) %>
             <%= link_to recording.title.blank? ? "No title for this record!" : recording.title, recording_path(recording), class: (recording.title.blank? ? 'no_title' : '')%>

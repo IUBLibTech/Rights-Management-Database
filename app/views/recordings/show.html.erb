@@ -1,8 +1,29 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'Edit', edit_recording_path(@recording) %> |
-<%= link_to 'Back', :back %>
-<h4>Recording</h4>
+<div style="margin-bottom: 15px">
+  <%= link_to 'Edit', edit_recording_path(@recording) %> |
+  <%= link_to 'Back', :back %>
+</div>
 <div class="left">
+  <% if @recording.needs_review? %>
+    <%= button_to "Reviewed", mark_reviewed_recording_path(@recording), method: 'post' %>
+  <% else %>
+    <%= button_to "Needs Review", mark_needs_review_recording_path(@recording), method: 'post' %>
+  <% end %>
+  <% if !@recording.catalog_key.nil? %>
+    <div class="iucat_link_div">
+      <a href="https://iucat.iu.edu/catalog/<%= @recording.catalog_key %>" target="_blank">IUCAT Record</a>
+    </div>
+  <% end %>
+  <% if @recording.fedora_item_id.blank? %>
+    <div class="iucat_link_div">
+      <a href="#">No Fedora ID in the database...</a>
+    </div>
+  <% else %>
+    <%= link_to "MCO Item", "#" %>
+  <% end %>
+</div>
+<div class="left w_400">
+<h4>Recording</h4>
   <table id="recording_table">
     <tbody>
     <tr>
@@ -25,27 +46,24 @@
       <th>Access Decision</th>
       <td><%= @recording.access_determination %></td>
     </tr>
+    <tr>
+      <th>Unit</th>
+      <td><%= @recording.unit %></td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td><%= @recording.format %></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><%= @recording.description %></td>
+    </tr>
+    <tr>
+      <th>Last Updated By</th>
+      <td><i><%= @recording.last_updated_by %></i></td>
+    </tr>
     </tbody>
   </table>
-</div>
-<div class="left">
-  <% if @recording.needs_review? %>
-    <%= button_to "Reviewed", mark_reviewed_recording_path(@recording), method: 'post' %>
-  <% else %>
-    <%= button_to "Needs Review", mark_needs_review_recording_path(@recording), method: 'post' %>
-  <% end %>
-  <% if !@recording.catalog_key.nil? %>
-    <div class="iucat_link_div">
-      <a href="https://iucat.iu.edu/catalog/<%= @recording.catalog_key %>" target="_blank">IUCAT Record</a>
-    </div>
-  <% end %>
-  <% if @recording.fedora_item_id.blank? %>
-    <div class="iucat_link_div">
-      <a href="#">No Fedora ID in the database...</a>
-    </div>
-  <% else %>
-    <%= link_to "MCO Item", "#" %>
-  <% end %>
 </div>
 <% unless @recording.last_copyright_librarian_decision.nil? %>
 <div class="lef">
@@ -54,7 +72,7 @@
 <% end %>
 <% if @recording.past_access_decisions.size > 0 %>
   <div class="left">
-    <h4 class="m_top_10">Previous Access Decisions</h4>
+    <h4>Previous Access Decisions</h4>
     <ul class="decisions">
       <% @recording.past_access_decisions.each_with_index do |ad, i| %>
       <li class="<%= i == 0 ? 'first' : '' %><%= ad.copyright_librarian? ? 'cl' : '' %>"><b><%= ad.decision %></b> (<%= ad.changed_by %>/<%= ad.created_at.strftime("%B %d, %Y") %>)</li>
@@ -63,5 +81,33 @@
   </div>
 <% end %>
 <div class="clear m_top_10">
-  <i>Last Updated By</i>: <i><%= @recording.last_updated_by %></i>
+
 </div>
+<h4>Recording Contributors???</h4>
+<table>
+  <tbody>
+  <% @recording.recording_contributor_people.each do |p| %>
+    <tr>
+      <td><%= p.person.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br><br><br><br>
+<h4>Atom Feed Information</h4>
+<table>
+  <tbody>
+  <tr>
+    <th>Title</th>
+    <td><%= Nokogiri::HTML.fragment @recording.atom_feed_read.title %></td>
+  </tr>
+  <tr>
+    <th>Feed Update Date</th>
+    <td><%= @recording.atom_feed_read.avalon_last_updated %></td>
+  </tr>
+  <tr>
+    <th>JSON</th>
+    <td><pre><%= JSON.pretty_generate(JSON.parse(@recording.atom_feed_read.json)) %></pre></td>
+  </tr>
+  </tbody>
+</table>

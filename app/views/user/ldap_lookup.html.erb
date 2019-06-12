@@ -9,7 +9,7 @@
 <div class="left" style="width:300px">
   <p><b><%= User.current_username %></b> has access to the following Units</p>
   <ul>
-    <% User.current_user_units.each do |g| %>
+    <% UnitsHelper.human_readable_units.each do |g| %>
       <li><%= g %></li>
     <% end %>
   </ul>

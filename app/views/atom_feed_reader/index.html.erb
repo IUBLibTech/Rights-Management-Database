@@ -1,0 +1,25 @@
+<% if @atom_feed_reads.size == 0 %>
+  <%= link_to "Prepopulate ", atom_feed_prepopulate_path %>&nbsp;|&nbsp;
+<% end %>
+<%= link_to "Read Current", atom_feed_read_current_path %>
+<h4>MCO RSS Feed Read</h4>
+<p>This page tests out functionality of the MCO RSS feed and JSON Item feed</p>
+<table>
+  <tbody>
+  <tr>
+    <th>Unit</th>
+    <th>Title</th>
+    <th>Updated</th>
+    <th>Avalon Record</th>
+    <th>JSON URL</th>
+  </tr>
+  <% @atom_feed_reads.each do |a|%>
+    <tr>
+      <td><%= Nokogiri::HTML.fragment a.title %></td>
+      <td><%= a.avalon_last_updated %></td>
+      <td><%= link_to "MCO", a.avalon_id %></td>
+      <td><%= link_to "JSON",  atom_feed_read_json_path(a.id) %> | <%= link_to "Load Record(s)", load_avalon_record_path(a.id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

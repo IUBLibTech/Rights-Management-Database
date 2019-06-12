@@ -14,7 +14,6 @@ class SessionsController < ActionController::Base
     "https://cas.iu.edu"
   end
 
-
   def new
     redirect_to("#{cas}/cas/login?cassvc=ANY&casurl=#{root_url}sessions/validate_login")
   end

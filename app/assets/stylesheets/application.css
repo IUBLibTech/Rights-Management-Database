@@ -124,3 +124,6 @@ margin-top: 25px;
     list-style-position:inside;
     border: 1px solid green;
 }
+th, td {
+    vertical-align: top;
+}
