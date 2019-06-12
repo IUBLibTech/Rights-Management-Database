@@ -1,3 +1,9 @@
-<p>
-  A recording could not be found with MDPI Barcode: <%= params[:mdpi_barcode] %>
-</p>
+<h4>The feed read for the barcode <%= params[:mdpi_barcode] %></h4>
+<pre>
+  <%= JSON.pretty_generate JSON.parse @atom_feed_read.to_json unless @atom_feed_read.nil? %>
+</pre>
+
+<h4>The existing record</h4>
+<pre>
+  <%= JSON.pretty_generate JSON.parse @existing.to_json unless @existing.nil?%>
+</pre>

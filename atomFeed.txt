@@ -1,0 +1,1756 @@
+https://mco-staging.dlib.indiana.edu/catalog.atom?q=other_identifier_sim:/GR[0-9]{8}/&sort=system_modified_dtsi+desc&rows=100&page=6
+
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+  <title>{:default=&gt;"Keyword"}: other_identifier_sim:/GR[0-9]{8}/ - Media Collections Online (test) Search Results</title>
+  <author>
+    <name>Media Collections Online (test)</name>
+  </author>
+  <link rel="self" href="https://mco-staging.dlib.indiana.edu/catalog.atom?page=6&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc"/>
+  <link rel="alternate" href="https://mco-staging.dlib.indiana.edu/catalog.html?page=6&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc" type="text/html"/>
+  <id>https://mco-staging.dlib.indiana.edu/catalog.html?page=6&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc&amp;type=text%2Fhtml</id>
+  <link rel="next" href="https://mco-staging.dlib.indiana.edu/catalog.atom?page=7&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc"/>
+  <link rel="previous" href="https://mco-staging.dlib.indiana.edu/catalog.atom?page=5&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc"/>
+  <link rel="first" href="https://mco-staging.dlib.indiana.edu/catalog.atom?page=1&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc"/>
+  <link rel="last" href="https://mco-staging.dlib.indiana.edu/catalog.atom?page=50&amp;q=other_identifier_sim%3A%2FGR%5B0-9%5D%7B8%7D%2F&amp;rows=100&amp;sort=system_modified_dtsi+desc"/>
+  <link rel="search" type="application/opensearchdescription+xml" href="https://mco-staging.dlib.indiana.edu/catalog/opensearch.xml"/>
+  <opensearch:totalResults>4974</opensearch:totalResults>
+  <opensearch:startIndex>500</opensearch:startIndex>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:Query role="request" searchTerms="other_identifier_sim:/GR[0-9]{8}/" startPage="6"/>
+  <updated>2019-06-04T18:47:07Z</updated>
+<entry>
+  <title>[Program, 1967-1968, no. 375]</title>
+  <updated>2019-04-22T16:38:33Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/1c18dm828.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/1c18dm828</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1968&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University Philharmonic Orchestra.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Who walks in when I walk out</title>
+  <updated>2019-04-22T16:31:32Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/2v23w016s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/2v23w016s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1951&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Firehouse Five Plus Two (Musical group).&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Sobbin&amp;#39; blues</title>
+  <updated>2019-04-22T16:24:01Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/cf95jh43j.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/cf95jh43j</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1951&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Firehouse Five Plus Two (Musical group).&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Lonesome mama blues</title>
+  <updated>2019-04-22T16:16:40Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/kh04dv89t.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/kh04dv89t</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1951&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Firehouse Five Plus Two (Musical group).&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Frankie and Johnny : traditional</title>
+  <updated>2019-04-22T16:09:02Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/xs55mh679.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/xs55mh679</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1951&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Firehouse Five Plus Two (Musical group).&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Milenberg joys fox trot</title>
+  <updated>2019-04-22T15:52:03Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/nc580s57x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/nc580s57x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1925&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Lewis, Ted, 1892-1971.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>When my baby smiles at me</title>
+  <updated>2019-04-22T15:38:37Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/p5547x21n.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/p5547x21n</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1927 (Creation date: 1926)&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Lewis, Ted, 1892-1971.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Muskrat ramble</title>
+  <updated>2019-04-22T15:28:08Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/tq57nw771.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/tq57nw771</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1947 (Creation date: 1945)&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Miller, Eddie, 1911-1991&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Ev&amp;#39;ry little moment : fox trot = A cada ratito ; [performed by] Dorothy Fields, Jimmy McHugh ; [performed by] Eddy Duchin and his orchestra. You&amp;#39;re all I need : fox trot = Eres todo lo que quiero / Kahn, Kaper, Jurmann ; [performed by] Eddy Duchin and his orchestra</title>
+  <updated>2019-04-22T15:22:11Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/s4655n447.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/s4655n447</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1935&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Duchin, Eddy, 1909-1951&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Riptide fox trot : dedicated to the M-G-M film &amp;quot;Riptide&amp;quot;</title>
+  <updated>2019-04-22T15:15:37Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qv33s2686.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qv33s2686</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1934&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Donaldson, Walter, 1893-1947.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>To Mary, with love : fox trot = Casarse con amor</title>
+  <updated>2019-04-22T15:01:13Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/6q182q928.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/6q182q928</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1936&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Duchin, Eddy, 1909-1951&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>El pito de Pepito</title>
+  <updated>2019-04-22T14:57:57Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/3b591f258.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/3b591f258</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Conjunto Cachana.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Alicia la gorda</title>
+  <updated>2019-04-22T14:54:52Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/g445cj86n.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/g445cj86n</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Oyola, Felita.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>La mafafa de Felita</title>
+  <updated>2019-04-22T14:52:00Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/9593v091r.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/9593v091r</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Oyola, Felita.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Moonlight and shadows : fox trot : from the Paramount film &amp;quot;Jungle princess&amp;quot; = Claro de luna y sombras</title>
+  <updated>2019-04-22T14:50:14Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/xd07gz394.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/xd07gz394</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1937&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Duchin, Eddy, 1909-1951&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>El pastel</title>
+  <updated>2019-04-22T14:48:40Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/bz60d2150.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/bz60d2150</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Oyola, Felita.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>El siete de copas</title>
+  <updated>2019-04-22T14:45:38Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/cz30pz35z.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/cz30pz35z</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Dueto Pancho Villa.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Anything your little heart desires : fox trot = Todito lo que tú quieras</title>
+  <updated>2019-04-22T14:44:59Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/br86b821n.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/br86b821n</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1933&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Duchin, Eddy, 1909-1951&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Por una eternidad</title>
+  <updated>2019-04-22T14:43:26Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/bn999c50v.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/bn999c50v</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Marrero, Siso.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Chi chi merengue</title>
+  <updated>2019-04-22T14:39:52Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/08612t13p.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/08612t13p</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Marrero, Siso.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Palesteena</title>
+  <updated>2019-04-22T14:39:19Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/nv9357728.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/nv9357728</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1950&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Lamare, Nappy.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Adios a Borinquen</title>
+  <updated>2019-04-22T14:37:49Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/h415pg38v.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/h415pg38v</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Dueto Pancho Villa.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Johnson rag</title>
+  <updated>2019-04-22T14:34:06Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/s7526j550.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/s7526j550</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1950&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Lamare, Nappy.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>La cabulla</title>
+  <updated>2019-04-22T14:34:02Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/sq87c031x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/sq87c031x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Donate, José.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Nido vacio</title>
+  <updated>2019-04-22T14:30:51Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/tt44ps52d.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/tt44ps52d</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Cárdenas, Olimpo.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>[Program, 1986-1987, no. 343]</title>
+  <updated>2019-04-22T14:25:24Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/8p58pj47x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/8p58pj47x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1986&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University Orchestra.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Deep Henderson : fox trot = Henderson pensativo</title>
+  <updated>2019-04-22T14:24:50Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/47429f76w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/47429f76w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1926&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Coon-Sanders Nighthawks (Musical group)&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Ésta tarde ví llover</title>
+  <updated>2019-04-22T14:21:29Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/bz60d214q.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/bz60d214q</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Jiménez, Carmita, 1939-2003.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>There goes my attraction</title>
+  <updated>2019-04-22T14:18:24Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/8s45qf46w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/8s45qf46w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1936&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Sanders, Joe.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>El buen marido El baile de Patricia</title>
+  <updated>2019-04-22T14:18:07Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/xd07gz38v.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/xd07gz38v</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Peñaranda, José Maria, 1907-2006.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>I found a rose in the snow</title>
+  <updated>2019-04-22T14:13:49Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/sj139672f.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/sj139672f</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1936 (Creation date: 1935)&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Sanders, Joe.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Decime lo que opínas</title>
+  <updated>2019-04-22T14:13:45Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/jm214v27d.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/jm214v27d</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Serapio.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Daily rag</title>
+  <updated>2019-04-22T14:10:22Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/08612t12d.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/08612t12d</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Pete Daily&amp;#39;s Dixieland Band.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Gaviota</title>
+  <updated>2019-04-22T14:09:57Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/np193f911.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/np193f911</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Embajadores (Musical group)&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Muralla del rencor</title>
+  <updated>2019-04-22T14:06:36Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/37720j792.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/37720j792</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Ramírez, Lucho, 1931-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Down home rag</title>
+  <updated>2019-04-22T14:06:06Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/5d86p4882.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/5d86p4882</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Daily, Pete.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Muralla del rencor</title>
+  <updated>2019-04-22T14:03:35Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/w0892g61x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/w0892g61x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Ramírez, Lucho, 1931-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Que me den pasteles At a christmas feast</title>
+  <updated>2019-04-22T14:03:03Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/z029p9869.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/z029p9869</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Bimbi, 1909-1991.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Adiós</title>
+  <updated>2019-04-22T13:59:04Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/2j62s9792.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/2j62s9792</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Roy, Eduardo.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>So you&amp;#39;re the one fox trot</title>
+  <updated>2019-04-22T13:57:32Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/1r66j619q.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/1r66j619q</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1940&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Duchin, Eddy, 1909-1951&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>A mí me llaman el negro</title>
+  <updated>2019-04-22T13:55:21Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/h702qc536.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/h702qc536</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Orquesta Hermanos Contreras.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Sombra verde Green shadow</title>
+  <updated>2019-04-22T13:52:13Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/m039k9441.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/m039k9441</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Chavales de España (Musical group)&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Los arrayanes</title>
+  <updated>2019-04-22T13:48:33Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/m900p004s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/m900p004s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1953&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Trío Dalmar.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Eso es todo</title>
+  <updated>2019-04-22T13:45:17Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/zs25xf098.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/zs25xf098</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Hernández, Mario, 1923-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Cuanta duda</title>
+  <updated>2019-04-22T13:42:47Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/kh04dv88j.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/kh04dv88j</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Trío los Juglares.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Fiesta de Navidad</title>
+  <updated>2019-04-22T13:39:39Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/mc87pv57x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/mc87pv57x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1961&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Sonora Matancera (Musical group)&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Casita ideal</title>
+  <updated>2019-04-22T13:37:01Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qn59q865w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qn59q865w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Valle, Joe.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Poco a poco</title>
+  <updated>2019-04-22T13:32:26Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/z029p9851.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/z029p9851</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1958&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Cruz, Celia.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Me enseñaste a querer</title>
+  <updated>2019-04-22T13:28:22Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/3197xr64t.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/3197xr64t</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Argentino, Carlos, 1929-1991.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Mi decisión</title>
+  <updated>2019-04-22T13:25:06Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/ws859m42s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/ws859m42s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;196u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Ramito.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>School #60 Field Day, May 1947</title>
+  <updated>2019-04-22T13:21:38Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/k930c292j.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/k930c292j</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1947&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Toma mi vida</title>
+  <updated>2019-04-22T13:21:14Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/3484zn731.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/3484zn731</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Galindo, Chito, 1924-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Noche azul</title>
+  <updated>2019-04-22T13:16:54Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/x633f5922.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/x633f5922</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1957&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Miranda, Elsa.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Oklahoma City #2 / Oil Wells, May 1947</title>
+  <updated>2019-04-22T13:16:07Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/sx61dr83s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/sx61dr83s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1947&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Anne&amp;#39;s and Tom&amp;#39;s Birthday Parties, August 6 and 8, 1942 (Anne&amp;#39;s first party, 3 years old)</title>
+  <updated>2019-04-22T13:15:07Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/7s75dj38j.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/7s75dj38j</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1942&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Vamos caminando</title>
+  <updated>2019-04-22T13:12:26Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qb98mm122.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qb98mm122</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1952&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Concepción, César&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Brazil: The Gathering Millions [English language optical track]</title>
+  <updated>2019-04-22T12:56:03Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/1n79h890q.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/1n79h890q</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Lugar for Senate 1976 Campaign TV Spots</title>
+  <updated>2019-04-19T20:21:58Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/st74cw239.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/st74cw239</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1976&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Fonda and Ford (I) (Los Angeles CBS Morning News: Bogdanovich Series) 302</title>
+  <updated>2019-04-19T19:59:56Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/h415pg369.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/h415pg369</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Five starring Stanwyck (Los Angeles CBS Morning News: Bogdanovich Series) 317</title>
+  <updated>2019-04-19T19:59:55Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/dj52w935r.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/dj52w935r</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Favorites of 1940</title>
+  <updated>2019-04-19T19:59:54Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/q524jt308.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/q524jt308</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Elaine May 8-11-88</title>
+  <updated>2019-04-19T19:59:53Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/gf06g7797.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/gf06g7797</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Charlie Chaplan</title>
+  <updated>2019-04-19T19:59:52Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/tb09jb56f.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/tb09jb56f</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Ford/Fonda II. Hepburn&amp;#39;s &amp;#39;30&amp;#39;s</title>
+  <updated>2019-04-19T19:59:51Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/s4655n43z.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/s4655n43z</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Ford/Fonda II, Hepburn&amp;#39;s 30&amp;#39;s, Cukor #29</title>
+  <updated>2019-04-19T19:59:49Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qb98mm09r.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qb98mm09r</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Pretty</title>
+  <updated>2019-04-19T19:25:58Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/cz30pz33d.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/cz30pz33d</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1952 (Creation date: 1951)&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Davis, Lem.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>[Program, 1989-1990, no. 586]</title>
+  <updated>2019-04-19T17:17:25Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qb98mm11s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qb98mm11s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1990&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University Percussion Ensemble.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Brazil: The Gathering Millions [Portuguese language version]</title>
+  <updated>2019-04-19T17:11:47Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/d791sn189.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/d791sn189</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1965&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;NET&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;From the NET series Population Problems. Answer print.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Nuevas ansias New anxieties ; A tu lado = At your side</title>
+  <updated>2019-04-19T16:27:37Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/jq085q75c.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/jq085q75c</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Beltran, Alberto, vocalist.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Rompecabezas Puzzlers</title>
+  <updated>2019-04-19T16:23:42Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/hd76s481w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/hd76s481w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Viloria, Angel.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>9-28-88 Bogdanovich on Donald Siegal</title>
+  <updated>2019-04-19T16:20:02Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/zp38wj422.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/zp38wj422</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;unknown/unknown&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Qué lindo es amor Love -- how beautiful</title>
+  <updated>2019-04-19T16:18:05Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/37720j78s.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/37720j78s</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Calandria, 1925-1994.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>I wonder why</title>
+  <updated>2019-04-19T16:16:03Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/5138jk547.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/5138jk547</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1929&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Green, Joe, percussionist.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Dímelo...pero dímelo</title>
+  <updated>2019-04-19T16:14:14Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/qv33s267x.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/qv33s267x</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1955&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Pinedo, Nelson, 1928-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>What d&amp;#39;ya think of my baby</title>
+  <updated>2019-04-19T16:09:04Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/s7526j53f.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/s7526j53f</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1929&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Hall, Frederick, 1898-1964.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Anoche te ví</title>
+  <updated>2019-04-19T16:07:47Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/mg74qr89f.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/mg74qr89f</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1954&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Valdés, Vicentico.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Todo acabo We&amp;#39;re through ; Portate bien = Behave yourself</title>
+  <updated>2019-04-19T16:00:24Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/dn39x641d.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/dn39x641d</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Rodriguez, Johnny, musician.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History I: Factories and Cities Grow</title>
+  <updated>2019-04-19T16:00:04Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/sf268b294.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/sf268b294</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1950-04-17/1950-04-24&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Baión de nené</title>
+  <updated>2019-04-19T15:53:24Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/4t64gs799.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/4t64gs799</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Marini, Leo, 1920-2000&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: The Beating Heart</title>
+  <updated>2019-04-19T15:51:35Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/cz30pz324.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/cz30pz324</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-11-23/1948-12-02&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Science from Underground</title>
+  <updated>2019-04-19T15:49:08Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/0r9678535.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/0r9678535</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-11-18/1948-11-25&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Alchemist and Scholastic</title>
+  <updated>2019-04-19T15:46:36Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/vm40xx65k.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/vm40xx65k</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-11-11/1948-11-18&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>La ventana The window</title>
+  <updated>2019-04-19T15:46:36Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/xd07gz37k.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/xd07gz37k</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;195u&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Morales, Rubén.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Galileo Tests A Theory</title>
+  <updated>2019-04-19T15:44:11Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/hq37vt71g.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/hq37vt71g</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-28/1948-11-04&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Sun, Moon, and Stars</title>
+  <updated>2019-04-19T15:41:21Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/5712mb99v.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/5712mb99v</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-11-04/1948-11-11&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Save it pretty mama</title>
+  <updated>2019-04-19T15:39:51Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/xd07gz369.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/xd07gz369</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1939&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Armstrong, Louis, 1901-1971&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Discovers How He Thinks</title>
+  <updated>2019-04-19T15:38:51Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/np193f90r.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/np193f90r</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-21/1948-10-28&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Greeks Ask Questions</title>
+  <updated>2019-04-19T15:34:48Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/v405sf79n.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/v405sf79n</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-14/1948-10-21&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>La luna lo sabe The moon knows it</title>
+  <updated>2019-04-19T15:33:51Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/47429f75m.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/47429f75m</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1952&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Trío Los Mendoza.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Reports On His World</title>
+  <updated>2019-04-19T15:32:14Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/hq37vt706.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/hq37vt706</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-07/1948-10-14&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Let&amp;#39;s get together</title>
+  <updated>2019-04-19T15:30:15Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/vq27zs96w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/vq27zs96w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1929&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Hall, Frederick, 1898-1964.&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Reports On His World</title>
+  <updated>2019-04-19T15:29:42Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/s7526j51w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/s7526j51w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-07/1948-10-14&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: Science IV: Where It All Began</title>
+  <updated>2019-04-19T15:27:03Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/70795d76w.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/70795d76w</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1948-10-30/1948-10-07&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History III: How It All Adds</title>
+  <updated>2019-04-19T15:19:13Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/4q77fw724.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/4q77fw724</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949-04-13/1949-04-20&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History III: Look at Ourselves: What We Have and Where It Came From</title>
+  <updated>2019-04-19T15:16:21Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/3j333733f.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/3j333733f</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949-04-06/1949-04-13&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Blue shadows</title>
+  <updated>2019-04-19T15:15:14Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/zp38wj43b.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/zp38wj43b</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1928&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Haring, Bob, 1896-&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History III: Europe Discovers The New World</title>
+  <updated>2019-04-19T15:13:33Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/sj1396715.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/sj1396715</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949-03-30/1949-04-06&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History III: Europe Discovers the Far East</title>
+  <updated>2019-04-19T15:10:27Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/r207tv12z.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/r207tv12z</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949-03-23/1949-03-30&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Indiana School of the Sky: History III: Cedric Goes To A Fair</title>
+  <updated>2019-04-19T15:07:30Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/08612t114.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/08612t114</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1949-03-16/1949-03-23&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Indiana University. Department of Radio and Television.&lt;/dd&gt;
+	    &lt;dt class="blacklight-summary_ssi"&gt;Summary:&lt;/dt&gt;
+	    &lt;dd class="blacklight-summary_ssi"&gt;The Indiana School of the Sky radio program of the Indiana University Department of Radio and Television began broadcasting educational radio programs in 1947 and continued through the early 1960s....&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+<entry>
+  <title>Dick Lugar: Everything a President Should Be</title>
+  <updated>2019-04-19T15:02:22Z</updated>
+  <link rel="alternate" type="application/json" href="https://mco-staging.dlib.indiana.edu/media_objects/bg257k725.json"/>
+  <id>https://mco-staging.dlib.indiana.edu/media_objects/bg257k725</id>
+  <summary type="html">
+
+&lt;dl class="document-metadata dl-horizontal dl-invert col-md-9"&gt;
+  
+	    &lt;dt class="blacklight-date_ssi"&gt;Date:&lt;/dt&gt;
+	    &lt;dd class="blacklight-date_ssi"&gt;1996&lt;/dd&gt;
+	    &lt;dt class="blacklight-creator_ssim"&gt;Main contributors:&lt;/dt&gt;
+	    &lt;dd class="blacklight-creator_ssim"&gt;Unknown&lt;/dd&gt;
+
+&lt;/dl&gt;
+  </summary>
+</entry>
+</feed>

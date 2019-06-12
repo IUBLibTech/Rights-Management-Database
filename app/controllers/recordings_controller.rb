@@ -10,6 +10,11 @@ class RecordingsController < ApplicationController
   # GET /recordings/1
   # GET /recordings/1.json
   def show
+    if User.belongs_to_unit?(@recording.unit)
+      render :show
+    else
+      render 'recordings/not_authorized'
+    end
   end
 
   # GET /recordings/new
@@ -19,13 +24,13 @@ class RecordingsController < ApplicationController
 
   # GET /recordings/1/edit
   def edit
+    render 'recordings/not_authorized' unless User.belongs_to_unit?(@recording.unit)
   end
 
   # POST /recordings
   # POST /recordings.json
   def create
     @recording = Recording.new(recording_params)
-
     respond_to do |format|
       if @recording.save
         format.html { redirect_to @recording, notice: 'Recording was successfully created.' }
@@ -40,24 +45,32 @@ class RecordingsController < ApplicationController
   # PATCH/PUT /recordings/1
   # PATCH/PUT /recordings/1.json
   def update
-    respond_to do |format|
-      if @recording.update(recording_params)
-        format.html { redirect_to @recording, notice: 'Recording was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recording }
-      else
-        format.html { render :edit }
-        format.json { render json: @recording.errors, status: :unprocessable_entity }
+    if User.belongs_to_unit?(@recording.unit)
+      respond_to do |format|
+        if @recording.update(recording_params)
+          format.html { redirect_to @recording, notice: 'Recording was successfully updated.' }
+          format.json { render :show, status: :ok, location: @recording }
+        else
+          format.html { render :edit }
+          format.json { render json: @recording.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      render 'recordings/not_authorized'
     end
   end
 
   # DELETE /recordings/1
   # DELETE /recordings/1.json
   def destroy
-    @recording.destroy
-    respond_to do |format|
-      format.html { redirect_to recordings_url, notice: 'Recording was successfully destroyed.' }
-      format.json { head :no_content }
+    if User.belongs_to_unit? @recording.unit
+      @recording.destroy
+      respond_to do |format|
+        format.html { redirect_to recordings_url, notice: 'Recording was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      render 'recordings/not_authorized'
     end
   end
 
@@ -76,7 +89,7 @@ class RecordingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recording
-      @recording = Recording.includes(:past_access_decisions).order('past_access_decisions.created_at DESC').find(params[:id])
+      @recording = Recording.includes(:past_access_decisions, recording_contributor_people: [:person]).order('past_access_decisions.created_at DESC').find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

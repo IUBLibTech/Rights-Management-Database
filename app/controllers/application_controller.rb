@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   around_filter :scope_current_username
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def true?(obj)
+    obj.to_s.downcase == "true"
+  end
+
   private
   def scope_current_username
     User.current_username = current_username

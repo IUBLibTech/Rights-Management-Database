@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PodPullTest < ActiveSupport::TestCase
+class PerformanceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -3,17 +3,16 @@ class SessionsController < ActionController::Base
   include SessionsHelper
   require 'net/http'
 
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
   def cas_reg
     "https://cas-reg.uits.iu.edu"
   end
   def cas
     "https://cas.iu.edu"
   end
-
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-  include SessionsHelper
 
   def new
     redirect_to("#{cas}/cas/login?cassvc=ANY&casurl=#{root_url}sessions/validate_login")
@@ -32,7 +31,7 @@ class SessionsController < ActionController::Base
       @nlength=@resp.length - 7
       @resp_user=@resp.slice(5,@nlength)
       if User.authenticate(@resp_user)
-        sign_in(@resp_user) 
+        sign_in(@resp_user)
         redirect_back_or_to root_url
       else
         redirect_to "#{root_url}denied.html"

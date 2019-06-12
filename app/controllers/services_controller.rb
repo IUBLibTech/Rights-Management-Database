@@ -2,16 +2,49 @@ class ServicesController < ApplicationController
   include BasicAuthenticationHelper
   # Since this is an API, use :null_session instead of the rails default token.
   protect_from_forgery with: :null_session
-
   before_action :authenticate
 
   # json response given a barcode what the access decision is for the recording
   # get /services/access_decision_by_barcode/:mdpi_barcode
   def access_decision_by_barcode
     bc = params[:mdpi_barcode]
-    r = Recording.where(mdpi_barcode: bc).first
-    response = r.nil? ? no_recording_msg(bc) : access_decision_msg(r)
-    render json: response
+    recording = Recording.where(mdpi_barcode: bc).first
+    render json: recording_json_hash(recording).to_json
+  end
+
+  # Note: access decision (singular) by barcodes (plural)
+  # action reads the post body which should contain a JSON array of MDPI barcodes
+  def access_decision_by_barcodes
+    response = {}
+    status = 200
+    success = true
+    ad = []
+    begin
+      bcs = JSON.parse(request.body.read)
+      bcs.each do |bc|
+        if ApplicationHelper.valid_barcode? bc
+          recording = Recording.where(mdpi_barcode: bc.to_i).first
+          response[bc] = recording_json_hash(recording)
+          success &&= !recording.nil?
+          ad << recording.access_determination
+        else
+          response[:bc] = recording_json_hash(nil)
+          success = false
+        end
+      end
+    rescue => e
+      msg = e.message
+      bt = e.backtrace.join("\n")
+      logger.error msg
+      logger.error bt
+      response = {"errorMessage": "#{e.message}}"}
+      status = 500
+    end
+    if success
+      response[:status] = "success"
+      response[:accessDecision] = Recording.most_restrictive_access(ad)
+    end
+    render json: response.to_json, status: status
   end
 
   # json response containing access decisions for ALL records in RMD
@@ -43,6 +76,20 @@ class ServicesController < ApplicationController
 
   def access_decision_msg(r)
     {status: "success", mdpi_barcode: r.mdpi_barcode, access_decision: r.access_determination}
+  end
+
+  def recording_json_hash(recording)
+    response = {}
+    if recording
+      response[:status] = "success"
+      response[:mdpiBarcode] = "#{recording.mdpi_barcode}"
+      response[:accessDecision] = "#{recording.access_determination}"
+    else
+      response[:status] = "failure"
+      response[:mdpi_barcode] = "#{params[:mdpi_barcode]}"
+      response[:errorMessage] = "RMD could not find a record with MDPI Barcode: "+params[:mdpi_barcode]
+    end
+    response
   end
 
 end

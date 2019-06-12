@@ -1,11 +1,7 @@
 require 'test_helper'
 
 class RecordingTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should not save without an mdpi_barcode" do
 
-
-  def test_save_without_barcode
-
+  end
 end

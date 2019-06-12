@@ -29,7 +29,7 @@
     <tr>
       <th>Access Decision</th>
       <td>
-        <%= f.select :access_determination, options_for_select(Recording::ACCESS_DECISIONS, @recording.access_determination) %>
+        <%= f.select :access_determination, options_for_select(@recording.allowed_access_determinations, @recording.access_determination) %>
       </td>
     </tr>
     <tr>

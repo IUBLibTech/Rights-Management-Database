@@ -1,6 +1,8 @@
 module SessionsHelper
   def sign_in(username)
     self.current_username = username
+    puts "\n\n\n\n\n\nResetting User in database!!\n\n\n\n\n"
+    User.save_session_user(@resp_user)
   end
 
   def current_username=(username)
@@ -39,6 +41,9 @@ module SessionsHelper
     session.delete(:return_to)
   end
 
-
+  # FIXME: change this to check against ADS group(?) for copyright librarian
+  def copyright_librarian?(username)
+    UserHelper::COPYRIGHT_LIBRARIANS.include? username
+  end
 
 end
