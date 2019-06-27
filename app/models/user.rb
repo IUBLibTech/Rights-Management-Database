@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     end
     units = UnitsHelper.calc_user_ads_units(username)
     units.each do |unit|
-      u.public_send(unit.underscore, true)
+      u.send("#{unit.underscore}=", true)
     end
     u.save!
   end

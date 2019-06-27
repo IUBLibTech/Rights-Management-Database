@@ -38,7 +38,6 @@ module ApplicationHelper
     return b
   end
 
-
   def ApplicationHelper.valid_mdpi_barcode(seed = 0, prefix = 0)
     generate_barcode(true, seed, 4)
   end

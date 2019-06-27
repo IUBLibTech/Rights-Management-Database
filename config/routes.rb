@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :avalon_items
   resources :people
   resources :performances
   resources :policies

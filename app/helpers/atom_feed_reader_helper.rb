@@ -79,8 +79,10 @@ module AtomFeedReaderHelper
       avalon_last_updated = DateTime.parse e.xpath('updated').first.content
       json_url = e.xpath('link/@href').first.value
       avalon_id = e.xpath('id').first.content
+      debugger if title.include?("Billie")
       atom_feed_reads << AtomFeedRead.new(title: title, avalon_last_updated: avalon_last_updated, json_url: json_url, avalon_id: avalon_id)
     end
+    debugger
     atom_feed_reads
   end
   def self.read(order, rows, page, identifier = POD_GROUP_KEY_SOLR_Q)

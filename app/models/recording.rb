@@ -6,6 +6,7 @@ class Recording < ActiveRecord::Base
 
 
   belongs_to :atom_feed_read
+  belongs_to :avalon_item
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
 

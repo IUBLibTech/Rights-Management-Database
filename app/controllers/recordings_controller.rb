@@ -4,7 +4,7 @@ class RecordingsController < ApplicationController
   # GET /recordings
   # GET /recordings.json
   def index
-    @recordings = Recording.all
+    @avalon_items = AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username)).order(:title)
   end
 
   # GET /recordings/1
