@@ -27,6 +27,10 @@ module UnitsHelper
     units
   end
 
+  def self.unit_member?(username, unit)
+    user = User.where(username: username).first
+    user[unit.downcase.parameterize.underscore.to_sym]
+  end
 
   def self.human_readable_units_search(username)
     user = User.where(username: username).first

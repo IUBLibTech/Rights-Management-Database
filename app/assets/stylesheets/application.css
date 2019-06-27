@@ -126,4 +126,9 @@ margin-top: 25px;
 }
 th, td {
     vertical-align: top;
+    text-align: left;
+}
+th {
+    align
+    background: #a2d7f6;
 }
