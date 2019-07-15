@@ -25,11 +25,15 @@ class WorksController < ApplicationController
   # POST /works.json
   def create
     @work = Work.new(work_params)
-
     respond_to do |format|
       if @work.save
+        if params[:avalon_item_id]
+          @avalon_item = AvalonItem.find(params[:avalon_item_id])
+          AvalonItemWork.new(work_id: @work.id, avalon_item_id: params[:avalon_item_id].to_i).save
+        end
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
-        format.json { render :show, status: :created, location: @work }
+        format.js {}
+        format.json { render text: "success"}
       else
         format.html { render :new }
         format.json { render json: @work.errors, status: :unprocessable_entity }
@@ -59,6 +63,12 @@ class WorksController < ApplicationController
       format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def ajax_new_work
+    @work = Work.new(title: params[:title])
+    @ajax = true
+    render partial: 'works/form'
   end
 
   private

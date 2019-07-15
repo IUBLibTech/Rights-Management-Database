@@ -1,76 +1,325 @@
 
-<h4 class="avalon_item"><%= link_to @avalon_item.title, @atom_feed_read.avalon_id, target: "_blank" %></h4>
-
-<div class="avalon_item_metadata">
-  <table>
-    <tbody>
-    <tr>
-      <th>Unit</th>
-      <td>
-        <%= @avalon_item.recordings.first.unit %>
-      </td>
-    </tr>
-    <tr>
-      <th>Description</th>
-      <td>
-        <%= @avalon_item.recordings.first.description %>
-      </td>
-    </tr>
-    <tr>
-      <th>Last updated by</th>
-      <td>
-        <%= @avalon_item.recordings.first.last_updated_by %>
-      </td>
-    </tr>
-    <tr>
-      <th>Recording Contributors</th>
-      <td>
-        <ul>
-          <% @avalon_item.recordings.first.recording_contributor_people.each do |p| %>
-          <li>
-            <%= p.person.name %>
-          </li>
-          <% end %>
-        </ul>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<h4>Avalon Item</h4>
+<h4 class="avalon_item"><%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %></h4>
+<div class="rmd_metadata">
+  <%= render 'rmd_metadata' %>
 </div>
-
-<div class="recordings">
+<div class="clear">
   <h4>Recordings</h4>
   <table>
     <tbody>
     <tr>
       <th>MDPI Barcode</th>
-      <th>Format</th>
-      <th>Access Decision</th>
     </tr>
     <% @avalon_item.recordings.each do |recording| %>
       <tr>
         <td><%= recording.mdpi_barcode %></td>
-        <td><%= recording.format %></td>
-        <td><%= recording.access_determination %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
-<h4>Atom Feed Information</h4>
-<table>
-  <tbody>
-  <tr>
-    <th>Title</th>
-    <td><%= Nokogiri::HTML.fragment @avalon_item.recordings.first.atom_feed_read.title %></td>
-  </tr>
-  <tr>
-    <th>Feed Update Date</th>
-    <td><%= @avalon_item.recordings.first.atom_feed_read.avalon_last_updated %></td>
-  </tr>
-  <tr>
-    <th>JSON</th>
-    <td><pre><%= JSON.pretty_generate(JSON.parse(@avalon_item.recordings.first.atom_feed_read.json)) %></pre></td>
-  </tr>
-  </tbody>
-</table>
+
+<div class="accordion clear">
+  <h3>Avalon Metadata</h3>
+  <div>
+    <table class="json_table">
+      <tbody>
+      <tr>
+        <th>Title</th>
+        <td class="adder"><%= @json["title"] %></td>
+      </tr>
+      <tr>
+        <th>Unit</th>
+        <td>
+          <%= @avalon_item.pod_unit %>
+        </td>
+        <th>Creator</th>
+        <td>
+          <ul>
+            <% @json["fields"]["creator"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Uniform Title</th>
+        <td class="adder work"><%= @json["uniform_title"] %></td>
+        <th>Date Created</th>
+        <td><%= @json["fields"]["date_created"] %></td>
+      </tr>
+      <tr>
+        <th>Translated Title</th>
+        <td class="adder work">
+          <%= @json["translated_title"] %>
+        </td>
+        <th>Date Issued</th>
+        <td class="adder date issue"><%= @json["fields"]["date_issued"] %></td>
+      </tr>
+      <tr>
+        <th>Avalon Collection</th>
+        <td><%= @json["collection"] %></td>
+        <th>Copyright Date</th>
+        <td class="adder date copyright"><%= @json["fields"]["copyright_date"] %></td>
+      </tr>
+      <tr>
+        <th>Main Contributors</th>
+        <td>
+          <ul>
+            <% @json["main_contributors"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Publisher</th>
+        <td>
+          <ul>
+            <% @json["fields"]["publisher"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Publication Date</th>
+        <td class="adder date publication">
+          <%= @json["publication_date"] %>
+        </td>
+        <th>Physical Description</th>
+        <td>
+          <ul>
+            <% @json["fields"]["physical_description"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Bibliographic ID</th>
+        <td><%= @json["fields"]["bibliographic_id"] %></td>
+        <th>Statement of Responsibility</th>
+        <td><%= @json["fields"]["statement_of_responsibility"] %></td>
+      </tr>
+      <tr>
+        <th>Note</th>
+        <td><%= @json["fields"]["note"] %></td>
+        <th>Contributor</th>
+        <td>
+          <ul>
+            <% @json["fields"]["contributor"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Language</th>
+        <td>
+          <ul>
+            <% @json["fields"]["language"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Terms of Use</th>
+        <td><%= @json["fields"]["terms_of_use"] %></td>
+      </tr>
+      <tr>
+            <% debugger %>
+        <th>Table of Contents</th>
+        <td>
+          <ul>
+            <% @json["fields"]["table_of_contents"]&.each do |mc| %>
+              <li class='adder work'><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>JSON</h3>
+  <div class="json">
+    <pre>
+      <%= JSON.pretty_generate @json %>
+    </pre>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+      $('.accordion').accordion({
+          collapsible: true,
+          active: 0,
+          heightStyle: "content"
+      });
+      $.contextMenu({
+          selector: '.adder',
+          items: {
+              work: {name: "Add Work", callback: function(key, opt) {
+                      addWork($(this)[0].firstChild.nodeValue);
+                  }},
+              person: {name: "Add Person", callback: function(key, opt) {
+                  addPerson($(this)[0].firstChild.nodeValue);
+                  }},
+              date: {name: "Add Date", callback: function(key, opt) {
+                  addDate($(this)[0].firstChild.nodeValue)
+                  }}
+          }
+      });
+      $("#access").change(function() {
+          var val = $(this).find("option:selected").attr('value');
+          $.ajax({
+              url: '<%= ajax_avalon_item_access_decision_path %>',
+              method: "POST",
+              data: {
+                  id: <%= @avalon_item.id %>,
+                  access: val
+              },
+              success: function(response) {
+                  swal.fire({
+                      title: "Success",
+                      html: "Access Determination Successfully Set To: "+val
+                  })
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                  swal.fire({
+                      title: "Error",
+                      heightAuto: false,
+                      type: 'error',
+                      html: "An error occured while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
+                  })
+              }
+          })
+      });
+  });
+
+  function addWork(val) {
+      var form = null;
+      $.ajax({
+          url: '<%= ajax_new_work_url %>',
+          data: {
+              avalon_item_id: <%= @avalon_item.id %>,
+              title: val
+          },
+          success: function(result) {
+              swal.fire(
+                  {
+                      title: "Add Work",
+                      html: result,
+                      allowClickOutside: true,
+                      showCancelButton: true,
+                      cancel: {
+                          text: "Cancel",
+                          value: null,
+                          visible: true,
+                          closeModal: true
+                      },
+                      confirm: {
+                          text: "Create Work",
+                          value: true,
+                          visible: true,
+                          closeModal: false,
+                      }
+                  }
+              ).then(
+                  function(result) {
+                      if (result.value) {
+                          form = $('#new_work');
+                          form.submit();
+                      }
+                  }
+              );
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              swal("Something Bad Happened...");
+          }
+      })
+  }
+  function addPerson(val) {
+      var form = null;
+      $.ajax({
+          url: '<%= ajax_new_person_url %>',
+          data: {
+              avalon_item_id: <%= @avalon_item.id %>,
+              name: val
+          },
+          success: function(result) {
+              swal.fire(
+                  {
+                      title: "Add Person",
+                      html: result,
+                      allowClickOutside: true,
+                      showCancelButton: true,
+                      cancel: {
+                          text: "Cancel",
+                          value: null,
+                          visible: true,
+                          closeModal: true
+                      },
+                      confirm: {
+                          text: "Create Person",
+                          value: true,
+                          visible: true,
+                          closeModal: false,
+                      }
+                  }
+              ).then(
+                  function(result) {
+                      if (result.value) {
+                          form = $('#new_person');
+                          form.submit();
+                      }
+                  }
+              );
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              swal("Something Bad Happened...");
+          }
+      })
+  }
+
+  function addDate(val) {
+      var form = null;
+      $.ajax({
+          url: '#',
+          data: {
+              avalon_item_id: <%= @avalon_item.id %>,
+              name: val
+          },
+          success: function(result) {
+              swal.fire(
+                  {
+                      title: "Add Date",
+                      html: "some form to add a date",
+                      allowClickOutside: true,
+                      showCancelButton: true,
+                      cancel: {
+                          text: "Cancel",
+                          value: null,
+                          visible: true,
+                          closeModal: true
+                      },
+                      confirm: {
+                          text: "Create Date",
+                          value: true,
+                          visible: true,
+                          closeModal: false,
+                      }
+                  }
+              ).then(
+                  function(result) {
+                      if (result.value) {
+                          form = $('#new_date');
+                          form.submit();
+                      }
+                  }
+              );
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              swal("Something Bad Happened...");
+          }
+      })
+  }
+</script>

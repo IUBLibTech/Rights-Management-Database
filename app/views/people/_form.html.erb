@@ -1,4 +1,7 @@
-<%= form_for(@person) do |f| %>
+<%= form_for(@person,  remote: (@ajax ? true : false)) do |f| %>
+  <% if @ajax %>
+    <%= hidden_field_tag 'avalon_item_id', params[:avalon_item_id].to_i %>
+  <% end %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -48,7 +51,9 @@
     <h4 class="m_top_10">Notes</h4>
     <%= f.text_area :notes, class: 'boxsizingBorder w_400' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% unless @ajax %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
 <% end %>

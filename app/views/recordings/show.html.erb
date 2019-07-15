@@ -94,20 +94,4 @@
   </tbody>
 </table>
 <br><br><br><br>
-<h4>Atom Feed Information</h4>
-<table>
-  <tbody>
-  <tr>
-    <th>Title</th>
-    <td><%= Nokogiri::HTML.fragment @recording.atom_feed_read.title %></td>
-  </tr>
-  <tr>
-    <th>Feed Update Date</th>
-    <td><%= @recording.atom_feed_read.avalon_last_updated %></td>
-  </tr>
-  <tr>
-    <th>JSON</th>
-    <td><pre><%= JSON.pretty_generate(JSON.parse(@recording.atom_feed_read.json)) %></pre></td>
-  </tr>
-  </tbody>
-</table>
+

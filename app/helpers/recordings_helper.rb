@@ -33,7 +33,7 @@ module RecordingsHelper
         end
       end
 
-      @atom_feed_read.update_attributes(successfully_read: true, json: json_text, avalon_last_updated: @atom_feed_read.avalon_last_updated)
+      @atom_feed_read.update_attributes(successfully_read: true, avalon_last_updated: @atom_feed_read.avalon_last_updated)
       last_recording
     end
   end

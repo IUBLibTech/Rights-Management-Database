@@ -1,0 +1,23 @@
+<div class="left">
+  <% if @avalon_item.has_rmd_metadata? %>
+    <h4>Works on this recording</h4>
+    <ul>
+      <% @avalon_item.works.each do |w| %>
+        <li><%= link_to "#{w.title}", work_path(w), target: "_blank" %>&nbsp;(<%= w.access_determination %>)</li>
+      <% end %>
+    </ul>
+    <h4>Main Contributors</h4>
+    <ul>
+      <% @avalon_item.people.each do |p| %>
+        <li><%= link_to p.name, people_path(p), target: "_blank" %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No RMD generated metadata</p>
+  <% end %>
+</div>
+<div class="left">
+  <h4>Access Determination</h4>
+  <%= select_tag :access, options_for_select(Recording::ACCESS_DECISIONS.collect{|a| [a, a]}, @avalon_item.access_determination) %>
+</div>
+

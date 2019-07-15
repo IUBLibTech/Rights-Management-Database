@@ -1,8 +1,40 @@
 // Place all the styles related to the AvalonItems controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 h4.avalon_item {
   background: none;
-  margin-top: 15px;
   font-size: 1.3em;
+}
+
+.edit_avalon_item_link {
+  font-size: .75em;
+  color: #3aa0fe;
+  margin-right: 10px;
+}
+.edit_avalon_item_link:hover {
+  font-size: .75em;
+  color: #3aa0fe;
+  margin-right: 10px;
+}
+.edit_avalon_item_link:visited {
+  font-size: .75em;
+  color: #3aa0fe;
+  margin-right: 10px;
+}
+
+div.rmd_metadata, div.recordings {
+  margin-top: 20px;
+  clear: both;
+}
+
+div.rmd_metadata {
+  overflow: hidden;
+}
+
+div.menu {
+
+}
+.json_table > tbody > tr > th {
+  background: #a2d7f6;
 }

@@ -37,10 +37,16 @@ Rails.application.routes.draw do
   end
 
   get '/users/', to: 'user#index', as: 'users'
-  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   get '/user/ldap_lookup', to: 'user#ldap_lookup', as: 'ldap_lookup'
 
   resources :works
+
+  # ajax calls
+  get '/avalon_items/:id/rmd_metadata', to: 'avalon_items#ajax_rmd_metadata', as: 'ajax_avalon_item_rmd_metadata'
+  post '/avalon_items/access_decision', to: 'avalon_items#ajax_post_access_decision', as: 'ajax_avalon_item_access_decision'
+  get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
+  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
+  get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

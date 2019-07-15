@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery-ui
+//= require sweetalert2
 //= require_tree .
 $(document).ready(function() {
    $(".decodeURI").on("paste", function(e) {

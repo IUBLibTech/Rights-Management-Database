@@ -25,10 +25,14 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
-
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        if params[:avalon_item_id]
+          @avalon_item = AvalonItem.find(params[:avalon_item_id])
+          AvalonItemPerson.new(person_id: @person.id, avalon_item_id: params[:avalon_item_id].to_i).save
+        end
+        format.html { render "avalon_items/rmd_metadata" }
+        format.js {}
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
@@ -59,6 +63,12 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def ajax_new_person
+    @person = Person.new(name: params[:name])
+    @ajax = true
+    render partial: 'people/form'
   end
 
   private

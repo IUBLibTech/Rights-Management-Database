@@ -1,4 +1,7 @@
-<%= form_for(@work) do |f| %>
+<%= form_for(@work, remote: (@ajax ? true : false)) do |f| %>
+  <% if @ajax %>
+    <%= hidden_field_tag 'avalon_item_id', params[:avalon_item_id].to_i %>
+  <% end %>
   <% if @work.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
@@ -58,7 +61,10 @@
     <h4 class="m_top_10">Notes</h4>
     <%= f.text_area :notes, class: 'boxsizingBorder w_400' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%# if the form is being created for an ajax call, omit the submit button %>
+  <% unless @ajax%>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
 <% end %>
