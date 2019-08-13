@@ -16,18 +16,22 @@
   <table class="w_400">
     <tbody>
     <tr>
-      <th>Name</th>
+      <th>First Name</th>
       <td>
-        <%= f.text_field :name %>
+        <%= f.text_field :first_name %>
       </td>
     </tr>
     <tr>
+      <th>Last Name</th>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
       <th>Date of Birth</th>
-      <td><%= f.text_field :date_of_birth %></td>
+      <td><%= f.text_field :date_of_birth_edtf, class: 'edtf' %></td>
     </tr>
     <tr>
       <th>Date of Death</th>
-      <td><%= f.text_field :date_of_death %></td>
+      <td><%= f.text_field :date_of_death_edtf, class: 'edtf' %></td>
     </tr>
     <tr>
       <th>Place of Birth</th>

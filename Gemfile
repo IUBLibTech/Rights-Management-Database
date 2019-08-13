@@ -15,6 +15,9 @@ gem 'sweetalert2'
 
 gem 'mysql2', '~> 0.3.20'
 
+gem 'edtf'
+gem 'edtf-humanize'
+
 gem 'pundit'
 
 gem 'nokogiri'

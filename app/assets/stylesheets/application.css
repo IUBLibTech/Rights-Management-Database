@@ -48,6 +48,9 @@ div.branding {
     width: 200px;
     margin: auto;
 }
+.i {
+    font-style: italic;
+}
 
 .nav_ul {
     list-style-type: none;

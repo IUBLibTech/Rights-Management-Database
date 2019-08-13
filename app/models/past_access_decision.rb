@@ -1,3 +1,3 @@
 class PastAccessDecision < ActiveRecord::Base
-  belongs_to :recording
+  belongs_to :avalon_item
 end

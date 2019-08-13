@@ -1,6 +1,7 @@
-
 <h4>Avalon Item</h4>
-<h4 class="avalon_item"><%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %></h4>
+<h4 class="avalon_item">
+  <%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %>
+</h4>
 <div class="rmd_metadata">
   <%= render 'rmd_metadata' %>
 </div>
@@ -167,19 +168,99 @@
                   }}
           }
       });
+      hookListeners();
+  });
+
+  function loadRmdMetadata() {
+      $.ajax({
+          url: '<%= ajax_avalon_item_rmd_metadata_path(@avalon_item.id) %>',
+          success: function(result) {
+              $('.rmd_metadata').html(result);
+              hookListeners();
+          },
+          error: function() {
+              swal("Something bad happened server side when trying to update the RMD generated metadata...")
+          }
+      });
+  }
+
+  /*
+  This ajax call to loadRmdMetadata results in part of the DOM being replaced with the response. Elements in the
+  response need to have event listeners installed after being added to the DOM.
+   */
+  function hookListeners() {
       $("#access").change(function() {
           var val = $(this).find("option:selected").attr('value');
+          ajaxAccess(val);
+      });
+      hookNeedsReview();
+      hookReviewCommentSlide();
+      hookMarkReviewed();
+  }
+
+  function hookReviewCommentSlide() {
+      $('.needs_review').hover(function() {
+          $('.toggle').toggle('slide', {
+              direction: 'up'
+          });
+      })
+  }
+
+  function hookNeedsReview() {
+      $('p.review_not_needed').click(function() {
+          swal.fire({
+              title: 'Comments for Copyright Librarian',
+              input: "textarea",
+              showCancelButton: true,
+              confirmButtonText: 'Mark Needing Review',
+              showLoaderOnConfirm: true,
+              preConfirm: (comment) => {
+                  var form = new FormData();
+                  form.append("id", "<%= @avalon_item.id %>");
+                  form.append("comment", comment);
+                  fetch("<%= ajax_post_needs_review_path %>", {
+                      method: 'post',
+                      body: form,
+                      headers: {
+                          'X-CSRF-Token': "<%= form_authenticity_token %>"
+                      }
+                  }).then(response => {
+                      response.text().then(function(text) {
+                          if (response.ok) {
+                              swal.fire({
+                                  title: 'Updated Review Status',
+                                  html: "Successfully flagged the Avalon Item as needing review."
+                              }).then((result) => {
+                                  loadRmdMetadata();
+                              });
+                          } else {
+                              swal.fire({
+                                  type: 'error',
+                                  title: 'Failed to Update Avalon Item',
+                                  html: text
+                              })
+                          }
+                      })
+
+                  })
+              }
+          })
+      });
+  }
+  function hookMarkReviewed() {
+      $('#mark_reviewed_button').click(function() {
           $.ajax({
-              url: '<%= ajax_avalon_item_access_decision_path %>',
-              method: "POST",
+              url: "<%= ajax_post_reviewed_path %>",
+              method: 'post',
               data: {
-                  id: <%= @avalon_item.id %>,
-                  access: val
+                  id: "<%= @avalon_item.id %>"
               },
-              success: function(response) {
+              success: function(result) {
                   swal.fire({
-                      title: "Success",
-                      html: "Access Determination Successfully Set To: "+val
+                      title: "Updated Avalon Item",
+                      html: "<p>"+result+"</p>"
+                  }).then (function() {
+                      loadRmdMetadata();
                   })
               },
               error: function(jqXHR, textStatus, errorThrown) {
@@ -187,12 +268,51 @@
                       title: "Error",
                       heightAuto: false,
                       type: 'error',
-                      html: "An error occured while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
+                      html: "An error occurred while trying to mark the record reviewed:<br/><pre>"+ jqXHR.responseText +"</pre>"
                   })
               }
           })
       });
-  });
+  }
+
+  function ajaxAccess(decision) {
+      $.ajax({
+          url: '<%= ajax_avalon_item_access_decision_path %>',
+          method: "POST",
+          data: {
+              id: <%= @avalon_item.id %>,
+              access: decision
+          },
+          success: function(response) {
+            swal.fire({
+                title: 'Updated Record',
+                html: "This Avalon Item was successfully updated"
+            }).then(function() {
+                loadRmdMetadata();
+            })
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              swal.fire({
+                  title: "Error",
+                  heightAuto: false,
+                  type: 'error',
+                  html: "An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
+              })
+          }
+      })
+  }
+
+  var edtf_matcher = /^[\d\\?~]{4,5}$/
+  function hookEdtfValidation() {
+      $('.edtf').on('input',function() {
+          val = $(this).val();
+          if (val.length == 0 || edtf_matcher.test(val)) {
+              $(this).removeClass("bad_edtf");
+          } else {
+              $(this).addClass('bad_edtf');
+          }
+      })
+  }
 
   function addWork(val) {
       var form = null;
@@ -207,7 +327,6 @@
                   {
                       title: "Add Work",
                       html: result,
-                      allowClickOutside: true,
                       showCancelButton: true,
                       cancel: {
                           text: "Cancel",
@@ -220,6 +339,9 @@
                           value: true,
                           visible: true,
                           closeModal: false,
+                      },
+                      onOpen: function() {
+                          hookEdtfValidation();
                       }
                   }
               ).then(
@@ -242,14 +364,13 @@
           url: '<%= ajax_new_person_url %>',
           data: {
               avalon_item_id: <%= @avalon_item.id %>,
-              name: val
+              last_name: val
           },
           success: function(result) {
               swal.fire(
                   {
                       title: "Add Person",
                       html: result,
-                      allowClickOutside: true,
                       showCancelButton: true,
                       cancel: {
                           text: "Cancel",
@@ -262,6 +383,9 @@
                           value: true,
                           visible: true,
                           closeModal: false,
+                      },
+                      onOpen: function(dom) {
+                          hookEdtfValidation(dom);
                       }
                   }
               ).then(
@@ -272,11 +396,13 @@
                       }
                   }
               );
+              hookEdtfValidation();
           },
           error: function(jqXHR, textStatus, errorThrown) {
               swal("Something Bad Happened...");
           }
-      })
+      });
+
   }
 
   function addDate(val) {
@@ -292,7 +418,6 @@
                   {
                       title: "Add Date",
                       html: "some form to add a date",
-                      allowClickOutside: true,
                       showCancelButton: true,
                       cancel: {
                           text: "Cancel",

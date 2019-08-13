@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   # ajax calls
   get '/avalon_items/:id/rmd_metadata', to: 'avalon_items#ajax_rmd_metadata', as: 'ajax_avalon_item_rmd_metadata'
   post '/avalon_items/access_decision', to: 'avalon_items#ajax_post_access_decision', as: 'ajax_avalon_item_access_decision'
+  post '/avalon_items/ajax_needs_review', to: 'avalon_items#ajax_post_needs_review', as: 'ajax_post_needs_review'
+  post '/avalon_items/ajax_reviewed', to: 'avalon_items#ajax_post_reviewed', as: 'ajax_post_reviewed'
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'

@@ -17,14 +17,19 @@ module UnitsHelper
 
   def self.calc_user_ads_units(user)
     u = User.new
-    u.ldap_lookup_key = user
-    belongs_to = u.ldap_groups
-    accessible_groups = belongs_to & ads_groups
-    units = []
-    accessible_groups.each do |g|
-      units << g[22...100]
+    if User::COPYRIGHT_LIBRARIANS.include? user
+      return units
+    else
+      u.ldap_lookup_key = user
+      belongs_to = u.ldap_groups
+      accessible_groups = belongs_to & ads_groups
+      units = []
+      accessible_groups.each do |g|
+        # remove the first 21 characters of the group name to get the unit name (BL-LDLP-MDPI-MANAGERS-)
+        units << g[22...100]
+      end
+      units
     end
-    units
   end
 
   def self.unit_member?(username, unit)

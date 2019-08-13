@@ -5,6 +5,7 @@
 h4.avalon_item {
   background: none;
   font-size: 1.3em;
+  padding-top: 5px;
 }
 
 .edit_avalon_item_link {
@@ -22,6 +23,10 @@ h4.avalon_item {
   color: #3aa0fe;
   margin-right: 10px;
 }
+.access_history {
+  list-style-type: none;
+  padding-left: 5px;
+}
 
 div.rmd_metadata, div.recordings {
   margin-top: 20px;
@@ -38,3 +43,73 @@ div.menu {
 .json_table > tbody > tr > th {
   background: #a2d7f6;
 }
+
+.librarian_decision {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.avalon_item > a {
+  float: left;
+}
+
+div.reviewed_div {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.reviewed_div > p {
+  margin: 0 0 0 15px;
+}
+.needs_review {
+  padding: 5px;
+  font-weight: bold;
+  background: rgba(255, 0, 0, 0.2);
+  cursor: help;
+}
+.review_not_needed {
+  cursor: pointer;
+}
+.reviewed {
+  font-weight: bold;
+  background-color:#2a4159;
+  color:#ffffff;
+  padding: 5px;
+}
+.toggle {
+  display: none;
+  z-index: 1;
+  margin-left: 20px;
+  position: fixed;
+  background: #3aa0fe;
+  padding: 5px;
+  width: 300px;
+  border: 2px solid white;
+  border-top: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+}
+
+.button {
+  background-color:#2a4159;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  border:1px solid #18ab29;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:12px;
+  font-weight:bold;
+  padding:2px 8px;
+  text-decoration:none;
+}
+
+.bad_edtf {
+  color: red;
+  font-weight: bold;
+}
+

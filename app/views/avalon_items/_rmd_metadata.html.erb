@@ -1,3 +1,24 @@
+<div>
+  <div class='reviewed_div'>
+    <% if @avalon_item.reviewed?%>
+      <p class="reviewed">This Item has been Reviewed by a Copyright Librarian</p>
+    <% elsif @avalon_item.needs_review? %>
+      <p class="needs_review" data-comment="<% @avalon_item.needs_review_comment %>">
+        <span>This Item Needs Review</span>
+        <% if User.copyright_librarian? %>
+          <span class="button" id="mark_reviewed_button">Mark Reviewed</span>
+        <% end %>
+      </p>
+      <div class="toggle">
+        <p class="<%= 'i' if @avalon_item.needs_review_comment.blank? %>">
+          <%= @avalon_item.needs_review_comment.blank? ? "#{@avalon_item.review_requester} did not leave a comment specifying why this item needed review." : @avalon_item.needs_review_comment %>
+        </p>
+      </div>
+    <% else %>
+      <p class="review_not_needed button">Click to Mark 'Needs Review'</p>
+    <% end %>
+  </div>
+</div>
 <div class="left">
   <% if @avalon_item.has_rmd_metadata? %>
     <h4>Works on this recording</h4>
@@ -17,7 +38,27 @@
   <% end %>
 </div>
 <div class="left">
-  <h4>Access Determination</h4>
-  <%= select_tag :access, options_for_select(Recording::ACCESS_DECISIONS.collect{|a| [a, a]}, @avalon_item.access_determination) %>
+  <h4>Current Access Determination</h4>
+  <div class="access_div <%= @avalon_item.past_access_decisions.last.copyright_librarian? ? "librarian_decision" : ''%>">
+    <%= "#{@avalon_item.past_access_decisions.last.decision} - #{@avalon_item.past_access_decisions.last.created_at.strftime('%m/%d/%Y %I:%M%p')} (<i>#{@avalon_item.past_access_decisions.last.changed_by}</i>)".html_safe %>
+  </div>
+  <h4>Change Access Determination</h4>
+  <div class="access_change_div">
+    <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination),
+                   class: "#{@avalon_item.past_access_decisions.last.copyright_librarian? ? "librarian_decision" : ''}" %>
+  </div>
 </div>
+<% if @avalon_item.past_access_decisions.size > 1 %>
+  <div class="left">
+    <h4>Previous Access Determinations</h4>
+    <% decisions = @avalon_item.past_access_decisions.to_a; decisions.pop %>
+    <ul class="access_history">
+      <% decisions.sort{|a,b| b.created_at <=> a.created_at}.each do |d| %>
+        <li class="<%= d.copyright_librarian? ? "librarian_decision" : "" %>">
+          <%= "#{d.decision} - #{d.created_at.strftime('%m/%d/%Y %I:%M%p')} (<i>#{d.changed_by}</i>)".html_safe %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 

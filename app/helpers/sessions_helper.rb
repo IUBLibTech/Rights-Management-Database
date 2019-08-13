@@ -1,7 +1,6 @@
 module SessionsHelper
   def sign_in(username)
     self.current_username = username
-    puts "\n\n\n\n\n\nResetting User in database!!\n\n\n\n\n"
     User.save_session_user(@resp_user)
   end
 

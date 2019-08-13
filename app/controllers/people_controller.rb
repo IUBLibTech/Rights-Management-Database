@@ -66,7 +66,7 @@ class PeopleController < ApplicationController
   end
 
   def ajax_new_person
-    @person = Person.new(name: params[:name])
+    @person = Person.new(last_name: params[:last_name])
     @ajax = true
     render partial: 'people/form'
   end
@@ -80,7 +80,7 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(
-          :name, :date_of_birth, :date_of_death, :place_of_birth, :authority_source, :aka, :notes, :authority_source_url
+          :first_name, :last_name, :date_of_birth_edtf, :date_of_death_edtf, :place_of_birth, :authority_source, :aka, :notes, :authority_source_url
       )
     end
 end

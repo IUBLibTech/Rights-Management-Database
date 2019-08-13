@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body oncontextmenu="return false;">
+<body>
 <div class="branding">
   Rights Management Database
   <div class="auth" style="font-size: .3em; float: right">
@@ -32,7 +32,7 @@
       <%= link_to "Home", root_path %>
     </li>
     <li class="nav_li">
-      <%= link_to "Recordings", avalon_items_path %>
+      <%= link_to "Avalon Items", avalon_items_path %>
     </li>
     <li class="nav_li">
       <%= link_to "Users", users_path %>

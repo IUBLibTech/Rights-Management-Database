@@ -19,32 +19,18 @@
     </table>
   <% end %>
 </div>
-<% if @needs_review.size > 0 %>
-  <h4 class="m_top_25">Recordings Needing Review</h4>
+<% unless @needs_review.nil? || @needs_review.size < 1 %>
+  <h4 class="m_top_25">Avalon Items Needing Review</h4>
   <table>
     <tbody>
     <tr>
       <th>Title</th>
-      <th>Access Decision</th>
-      <th>MDPI Barcode</th>
-      <th>Fedora Item</th>
-      <th>IUCAT Record</th>
+      <th>Access Determination</th>
     </tr>
-    <% @needs_review.each do |recording| %>
+    <% @needs_review.each do |avalon_item| %>
       <tr>
-        <td><%= link_to "#{recording.title.blank? ? "No Title!" : recording.title}", recording_path(recording), class: (recording.title.blank? ? 'blank_title' : '') %></td>
-        <td><%= recording.access_determination %></td>
-        <td><%= recording.mdpi_barcode %></td>
-        <td>
-          <% unless recording.fedora_item_id.blank? %>
-            <a href="#">MCO Item</a>
-          <% end %>
-        </td>
-        <td>
-          <% unless recording.catalog_key.blank? %>
-            <a href="https://iucat.iu.edu/catalog/<%= recording.catalog_key %>" target="_blank">IUCAT Record</a>
-          <% end %>
-        </td>
+        <td><%= link_to "#{avalon_item.title.blank? ? "No Title!" : avalon_item.title}", avalon_item_path(avalon_item), class: (avalon_item.title.blank? ? 'blank_title' : '') %></td>
+        <td><%= avalon_item.access_determination %></td>
       </tr>
     <% end %>
     </tbody>
