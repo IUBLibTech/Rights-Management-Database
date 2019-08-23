@@ -2,6 +2,11 @@
   <div class='reviewed_div'>
     <% if @avalon_item.reviewed?%>
       <p class="reviewed">This Item has been Reviewed by a Copyright Librarian</p>
+      <div class="toggle">
+        <p class="<%= 'i' if @avalon_item.reviewed_comment.blank? %>">
+          <%= @avalon_item.reviewed_comment.blank? ? "The Copyright Librarian that reviewed this item did not leave a comment regarding the review." : @avalon_item.reviewed_comment %>
+        </p>
+      </div>
     <% elsif @avalon_item.needs_review? %>
       <p class="needs_review" data-comment="<% @avalon_item.needs_review_comment %>">
         <span>This Item Needs Review</span>

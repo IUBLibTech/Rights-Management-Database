@@ -5,6 +5,9 @@ class NavController < ApplicationController
   def start
     if User.copyright_librarian?
       @needs_review = AvalonItem.where("needs_review = true AND reviewed is not true")
+    else
+      units = UnitsHelper.human_readable_units_search(User.current_username)
+      @needs_review = AvalonItem.where(needs_review: true, reviewed: [nil, false], pod_unit: units)
     end
   end
 

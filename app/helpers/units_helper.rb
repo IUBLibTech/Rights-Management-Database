@@ -46,4 +46,8 @@ module UnitsHelper
     groups
   end
 
+  def self.sql_where_claus(username)
+    "pod_unit in (#{human_readable_units_search(username).join(', ')})"
+  end
+
 end

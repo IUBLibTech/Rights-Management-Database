@@ -40,6 +40,10 @@
       <td><%= f.text_field :alternative_titles %></td>
     </tr>
     <tr>
+      <th>Publisher</th>
+      <td><%= f.text_field :publisher %></td>
+    </tr>
+    <tr>
       <th>Publication Date</th>
       <td><%= f.text_field :publication_date, class: 'edtf' %></td>
     </tr>
@@ -53,7 +57,7 @@
     </tr>
     <tr>
       <th>Authority Source URL</th>
-      <td><%= f.text_field :authority_source_url, class: 'decodeURI' %></td>
+      <td><%= f.text_field :authority_source_url, class: 'decodeURI urlValidator' %></td>
     </tr>
     </tbody>
   </table>

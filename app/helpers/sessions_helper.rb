@@ -40,8 +40,8 @@ module SessionsHelper
     session.delete(:return_to)
   end
 
-  # FIXME: change this to check against ADS group(?) for copyright librarian
   def copyright_librarian?(username)
+    debugger
     UserHelper::COPYRIGHT_LIBRARIANS.include? username
   end
 

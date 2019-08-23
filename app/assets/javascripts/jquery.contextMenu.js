@@ -19,10 +19,10 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as anonymous module.
-        define(['jquery'], factory);
+        define(['../../.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/jquery-rails-4.3.3/vendor/assets/javascripts/jquery'], factory);
     } else if (typeof exports === 'object') {
         // Node / CommonJS
-        factory(require('jquery'));
+        factory(require('../../.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/jquery-rails-4.3.3/vendor/assets/javascripts/jquery'));
     } else {
         // Browser globals.
         factory(jQuery);

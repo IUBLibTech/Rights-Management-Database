@@ -67,7 +67,7 @@ class AvalonItemsController < ApplicationController
     elsif @avalon_item.reviewed?
       render text: "This Avalon Item has already been reviewed by a Copyright Librarian", status: 400
     elsif @avalon_item.needs_review? && User.copyright_librarian?
-      if @avalon_item.update_attributes(reviewed: true)
+      if @avalon_item.update_attributes(reviewed: true, reviewed_comment:params[:comment])
         render text: "Successfully Marked <i>#{@avalon_item.title}</i> as reviewed", status: 200
       else
         render text: "Something unexpected happened while trying to mark the recording as needing review", status: 500

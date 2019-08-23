@@ -31,7 +31,7 @@ class PeopleController < ApplicationController
           @avalon_item = AvalonItem.find(params[:avalon_item_id])
           AvalonItemPerson.new(person_id: @person.id, avalon_item_id: params[:avalon_item_id].to_i).save
         end
-        format.html { render "avalon_items/rmd_metadata" }
+        format.html { redirect_to people_path }
         format.js {}
         format.json { render :show, status: :created, location: @person }
       else
@@ -66,7 +66,7 @@ class PeopleController < ApplicationController
   end
 
   def ajax_new_person
-    @person = Person.new(last_name: params[:last_name])
+    @person = Person.new(last_name: params[:last_name], first_name: params[:first_name])
     @ajax = true
     render partial: 'people/form'
   end
