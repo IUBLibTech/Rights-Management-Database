@@ -460,7 +460,7 @@
                       },
                       preConfirm: () => {
                           var name = $('#person_first_name').val().length > 0 || $('#person_last_name').val().length > 0;
-                          var dates = validEdtf($('#person_date_of_birth_edtf').val()) || validEdtf($('#person_date_of_death_edtf').val());
+                          var dates = validEdtf($('#person_date_of_birth_edtf').val()) && validEdtf($('#person_date_of_death_edtf').val());
                           var url = validURL($('#person_authority_source_url').val());
                           if (name && dates && url) {
                               return true;
