@@ -117,3 +117,45 @@ div.reviewed_div {
   padding-left: 10px;
 }
 
+#popup_menu {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+#popup_menu > ul > li {
+  position: relative;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: .2em 2em;
+  color: #2f2f2f;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #fff;
+}
+#popup_menu > ul > li:hover {
+  color: white;
+  cursor: pointer;
+  background: #2980b9;
+}
+
+
+#popup_menu > ul {
+  position: absolute;
+  display: inline-block;
+  min-width: 13em;
+  max-width: 26em;
+  padding: .25em 0;
+  margin: .3em;
+  font-family: inherit;
+  font-size: inherit;
+  list-style-type: none;
+  background: #fff;
+  border: 1px solid #bebebe;
+  border-radius: .2em;
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,.5);
+}

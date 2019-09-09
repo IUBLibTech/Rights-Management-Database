@@ -65,31 +65,16 @@
     </tbody>
   </table>
 </div>
-<% unless @recording.last_copyright_librarian_decision.nil? %>
-<div class="lef">
-      <b>Copyright Librarian Access Determination:</b> <%=  @recording.last_copyright_librarian_decision.decision  %>
-</div>
-<% end %>
-<% if @recording.past_access_decisions.size > 0 %>
-  <div class="left">
-    <h4>Previous Access Determinations</h4>
-    <ul class="decisions">
-      <% @recording.past_access_decisions.each_with_index do |ad, i| %>
-      <li class="<%= i == 0 ? 'first' : '' %><%= ad.copyright_librarian? ? 'cl' : '' %>"><b><%= ad.decision %></b> (<%= ad.changed_by %>/<%= ad.created_at.strftime("%B %d, %Y") %>)</li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+
+
 <div class="clear m_top_10">
 
 </div>
-<h4>Recording Contributors???</h4>
+<h4>Performances On This Recording</h4>
 <table>
   <tbody>
-  <% @recording.recording_contributor_people.each do |p| %>
-    <tr>
-      <td><%= p.person.name %></td>
-    </tr>
+  <% @recording.performances.each do |p| %>
+
   <% end %>
   </tbody>
 </table>

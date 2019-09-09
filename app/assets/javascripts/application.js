@@ -16,6 +16,7 @@
 //= require jquery-ui
 //= require sweetalert2
 //= require_tree .
+//= require_tree ./jquery-hoverIntent-1.10.0
 $(document).ready(function() {
    $(".decodeURI").on("paste", function(e) {
        e.preventDefault();

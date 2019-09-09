@@ -25,32 +25,13 @@
   </div>
 </div>
 <div class="left">
-  <% if @avalon_item.has_rmd_metadata? %>
-    <h4>Works on this recording</h4>
-    <ul>
-      <% @avalon_item.works.each do |w| %>
-        <li><%= link_to "#{w.title}", work_path(w), target: "_blank" %>&nbsp;(<%= w.access_determination %>)</li>
-      <% end %>
-    </ul>
-    <h4>Main Contributors</h4>
-    <ul>
-      <% @avalon_item.people.each do |p| %>
-        <li><%= link_to p.name, people_path(p), target: "_blank" %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No RMD generated metadata</p>
-  <% end %>
-</div>
-<div class="left">
   <h4>Current Access Determination</h4>
   <div class="access_div <%= @avalon_item.past_access_decisions.last.copyright_librarian? ? "librarian_decision" : ''%>">
     <%= "#{@avalon_item.past_access_decisions.last.decision} - #{@avalon_item.past_access_decisions.last.created_at.strftime('%m/%d/%Y %I:%M%p')} (<i>#{@avalon_item.past_access_decisions.last.changed_by}</i>)".html_safe %>
   </div>
   <h4>Change Access Determination</h4>
   <div class="access_change_div">
-    <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination),
-                   class: "#{@avalon_item.past_access_decisions.last.copyright_librarian? ? "librarian_decision" : ''}" %>
+    <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
   </div>
 </div>
 <% if @avalon_item.past_access_decisions.size > 1 %>

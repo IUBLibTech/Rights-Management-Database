@@ -1,14 +1,10 @@
 class AvalonItem < ActiveRecord::Base
   include AccessDeterminationHelper
   has_many :recordings
-  has_many :avalon_item_works
-  has_many :works, through: :avalon_item_works
-  has_many :avalon_item_people
-  has_many :people, through: :avalon_item_people
   has_many :past_access_decisions
 
   def has_rmd_metadata?
-    works.size > 0 || people.size > 0
+    recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0
   end
 
   def access_determination

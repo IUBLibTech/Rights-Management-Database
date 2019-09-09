@@ -89,7 +89,7 @@ class RecordingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recording
-      @recording = Recording.includes(:past_access_decisions, recording_contributor_people: [:person]).order('past_access_decisions.created_at DESC').find(params[:id])
+      @recording = Recording.includes(recording_contributor_people: [:person]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
