@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.10'
+gem 'rails', '~> 5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -13,7 +13,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # this version: https://sweetalert2.github.io/
 gem 'sweetalert2'
 
-gem 'mysql2', '~> 0.3.20'
+gem 'mysql2', '~> 0.5'
 
 gem 'edtf'
 gem 'edtf-humanize'
@@ -38,8 +38,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'jquery-ui-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
