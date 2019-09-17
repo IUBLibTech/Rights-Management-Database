@@ -10,6 +10,8 @@ class Recording < ActiveRecord::Base
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
 
+  accepts_nested_attributes_for :recording_performances
+
   UNITS = ["B-AAAI", "B-AAAMC", "B-AFRIST", "B-ALF", "B-ANTH", "B-ARCHIVES", "B-ASTR", "B-ATHBASKM", "B-ATHBASKW",
            "B-ATHFHOCKEY", "B-ATHFTBL", "B-ATHROWING", "B-ATHSOCCM", "B-ATHSOFTB", "B-ATHTENNM", "B-ATHVIDEO",
            "B-ATHVOLLW", "B-ATM", "B-BCC", "B-BFCA", "B-BUSSPEA", "B-CAC", "B-CDEL", "B-CEDIR", "B-CELCAR", "B-CELTIE",

@@ -70,11 +70,14 @@
 <div class="clear m_top_10">
 
 </div>
-<h4>Performances On This Recording</h4>
+<h4>Performances On This Recording...</h4>
 <table>
   <tbody>
   <% @recording.performances.each do |p| %>
-
+  <dir>
+    <b>Location:</b>&nbsp;<%= p.location %> <br>
+    <b>Performance Date: </b><%= p.performance_date %>
+  </dir>
   <% end %>
   </tbody>
 </table>

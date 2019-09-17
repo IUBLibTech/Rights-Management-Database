@@ -41,7 +41,6 @@ module SessionsHelper
   end
 
   def copyright_librarian?(username)
-    debugger
     UserHelper::COPYRIGHT_LIBRARIANS.include? username
   end
 

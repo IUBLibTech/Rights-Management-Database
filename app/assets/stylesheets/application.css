@@ -25,6 +25,13 @@ h4 {
     background: rgba(9, 155, 231, 0.4);
 }
 
+h5 {
+    margin: 0;
+    padding: 0;
+    background: rgba(9, 155, 231, 0.4);
+    font-size: 1em;
+}
+
 div.branding {
     font-size: 3em;
     padding: 5px;
@@ -116,9 +123,15 @@ margin-top: 10px
 .m_top_25 {
 margin-top: 25px;
 }
+.ml_25 {
+    margin-left: 25px;
+}
 
 .w_400 {
     width: 400px;
+}
+.w_250 {
+    width: 200px;
 }
 .boxsizingBorder {
     -webkit-box-sizing: border-box;

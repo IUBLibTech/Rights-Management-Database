@@ -159,3 +159,13 @@ div.reviewed_div {
   -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.5);
   box-shadow: 0 2px 5px rgba(0,0,0,.5);
 }
+div.recording_barcode {
+  margin: 5px 0;
+}
+.performance_delete {
+  float: right;
+  margin-top: 0;
+}
+.performance_delete[data-title]:hover:after {
+  content: attr(data-title);
+}

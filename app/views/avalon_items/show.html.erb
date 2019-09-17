@@ -7,18 +7,26 @@
 </div>
 <div class="clear">
   <h4>Recordings In This Avalon Item</h4>
-  <table>
-    <tbody>
-    <% @avalon_item.recordings.each do |recording| %>
-    <div class="recording_div">
-      <p><%= link_to recording.mdpi_barcode, recording_path(recording) %></p>
-      <button type="button" class="add_recording_button" data-recording-id="<%= recording.id %>">Add Performance</button>
+  <% @avalon_item.recordings.each do |recording| %>
+  <div class="recording_div">
+    <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
+    <div class="ml_25">
+      <h5>Performances On This Recording</h5>
+      <% recording.performances.each do |p| %>
+        <div class="left w_250">
+          <b>Location: </b><span><%= p.location %></span>
+          <div class="ui-icon ui-icon-circle-close performance_delete" title="Delete Performance" data-performance-id="<%= p.id %>"></div>
+          <br>
+          <b>Performance Date: </b><span><%= p.performance_date %></span>
+        </div>
+      <% end %>
     </div>
-    <% end %>
-    </tbody>
-  </table>
+    <div class="clear">
+      <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
+    </div>
+  </div>
+  <% end %>
 </div>
-
 <div class="accordion clear">
   <h3>Avalon Metadata</h3>
   <div>

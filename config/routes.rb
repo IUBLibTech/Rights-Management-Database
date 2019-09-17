@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
+  get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

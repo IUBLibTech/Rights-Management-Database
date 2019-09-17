@@ -23,6 +23,7 @@
         });
     }
 
+
     /*
     This ajax call to loadRmdMetadata results in part of the DOM being replaced with the response. Elements in the
     response need to have event listeners installed after being added to the DOM.
@@ -35,7 +36,8 @@
         hookNeedsReview();
         hookReviewCommentSlide();
         hookMarkReviewed();
-
+        hookAddPerformance();
+        hookDeletePerformance();
         // all popup menu stuff
         $('.adder').contextmenu(function(e) {
             e.preventDefault();
@@ -64,10 +66,111 @@
         // end popup menu stuff
     }
 
+
     function hookAddPerformance() {
         $('.add_performance_button').click(function() {
+            let recording_id = $(this).attr('data-recording-id');
+            $.ajax({
+                url: '<%= ajax_new_performance_path %>',
+                data: {
+                    avalon_item_id: window.location.href.substring(window.location.href.lastIndexOf('/') + 1),
+                    recording_id: recording_id
+                },
+                success: function(result) {
+                    swal.fire(
+                        {
+                            title: "Add Performance",
+                            html: result,
+                            showCancelButton: true,
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                closeModal: true
+                            },
+                            confirm: {
+                                text: "Create Performance",
+                                value: true,
+                                visible: true,
+                                closeModal: false,
+                            },
+                            onOpen: function (dom) {
+                                hookEdtfValidation(dom);
+                                hookUrlValidator();
+                            },
+                            preConfirm: () => {
+                                let val = $('#performance_performance_date').val();
+                                let valid_date = validFullDate(val);
+                                let valid_location = $('#performance_location').val().length > 0;
 
+                                if (valid_date && valid_location) {
+                                    return true;
+                                } else {
+                                    var msg = "<ul class='errorList'>";
+                                    if (!valid_date) {
+                                        msg += "<li>You must specify a valid date for this Performance (<b>mm/dd/yyyy</b>)</li>"
+                                    }
+                                    if (!valid_location) {
+                                        msg += "<li>You must specify a location for this Performance</li>";
+                                    }
+                                    msg += "</ul>";
+                                    Swal.showValidationError(msg);
+                                    return false;
+                                }
+                            }
+                        }
+                    ).then(
+                        function(result) {
+                            if (result.value) {
+                                form = $('#new_performance');
+                                form.submit();
+                            }
+                        }
+                    );
+                }
+            })
         });
+    }
+    function hookDeletePerformance() {
+        $('.performance_delete').click(function() {
+            let performance_id = $(this).attr('data-performance-id');
+            let location = $(this).prev('span')[0].textContent;
+            let date = $(this).next().next().next()[0].textContent;
+            swal.fire({
+                title: "Delete Performance",
+                html: "This will permanently delete <b>"+location+" "+date+"</b>. Are you sure you wish to continue?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete Performance'
+            }).then((result) => {
+                if (result.value) {
+                    let id =
+                    $.ajax({
+                        url: "<%= performances_path("id") %>".replace(".id", "/"+performance_id),
+                        method: "delete",
+                        success: function(result) {
+                            swal.fire({
+                                text: "The performance was successfully deleted.",
+                                onClose: () => {
+                                    window.location.reload(true);
+                                }
+                            })
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            swal.fire({
+                                title: "AJAX Error",
+                                html: "<p>An error occurred while trying to delete the Performance.</p><p><b>"+ xhr.responseText+"</b></p>",
+                                onClose: () => {
+                                    window.location.reload(true);
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+        })
     }
 
     function hookReviewCommentSlide() {
@@ -202,6 +305,14 @@
                 $(this).addClass('bad_edtf');
             }
         })
+        $('.full_date').on('input', function() {
+           let val = $(this).val();
+           if (val.length === 0 || validFullDate(val)) {
+               $(this).removeClass('bad_edtf');
+           } else {
+               $(this).addClass('bad_edtf');
+           }
+        });
     }
 
     function hookUrlValidator() {
@@ -228,6 +339,11 @@
     function validEdtf(str) {
         let edtf_matcher = /^[\d\\?~]{4,5}$/
         return str === undefined || !!edtf_matcher.test(str) || str === 'unknown' || str.length == 0;
+    }
+
+    function validFullDate(date) {
+        let dateformat = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+        return date.match(dateformat)
     }
 
   function addPerson(val) {
