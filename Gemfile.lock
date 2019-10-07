@@ -169,7 +169,7 @@ DEPENDENCIES
   ldap_groups_lookup
   mysql2 (~> 0.5)
   net-scp
-  nokogiri
+  nokogiri (>= 1.10.4)
   pundit
   rails (~> 4.2.11)
   sass-rails
