@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post 'mark_reviewed'
     end
   end
+  resources :tracks
 
   post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
 
@@ -37,10 +38,20 @@ Rails.application.routes.draw do
   end
 
   get '/users/', to: 'user#index', as: 'users'
-  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   get '/user/ldap_lookup', to: 'user#ldap_lookup', as: 'ldap_lookup'
 
   resources :works
+
+  # ajax calls
+  get '/avalon_items/:id/rmd_metadata', to: 'avalon_items#ajax_rmd_metadata', as: 'ajax_avalon_item_rmd_metadata'
+  post '/avalon_items/access_decision', to: 'avalon_items#ajax_post_access_decision', as: 'ajax_avalon_item_access_decision'
+  post '/avalon_items/ajax_needs_review', to: 'avalon_items#ajax_post_needs_review', as: 'ajax_post_needs_review'
+  post '/avalon_items/ajax_reviewed', to: 'avalon_items#ajax_post_reviewed', as: 'ajax_post_reviewed'
+  get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
+  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
+  get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
+  get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
+  get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

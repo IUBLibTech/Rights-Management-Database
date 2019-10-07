@@ -5,7 +5,6 @@ module AtomFeedReaderHelper
 
   POD_GROUP_KEY_SOLR_Q = '/GR[0-9]{8}/'
 
-
   # grabs the oldest 100 Avalon Items from the RSS feed and creates AtomFeedRecords
   def self.prepopulate
     if AtomFeedRead.all.size == 0
@@ -78,11 +77,10 @@ module AtomFeedReaderHelper
       title = e.xpath('title').first.content
       avalon_last_updated = DateTime.parse e.xpath('updated').first.content
       json_url = e.xpath('link/@href').first.value
-      avalon_id = e.xpath('id').first.content
-      debugger if title.include?("Billie")
-      atom_feed_reads << AtomFeedRead.new(title: title, avalon_last_updated: avalon_last_updated, json_url: json_url, avalon_id: avalon_id)
+      avalon_item_url = e.xpath('id').first.content
+      avalon_id = avalon_item_url.chars[avalon_item_url.rindex('/') + 1..avalon_item_url.length].join("")
+      atom_feed_reads << AtomFeedRead.new(title: title, avalon_last_updated: avalon_last_updated, json_url: json_url, avalon_item_url: avalon_item_url, avalon_id: avalon_id)
     end
-    debugger
     atom_feed_reads
   end
   def self.read(order, rows, page, identifier = POD_GROUP_KEY_SOLR_Q)

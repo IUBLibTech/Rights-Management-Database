@@ -4,12 +4,11 @@ class CreateAtomFeedReads < ActiveRecord::Migration
       t.text :title, null: false
       t.datetime :avalon_last_updated, null: false
       t.string :json_url, null: false
+      t.string :avalon_item_url, null: false
       t.string :avalon_id, null: false
       t.boolean :successfully_read, default: false
-      t.text :json
       t.timestamps null: false
-
-      t.index :avalon_id, unique: true
     end
+    add_index :atom_feed_reads, :avalon_id, unique: true
   end
 end

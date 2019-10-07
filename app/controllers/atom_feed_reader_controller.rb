@@ -1,5 +1,5 @@
 class AtomFeedReaderController < ApplicationController
-  include RecordingsHelper
+  include AvalonItemsHelper
   before_action :set_atom_feed_read, only: [:read_json, :load_avalon_record]
 
   def index
@@ -22,13 +22,13 @@ class AtomFeedReaderController < ApplicationController
 
   def load_avalon_record
     json_text = AtomFeedReaderHelper.read_avalon_json(@atom_feed_read.json_url)
-    last_recording = save_json(json_text)
-    if last_recording.nil?
+    avalon_item = save_json(json_text)
+    if avalon_item.nil?
       flash[:warning] = "Could not find any Recordings in MCO from URL #{@atom_feed_read.json_url}"
-      redirect_to recordings_path
+      redirect_to avalon_items_path
     else
       flash[:notice] = "New record(s) were loaded into RMD"
-      redirect_to recording_path(last_recording)
+      redirect_to avalon_item_path(avalon_item)
     end
   end
 

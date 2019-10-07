@@ -1,0 +1,14 @@
+swal({
+    title: "New Work",
+    html: "<p>A new Work was created with title: <i><%= @work.title %></i>"
+});
+$.ajax({
+    url: '<%= ajax_avalon_item_rmd_metadata_path(@avalon_item.id) %>',
+    success: function(result) {
+        $('.rmd_metadata').html(result);
+        hookListeners();
+    },
+    error: function() {
+        swal("Something bad happened server side...")
+    }
+})

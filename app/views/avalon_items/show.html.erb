@@ -1,76 +1,260 @@
-
-<h4 class="avalon_item"><%= link_to @avalon_item.title, @atom_feed_read.avalon_id, target: "_blank" %></h4>
-
-<div class="avalon_item_metadata">
-  <table>
-    <tbody>
-    <tr>
-      <th>Unit</th>
-      <td>
-        <%= @avalon_item.recordings.first.unit %>
-      </td>
-    </tr>
-    <tr>
-      <th>Description</th>
-      <td>
-        <%= @avalon_item.recordings.first.description %>
-      </td>
-    </tr>
-    <tr>
-      <th>Last updated by</th>
-      <td>
-        <%= @avalon_item.recordings.first.last_updated_by %>
-      </td>
-    </tr>
-    <tr>
-      <th>Recording Contributors</th>
-      <td>
-        <ul>
-          <% @avalon_item.recordings.first.recording_contributor_people.each do |p| %>
-          <li>
-            <%= p.person.name %>
-          </li>
+<h4>Avalon Item</h4>
+<h4 class="avalon_item">
+  <%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %>
+</h4>
+<div class="rmd_metadata">
+  <%= render 'rmd_metadata' %>
+</div>
+<div class="clear">
+  <h4>Recordings In This Avalon Item</h4>
+  <% @avalon_item.recordings.each do |recording| %>
+  <div class="recording_div">
+    <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
+    <div class="table_div">
+      <table>
+        <tbody>
+        <tr>
+          <th>Title</th>
+          <td><%= recording.title %></td>
+          <th>Producers</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td class="desc_td"><%= recording.description %></td>
+          <th>In Copyright?</th>
+          <td><%= recording.in_copyright.blank? ? '' : recording.in_copyright? ? 'Yes' : 'No' %></td>
+        </tr>
+        <tr>
+          <th>Published</th>
+          <td><%= recording.published.blank? ? '' : recording.published? ? 'Yes' : 'No'%></td>
+          <th>Copyright End Date</th>
+          <td><%= recording.copyright_end_date %></td>
+        </tr>
+        <tr>
+          <th>Date Of First Publication</th>
+          <td><%= recording.date_of_first_publication %></td>
+          <th>Reeceipt Of Will Before 90 Days Of Death?</th>
+          <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
+        </tr>
+        <tr>
+          <th>Creation Date</th>
+          <td><%= recording.creation_date %></td>
+          <th>Authority Source</th>d
+          <td><%= recording.authority_source%></td>
+        </tr>
+        <tr>
+          <th>Country Of First Publication</th>
+          <td><%= recording.country_of_first_publication %></td>
+          <th>Authority Source URL</th>
+          <td><%= link_to recording.authority_source_url, recording.authority_source_url, target: '_blank' unless recording.authority_source_url.blank? %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <th>Access Determination</th>
+          <td><%= recording.access_determination %></td>
+        </tr>
+        <tr>
+          <th>Notes</th>
+          <td colspan="3"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clear ml_25">
+      <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
+    </div>
+    <% if recording.performances.size > 0 %>
+      <div class="ml_25 accordion performances">
+        <h5>Performances</h5>
+        <div class="performances">
+          <% recording.performances.each do |p| %>
+            <div class="performance">
+              <h6><%= p.title %></h6>
+              <div class="left">
+                <b>Location: </b><span><%= p.location %></span>
+                <br>
+                <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
+              </div>
+              <div class="left">
+                <b>Notes:</b> <%= p.notes %>
+              </div>
+              <div class="ui-icon ui-icon-circle-close performance_delete right" title="Delete: <%= "#{p.location} - #{p.performance_date.strftime("%m/%d/%Y")}" %>" data-performance-id="<%= p.id %>" data-performance-title="<%= p.title %>" data-performance-location="<%= p.location %>"></div>
+              <div class="clear">
+                <button type="button" class="add_track_button" data-performance-id="<%= p.id %>">Add Track</button>
+              </div>
+              <% if p.tracks.size > 0 %>
+                <div class="tracks">
+                  <div class="accordion">
+                    <h5>Tracks</h5>
+                    <div class="">
+                      <% p.tracks.each do |t| %>
+                        <div class="track" data-track-id="<%= t.id %>">
+                          <h6><%= t.track_name %></h6>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <th>Start Time</th>
+                                <td><%= t.recording_start_time %></td>
+                                <th>In Copyright?</th>
+                                <td><%= t.in_copyright.blank? ? '' : t.in_copyright? ? 'Yes' : 'No' %></td>
+                              </tr>
+                              <tr>
+                                <th>End Time</th>
+                                <td><%= t.recording_end_time %></td>
+                                <th>Copyright End Date</th>
+                                <td><%= t.copyright_end_date %></td>
+                              </tr>
+                              <tr>
+                                <th>Access Determination</th>
+                                <td><%= t.access_determination %></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           <% end %>
-        </ul>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="recordings">
-  <h4>Recordings</h4>
-  <table>
-    <tbody>
-    <tr>
-      <th>MDPI Barcode</th>
-      <th>Format</th>
-      <th>Access Decision</th>
-    </tr>
-    <% @avalon_item.recordings.each do |recording| %>
-      <tr>
-        <td><%= recording.mdpi_barcode %></td>
-        <td><%= recording.format %></td>
-        <td><%= recording.access_determination %></td>
-      </tr>
+        </div>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+  </div>
+  <% end %>
 </div>
-<h4>Atom Feed Information</h4>
-<table>
-  <tbody>
-  <tr>
-    <th>Title</th>
-    <td><%= Nokogiri::HTML.fragment @avalon_item.recordings.first.atom_feed_read.title %></td>
-  </tr>
-  <tr>
-    <th>Feed Update Date</th>
-    <td><%= @avalon_item.recordings.first.atom_feed_read.avalon_last_updated %></td>
-  </tr>
-  <tr>
-    <th>JSON</th>
-    <td><pre><%= JSON.pretty_generate(JSON.parse(@avalon_item.recordings.first.atom_feed_read.json)) %></pre></td>
-  </tr>
-  </tbody>
-</table>
+<div class="accordion clear">
+  <h3>Avalon Metadata</h3>
+  <div>
+    <table class="json_table">
+      <tbody>
+      <tr>
+        <th>Title</th>
+        <td class="adder"><%= @json["title"] %></td>
+      </tr>
+      <tr>
+        <th>Unit</th>
+        <td>
+          <%= @avalon_item.pod_unit %>
+        </td>
+        <th>Creator</th>
+        <td>
+          <ul>
+            <% @json["fields"]["creator"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Uniform Title</th>
+        <td class="adder work"><%= @json["uniform_title"] %></td>
+        <th>Date Created</th>
+        <td><%= @json["fields"]["date_created"] %></td>
+      </tr>
+      <tr>
+        <th>Translated Title</th>
+        <td class="adder work">
+          <%= @json["translated_title"] %>
+        </td>
+        <th>Date Issued</th>
+        <td class="adder date issue"><%= @json["fields"]["date_issued"] %></td>
+      </tr>
+      <tr>
+        <th>Avalon Collection</th>
+        <td><%= @json["collection"] %></td>
+        <th>Copyright Date</th>
+        <td class="adder date copyright"><%= @json["fields"]["copyright_date"] %></td>
+      </tr>
+      <tr>
+        <th>Main Contributors</th>
+        <td>
+          <ul>
+            <% @json["main_contributors"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Publisher</th>
+        <td>
+          <ul>
+            <% @json["fields"]["publisher"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Publication Date</th>
+        <td class="adder date publication">
+          <%= @json["publication_date"] %>
+        </td>
+        <th>Physical Description</th>
+        <td>
+          <ul>
+            <% @json["fields"]["physical_description"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Bibliographic ID</th>
+        <td><%= @json["fields"]["bibliographic_id"] %></td>
+        <th>Statement of Responsibility</th>
+        <td><%= @json["fields"]["statement_of_responsibility"] %></td>
+      </tr>
+      <tr>
+        <th>Note</th>
+        <td><%= @json["fields"]["note"] %></td>
+        <th>Contributor</th>
+        <td>
+          <ul>
+            <% @json["fields"]["contributor"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Language</th>
+        <td>
+          <ul>
+            <% @json["fields"]["language"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Terms of Use</th>
+        <td><%= @json["fields"]["terms_of_use"] %></td>
+      </tr>
+      <tr>
+        <th>Table of Contents</th>
+        <td>
+          <ul>
+            <% @json["fields"]["table_of_contents"]&.each do |mc| %>
+              <li class='adder work'><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>JSON</h3>
+  <div class="json">
+    <pre>
+      <%= JSON.pretty_generate @json %>
+    </pre>
+  </div>
+</div>
+<div id="popup_menu" class="pup">
+  <ul class="pup">
+    <li class="pup add_person_button">Add Person</li>
+    <li class="pup add_work_button">Add Work</li>
+  </ul>
+</div>
+<%= render partial: 'avalon_items/rmd_javascript' %>

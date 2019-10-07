@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   include LDAPGroupsLookup::Behavior
 
   # FIXME: for now simply check usernames against this array for determining if a given user is a copyright librarian
-  COPYRIGHT_LIBRARIANS = %w(nazapant)
-  WEB_ADMINS = %w(shmichae jaalbrec)
+  COPYRIGHT_LIBRARIANS = %w(nazapant shmichae mcwhitak jaalbrec gfitzwat)
+  WEB_ADMINS = %w(shmichae jaalbrec mcwhitak)
 
 
   def self.authenticate(username)

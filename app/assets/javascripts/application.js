@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require jquery-ui
+//= require sweetalert2
 //= require_tree .
+//= require_tree ./jquery-hoverIntent-1.10.0
 $(document).ready(function() {
    $(".decodeURI").on("paste", function(e) {
        e.preventDefault();
@@ -59,4 +61,84 @@ function showLoad(jqSelector, scale) {
 }
 function hideLoader(jqSelector) {
     jqSelector.find('.loader').remove();
+}
+
+function hookEdtfValidation() {
+    $('.edtf').on('input',function() {
+        let val = $(this).val();
+        if (val.length === 0 || validEdtf(val)) {
+            $(this).removeClass("badEdtf");
+        } else {
+            $(this).addClass('badEdtf');
+        }
+    })
+}
+
+function hookFullDateValidation() {
+    $('.full_date').on('input', function() {
+        let val = $(this).val();
+        if (val.length === 0 || validFullDate(val)) {
+            $(this).removeClass('badFullDate');
+        } else {
+            $(this).addClass('badFullDate');
+        }
+    });
+}
+
+function hookYearValidation() {
+    $('.year').on('input',function() {
+        let val = $(this).val();
+        if (val.length === 0 || validYear(val)) {
+            $(this).removeClass("badYear");
+        } else {
+            $(this).addClass('badYear');
+        }
+    })
+}
+
+function hookUrlValidator() {
+    $('.urlValidator').on('input',function() {
+        let val = $(this).val();
+        if (val.length === 0 || validURL(val)) {
+            $(this).removeClass("badUrl");
+        } else {
+            $(this).addClass('badUrl');
+        }
+    });
+}
+
+function hookHMSValidator() {
+    $('.hms_validator').on('input', function() {
+        let time = $(this).val();
+        if (time.length === 0 || validHMS(time)) {
+            $(this).removeClass('badHms')
+        } else {
+            $(this).addClass('badHms');
+        }
+        $(this)
+    });
+}
+
+function validHMS(string) {
+    return string.match(/(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/);
+}
+
+function validEdtf(str) {
+    let edtf_matcher = /^([\d]{4}$|[\d]{3}u|^[\d]{4}\??)$/
+    return str === undefined || !!edtf_matcher.test(str) || str === 'unknown' || str.length == 0;
+}
+
+function validURL(str) {
+    let pattern = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?/
+    return str === undefined || !!pattern.test(str) || str.length == 0;
+}
+
+function validFullDate(date) {
+    let dateformat = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+    return date.match(dateformat)
+}
+
+function validYear(year) {
+    let yearFormat = /^(1|2)[0-9]{3}$/
+    return year.match(yearFormat);
 }

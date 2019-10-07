@@ -25,10 +25,14 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
-
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        if params[:avalon_item_id]
+          @avalon_item = AvalonItem.find(params[:avalon_item_id])
+          AvalonItemPerson.new(person_id: @person.id, avalon_item_id: params[:avalon_item_id].to_i).save
+        end
+        format.html { redirect_to people_path }
+        format.js {}
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
@@ -61,6 +65,12 @@ class PeopleController < ApplicationController
     end
   end
 
+  def ajax_new_person
+    @person = Person.new(last_name: params[:last_name], first_name: params[:first_name])
+    @ajax = true
+    render partial: 'people/form'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
@@ -70,7 +80,7 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(
-          :name, :date_of_birth, :date_of_death, :place_of_birth, :authority_source, :aka, :notes, :authority_source_url
+          :first_name, :last_name, :date_of_birth_edtf, :date_of_death_edtf, :place_of_birth, :authority_source, :aka, :notes, :authority_source_url
       )
     end
 end

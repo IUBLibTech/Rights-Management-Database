@@ -25,14 +25,22 @@ class PerformancesController < ApplicationController
   # POST /performances.json
   def create
     @performance = Performance.new(performance_params)
-
-    respond_to do |format|
-      if @performance.save
-        format.html { redirect_to @performance, notice: 'Performance was successfully created.' }
-        format.json { render :show, status: :created, location: @performance }
-      else
-        format.html { render :new }
-        format.json { render json: @performance.errors, status: :unprocessable_entity }
+    Performance.transaction do
+      respond_to do |format|
+        if @performance.save
+          @recording_performance = RecordingPerformance.new(recording_id: params[:recording_id], performance_id: @performance.id)
+          if  @recording_performance.save
+            @avalon_item = AvalonItem.find(params[:avalon_item_id])
+            format.html { redirect_to @avalon_item, notice: 'Performance was successfully created.' }
+            format.json { render :show, status: :created, location: @performance }
+          else
+            format.html { render :new }
+            format.json { render json: recording_performance.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { render :new }
+          format.json { render json: @performance.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -54,11 +62,18 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1
   # DELETE /performances/1.json
   def destroy
-    @performance.destroy
-    respond_to do |format|
-      format.html { redirect_to performances_url, notice: 'Performance was successfully destroyed.' }
-      format.json { head :no_content }
+    begin
+      @performance.destroy
+      render text: "success", status: 200
+    rescue
+
     end
+  end
+
+  def ajax_new_performance
+    @recording = Recording.find(params[:recording_id])
+    @performance = Performance.new
+    render partial: 'performances/form'
   end
 
   private
@@ -69,6 +84,6 @@ class PerformancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def performance_params
-      params.fetch(:performance, {})
+      params.require(:performance).permit(:location, :performance_date, :performance_date_string, :title, :notes)
     end
 end

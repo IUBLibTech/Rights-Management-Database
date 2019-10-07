@@ -23,7 +23,9 @@ class SessionsController < ActionController::Base
     uri = URI.parse("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
     request = Net::HTTP.new(uri.host, uri.port)
     request.use_ssl = true
-    request.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #request.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    request.ssl_version = :TLSv1_2
     response = request.get("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
     @resp = response.body
     if @resp.slice(0,3) == 'yes'

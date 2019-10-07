@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :signed_in_user
   around_filter :scope_current_username
+  before_filter :set_browser_no_cache
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def true?(obj)
@@ -24,5 +25,12 @@ class ApplicationController < ActionController::Base
   def user_not_authorized(exception)
     flash[:warning] = "You are not authorized to #{meaningful_action_name(action_name).humanize.downcase} #{controller_name.humanize.split.map(&:capitalize)*' '}"
     redirect_to request.referrer || root_path
+  end
+
+  private
+  def set_browser_no_cache
+    response.headers["Cache-Control"] = "no-cache, no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 end

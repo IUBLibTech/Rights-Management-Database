@@ -25,11 +25,15 @@ class WorksController < ApplicationController
   # POST /works.json
   def create
     @work = Work.new(work_params)
-
     respond_to do |format|
       if @work.save
+        if params[:avalon_item_id]
+          @avalon_item = AvalonItem.find(params[:avalon_item_id])
+          AvalonItemWork.new(work_id: @work.id, avalon_item_id: params[:avalon_item_id].to_i).save
+        end
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
-        format.json { render :show, status: :created, location: @work }
+        format.js {}
+        format.json { render text: "success"}
       else
         format.html { render :new }
         format.json { render json: @work.errors, status: :unprocessable_entity }
@@ -61,6 +65,12 @@ class WorksController < ApplicationController
     end
   end
 
+  def ajax_new_work
+    @work = Work.new(title: params[:title])
+    @ajax = true
+    render partial: 'works/form'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_work
@@ -70,8 +80,10 @@ class WorksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_params
       params.require(:work).permit(
-          :title, :traditional, :contemporary_work_in_copyright, :restored_copyright, :alternative_titles, :publication_date,
-          :authority_source, :notes, :access_determination, :copyright_end_date, :authority_source_url
+          :title, :alternative_titles, :publication_date_edtf, :authority_source, :authority_source_url,
+          :traditional, :contemporary_work_in_copyright, :restored_copyright, :copyright_renewed,
+          :copyright_end_date_edtf, :access_determination, :notes
+
       )
     end
 end

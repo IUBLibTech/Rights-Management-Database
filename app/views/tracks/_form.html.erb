@@ -1,0 +1,36 @@
+<%= form_for @track do |f| %>
+  <%= hidden_field_tag :avalon_item_id, @avalon_item.id %>
+  <%= f.hidden_field :performance_id, value: @performance.id %>
+  <table>
+    <tbody>
+    <tr>
+      <th>Track Name</th>
+      <td><%= f.text_field :track_name, value: (@track.track_name.nil? ? "Track #{@performance.tracks.size + 1}" : @track.track_name) %></td>
+    </tr>
+    <tr>
+      <th>Start Time (hh:mm:ss)</th>
+      <td>
+        <%= f.text_field :recording_start_time, class: 'hms_validator' %>
+      </td>
+    </tr>
+    <tr>
+      <th>End Time (hh:mm:ss)</th>
+      <td>
+        <%= f.text_field :recording_end_time, class: 'hms_validator' %>
+      </td>
+    </tr>
+    <tr>
+      <th>In Copyright</th>
+      <td><%= f.select :in_copyright, [['', nil], ['Yes', true], ['No', false]] %></td>
+    </tr>
+    <tr>
+      <th>Copyright End Date</th>
+      <td><%= f.text_field :copyright_end_date, class: 'year' %></td>
+    </tr>
+    <tr>
+      <th>Access Determination</th>
+      <td><%= f.select :access_determination, options_for_select(AccessDeterminationHelper::ACCESS_DECISIONS, @track.access_determination) %></td>
+    </tr>
+    </tbody>
+  </table>
+<% end %>
