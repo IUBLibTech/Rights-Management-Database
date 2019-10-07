@@ -8,48 +8,48 @@
     <td><%= @work.title %></td>
   </tr>
   <tr>
-    <th>Access Determination</th>
-    <td><%= @work.access_determination %></td>
-  </tr>
-  <tr>
-    <th>Traditional</th>
-    <td><%= @work.traditional? ? 'Yes' : 'No' %></td>
-  </tr>
-  <tr>
-    <th>Contemporary Work in Copyright</th>
-    <td><%= @work.contemporary_work_in_copyright? ? 'Yes':'No' %></td>
-  </tr>
-  <tr>
-    <th>Restored Copyright</th>
-    <td><%= @work.restored_copyright? ? 'Yes':'No'%></td>
-  </tr>
-  <tr>
     <th>Alternative Titles</th>
     <td><%= @work.alternative_titles %></td>
   </tr>
   <tr>
-    <th>Publisher</th>
-    <td><%= @work.publisher %></td>
-  </tr>
-  <tr>
-    <th>Publication Date</th>
-    <td><%= @work.publication_date %></td>
-  </tr>
-  <tr>
-    <th>Copyright End Date</th>
-    <td><%= @work.copyright_end_date %></td>
+    <th>Publication Year</th>
+    <td><%= @work.publication_date_edtf %></td>
   </tr>
   <tr>
     <th>Authority Source</th>
-    <td><%= @work.authority_source %></td>
+    <td><%= link_to @work.authority_source, @work.authority_source, target: '_blank'%></td>
   </tr>
   <tr>
-    <th>Authority Source URL</th>
-    <td><%= link_to "#{@work.authority_source_url}", @work.authority_source_url, target: '_blank' unless @work.authority_source_url.blank? %></td>
+    <th>Traditional</th>
+    <td><%= @work.traditional.blank? ? '' : @work.traditional? ? "Yes" : "No" %></td>
+  </tr>
+  <tr>
+    <th>Work in Copyright</th>
+    <td><%= @work.contemporary_work_in_copyright.blank? ? '' : @work.contemporary_work_in_copyright? ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Restored Copyright</th>
+    <td><%= @work.restored_copyright.blank? ? '' : @work.restored_copyright? ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Copyright Renewed?</th>
+    <td><%= @work.copyright_renewed.blank? ? '' : @work.copyright_renewed? ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Copyright End Year</th>
+    <td><%= @work.copyright_end_date_edtf %></td>
+  </tr>
+  <tr>
+    <th>Access Determination</th>
+    <td><%= @work.access_determination %></td>
+  </tr>
+  <tr>
+    <th colspan="2">Notes</th>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <%= @work.notes %>
+    </td>
   </tr>
   </tbody>
 </table>
-<div class="notes w_400">
-  <h4 class="m_top_10">Notes</h4>
-  <%= @work.notes%>
-</div>

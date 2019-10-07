@@ -10,20 +10,119 @@
   <% @avalon_item.recordings.each do |recording| %>
   <div class="recording_div">
     <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
-    <div class="ml_25">
-      <h5>Performances On This Recording</h5>
-      <% recording.performances.each do |p| %>
-        <div class="left w_250">
-          <b>Location: </b><span><%= p.location %></span>
-          <div class="ui-icon ui-icon-circle-close performance_delete" title="Delete Performance" data-performance-id="<%= p.id %>"></div>
-          <br>
-          <b>Performance Date: </b><span><%= p.performance_date %></span>
-        </div>
-      <% end %>
+    <div class="table_div">
+      <table>
+        <tbody>
+        <tr>
+          <th>Title</th>
+          <td><%= recording.title %></td>
+          <th>Producers</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td class="desc_td"><%= recording.description %></td>
+          <th>In Copyright?</th>
+          <td><%= recording.in_copyright.blank? ? '' : recording.in_copyright? ? 'Yes' : 'No' %></td>
+        </tr>
+        <tr>
+          <th>Published</th>
+          <td><%= recording.published.blank? ? '' : recording.published? ? 'Yes' : 'No'%></td>
+          <th>Copyright End Date</th>
+          <td><%= recording.copyright_end_date %></td>
+        </tr>
+        <tr>
+          <th>Date Of First Publication</th>
+          <td><%= recording.date_of_first_publication %></td>
+          <th>Reeceipt Of Will Before 90 Days Of Death?</th>
+          <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
+        </tr>
+        <tr>
+          <th>Creation Date</th>
+          <td><%= recording.creation_date %></td>
+          <th>Authority Source</th>
+          <td><%= recording.authority_source%></td>
+        </tr>
+        <tr>
+          <th>Country Of First Publication</th>
+          <td><%= recording.country_of_first_publication %></td>
+          <th>Authority Source URL</th>
+          <td><%= link_to recording.authority_source_url, recording.authority_source_url, target: '_blank' unless recording.authority_source_url.blank? %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <th>Access Determination</th>
+          <td><%= recording.access_determination %></td>
+        </tr>
+        <tr>
+          <th>Notes</th>
+          <td colspan="3"></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="clear">
+    <div class="clear ml_25">
       <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
     </div>
+    <% if recording.performances.size > 0 %>
+      <div class="ml_25 accordion performances">
+        <h5>Performances</h5>
+        <div class="performances">
+          <% recording.performances.each do |p| %>
+            <div class="performance">
+              <h6><%= p.title %></h6>
+              <div class="left">
+                <b>Location: </b><span><%= p.location %></span>
+                <br>
+                <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
+              </div>
+              <div class="left">
+                <b>Notes:</b> <%= p.notes %>
+              </div>
+              <div class="ui-icon ui-icon-circle-close performance_delete right" title="Delete: <%= "#{p.location} - #{p.performance_date.strftime("%m/%d/%Y")}" %>" data-performance-id="<%= p.id %>" data-performance-title="<%= p.title %>" data-performance-location="<%= p.location %>"></div>
+              <div class="clear">
+                <button type="button" class="add_track_button" data-performance-id="<%= p.id %>">Add Track</button>
+              </div>
+              <% if p.tracks.size > 0 %>
+                <div class="tracks">
+                  <div class="accordion">
+                    <h5>Tracks</h5>
+                    <div class="">
+                      <% p.tracks.each do |t| %>
+                        <div class="track" data-track-id="<%= t.id %>">
+                          <h6><%= t.track_name %></h6>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <th>Start Time</th>
+                                <td><%= t.recording_start_time %></td>
+                                <th>In Copyright?</th>
+                                <td><%= t.in_copyright.blank? ? '' : t.in_copyright? ? 'Yes' : 'No' %></td>
+                              </tr>
+                              <tr>
+                                <th>End Time</th>
+                                <td><%= t.recording_end_time %></td>
+                                <th>Copyright End Date</th>
+                                <td><%= t.copyright_end_date %></td>
+                              </tr>
+                              <tr>
+                                <th>Access Determination</th>
+                                <td><%= t.access_determination %></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <% end %>
 </div>

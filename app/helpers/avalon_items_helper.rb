@@ -18,8 +18,7 @@ module AvalonItemsHelper
       barcodes.each do |bc|
         recording = Recording.new(
             mdpi_barcode: bc.to_i, title: title, description: summary, access_determination: Recording::DEFAULT_ACCESS,
-            published: publication_date, fedora_item_id: json["id"], format: fields["format"],
-            atom_feed_read_id: @atom_feed_read.id, unit: unit, avalon_item_id: avalon_item.id
+            published: publication_date, fedora_item_id: json["id"], atom_feed_read_id: @atom_feed_read.id, unit: unit, avalon_item_id: avalon_item.id
         )
         recording.save!
       end
@@ -29,7 +28,9 @@ module AvalonItemsHelper
   end
 
   def pod_metadata_unit(mdpi_barcode)
-    u = Rails.application.secrets[:pod_full_metadata_url].gsub!(':mdpi_barocde', mdpi_barcode)
+    # this is not Java... Strings are full fledged objects and unless you .dup or .clone the secret val, you are changing
+    # the value stored at Rails.application.secrets... NOT GOOD
+    u = Rails.application.secrets[:pod_full_metadata_url].dup.gsub!(':mdpi_barocde', mdpi_barcode)
     uri = URI.parse(u)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true

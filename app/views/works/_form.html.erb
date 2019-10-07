@@ -20,36 +20,12 @@
       <td><%= f.text_field :title %></td>
     </tr>
     <tr>
-      <th>Access Determination</th>
-      <td><%= f.select :access_determination, options_for_select(Recording::ACCESS_DECISIONS, @work.access_determination) %></td>
-    </tr>
-    <tr>
-      <th>Traditional</th>
-      <td><%= f.check_box :traditional %></td>
-    </tr>
-    <tr>
-      <th>Contemporary Work in Copyright</th>
-      <td><%= f.check_box :contemporary_work_in_copyright %></td>
-    </tr>
-    <tr>
-      <th>Restored Copyright</th>
-      <td><%= f.check_box :restored_copyright %></td>
-    </tr>
-    <tr>
       <th>Alternative Titles</th>
       <td><%= f.text_field :alternative_titles %></td>
     </tr>
     <tr>
-      <th>Publisher</th>
-      <td><%= f.text_field :publisher %></td>
-    </tr>
-    <tr>
-      <th>Publication Date</th>
-      <td><%= f.text_field :publication_date, class: 'edtf' %></td>
-    </tr>
-    <tr>
-      <th>Copyright End Date</th>
-      <td><%= f.text_field :copyright_end_date, class: 'edtf' %></td>
+      <th>Publication Year</th>
+      <td><%= f.text_field :publication_date_edtf, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Authority Source</th>
@@ -57,14 +33,42 @@
     </tr>
     <tr>
       <th>Authority Source URL</th>
-      <td><%= f.text_field :authority_source_url, class: 'decodeURI urlValidator' %></td>
+      <td><%= f.text_field :authority_source, class: 'urlValidator' %></td>
+    </tr>
+    <tr>
+      <th>Traditional</th>
+      <td><%= f.check_box :traditional %></td>
+    </tr>
+    <tr>
+      <th>Work in Copyright</th>
+      <td><%= f.check_box :contemporary_work_in_copyright %></td>
+    </tr>
+    <tr>
+      <th>Restored Copyright</th>
+      <td><%= f.check_box :restored_copyright %></td>
+    </tr>
+    <tr>
+      <th>Copyright Renewed?</th>
+      <td><%= f.check_box :copyright_renewed %></td>
+    </tr>
+    <tr>
+      <th>Copyright End Year</th>
+      <td><%= f.text_field :copyright_end_date_edtf, class: 'year' %><span class="ui-icon ui-icon-help"></span></td>
+    </tr>
+    <tr>
+      <th>Access Determination</th>
+      <td><%= f.select :access_determination, options_for_select(Recording::ACCESS_DECISIONS, @work.access_determination) %></td>
+    </tr>
+    <tr>
+      <th colspan="2">Notes</th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="text_area_wrap"><%= f.text_area :notes, class: 'tArea' %></div>
+      </td>
     </tr>
     </tbody>
   </table>
-  <div class="notes">
-    <h4 class="m_top_10">Notes</h4>
-    <%= f.text_area :notes, class: 'boxsizingBorder w_400' %>
-  </div>
   <%# if the form is being created for an ajax call, omit the submit button %>
   <% unless @ajax%>
     <div class="actions">

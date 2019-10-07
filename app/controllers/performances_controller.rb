@@ -84,6 +84,6 @@ class PerformancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def performance_params
-      params.require(:performance).permit(:location, :performance_date)
+      params.require(:performance).permit(:location, :performance_date, :performance_date_string, :title, :notes)
     end
 end

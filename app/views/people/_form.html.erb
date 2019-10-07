@@ -27,11 +27,11 @@
     </tr>
     <tr>
       <th>Date of Birth</th>
-      <td><%= f.text_field :date_of_birth_edtf, class: 'edtf' %></td>
+      <td><%= f.text_field :date_of_birth_edtf, class: 'full_date' %><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Date of Death</th>
-      <td><%= f.text_field :date_of_death_edtf, class: 'edtf' %></td>
+      <td><%= f.text_field :date_of_death_edtf, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Place of Birth</th>
@@ -49,12 +49,12 @@
       <th>AKA</th>
       <td><%= f.text_field :aka %></td>
     </tr>
+    <tr><th colspan="2">Notes</th></tr>
+    <tr>
+      <td colspan="2"><div class="textarea_wrap"><%= f.text_area :notes, class: 'tArea' %></div></td>
+    </tr>
     </tbody>
   </table>
-  <div class="notes w_400">
-    <h4 class="m_top_10">Notes</h4>
-    <%= f.text_area :notes, class: 'boxsizingBorder w_400' %>
-  </div>
   <% unless @ajax %>
     <div class="actions">
       <%= f.submit %>

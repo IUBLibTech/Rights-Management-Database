@@ -4,6 +4,7 @@ class Recording < ActiveRecord::Base
   has_many :recording_performances
   has_many :performances, through: :recording_performances
   has_many :recording_contributor_people
+  has_many :people, through: :recording_contributor_people
 
   belongs_to :atom_feed_read
   belongs_to :avalon_item
@@ -27,7 +28,6 @@ class Recording < ActiveRecord::Base
   validates :access_determination, :inclusion => {:in => ACCESS_DECISIONS}
   validates :mdpi_barcode, mdpi_barcode: true
 
-  after_update :record_access_change
 
 
 

@@ -108,11 +108,6 @@ div.reviewed_div {
   text-decoration:none;
 }
 
-.bad_edtf {
-  color: red;
-  font-weight: bold;
-}
-
 .errorList {
   padding-left: 10px;
 }
@@ -168,4 +163,17 @@ div.recording_barcode {
 }
 .performance_delete[data-title]:hover:after {
   content: attr(data-title);
+}
+.performances {
+  margin-left: 10px;
+}
+.tracks {
+  margin-left: 73px;
+}
+.performance {
+
+}
+
+.ui-accordion .ui-accordion-content {
+  padding-left: 0 !important;
 }

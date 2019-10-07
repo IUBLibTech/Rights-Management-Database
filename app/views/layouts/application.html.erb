@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <title>Rmd</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-tracks' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-tracks' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag asset_path('favicon-32x32.png') %>
 </head>
 <body>
 <div class="branding">
@@ -62,7 +63,21 @@
 </body>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
+      setJqUiTooltips();
       $(document).tooltip();
-  })
+  });
+  function setJqUiTooltips() {
+      $(".ui-icon-help").hover(function() {
+          if ($(this).prev().hasClass('edtf')) {
+              $(this).attr('title', "EDTF Year. Valid input includes 1978, 1978?, and 197u. 1978? means that the date is not certain. 197u means sometime in the 1970s");
+          } else if ($(this).prev().hasClass('year')) {
+              $(this).attr('title', "This must be a full, four digit year: 1978");
+          } else if ($(this).prev().hasClass('full_date')) {
+              $(this).attr('title', "This must be a complete Date formatted mm/dd/yyyy")
+          } else if ($(this).prev().hasClass('hms_validator')) {
+              $(this).attr('title', "This must be formatted hh:mm:ss")
+          }
+      });
+  }
 </script>
 </html>

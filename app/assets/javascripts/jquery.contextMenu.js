@@ -1564,7 +1564,7 @@
                     root.positionSubmenu.call(opt.$node, opt.$menu); // positionSubmenu, will only do anything if user already hovered over menu item that just got new subitems.
                 }
 
-                // Wait for promise completion. .then(success, error, notify) (we don't track notify). Bind the opt
+                // Wait for promise completion. .then(success, error, notify) (we don't tracks notify). Bind the opt
                 // and root to avoid scope problems
                 promise.then(completedPromise.bind(this, opt, root), errorPromise.bind(this, opt, root));
             },

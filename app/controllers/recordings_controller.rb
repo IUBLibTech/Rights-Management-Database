@@ -94,6 +94,10 @@ class RecordingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recording_params
-      params.require(:recording).permit(:access_determination, :title, :last_updated_by)
+      params.require(:recording).permit(
+          :access_determination, :title, :description, :format, :published, :date_of_first_publication, :creation_date,
+          :creation_end_date, :country_of_first_publication, :in_copyright, :copyright_end_date, :receipt_of_will_before_90_days_of_death,
+          :authority_source, :authority_source_url
+      )
     end
 end

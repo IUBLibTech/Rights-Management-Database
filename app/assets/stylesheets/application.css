@@ -31,6 +31,12 @@ h5 {
     background: rgba(9, 155, 231, 0.4);
     font-size: 1em;
 }
+h6 {
+    background: none;
+    color: #D07A00;
+    font-size: 1em;
+    margin: 0;
+}
 
 div.branding {
     font-size: 3em;
@@ -147,3 +153,27 @@ th, td {
     text-align: left;
 }
 
+.orange {
+    font-weight: bold;
+    color: #D07A00;
+}
+
+.submit_row > th, .submit_row > td {
+    padding-top: 20px;
+}
+.badEdtf, .badYear, .badFullDate, .badUrl, .badHms {
+    color: red;
+    font-weight: bold;
+}
+.textarea_wrap {
+    overflow: hidden;
+    padding: 0 2px 0 0;
+}
+.tArea {
+    width: 100%;
+    height: 120px;
+    padding: 0;
+}
+.desc_td {
+    max-width: 600px;
+}
