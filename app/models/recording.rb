@@ -5,6 +5,7 @@ class Recording < ActiveRecord::Base
   has_many :performances, through: :recording_performances
   has_many :recording_contributor_people
   has_many :people, through: :recording_contributor_people
+  has_many :recording_notes
 
   belongs_to :atom_feed_read
   belongs_to :avalon_item

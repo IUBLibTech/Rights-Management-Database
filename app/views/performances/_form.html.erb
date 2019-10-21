@@ -31,16 +31,6 @@
       <th>Performance Date (mm/dd/yyyy)</th>
       <td><%= f.text_field :performance_date_string, class: 'full_date' %></td>
     </tr>
-    <tr>
-      <th colspan="2">Notes</th>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <div class="textarea_wrap">
-          <%= f.text_area :notes, class: 'tArea' %>
-        </div>
-      </td>
-    </tr>
     </tbody>
   </table>
   <% unless action_name == 'ajax_new_performance' %>

@@ -47,4 +47,21 @@
     </ul>
   </div>
 <% end %>
+<%=  %>
+<div class="notes">
+  <h4>Avalon Item Notes</h4>
+  <div class="clear">
+    <button type="button" class="add_avalon_item_note_button" data-avalon-item-id="<%= @avalon_item.id %>">Add Note</button>
+  </div>
+  <ul>
+    <% @avalon_item.avalon_item_notes.order("created_at DESC").each do |n| %>
+    <li>
+      <div class="note">
+        <b>Creator: </b><i><%= n.creator %></i> (<%= n.created_at.strftime('%I:%M%p %m/%d/%Y') %>) <br>
+        <%= n.text %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+</div>
 

@@ -177,3 +177,16 @@ div.recording_barcode {
 .ui-accordion .ui-accordion-content {
   padding-left: 0 !important;
 }
+.notes {
+  float: left;
+  max-width: 450px;
+  min-width: 450px;
+}
+.notes > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.note {
+
+}

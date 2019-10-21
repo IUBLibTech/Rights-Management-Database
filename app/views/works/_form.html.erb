@@ -37,19 +37,19 @@
     </tr>
     <tr>
       <th>Traditional</th>
-      <td><%= f.check_box :traditional %></td>
+      <td><%= f.select :traditional, [['', nil], ['Yes', true], ['No', false]] %></td>
     </tr>
     <tr>
       <th>Work in Copyright</th>
-      <td><%= f.check_box :contemporary_work_in_copyright %></td>
+      <td><%= f.select :contemporary_work_in_copyright, [['', nil], ['Yes', true], ['No', false]] %></td>
     </tr>
     <tr>
       <th>Restored Copyright</th>
-      <td><%= f.check_box :restored_copyright %></td>
+      <td><%= f.select :restored_copyright, [['', nil], ['Yes', true], ['No', false]] %></td>
     </tr>
     <tr>
       <th>Copyright Renewed?</th>
-      <td><%= f.check_box :copyright_renewed %></td>
+      <td><%= f.select :copyright_renewed, [['', nil], ['Yes', true], ['No', false]] %></td>
     </tr>
     <tr>
       <th>Copyright End Year</th>

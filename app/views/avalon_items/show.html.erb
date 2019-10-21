@@ -10,7 +10,7 @@
   <% @avalon_item.recordings.each do |recording| %>
   <div class="recording_div">
     <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
-    <div class="table_div">
+    <div class="table_div left">
       <table>
         <tbody>
         <tr>
@@ -31,16 +31,18 @@
           <th>Copyright End Date</th>
           <td><%= recording.copyright_end_date %></td>
         </tr>
-        <tr>
+        <tr>gg
           <th>Date Of First Publication</th>
           <td><%= recording.date_of_first_publication %></td>
-          <th>Reeceipt Of Will Before 90 Days Of Death?</th>
-          <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
+          <% if @avalon_item.pod_unit == 'B-ATM' %>
+            <th>Receipt Of Will Before 90 Days Of Death?</th>
+            <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
+          <% end %>
         </tr>
         <tr>
           <th>Creation Date</th>
           <td><%= recording.creation_date %></td>
-          <th>Authority Source</th>d
+          <th>Authority Source</th>
           <td><%= recording.authority_source%></td>
         </tr>
         <tr>
@@ -55,12 +57,24 @@
           <th>Access Determination</th>
           <td><%= recording.access_determination %></td>
         </tr>
-        <tr>
-          <th>Notes</th>
-          <td colspan="3"></td>
-        </tr>
         </tbody>
       </table>
+    </div>
+    <div class="notes">
+      <h4>Recording Notes</h4>
+      <div class="clear">
+        <button type="button" class="add_recording_note_button" data-recording-id="<%= recording.id %>">Add Note</button>
+      </div>
+      <ul>
+        <% recording.recording_notes.each do |note| %>
+          <li>
+            <div class="note">
+              <b>Creator: </b><i><%= note.creator %></i> (<%= note.created_at.strftime('%I:%M%p %m/%d/%Y') %>) <br>
+              <%= note.text %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
     </div>
     <div class="clear ml_25">
       <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
@@ -71,15 +85,29 @@
         <div class="performances">
           <% recording.performances.each do |p| %>
             <div class="performance">
-              <h6><%= p.title %></h6>
+              <h6><%= p.title.blank? ? "<i>No Title Specified</i>".html_safe : p.title %></h6>
               <div class="left">
                 <b>Location: </b><span><%= p.location %></span>
                 <br>
                 <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
               </div>
-              <div class="left">
-                <b>Notes:</b> <%= p.notes %>
+              <div class="notes">
+                <h4>Performance gNotes</h4>
+                <div class="clear">
+                  <button type="button" class="add_performance_note_button" data-performance-id="<%= p.id %>">Add Note</button>
+                </div>
+                <ul>
+                  <% p.performance_notes.each do |note| %>
+                  <li>
+                    <div class="note">
+                      <b>Creator: </b><i><%= note.creator %></i> (<%= note.created_at.strftime('%I:%M%p %m/%d/%Y') %>) <br>
+                      <%= note.text %>
+                    </div>
+                  </li>
+                  <% end %>
+                </ul>
               </div>
+
               <div class="ui-icon ui-icon-circle-close performance_delete right" title="Delete: <%= "#{p.location} - #{p.performance_date.strftime("%m/%d/%Y")}" %>" data-performance-id="<%= p.id %>" data-performance-title="<%= p.title %>" data-performance-location="<%= p.location %>"></div>
               <div class="clear">
                 <button type="button" class="add_track_button" data-performance-id="<%= p.id %>">Add Track</button>

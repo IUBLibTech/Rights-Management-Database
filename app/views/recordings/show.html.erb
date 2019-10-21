@@ -59,10 +59,12 @@
       <th>Copyright End Date</th>
       <td><%= @recording.copyright_end_date %></td>
     </tr>
-    <tr>
-      <th>Receipt Of Will Before 90 Days Of Death?</th>
-      <td><%= @recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
-    </tr>
+    <% if @recording.avalon_item.pod_unit == 'B-ATM' %>
+      <tr>
+        <th>Receipt Of Will Before 90 Days Of Death?</th>
+        <td><%= @recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
+      </tr>
+    <% end %>
     <tr>
       <th>Authority Source</th>
       <td><%= link_to @recording.authority_source, @recording.authority_source, {target: '_blank'} unless @recording.authority_source.blank? %></td>

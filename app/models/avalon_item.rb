@@ -2,6 +2,7 @@ class AvalonItem < ActiveRecord::Base
   include AccessDeterminationHelper
   has_many :recordings
   has_many :past_access_decisions
+  has_many :avalon_item_notes
 
   def has_rmd_metadata?
     recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0

@@ -66,10 +66,12 @@
       <th>Copyright End Date</th>
       <td><%= f.text_field :copyright_end_date, class: 'year' %></td>
     </tr>
-    <tr>
-      <th>Receipt Of Will Before 90 Days Of Death?</th>
-      <td><%= f.select :receipt_of_will_before_90_days_of_death, [['', nil], ['Yes', true], ['No', false]] %></td>
-    </tr>
+    <% if @recording.avalon_item == 'B-ATM' %>
+      <tr>
+        <th>Receipt Of Will Before 90 Days Of Death?</th>
+        <td><%= f.select :receipt_of_will_before_90_days_of_death, [['', nil], ['Yes', true], ['No', false]] %></td>
+      </tr>
+    <% end %>
     <tr>
       <th>Authority Source</th>
       <td><%= f.text_field :authority_source %></td>

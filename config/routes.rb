@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   resources :avalon_items
+  resources :avalon_item_notes, only: [:new, :create]
   resources :people
   resources :performances
+  resources :performance_notes, only: [:new, :create]
   resources :policies
   resources :recording_contributors
+  resources :recording_notes, only: [:new, :create]
   resources :recordings do
     member do
       post 'mark_needs_review'

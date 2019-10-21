@@ -41,7 +41,133 @@
         hookAddTrack();
         hookDeleteTrack();
         hookPopupMenu();
+        hookAddAvalonItemNote();
+        hookAddRecordingNote();
+        hookAddPerformanceNote();
+    }
 
+  function hookAddPerformanceNote() {
+      $('.add_performance_note_button').click(function() {
+          let performance_id = $(this).attr('data-performance-id');
+          $.ajax({
+              url: '<%= new_performance_note_path %>',
+              data: {
+                  performance_id: performance_id,
+                  avalon_item_id: <%= @avalon_item.id %>
+              },
+              success: function(result) {
+                  swal.fire({
+                      title: 'Adding Note',
+                      html: result,
+                      showCancelButton: true,
+                      cancel: {
+                          text: "Cancel",
+                          value: null,
+                          visible: true,
+                          closeModal: true
+                      },
+                      confirm: {
+                          text: "Create Note",
+                          value: true,
+                          visible: true,
+                          closeModal: false,
+                      }
+                  }).then(
+                      function(result) {
+                          if (result.value) {
+                              form = $('#new_performance_note');
+                              form.submit();
+                          }
+                      }
+                  );
+              },
+              error: function() {
+
+              }
+          })
+      });
+  }
+
+    function hookAddAvalonItemNote() {
+        $('.add_avalon_item_note_button').click(function() {
+           let avalon_item_id = $(this).attr('data-avalon-item-id');
+           $.ajax({
+               url: '<%= new_avalon_item_note_path %>',
+               data: {
+                   avalon_item_id: avalon_item_id
+               },
+               success: function(result) {
+                   swal.fire({
+                       title: 'Adding Note',
+                       html: result,
+                       showCancelButton: true,
+                       cancel: {
+                           text: "Cancel",
+                           value: null,
+                           visible: true,
+                           closeModal: true
+                       },
+                       confirm: {
+                           text: "Create Note",
+                           value: true,
+                           visible: true,
+                           closeModal: false,
+                       }
+                   }).then(
+                       function(result) {
+                           if (result.value) {
+                               form = $('#new_avalon_item_note');
+                               form.submit();
+                           }
+                       }
+                   );
+               },
+               error: function() {
+
+               }
+           })
+        });
+    }
+
+    function hookAddRecordingNote() {
+        $('.add_recording_note_button').click(function() {
+           let recording_id = $(this).attr('data-recording-id');
+           $.ajax({
+               url: '<%= new_recording_note_path %>',
+               data: {
+                   recording_id: recording_id
+               },
+               success: function(result) {
+                   swal.fire({
+                       title: 'Adding Note',
+                       html: result,
+                       showCancelButton: true,
+                       cancel: {
+                           text: "Cancel",
+                           value: null,
+                           visible: true,
+                           closeModal: true
+                       },
+                       confirm: {
+                           text: "Create Note",
+                           value: true,
+                           visible: true,
+                           closeModal: false,
+                       }
+                   }).then(
+                       function(result) {
+                           if (result.value) {
+                               form = $('#new_recording_note');
+                               form.submit();
+                           }
+                       }
+                   );
+               },
+               error: function() {
+
+               }
+           });
+        });
     }
 
     function hookPopupMenu() {
@@ -429,11 +555,12 @@
                           hookEdtfValidation(dom);
                           hookFullDateValidation();
                           hookUrlValidator();
+                          hookFullOrYearEDTF();
                           setJqUiTooltips();
                       },
                       preConfirm: () => {
                           var name = $('#person_first_name').val().length > 0 || $('#person_last_name').val().length > 0;
-                          var dates = validEdtf($('#person_date_of_birth_edtf').val()) && validEdtf($('#person_date_of_death_edtf').val());
+                          var dates = validFullOrYearEDTF($('#person_date_of_birth_edtf').val()) && validFullOrYearEDTF($('#person_date_of_death_edtf').val());
                           var url = validURL($('#person_authority_source_url').val());
                           if (name && dates && url) {
                               return true;
@@ -509,7 +636,7 @@
                         },
                         preConfirm: () => {
                             let title = $('#work_title').val().length > 0;
-                            let dates =  validEdtf($('#work_publication_date').val()) && validEdtf($('#work_copyright_end_date').val());
+                            let dates =  validEdtfYear($('#work_publication_date').val()) && validEdtfYear($('#work_copyright_end_date').val());
                             let url = validURL($('#work_authority_source_url').val());
                             if (title && dates && url) {
                                 return true;
