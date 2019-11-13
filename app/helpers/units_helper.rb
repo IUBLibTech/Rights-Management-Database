@@ -17,7 +17,7 @@ module UnitsHelper
 
   def self.calc_user_ads_units(user)
     u = User.new
-    if User::COPYRIGHT_LIBRARIANS.include? user
+    if User.copyright_librarian? user
       return units
     else
       u.ldap_lookup_key = user

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post '/avalon_items/ajax_reviewed', to: 'avalon_items#ajax_post_reviewed', as: 'ajax_post_reviewed'
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
+  post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
   get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
   get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'

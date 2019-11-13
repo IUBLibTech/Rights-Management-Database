@@ -3,6 +3,7 @@ class AvalonItem < ActiveRecord::Base
   has_many :recordings
   has_many :past_access_decisions
   has_many :avalon_item_notes
+  has_many :review_comments
 
   def has_rmd_metadata?
     recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0
@@ -17,7 +18,7 @@ class AvalonItem < ActiveRecord::Base
   end
 
   def allowed_access_determinations
-    if User.copyright_librarian?
+    if User.current_user_copyright_librarian?
       ACCESS_DECISIONS
     else
       allowed = []

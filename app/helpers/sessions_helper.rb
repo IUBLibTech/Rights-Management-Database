@@ -40,8 +40,4 @@ module SessionsHelper
     session.delete(:return_to)
   end
 
-  def copyright_librarian?(username)
-    UserHelper::COPYRIGHT_LIBRARIANS.include? username
-  end
-
 end

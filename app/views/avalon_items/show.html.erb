@@ -28,10 +28,10 @@
         <tr>
           <th>Published</th>
           <td><%= recording.published.blank? ? '' : recording.published? ? 'Yes' : 'No'%></td>
-          <th>Copyright End Date</th>
+          <th>Enters Public Domain</th>
           <td><%= recording.copyright_end_date %></td>
         </tr>
-        <tr>gg
+        <tr>
           <th>Date Of First Publication</th>
           <td><%= recording.date_of_first_publication %></td>
           <% if @avalon_item.pod_unit == 'B-ATM' %>
@@ -92,7 +92,7 @@
                 <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
               </div>
               <div class="notes">
-                <h4>Performance gNotes</h4>
+                <h4>Performance Notes</h4>
                 <div class="clear">
                   <button type="button" class="add_performance_note_button" data-performance-id="<%= p.id %>">Add Note</button>
                 </div>
@@ -131,7 +131,7 @@
                               <tr>
                                 <th>End Time</th>
                                 <td><%= t.recording_end_time %></td>
-                                <th>Copyright End Date</th>
+                                <th>Enters Public Domain</th>
                                 <td><%= t.copyright_end_date %></td>
                               </tr>
                               <tr>

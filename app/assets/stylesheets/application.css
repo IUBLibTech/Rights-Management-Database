@@ -178,3 +178,8 @@ th, td {
 .desc_td {
     max-width: 600px;
 }
+
+/* overwrite SWAL css */
+.swal2-title {
+    font-size: 1.575em !important;
+}

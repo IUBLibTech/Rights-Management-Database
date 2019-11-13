@@ -25,11 +25,13 @@
     <tbody>
     <tr>
       <th>Title</th>
+      <th>Last Review Comment</th>
       <th>Access Determination</th>
     </tr>
     <% @needs_review.each do |avalon_item| %>
       <tr>
         <td><%= link_to "#{avalon_item.title.blank? ? "No Title!" : avalon_item.title}", avalon_item_path(avalon_item), class: (avalon_item.title.blank? ? 'blank_title' : '') %></td>
+        <td><%= (avalon_item.review_comments.last.copyright_librarian? ? "#{avalon_item.review_comments.last.creator}: " : '')%><%= avalon_item.review_comments.last.comment %></td>
         <td><%= avalon_item.access_determination %></td>
       </tr>
     <% end %>

@@ -2,26 +2,31 @@
   <div class='reviewed_div'>
     <% if @avalon_item.reviewed?%>
       <p class="reviewed">This Item has been Reviewed by a Copyright Librarian</p>
-      <div class="toggle">
-        <p class="<%= 'i' if @avalon_item.reviewed_comment.blank? %>">
-          <%= @avalon_item.reviewed_comment.blank? ? "The Copyright Librarian that reviewed this item did not leave a comment regarding the review." : @avalon_item.reviewed_comment %>
-        </p>
-      </div>
     <% elsif @avalon_item.needs_review? %>
-      <p class="needs_review" data-comment="<% @avalon_item.needs_review_comment %>">
-        <span>This Item Needs Review</span>
-        <% if User.copyright_librarian? %>
-          <span class="button" id="mark_reviewed_button">Mark Reviewed</span>
+      <p class="needs_review" data-comment="<% @avalon_item.review_comments.last.comment %>">
+        <% if User.current_user_copyright_librarian? %>
+          <span>Review Requested</span>
+          <span class="button" id="mark_reviewed_button">Add Review Comment</span>
+        <% else %>
+          <% if @avalon_item.last_review_comment_by_cl %>
+            <span>Response Requested</span>
+            <span class="button" id="additional_comment">Respond to Copyright Librarian</span>
+          <% else %>
+            <span>Review Requested</span>
+            <span class="button" id="additional_comment">Add Additional Comments</span>
+          <% end %>
         <% end %>
       </p>
-      <div class="toggle">
-        <p class="<%= 'i' if @avalon_item.needs_review_comment.blank? %>">
-          <%= @avalon_item.needs_review_comment.blank? ? "#{@avalon_item.review_requester} did not leave a comment specifying why this item needed review." : @avalon_item.needs_review_comment %>
-        </p>
-      </div>
     <% else %>
-      <p class="review_not_needed button">Click to Mark 'Needs Review'</p>
+      <p class="review_not_needed button">Click to Mark 'Needs Copyright Review'</p>
     <% end %>
+    <div class="toggle">
+      <% @avalon_item.review_comments.order("id DESC").each do |c| %>
+        <p class="<%= c.copyright_librarian? ? "cl_comment" : "cm_comment"%>">
+          <b><%= c.creator %> (<%= c.created_at.strftime('%m/%d/%Y') %>)</b>: <%= c.comment %>
+        </p>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="left">
