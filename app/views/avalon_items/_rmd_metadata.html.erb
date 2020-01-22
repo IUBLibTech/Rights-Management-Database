@@ -8,7 +8,7 @@
           <span>Review Requested</span>
           <span class="button" id="mark_reviewed_button">Add Review Comment</span>
         <% else %>
-          <% if @avalon_item.last_review_comment_by_cl %>
+          <% if @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM  %>
             <span>Response Requested</span>
             <span class="button" id="additional_comment">Respond to Copyright Librarian</span>
           <% else %>
@@ -17,7 +17,7 @@
           <% end %>
         <% end %>
       </p>
-    <% else %>
+    <% elsif !User.copyright_librarian?(User.current_username) %>
       <p class="review_not_needed button">Click to Mark 'Needs Copyright Review'</p>
     <% end %>
     <div class="toggle">

@@ -53,6 +53,12 @@
       <th>AKA</th>
       <td><%= f.text_field :aka %></td>
     </tr>
+    <tr>
+      <th>Role</th>
+      <td>
+        <%= select_tag "role", options_for_select(Person::ALL_ROLES.collect { |r| [r,r] }) %>
+      </td>
+    </tr>
     <tr><th colspan="2">Notes</th></tr>
     <tr>
       <td colspan="2"><div class="textarea_wrap"><%= f.text_area :notes, class: 'tArea' %></div></td>

@@ -57,6 +57,17 @@ Rails.application.routes.draw do
   get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
   get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
 
+  get '/avalon_items/ajax/cm_all', to: 'avalon_items#ajax_all_cm_items', as: 'ajax_avalon_all_cm_items'
+  get '/avalon_items/ajax/cm_iu_default_only_items', to: 'avalon_items#ajax_cm_iu_default_only_items', as: 'avalon_items_cm_iu_default_only_items'
+  get '/avalon_items/ajax/cm_waiting_on_cl', to: 'avalon_items#ajax_cm_waiting_on_cl', as: 'avalon_items_cm_waiting_on_cl'
+  get '/avalon_items/ajax/cm_waiting_on_self', to: 'avalon_items#ajax_cm_waiting_on_self', as: 'avalon_items_cm_waiting_on_self'
+  get '/avalon_items/ajax/cm_access_determined', to: 'avalon_items#ajax_cm_access_determined', as: 'avalon_items_cm_access_determined'
+
+  get '/avalon_items/ajax/cl_all', to: 'avalon_items#ajax_all_cl_items', as: 'ajax_avalon_cl_all'
+  get '/avalon_items/ajax/cl_initial_review', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_initial_review'
+  get '/avalon_items/ajax/cl_waiting_on_cm', to: 'avalon_items#ajax_cl_waiting_on_cm', as: 'avalon_items_cl_waiting_on_cm'
+  get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_waiting_on_self'
+
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

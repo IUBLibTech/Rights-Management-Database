@@ -1,0 +1,13 @@
+<p>Collection Manager Workflow</p>
+<div class="rvt-m-all-xxs rvt-border-radius">
+  <span id="cm_all_badge" class="filter-badge rvt-badge pointer" onclick="cmLoadAll()">All</span>
+  <span id="cm_default_badge" class="filter-badge rvt-badge rvt-badge--info-secondary pointer" onclick="cmLoadDefaultAccess()">Default Access</span>
+  <span id="cm_review_badge" class="filter-badge rvt-badge rvt-badge--warning-secondary pointer" onclick="cmLoadWaitingOnCL()">Review Requested</span>
+  <span id="cm_responses_badge" class="filter-badge rvt-badge rvt-badge--danger-secondary pointer" onclick="cmLoadWaitingOnSelf()">Responses</span>
+  <span id="cm_determined_badge" class="filter-badge rvt-badge rvt-badge--success-secondary pointer" onclick="cmLoadAccessDetermined()">Access Determined</span>
+</div>
+<div id="results_table_div">
+  <%= render partial: 'cm_avalon_items_table' %>
+</div>
+
+

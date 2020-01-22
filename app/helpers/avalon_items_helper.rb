@@ -10,10 +10,9 @@ module AvalonItemsHelper
     avalon_item = nil
     unit = pod_metadata_unit(barcodes.first)
     Recording.transaction do
-      avalon_item = AvalonItem.new(
-          avalon_id: json["id"], title: title, json: json_text, pod_unit: unit
-      )
-      PastAccessDecision.new(avalon_item: avalon_item, decision: AccessDeterminationHelper::DEFAULT_ACCESS, changed_by: 'automated ingest').save!
+      avalon_item = AvalonItem.new(avalon_id: json["id"], title: title, json: json_text, pod_unit: unit, review_state: AvalonItem::REVIEW_STATE_DEFAULT)
+      decision = PastAccessDecision.new(avalon_item: avalon_item, decision: AccessDeterminationHelper::DEFAULT_ACCESS, changed_by: 'automated ingest')
+      decision.save!
       avalon_item.save!
       barcodes.each do |bc|
         recording = Recording.new(

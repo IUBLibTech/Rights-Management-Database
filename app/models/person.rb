@@ -8,6 +8,16 @@ class Person < ActiveRecord::Base
   has_many :iu_affiliations, through: :person_iu_affiliations
   has_many :performance_contributor_people
 
+  RECORDING_CONTRIBUTOR_ROLES_KEY = "recording"
+  PERFORMANCE_CONTRIBUTOR_ROLES_KEY = "performance"
+  WORK_CONTRIBUTOR_ROLES_KEY = "work"
+  ROLES = {
+      RECORDING_CONTRIBUTOR_ROLES_KEY => ["Depositor (R)", "Recording Producer (R)"],
+      PERFORMANCE_CONTRIBUTOR_ROLES_KEY => ["Interviewer (P)", "Performer (P)", "Conductor (P)", "Interviewee (P)"],
+      WORK_CONTRIBUTOR_ROLES_KEY => ["Contributor (W)", "Principle Creator (W)"]
+  }
+  ALL_ROLES = Person::ROLES.keys.collect{|k| Person::ROLES[k]}.flatten.sort
+
   def name
     "#{first_name} #{last_name}"
   end

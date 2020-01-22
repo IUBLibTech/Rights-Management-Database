@@ -160,6 +160,6 @@ function validFullDate(date) {
 }
 
 function validYear(year) {
-    let yearFormat = /^(1|2)[0-9]{3}$/
+    let yearFormat = /^[0-9]{4}$/
     return year.match(yearFormat);
 }

@@ -403,7 +403,12 @@
             title: 'Comments for Copyright Librarian',
             input: "textarea",
             showCancelButton: true,
-            confirmButtonText: '<%= @avalon_item.needs_review ? (@avalon_item.last_review_comment_by_cl ? 'Respond' : 'Add Comment') : 'Request Review' %>',
+            confirmButtonText: '<%= if @avalon_item.needs_review
+                                      @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM ? 'Respond' : 'Add Comment'
+                                    else
+                                      'Request Review'
+                                    end
+                                %>',
             showLoaderOnConfirm: true,
             preConfirm: (comment) => {
                 let form = new FormData();
@@ -420,7 +425,7 @@
                         if (response.ok) {
                             swal.fire({
                                 title: 'Updated Review Status',
-                                html: response.text()
+                                html: text
                             }).then((result) => {
                                 loadRmdMetadata();
                             });
