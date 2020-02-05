@@ -17,6 +17,11 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def ajax_show
+    recording = Recording.find(params[:id])
+    render partial: 'recordings/ajax_show', locals: {recording: recording}
+  end
+
   # GET /recordings/new
   def new
     @recording = Recording.new
@@ -25,6 +30,11 @@ class RecordingsController < ApplicationController
   # GET /recordings/1/edit
   def edit
     render 'recordings/not_authorized' unless User.belongs_to_unit?(@recording.unit)
+  end
+
+  def ajax_edit
+    recording = Recording.find(params[:id])
+    render partial: 'recordings/ajax_edit', locals: {recording: recording}
   end
 
   # POST /recordings

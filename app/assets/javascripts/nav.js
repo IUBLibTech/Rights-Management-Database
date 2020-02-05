@@ -68,7 +68,9 @@ function ajaxItems(url, errorMsg, badgeSelector) {
         method: "GET",
         success: function(response) {
             $("#results_table_div").html(response);
+            hookTableSort('avalon_items_table');
             setPrimaryBadge($(badgeSelector));
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             swal({

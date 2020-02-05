@@ -1,4 +1,4 @@
-<div class="rvt_container rvt-m-all-sm">
+<div class="rvt_container">
   <% if User.copyright_librarian?(User.current_username) %>
     <%= render partial: 'cl_start' %>
   <% else %>
@@ -7,17 +7,21 @@
 </div>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-        $('#avalon_items_table').tablesorter(
+        hookTableSort('avalon_items_table');
+    });
+
+    function hookTableSort(tableId) {
+        $('#'+tableId).tablesorter(
             {
                 theme: 'bootstrap',
                 sortList: [[0,0], [1,0]],
                 headers: {
-                   '.no_sort' : {
+                    '.no_sort' : {
                         sorter: false
-                }
+                    }
             }
         });
-    });
+    }
 </script>
 
 

@@ -19,3 +19,455 @@
 .pointer {
     cursor: pointer;
 }
+
+/** taken from Matt Fitzwater's styles.css file */
+
+body,
+html {
+    height: 100%;
+    min-height: 100%;
+    position: relative
+}
+
+body {
+    padding-bottom: 60px;
+    margin: 0 0 100px
+}
+
+main {
+    padding: 0 0 20em
+}
+
+table a:active,
+table a:link,
+table a:visited {
+    text-decoration: none
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 1500px
+}
+
+.rvt-footer {
+    position: static;
+    bottom: 0;
+    padding: 1rem
+}
+
+h1 a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5em
+}
+
+h2 {
+    font-size: 1.3em;
+    font-weight: 700
+}
+
+h2 .rvt-button {
+    font-size: .8em
+}
+
+i.xxsmall {
+    font-size: .8em
+}
+
+.form-grid .rvt-grid__item-lg {
+    min-width: 45%
+}
+
+.rvt-grid__item-12,
+.rvt-grid__item-lg {
+    padding-bottom: 1em
+}
+
+.rightButton {
+    float: right;
+    margin: 1.65rem 0 0 0;
+    padding-right: 1.7em
+}
+
+.rightButton button {
+    float: right;
+    margin-left: 1em
+}
+
+input:not([type]),
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea {
+    border-color: #c7c7c7
+}
+
+input.avalon,
+textarea.avalon {
+    background: #f2f2f2;
+    border: none
+}
+
+.rvt-breadcrumbs li {
+    font-size: .8rem
+}
+
+a {
+    text-decoration: none
+}
+
+a:hover {
+    color: #900
+}
+
+.rvt-grid__item-lg {
+    position: relative
+}
+
+.btn {
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    border: none
+}
+
+.btn .fa-check {
+    display: none
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
+}
+
+.titleText,
+h4 {
+    font-size: 1em;
+    font-weight: 700
+}
+
+.swal1-textarea {
+    height: 3em
+}
+
+.floatRight {
+    float: right
+}
+
+.rvt-tabs__panel {
+    transition: visibility 0s .25s, opacity .25s linear
+}
+
+input.noBorder,
+input.noBorder:disabled {
+    border: none;
+    background: 0 0
+}
+
+td:nth-child(n),
+th:nth-child(n) {
+    min-width: 9em
+}
+
+.no-bottom-b-br {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0
+}
+
+form {
+    /*width: 500px;*/
+    /*margin: 3em*/
+}
+
+div[data-roles=true] {
+    padding: 1em;
+    background: #ebebeb;
+    margin: .55em 0;
+    border-radius: 7px;
+    display: none;
+    position: relative
+}
+
+.btnClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 0;
+    background: 0 0
+}
+
+.btnClose svg,
+.checkMark {
+    width: 35px;
+    height: 35px;
+    transition: all .2s ease-in-out
+}
+
+.st0 {
+    fill: #fff;
+    transition: all .2s ease-in-out
+}
+
+.st1 {
+    fill: #b44010;
+    transition: all .2s ease-in-out
+}
+
+svg:hover .st0 {
+    fill: #ebebeb
+}
+
+svg:hover .st1 {
+    fill: #900
+}
+
+h3 {
+    font-weight: 700
+}
+
+.checkMark {
+    fill: green;
+    display: none
+}
+
+div.show {
+    display: block
+}
+
+.rvt-dropdown {
+    display: block
+}
+
+#btn-roles {
+    width: 100%;
+    border: 1px solid #666;
+    border-radius: 3px;
+    text-align: left;
+    padding: .4em
+}
+
+#btn-roles svg {
+    position: absolute;
+    right: 8px;
+    top: 12px
+}
+
+button:focus {
+    outline: .125rem solid #006298
+}
+
+label {
+    margin: 1em 0 .25em
+}
+
+input,
+select,
+textarea {
+    margin-bottom: .5em
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out;
+    visibility: visible!important
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
+
+
+.joinedPanel {
+    margin-top: -1em
+}
+
+.accordion {
+    color: #edebeb;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 1em 1.5em;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    outline: 0;
+    transition: all .45s;
+    cursor: pointer;
+}
+
+.accordionPanel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+
+.accordion:focus,
+.accordion:hover {
+    background: #fff;
+    box-shadow: 0 -3px 3px 0 rgba(0, 0, 0, .25);
+    border-radius: 10px 10px 0 0;
+}
+
+.accordion:focus {
+    outline: 4px solid transparent
+}
+
+
+.accordion button::-moz-focus-inner {
+    border: 0
+}
+
+.accordion-title {
+    display: block;
+    /*pointer-events: none;*/
+    border: transparent 2px solid;
+    border-radius: 5px;
+    padding: .25em;
+    outline: 0;
+    color: #900;
+    font-size: 1.4em;
+    font-weight: 700
+}
+
+.accordion-panel .accordion-panel .accordion-trigger {
+    background: #e0dcdc
+}
+
+.accordion-trigger:focus .accordion-title {
+    border-color: #e0dcdc
+}
+
+.accordion-icon {
+    border: solid currentColor;
+    border-width: 0 5px 5px 0;
+    height: .85rem;
+    /*pointer-events: none;*/
+    position: absolute;
+    right: 2em;
+    top: 50%;
+    transform: translateY(-60%) rotate(45deg);
+    width: .85rem
+}
+
+.accordion-trigger:focus .accordion-icon,
+.accordion-trigger:hover .accordion-icon {
+    border-color: #900
+}
+
+.accordion-trigger[aria-expanded=true] .accordion-icon {
+    transform: translateY(-50%) rotate(-135deg)
+}
+
+.accordion-trigger[aria-expanded=true] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.accordion-panel {
+    margin: 0;
+    padding: 1em 1.5em;
+    border: 1px solid #d4cece;
+    border-radius: 8px
+}
+
+.accordion-panel[hidden] {
+    display: none
+}
+
+button {
+    border-style: none
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+input {
+    border: 1px solid #6b6b6b;
+    border-radius: .3em;
+    display: block;
+    font-size: inherit;
+    padding: .3em .5em
+}
+
+.accordion-panel.slideDown[hidden] {
+    animation-name: fadeOut;
+    animation-duration: .1s;
+    animation-timing-function: ease
+}
+
+.js-hidden {
+    animation-name: fadeOut;
+    animation-duration: .55s;
+    animation-timing-function: ease;
+    visibility: visible!important
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: .55s;
+    animation-timing-function: ease;
+    visibility: visible!important
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+h3.bgWhite {
+    background: #fff;
+    border-radius: 10px
+}
+
+
+/* Andrew added CSS */
+.bgGray {
+    background: #edebeb;
+    border-radius: 7px;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}

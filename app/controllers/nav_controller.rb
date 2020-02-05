@@ -10,6 +10,10 @@ class NavController < ApplicationController
     end
   end
 
+  def test
+
+  end
+
   def mdpi_barcode_search
     @recording = Recording.where(mdpi_barcode: params[:mdpi_barcode]).first
     if @recording.nil?

@@ -103,6 +103,48 @@ class AvalonItem < ActiveRecord::Base
     review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
   end
 
+  def rivet_button_badge
+    text = ""
+    css = ""
+    if User.current_user_copyright_librarian?
+      case review_state
+      when REVIEW_STATE_DEFAULT
+        return ""
+      when REVIEW_STATE_REVIEW_REQUESTED
+        text = "Initial Review"
+        css = "rvt-badge rvt-badge--info"
+      when REVIEW_STATE_WAITING_ON_CM
+        text = "Needs Information"
+        css = "rvt-badge rvt-badge--warning"
+      when REVIEW_STATE_WAITING_ON_CL
+        text = "Responses"
+        css = "rvt-badge rvt-badge--danger"
+      else
+        return ""
+      end
+    else
+      case review_state
+      when REVIEW_STATE_DEFAULT
+        text = "Default Access"
+        css = "rvt-badge rvt-badge--info"
+      when REVIEW_STATE_REVIEW_REQUESTED
+        text = "Review Requested"
+        css = "rvt-badge rvt-badge--warning"
+      when REVIEW_STATE_WAITING_ON_CM
+        text = "Responses"
+        css = "rvt-badge rvt-badge--danger"
+      when REVIEW_STATE_WAITING_ON_CL
+        text = "Review Requested"
+        css = "rvt-badge rvt-badge--warning"
+      when REVIEW_STATE_ACCESS_DETERMINED
+        text = "Access Determined"
+        css = "rvt-badge rvt-badge--success"
+      else
+        return ""
+      end
+    end
+    "<span class='#{css}'>#{text}</span>".html_safe
+  end
 
 
 end

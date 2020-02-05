@@ -1,288 +1,54 @@
-<h4>Avalon Item</h4>
-<h4 class="avalon_item">
-  <%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %>
-</h4>
-<div class="rmd_metadata">
-  <%= render 'rmd_metadata' %>
-</div>
-<div class="clear">
-  <h4>Recordings In This Avalon Item</h4>
-  <% @avalon_item.recordings.each do |recording| %>
-  <div class="recording_div">
-    <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
-    <div class="table_div left">
-      <table>
-        <tbody>
-        <tr>
-          <th>Title</th>
-          <td><%= recording.title %></td>
-          <th>Producers</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td class="desc_td"><%= recording.description %></td>
-          <th>In Copyright?</th>
-          <td><%= recording.in_copyright.blank? ? '' : recording.in_copyright? ? 'Yes' : 'No' %></td>
-        </tr>
-        <tr>
-          <th>Published</th>
-          <td><%= recording.published.blank? ? '' : recording.published? ? 'Yes' : 'No'%></td>
-          <th>Enters Public Domain</th>
-          <td><%= recording.copyright_end_date %></td>
-        </tr>
-        <tr>
-          <th>Date Of First Publication</th>
-          <td><%= recording.date_of_first_publication %></td>
-          <% if @avalon_item.pod_unit == 'B-ATM' %>
-            <th>Receipt Of Will Before 90 Days Of Death?</th>
-            <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
-          <% end %>
-        </tr>
-        <tr>
-          <th>Creation Date</th>
-          <td><%= recording.creation_date %></td>
-          <th>Authority Source</th>
-          <td><%= recording.authority_source%></td>
-        </tr>
-        <tr>
-          <th>Country Of First Publication</th>
-          <td><%= recording.country_of_first_publication %></td>
-          <th>Authority Source URL</th>
-          <td><%= link_to recording.authority_source_url, recording.authority_source_url, target: '_blank' unless recording.authority_source_url.blank? %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td></td>
-          <th>Access Determination</th>
-          <td><%= recording.access_determination %></td>
-        </tr>
-        </tbody>
-      </table>
+<h3 class="">
+  <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank"}) do %>
+    <span class="accordion-title rvt-text-bold">
+      <%= @avalon_item.title %>
+      <i class="fa fa-external-link xxsmall"><span class=sr-only>opens a new window</span></i>
+      <span class="">
+        <%= @avalon_item.rivet_button_badge %>
+      </span>
+    </span>
+  <% end %>
+</h3>
+<div class="avalon_item_metadata">
+  <div id="access_div" class="display-flex">
+    <div class=rvt-grid__item-lg>
+      <label for=access>Access Determination:</label>
+      <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
     </div>
-    <div class="notes">
-      <h4>Recording Notes</h4>
-      <div class="clear">
-        <button type="button" class="add_recording_note_button" data-recording-id="<%= recording.id %>">Add Note</button>
-      </div>
-      <ul>
-        <% recording.recording_notes.each do |note| %>
-          <li>
-            <div class="note">
-              <b>Creator: </b><i><%= note.creator %></i> (<%= note.created_at.strftime('%I:%M%p %m/%d/%Y') %>) <br>
-              <%= note.text %>
+    <div class="rvt-grid__item-lg rightButton">
+      <div>
+        <button type=button class=rvt-button data-modal-trigger=modal-note>Avalon Item Note</button>
+        <div class=rvt-modal id=modal-note role=dialog aria-labelledby=modal-example-title aria-hidden=true tabindex=-1>
+          <div class=rvt-modal__inner>
+            <header class=rvt-modal__header>
+              <h1 class=rvt-modal__title id=modal-example-title>Avalon Item Notes</h1></header>
+            <div class=rvt-modal__body>
+              <div class=rvt-grid__item-12>
+                <label for=notes1>Avalon Item Notes</label>
+                <textarea class=swal2-textarea id=notes1 aria-labelledby=notes></textarea>
+              </div>
             </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="clear ml_25">
-      <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
-    </div>
-    <% if recording.performances.size > 0 %>
-      <div class="ml_25 accordion performances">
-        <h5>Performances</h5>
-        <div class="performances">
-          <% recording.performances.each do |p| %>
-            <div class="performance">
-              <h6><%= p.title.blank? ? "<i>No Title Specified</i>".html_safe : p.title %></h6>
-              <div class="left">
-                <b>Location: </b><span><%= p.location %></span>
-                <br>
-                <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
-              </div>
-              <div class="notes">
-                <h4>Performance Notes</h4>
-                <div class="clear">
-                  <button type="button" class="add_performance_note_button" data-performance-id="<%= p.id %>">Add Note</button>
-                </div>
-                <ul>
-                  <% p.performance_notes.each do |note| %>
-                  <li>
-                    <div class="note">
-                      <b>Creator: </b><i><%= note.creator %></i> (<%= note.created_at.strftime('%I:%M%p %m/%d/%Y') %>) <br>
-                      <%= note.text %>
-                    </div>
-                  </li>
-                  <% end %>
-                </ul>
-              </div>
-
-              <div class="ui-icon ui-icon-circle-close performance_delete right" title="Delete: <%= "#{p.location} - #{p.performance_date.strftime("%m/%d/%Y")}" %>" data-performance-id="<%= p.id %>" data-performance-title="<%= p.title %>" data-performance-location="<%= p.location %>"></div>
-              <div class="clear">
-                <button type="button" class="add_track_button" data-performance-id="<%= p.id %>">Add Track</button>
-              </div>
-              <% if p.tracks.size > 0 %>
-                <div class="tracks">
-                  <div class="accordion">
-                    <h5>Tracks</h5>
-                    <div class="">
-                      <% p.tracks.each do |t| %>
-                        <div class="track" data-track-id="<%= t.id %>">
-                          <h6><%= t.track_name %></h6>
-                          <table>
-                            <tbody>
-                              <tr>
-                                <th>Start Time</th>
-                                <td><%= t.recording_start_time %></td>
-                                <th>In Copyright?</th>
-                                <td><%= t.in_copyright.blank? ? '' : t.in_copyright? ? 'Yes' : 'No' %></td>
-                              </tr>
-                              <tr>
-                                <th>End Time</th>
-                                <td><%= t.recording_end_time %></td>
-                                <th>Enters Public Domain</th>
-                                <td><%= t.copyright_end_date %></td>
-                              </tr>
-                              <tr>
-                                <th>Access Determination</th>
-                                <td><%= t.access_determination %></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
+            <div class=rvt-modal__controls>
+              <button type=button class=rvt-button>OK</button>
+              <button type=button class="rvt-button rvt-button--secondary" data-modal-close=modal-note>Cancel</button>
             </div>
-          <% end %>
+          </div>
         </div>
+        <button id=flagCopyrightLibrarian class=rvt-button data-modal-trigger=modal-example-basic>Copyright Librarian</button>
+        <button id=viewHistory class="rvt-button rvt-button--secondary" data-modal-trigger=modal-history>View History</button>
       </div>
+    </div>
+  </div>
+  <div id="recordings_div" class="rvt-p-all-sm bgGray">
+    <h2>Recordings In This Avalon Item </h2>
+    <% @avalon_item.recordings.each do |recording| %>
+      <%= render partial: 'recordings/ajax_show', locals: {recording: recording} %>
     <% end %>
   </div>
-  <% end %>
 </div>
-<div class="accordion clear">
-  <h3>Avalon Metadata</h3>
-  <div>
-    <table class="json_table">
-      <tbody>
-      <tr>
-        <th>Title</th>
-        <td class="adder"><%= @json["title"] %></td>
-      </tr>
-      <tr>
-        <th>Unit</th>
-        <td>
-          <%= @avalon_item.pod_unit %>
-        </td>
-        <th>Creator</th>
-        <td>
-          <ul>
-            <% @json["fields"]["creator"]&.each do |mc| %>
-              <li class="adder people"><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th>Uniform Title</th>
-        <td class="adder work"><%= @json["uniform_title"] %></td>
-        <th>Date Created</th>
-        <td><%= @json["fields"]["date_created"] %></td>
-      </tr>
-      <tr>
-        <th>Translated Title</th>
-        <td class="adder work">
-          <%= @json["translated_title"] %>
-        </td>
-        <th>Date Issued</th>
-        <td class="adder date issue"><%= @json["fields"]["date_issued"] %></td>
-      </tr>
-      <tr>
-        <th>Avalon Collection</th>
-        <td><%= @json["collection"] %></td>
-        <th>Copyright Date</th>
-        <td class="adder date copyright"><%= @json["fields"]["copyright_date"] %></td>
-      </tr>
-      <tr>
-        <th>Main Contributors</th>
-        <td>
-          <ul>
-            <% @json["main_contributors"]&.each do |mc| %>
-              <li class="adder people"><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-        <th>Publisher</th>
-        <td>
-          <ul>
-            <% @json["fields"]["publisher"]&.each do |mc| %>
-              <li><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th>Publication Date</th>
-        <td class="adder date publication">
-          <%= @json["publication_date"] %>
-        </td>
-        <th>Physical Description</th>
-        <td>
-          <ul>
-            <% @json["fields"]["physical_description"]&.each do |mc| %>
-              <li><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th>Bibliographic ID</th>
-        <td><%= @json["fields"]["bibliographic_id"] %></td>
-        <th>Statement of Responsibility</th>
-        <td><%= @json["fields"]["statement_of_responsibility"] %></td>
-      </tr>
-      <tr>
-        <th>Note</th>
-        <td><%= @json["fields"]["note"] %></td>
-        <th>Contributor</th>
-        <td>
-          <ul>
-            <% @json["fields"]["contributor"]&.each do |mc| %>
-              <li><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th>Language</th>
-        <td>
-          <ul>
-            <% @json["fields"]["language"]&.each do |mc| %>
-              <li><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-        <th>Terms of Use</th>
-        <td><%= @json["fields"]["terms_of_use"] %></td>
-      </tr>
-      <tr>
-        <th>Table of Contents</th>
-        <td>
-          <ul>
-            <% @json["fields"]["table_of_contents"]&.each do |mc| %>
-              <li class='adder work'><%= mc %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <h3>JSON</h3>
-  <div class="json">
-    <pre>
-      <%= JSON.pretty_generate @json %>
-    </pre>
-  </div>
-</div>
-<div id="popup_menu" class="pup">
-  <ul class="pup">
-    <li class="pup add_person_button">Add Person</li>
-    <li class="pup add_work_button">Add Work</li>
-  </ul>
-</div>
-<%= render partial: 'avalon_items/rmd_javascript' %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        hookAccordion();
+        hookEditRecordings();
+    });
+</script>

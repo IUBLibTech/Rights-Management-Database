@@ -1,0 +1,60 @@
+<div data-recording-id="<%= recording.id %>" class="recording_div">
+  <h3 class="accordion accordion-title active"><%= recording.title %> <%= recording.mdpi_barcode %></h3>
+  <%= form_for recording, remote: true do |f|%>
+  <div class="rvt-grid m-fadeIn">
+      <div class="rvt-grid__item-12">
+        <label for="recordingTitle">Title</label>
+        <%= f.text_field :title, {type: "text", id: "recordingTitle", 'aria-describedby': "inCopyright"} %>
+      </div>
+      <div class="rvt-grid__item-12">
+        <label for="recordingDescription">Recording Description</label>
+        <textarea class="noBorder" id="recordingDescription">Features Andy Warhol and Roy Lichtenstein as they discuss their use of common objects as models for their art. Shows Lichtenstein discussing his approach to Pop Art and at work on a painting, a sculpture which combines half-tone dot patterns with the three dimensional work, and a creation using a special irridescent plastic background which changes character as the position of the viewer changes. Interviews Warhol, who explains how his first Pop Art work came to be created and describes his other artistic endeavors, such as films and floating sculpture. Observes Warhol working on one of his silkscreen prints, creating his floating sculpture, and relaxing with his friends.
+            </textarea>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="inCopyright">In Copyright</label>
+        <input type="text" id="inCopyright" aria-describedby="inCopyright">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="copyrightEnd">Copyright End Date</label>
+        <input type="date" id="copyrightEnd" aria-describedby="copyrightEnd">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label>
+        <input type="text" id="receiptOfWill" aria-describedby="receiptOfWill">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="published">Published</label>
+        <input type="date" id="published" aria-describedby="Published">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="dateOfFirstPublication">Date Of First Publication</label>
+        <input type="date" id="dateOfFirstPublication" aria-describedby="dateOfFirstPublication">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="creationDate">Creation Date</label>
+        <input type="date" id="creationDate" aria-describedby="creationDate">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="countryOfFirstPublication">Country Of First Publication</label>
+        <input type="text" id="countryOfFirstPublication" aria-describedby="countryOfFirstPublication">
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="authoritySource">Authority Source</label>
+        <input type="text" id="countryOfFirstPublication" aria-describedby="authoritySource">
+      </div>
+      <div class="rvt-grid__item-12">
+        <label for="authoritySourceURL">Authority Source URL</label>
+        <input type="text" id="countryOfFirstPublication" aria-describedby="authoritySourceURL">
+      </div>
+      <div class="rvt-grid__item-12">
+        <label for="notes">Recording Notes</label>
+        <textarea class="swal2-textarea" id="notes" aria-labelledby="notes"></textarea>
+      </div>
+      <div class="rvt-grid__item-12">
+        <button class="recordingEditCancelButton rvt-button floatRight rvt-m-left-sm" data-recording-id="<%= recording.id %>">Cancel</button>
+        <button class="recordingEditUpdateButton rvt-button floatRight">Update</button>
+      </div>
+  </div>
+  <% end %>
+</div>

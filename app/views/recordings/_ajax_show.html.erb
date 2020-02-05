@@ -1,0 +1,60 @@
+<div data-recording-id="<%= recording.id %>" class="recording_div" >
+  <h3 class="accordion accordion-title active"><%= recording.title %> <%= recording.mdpi_barcode %></h3>
+  <div class="rvt-grid m-fadeIn">
+    <h3>Recording Description</h3>
+    <p><%= recording.description %></p>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="inCopyright">In Copyright</label> <br>
+      <%= if recording.in_copyright.nil?
+            ''
+          else
+            recording.in_copyright ? "Yes" : 'No'
+          end
+      %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="copyrightEnd">Copyright End Date</label> <br>
+      <%= recording.copyright_end_date %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label><br>
+      <%= recording.receipt_of_will_before_90_days_of_death %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="published">Published</label>
+      <br><%= recording.published %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="dateOfFirstPublication">Date Of First Publication</label>
+      <br><%= recording.date_of_first_publication %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="creationDate">Creation Date</label>
+      <br><%= recording.creation_date %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="countryOfFirstPublication">Country Of First Publication</label>
+      <br><%= recording.country_of_first_publication %>
+    </div>
+    <div class="rvt-grid__item-4-md-up">
+      <label for="authoritySource">Authority Source</label>
+      <br><%= recording.authority_source %>
+    </div>
+    <div class="rvt-grid__item-12">
+      <label for="authoritySourceURL">Authority Source URL</label>
+      <br><%= recording.authority_source_url %>
+    </div>
+    <div class="rvt-grid__item-12">
+      <label for="notes">Recording Notes</label>
+      <% recording.recording_notes.each do |note| %>
+        <div>
+          <h4>Creator: <%= note.creator %></h4>
+          <p><%= note.text %></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="rvt-grid__item-12">
+      <button class="rvt-button floatRight editRecordingButton" data-recording-id="<%= recording.id %>">Edit</button>
+    </div>
+  </div>
+</div>

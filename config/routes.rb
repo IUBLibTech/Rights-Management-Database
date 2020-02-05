@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :tracks
 
   post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
+  get '/nav/test', to: 'nav#test', as: 'nav_test'
 
   get '/atom_tester', to: 'atom_feed_reader#index', as: 'atom_feed_tester'
   get '/atom_tester/prepopulate', to: 'atom_feed_reader#prepopulate', as: 'atom_feed_prepopulate'
@@ -50,13 +51,6 @@ Rails.application.routes.draw do
   post '/avalon_items/access_decision', to: 'avalon_items#ajax_post_access_decision', as: 'ajax_avalon_item_access_decision'
   post '/avalon_items/ajax_needs_review', to: 'avalon_items#ajax_post_needs_review', as: 'ajax_post_needs_review'
   post '/avalon_items/ajax_reviewed', to: 'avalon_items#ajax_post_reviewed', as: 'ajax_post_reviewed'
-  get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
-  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
-  post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
-  get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
-  get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
-  get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
-
   get '/avalon_items/ajax/cm_all', to: 'avalon_items#ajax_all_cm_items', as: 'ajax_avalon_all_cm_items'
   get '/avalon_items/ajax/cm_iu_default_only_items', to: 'avalon_items#ajax_cm_iu_default_only_items', as: 'avalon_items_cm_iu_default_only_items'
   get '/avalon_items/ajax/cm_waiting_on_cl', to: 'avalon_items#ajax_cm_waiting_on_cl', as: 'avalon_items_cm_waiting_on_cl'
@@ -67,6 +61,15 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cl_initial_review', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_initial_review'
   get '/avalon_items/ajax/cl_waiting_on_cm', to: 'avalon_items#ajax_cl_waiting_on_cm', as: 'avalon_items_cl_waiting_on_cm'
   get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_waiting_on_self'
+
+  get 'recordings/ajax/edit/:id', to: 'recordings#ajax_edit', as: 'ajax_edit_recording'
+  get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
+  get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
+  get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
+  post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
+  post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
+  get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
+
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.
