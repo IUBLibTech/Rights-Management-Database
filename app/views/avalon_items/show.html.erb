@@ -46,9 +46,167 @@
     <% end %>
   </div>
 </div>
+<div class="">
+  <h3 class="accordion accordion-title active">Avalon Metadata</h3>
+  <div class="rvt-grid m-fadeIn">
+    <table class="json_table">
+      <tbody>
+      <tr>
+        <th>Title</th>
+        <td class="adder"><%= @json["title"] %></td>
+      </tr>
+      <tr>
+        <th>Unit</th>
+        <td>
+          <%= @avalon_item.pod_unit %>
+        </td>
+        <th>Creator</th>
+        <td>
+          <ul>
+            <% @json["fields"]["creator"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Uniform Title</th>
+        <td class="adder work"><%= @json["uniform_title"] %></td>
+        <th>Date Created</th>
+        <td><%= @json["fields"]["date_created"] %></td>
+      </tr>
+      <tr>
+        <th>Translated Title</th>
+        <td class="adder work">
+          <%= @json["translated_title"] %>
+        </td>
+        <th>Date Issued</th>
+        <td class="adder date issue"><%= @json["fields"]["date_issued"] %></td>
+      </tr>
+      <tr>
+        <th>Avalon Collection</th>
+        <td><%= @json["collection"] %></td>
+        <th>Copyright Date</th>
+        <td class="adder date copyright"><%= @json["fields"]["copyright_date"] %></td>
+      </tr>
+      <tr>
+        <th>Main Contributors</th>
+        <td>
+          <ul>
+            <% @json["main_contributors"]&.each do |mc| %>
+              <li class="adder people"><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Publisher</th>
+        <td>
+          <ul>
+            <% @json["fields"]["publisher"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Publication Date</th>
+        <td class="adder date publication">
+          <%= @json["publication_date"] %>
+        </td>
+        <th>Physical Description</th>
+        <td>
+          <ul>
+            <% @json["fields"]["physical_description"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Bibliographic ID</th>
+        <td><%= @json["fields"]["bibliographic_id"] %></td>
+        <th>Statement of Responsibility</th>
+        <td><%= @json["fields"]["statement_of_responsibility"] %></td>
+      </tr>
+      <tr>
+        <th>Note</th>
+        <td><%= @json["fields"]["note"] %></td>
+        <th>Contributor</th>
+        <td>
+          <ul>
+            <% @json["fields"]["contributor"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Language</th>
+        <td>
+          <ul>
+            <% @json["fields"]["language"]&.each do |mc| %>
+              <li><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+        <th>Terms of Use</th>
+        <td><%= @json["fields"]["terms_of_use"] %></td>
+      </tr>
+      <tr>
+        <th>Table of Contents</th>
+        <td>
+          <ul>
+            <% @json["fields"]["table_of_contents"]&.each do |mc| %>
+              <li class='adder work'><%= mc %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div>
+  <h3 class="accordion accordion-title active">JSON</h3>
+  <div class="rvt-grid m-fadeIn">
+    <pre>
+      <%= JSON.pretty_generate @json %>
+    </pre>
+  </div>
+</div>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
         hookAccordion();
         hookEditRecordings();
+        $("#access").change(function() {
+            let val = $(this).find("option:selected").attr('value');
+            ajaxAccess(val);
+        })
     });
+
+    function ajaxAccess(decision) {
+        $.ajax({
+            url: '<%= ajax_avalon_item_access_decision_path %>',
+            method: "POST",
+            data: {
+                id: <%= @avalon_item.id %>,
+                access: decision
+            },
+            success: function(response) {
+                swal.fire({
+                    title: 'Updated Record',
+                    html: "This Avalon Item was successfully updated"
+                }).then(function() {
+                    loadRmdMetadata();
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal.fire({
+                    title: "Error",
+                    heightAuto: false,
+                    type: 'error',
+                    html: "An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
+                })
+            }
+        })
+    }
 </script>

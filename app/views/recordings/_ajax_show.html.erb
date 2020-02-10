@@ -5,12 +5,7 @@
     <p><%= recording.description %></p>
     <div class="rvt-grid__item-4-md-up">
       <label for="inCopyright">In Copyright</label> <br>
-      <%= if recording.in_copyright.nil?
-            ''
-          else
-            recording.in_copyright ? "Yes" : 'No'
-          end
-      %>
+      <%= recording.in_copyright %>
     </div>
     <div class="rvt-grid__item-4-md-up">
       <label for="copyrightEnd">Copyright End Date</label> <br>

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 // require turbolinks
 //= require jquery-ui
+//= require jquery_nested_form
 //= require sweetalert2
 //= require_tree .
 //= require_tree ./jquery-hoverIntent-1.10.0

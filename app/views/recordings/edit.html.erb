@@ -18,11 +18,11 @@
                   confirmButtonText: "Ok"
               })
           }
-      })
+      });
       hookEdtfValidation();
       hookYearValidation();
       hookUrlValidator();
-  })
+  });
 
   function valid() {
       return $('.badEdtf').size() === 0 && $('.badYear').size() === 0 && $('.badUrl').size() === 0

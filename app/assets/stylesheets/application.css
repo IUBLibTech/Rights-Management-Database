@@ -322,6 +322,12 @@ textarea {
     outline: 0;
     transition: all .45s;
     cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .accordionPanel {
@@ -470,4 +476,7 @@ h3.bgWhite {
     background-color: white;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+}
+select {
+    background: white;
 }

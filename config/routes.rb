@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_waiting_on_self'
 
   get 'recordings/ajax/edit/:id', to: 'recordings#ajax_edit', as: 'ajax_edit_recording'
+  get 'recordings/ajax/show/:id', to: 'recordings#ajax_show', as: 'ajax_show_recording'
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
   get '/performances/ajax/new', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
   get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'

@@ -58,10 +58,8 @@ class RecordingsController < ApplicationController
     if User.belongs_to_unit?(@recording.unit)
       respond_to do |format|
         if @recording.update(recording_params)
-          format.html { redirect_to @recording, notice: 'Recording was successfully updated.' }
-          format.json { render :show, status: :ok, location: @recording }
+          format.html { render partial: 'recordings/ajax_show', locals: {recording: @recording}, status: :ok, location: @recording }
         else
-          format.html { render :edit }
           format.json { render json: @recording.errors, status: :unprocessable_entity }
         end
       end
