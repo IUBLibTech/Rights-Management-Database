@@ -23,6 +23,6 @@ function handleAccordionToggle(event) {
     if (on) {
         panel.style.display = 'none';
     } else {
-        panel.style.display = "flex";
+        panel.style.display = "block";
     }
 }

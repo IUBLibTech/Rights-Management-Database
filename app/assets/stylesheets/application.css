@@ -81,7 +81,7 @@ i.xxsmall {
 
 .rvt-grid__item-12,
 .rvt-grid__item-lg {
-    padding-bottom: 1em
+    /*padding-bottom: 1em*/
 }
 
 .rightButton {
@@ -471,6 +471,11 @@ h3.bgWhite {
     border-radius: 7px;
 }
 
+.perf_div {
+    border-radius: 7px;
+    background: whitesmoke;
+}
+
 .panel {
     padding: 0 18px;
     background-color: white;
@@ -479,4 +484,43 @@ h3.bgWhite {
 }
 select {
     background: white;
+}
+.avalon_item_title {
+    padding: .25em;
+    outline: 0;
+    /*color: #900;*/
+    font-size: 1.4em;
+}
+.past_access_dec_div {
+    border-bottom: 1px solid #dddddd !important;
+    border-top: 1px solid #dddddd !important;
+}
+.cl_dec {
+    font-weight: 700;
+}
+a:link, a:focus, a:visited, a:active {
+    outline: none; !important;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+/** Added by Andrew Albrecht */
+.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-disabled-button:focus {
+    align-items: center;
+    border-radius: 4px;
+    font-family: BentonSans, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 700;
+    color: white;
+    border: solid 2px;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    display: flex;
+    height: 2.5rem;
 }

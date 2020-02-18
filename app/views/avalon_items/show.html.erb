@@ -1,6 +1,6 @@
 <h3 class="">
-  <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank"}) do %>
-    <span class="accordion-title rvt-text-bold">
+  <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank", id: "foo"}) do %>
+    <span class="avalon_item_title rvt-text-bold">
       <%= @avalon_item.title %>
       <i class="fa fa-external-link xxsmall"><span class=sr-only>opens a new window</span></i>
       <span class="">
@@ -34,8 +34,45 @@
             </div>
           </div>
         </div>
-        <button id=flagCopyrightLibrarian class=rvt-button data-modal-trigger=modal-example-basic>Copyright Librarian</button>
-        <button id=viewHistory class="rvt-button rvt-button--secondary" data-modal-trigger=modal-history>View History</button>
+
+        <% #communication between CL and CM %>
+        <%
+          cl = User.current_user_copyright_librarian?
+          msg = nil
+          case @avalon_item.review_state
+          when AvalonItem::REVIEW_STATE_DEFAULT
+            msg = "Request Review"
+          when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+            msg = cl ? "Respond to Collection Manager" : "Add Additional Comments"
+          when AvalonItem::REVIEW_STATE_WAITING_ON_CM
+            msg = cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
+          when AvalonItem::REVIEW_STATE_WAITING_ON_CL
+            msg = cl ? "Respond to Copyright Librarian" : "Add Additional Comments"
+          when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+            msg = "Access Determined"
+          else
+            raise "How did we get to this ReviewState???"
+          end
+        %>
+        <button id=flagCopyrightLibrarian class=rvt-button data-modal-trigger=modal-example-basic><%= msg %></button>
+
+
+
+        <div class="rvt-dropdown">
+          <button type="button" class="rvt-button" data-dropdown-toggle="dropdown-navigation" aria-haspopup="true" aria-expanded="false" >
+            <span>History</span>
+            <svg aria-hidden="true" class="rvt-m-left-xs" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+              <path fill="currentColor" d="M8,12.46a2,2,0,0,1-1.52-.7L1.24,5.65a1,1,0,1,1,1.52-1.3L8,10.46l5.24-6.11a1,1,0,0,1,1.52,1.3L9.52,11.76A2,2,0,0,1,8,12.46Z"/>
+            </svg>
+          </button>
+          <div class="rvt-dropdown__menu rvt-dropdown__menu--right rvt-m-top-xl" id="dropdown-navigation" aria-hidden="true" role="menu" >
+            <% @avalon_item.past_access_decisions.order("id DESC").each do |d| %>
+            <div class="past_access_dec_div noselect <%= d.copyright_librarian? ? 'cl_dec' : '' %>">
+              <%= d.decision %> (<%= d.changed_by %>: <%= d.created_at.strftime("%l:%M%p %Y/%m/%d") %> )
+            </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -176,7 +213,7 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
         hookAccordion();
-        hookEditRecordings();
+        hookButtons();
         $("#access").change(function() {
             let val = $(this).find("option:selected").attr('value');
             ajaxAccess(val);

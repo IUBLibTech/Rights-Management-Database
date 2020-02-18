@@ -9,13 +9,13 @@ class RecordingsController < ApplicationController
 
   # GET /recordings/1
   # GET /recordings/1.json
-  def show
-    if User.belongs_to_unit?(@recording.unit)
-      render :show
-    else
-      render 'recordings/not_authorized'
-    end
-  end
+  # def show
+  #   if User.belongs_to_unit?(@recording.unit)
+  #     render :show
+  #   else
+  #     render 'recordings/not_authorized'
+  #   end
+  # end
 
   def ajax_show
     recording = Recording.find(params[:id])

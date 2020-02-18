@@ -86,7 +86,7 @@ class AvalonItem < ActiveRecord::Base
     Rails.application.secrets.avalon_media_url.gsub!(":id", self.avalon_id)
   end
 
-  # returns true if the AvalonItem has been flagged for review but nothing else has been done
+  # returns true if the AvalonItem has NOT been flagged for review AND access detemriniation is DEFAULT_ACCESS
   def iu_default_only?
     access_determination == DEFAULT_ACCESS && !needs_review
   end
