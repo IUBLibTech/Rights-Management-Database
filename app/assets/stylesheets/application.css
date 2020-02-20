@@ -512,15 +512,32 @@ a:link, a:focus, a:visited, a:active {
 }
 
 /** Added by Andrew Albrecht */
-.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-disabled-button:focus {
+.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-disabled-button:focus, .rvt-disabled-button:active  {
     align-items: center;
     border-radius: 4px;
     font-family: BentonSans, "Helvetica Neue", Helvetica, sans-serif;
     font-weight: 700;
-    color: white;
-    border: solid 2px;
     padding-left: .75rem;
     padding-right: .75rem;
     display: flex;
     height: 2.5rem;
+    outline: none;
+}
+.toggle {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    top: 2.5rem;
+    left: 480px;
+    max-width: 440px;
+}
+.cl_comment {
+    background: #c9ecff;
+}
+.badEdtf, .badYear, .badFullDate, .badUrl, .badHms {
+    color: red;
+    font-weight: bold;
 }

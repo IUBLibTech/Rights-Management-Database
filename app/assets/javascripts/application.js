@@ -109,8 +109,8 @@ function hookUrlValidator() {
     });
 }
 
-function hookHMSValidator() {
-    $('.hms_validator').on('input', function() {
+function hookHMSValidator(ancestor) {
+    ancestor.find('.hms_validator').on('input', function() {
         let time = $(this).val();
         if (time.length === 0 || validHMS(time)) {
             $(this).removeClass('badHms')

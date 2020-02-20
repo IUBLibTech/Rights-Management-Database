@@ -16,64 +16,25 @@
       <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
     </div>
     <div class="rvt-grid__item-lg rightButton">
-      <div>
-        <button type=button class=rvt-button data-modal-trigger=modal-note>Avalon Item Note</button>
-        <div class=rvt-modal id=modal-note role=dialog aria-labelledby=modal-example-title aria-hidden=true tabindex=-1>
-          <div class=rvt-modal__inner>
-            <header class=rvt-modal__header>
-              <h1 class=rvt-modal__title id=modal-example-title>Avalon Item Notes</h1></header>
-            <div class=rvt-modal__body>
-              <div class=rvt-grid__item-12>
-                <label for=notes1>Avalon Item Notes</label>
-                <textarea class=swal2-textarea id=notes1 aria-labelledby=notes></textarea>
-              </div>
-            </div>
-            <div class=rvt-modal__controls>
-              <button type=button class=rvt-button>OK</button>
-              <button type=button class="rvt-button rvt-button--secondary" data-modal-close=modal-note>Cancel</button>
-            </div>
-          </div>
-        </div>
-
-        <% #communication between CL and CM %>
-        <%
-          cl = User.current_user_copyright_librarian?
-          msg = nil
-          case @avalon_item.review_state
-          when AvalonItem::REVIEW_STATE_DEFAULT
-            msg = "Request Review"
-          when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
-            msg = cl ? "Respond to Collection Manager" : "Add Additional Comments"
-          when AvalonItem::REVIEW_STATE_WAITING_ON_CM
-            msg = cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
-          when AvalonItem::REVIEW_STATE_WAITING_ON_CL
-            msg = cl ? "Respond to Copyright Librarian" : "Add Additional Comments"
-          when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
-            msg = "Access Determined"
-          else
-            raise "How did we get to this ReviewState???"
-          end
-        %>
-        <button id=flagCopyrightLibrarian class=rvt-button data-modal-trigger=modal-example-basic><%= msg %></button>
-
-
-
-        <div class="rvt-dropdown">
-          <button type="button" class="rvt-button" data-dropdown-toggle="dropdown-navigation" aria-haspopup="true" aria-expanded="false" >
-            <span>History</span>
-            <svg aria-hidden="true" class="rvt-m-left-xs" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-              <path fill="currentColor" d="M8,12.46a2,2,0,0,1-1.52-.7L1.24,5.65a1,1,0,1,1,1.52-1.3L8,10.46l5.24-6.11a1,1,0,0,1,1.52,1.3L9.52,11.76A2,2,0,0,1,8,12.46Z"/>
-            </svg>
-          </button>
-          <div class="rvt-dropdown__menu rvt-dropdown__menu--right rvt-m-top-xl" id="dropdown-navigation" aria-hidden="true" role="menu" >
-            <% @avalon_item.past_access_decisions.order("id DESC").each do |d| %>
-            <div class="past_access_dec_div noselect <%= d.copyright_librarian? ? 'cl_dec' : '' %>">
-              <%= d.decision %> (<%= d.changed_by %>: <%= d.created_at.strftime("%l:%M%p %Y/%m/%d") %> )
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <%
+        @cl = User.current_user_copyright_librarian?
+        @msg = nil
+        case @avalon_item.review_state
+        when AvalonItem::REVIEW_STATE_DEFAULT
+          @msg = "Request Review"
+        when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+        when AvalonItem::REVIEW_STATE_WAITING_ON_CM
+          @msg = @cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
+        when AvalonItem::REVIEW_STATE_WAITING_ON_CL
+          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+        when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+          @msg = "Access Determined"
+        else
+          raise "How did we get to this ReviewState: #{@avalon_item.review_state}"
+        end
+      %>
+      <%= render partial: 'avalon_item_buttons' %>
     </div>
   </div>
   <div id="recordings_div" class="rvt-p-all-sm bgGray">
@@ -214,6 +175,10 @@
     $(document).ready(function() {
         hookAccordion();
         hookButtons();
+        <% unless @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED %>
+        hookNeedsReview();
+        <% end %>
+        hookReviewCommentSlide();
         $("#access").change(function() {
             let val = $(this).find("option:selected").attr('value');
             ajaxAccess(val);
@@ -246,4 +211,46 @@
             }
         })
     }
+    function hookNeedsReview() {
+        $('#mark_needs_reviewed').click(function() {
+            swal.fire({
+                title: 'Comments for <%= @cl ? 'Collection Manager' : 'Copyright Librarian' %>',
+                input: "textarea",
+                showCancelButton: true,
+                confirmButtonText: '<%= if @avalon_item.needs_review
+                                      @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM ? 'Respond' : 'Add Comment'
+                                    else
+                                      'Request Review'
+                                    end
+                                %>',
+                showLoaderOnConfirm: true,
+                preConfirm: (comment) => {
+                    let form = new FormData();
+                    form.append("id", "<%= @avalon_item.id %>");
+                    form.append("comment", comment);
+                    fetch("<%= ajax_post_needs_review_path %>", {
+                        method: 'post',
+                        body: form,
+                        headers: {
+                            'X-CSRF-Token': "<%= form_authenticity_token %>"
+                        }
+                    }).then(response => {
+                        response.text().then(function(text) {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                swal.fire({
+                                    type: 'error',
+                                    title: 'Failed to Update Avalon Item',
+                                    html: text
+                                })
+                            }
+                        })
+
+                    })
+                }
+            })
+        });
+    }
+
 </script>

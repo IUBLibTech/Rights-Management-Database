@@ -80,7 +80,7 @@ class AvalonItemsController < ApplicationController
         puts e.backtrace
         @msg = "An error occurred while processing the request."
       end
-      render text: @msg
+      render partial: 'avalon_items/review_comments'
     end
   end
 

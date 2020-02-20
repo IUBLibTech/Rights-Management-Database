@@ -2,15 +2,16 @@
 function hookButtons() {
     hookEditRecordings();
     hookCreateEditPerformances();
-    hookDeletePerformanceButtons()
+    hookDeletePerformanceButtons();
+    hookCreateTrackButtons();
 }
 function rehookButtons() {
     $(".editRecordingButton").unbind('click', editRecording).click(editRecording);
     $('.createPerformanceButton').unbind('click', loadNewPerformance).click(loadNewPerformance);
     $('.editPerformanceButton').unbind('click', loadEditPerformanceForm).click(loadEditPerformanceForm);
     $('.deletePerformanceButton').unbind('click', deletePerformance).click(deletePerformance);
+    $('.createTrackButton').unbind('click', createNewTrack).click(createNewTrack);
 }
-
 /** AJAX functionality for editing Recording metadata **/
 function hookEditRecordings() {
     $(".editRecordingButton").click(editRecording);
@@ -22,7 +23,6 @@ function hookCreateEditPerformances() {
 function hookDeletePerformanceButtons() {
     $('.deletePerformanceButton').click(deletePerformance)
 }
-
 function deletePerformance(event) {
     Swal.fire({
         title: 'Confirm Performance Delete',
@@ -30,7 +30,6 @@ function deletePerformance(event) {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#006298',
-        cancelButtonColor: '#d33',
         confirmButtonText: 'Delete'
     }).then((result) => {
         if (result.value) {
@@ -52,7 +51,6 @@ function deletePerformance(event) {
         }
     })
 }
-
 function editRecording(event) {
     loadEditRecordingForm($(event.target).attr('data-recording-id'));
 }
@@ -78,7 +76,6 @@ function loadEditRecordingForm(recordingId) {
         }
     })
 }
-
 function cancelRecordingEdit(recordingId) {
     $.ajax({
         url: '../recordings/ajax/show/'+recordingId,
@@ -96,7 +93,6 @@ function cancelRecordingEdit(recordingId) {
         }
     });
 }
-
 function submitRecordingEditResponse(recordingId, e, data, status, xhr) {
     $(".recording_div[data-recording-id="+recordingId+"]").replaceWith(xhr.responseText);
     rehookButtons();
@@ -105,7 +101,6 @@ function submitRecordingEditResponse(recordingId, e, data, status, xhr) {
 /** END AJAX functionality for editing Recordings **/
 
 /** AJAX functionality for Editing/Creating Performances */
-
 function loadNewPerformance(event) {
     loadNewPerformanceForm($(event.target).attr('data-recording-id'));
 }
@@ -136,7 +131,6 @@ function submitNewPerformanceResponse(recordingId, e, data, status, xhr) {
     rehookButtons();
     rehookAccordion();
 }
-
 function loadEditPerformanceForm(event) {
     let performanceId = event.target.getAttribute('data-performance-id');
     $.ajax({
@@ -176,10 +170,67 @@ function cancelPerformanceEdit(performanceId) {
         }
     });
 }
-
 function submitPerformanceEditResponse(performanceId, e, data, status, xhr) {
     $(".edit_performance_div[data-performance-id="+performanceId+"]").replaceWith(xhr.responseText);
     rehookButtons();
     rehookAccordion();
 }
 /** END AJAX functionality for editing Performances */
+
+/** AJAX functionality for CL/CM review comments history */
+function hookRequestReviewButton() {
+    $('#mark_needs_reviewed').click('');
+}
+
+function hookReviewCommentSlide() {
+    $('#mark_needs_reviewed').hoverIntent(function() {
+        let toggle = $('.toggle');
+        if ( !toggle.is(":animated") ) {
+            if (toggle.is(":visible")) {
+                toggle.slideUp(200);
+            } else {
+                toggle.slideDown(200)
+            }
+        }
+    });
+}
+/** END AJAX functionality for CL/CM review comments history */
+/** AJAX functionality for Tracks */
+function hookCreateTrackButtons() {
+    $('.createTrackButton').click(createNewTrack);
+}
+function createNewTrack(event) {
+    let performanceId = $(event.target).attr('data-performance-id');
+    $.ajax({
+        url: '../tracks/ajax/new/'+performanceId,
+        success: function(result) {
+            let h2 = $('.tracks[data-performance-id='+performanceId+']').children().first().after(result);
+            let newForm = h2.next();
+            hookHMSValidator(newForm);
+            $('form.new_performance').on("ajax:success", function(e, data, status, xhr) {
+                submitNewTrackResponse(performanceId, e, data, status, xhr);
+            });
+            h2.find('.hms_validator').
+            newForm.find('.trackCreateCancelButton').click(function() {
+                newForm.remove();
+            })
+        },
+        error: function(xhr,status,error) {
+            swal.fire({
+                icon: 'error',
+                title: "Ajax Error calling: /performances/ajax/edit/"+performanceId,
+                text: error
+            })
+        }
+    })
+}
+function submitNewTrackResponse(performanceId, event, ) {
+    $(e.target).parent().replaceWith(xhr.responseText);
+}
+
+function hookEditTrackButtons() {
+
+}
+function hookDeleteTrackButtons() {
+
+}

@@ -71,7 +71,8 @@ Rails.application.routes.draw do
   get '/performances/ajax/edit/:id', to: 'performances#ajax_edit_performance', as: 'ajax_edit_performance'
   get '/performances/ajax/show/:id', to: 'performances#ajax_show_performance', as: 'ajax_Show_performance'
 
-  get '/tracks/ajax/new', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
+  get '/tracks/ajax/new/:performance_id', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
+
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'

@@ -19,10 +19,10 @@ class AvalonItem < ActiveRecord::Base
     AvalonItem.where(needs_review: true, review_state: REVIEW_STATE_REVIEW_REQUESTED)
   }
   scope :cl_waiting_on_self, -> {
-    where(reviewed: false, needs_review: true, review_state: REVIEW_STATE_WAITING_ON_CL)
+    where(reviewed: [false, nil], needs_review: true, review_state: REVIEW_STATE_WAITING_ON_CL)
   }
   scope :cl_waiting_on_cm, -> {
-    where(reviewed: false, needs_review: true, review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
+    where(reviewed: [false, nil], needs_review: true, review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
   }
 
   scope :cm_all, -> {
@@ -36,7 +36,7 @@ class AvalonItem < ActiveRecord::Base
   }
   scope :cm_waiting_on_cl, -> {
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username))
-        .where("review_state = #{AvalonItem::REVIEW_STATE_WAITING_ON_CM} OR review_state = #{AvalonItem::REVIEW_STATE_REVIEW_REQUESTED}")
+        .where("review_state = #{AvalonItem::REVIEW_STATE_WAITING_ON_CL} OR review_state = #{AvalonItem::REVIEW_STATE_REVIEW_REQUESTED}")
   }
   scope :cm_waiting_on_self, -> {
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username), review_state: REVIEW_STATE_WAITING_ON_CM)
