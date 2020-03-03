@@ -146,12 +146,45 @@ class AvalonItemsController < ApplicationController
   end
   def ajax_cl_waiting_on_self
     @avalon_items = AvalonItem.cl_waiting_on_self
-    debgger
     render partial: 'nav/cl_avalon_items_table'
   end
   def ajax_cl_waiting_on_cm
     @avalon_items = AvalonItem.cl_waiting_on_cm
     render partial: 'nav/cl_avalon_items_table'
+  end
+
+  def ajax_people_adder
+    @avalon_item = AvalonItem.includes(recordings: [performances: [:tracks]]).find(params[:id])
+    @person = Person.new
+    if params[:text]
+      if params[:text].include?(',')
+        words = params[:text].split(',').collect { |x| x.strip }
+        @person.first_name = words[1]
+        @person.last_name = words[0]
+      elsif params[:text].include?(' ')
+        words = params[:text].split(' ').collect { |x| x.strip }
+        @person.first_name = words[0]
+        @person.last_name = words[1]
+      else
+        @person.first_name = params[:text]
+      end
+    end
+    render partial: 'avalon_items/ajax_people_adder'
+  end
+  def ajax_people_adder_post
+
+  end
+
+  def ajax_work_adder
+    @avalon_item = AvalonItem.includes(recordings: [performances: [:tracks]]).find(params[:id])
+    @work = Work.new
+    if params[:text]
+      @work.title = params[:text]
+    end
+    render partial: 'avalon_items/ajax_work_adder'
+  end
+  def ajax_work_adder_post
+
   end
 
 

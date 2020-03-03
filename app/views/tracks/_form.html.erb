@@ -1,6 +1,8 @@
-<%= form_for @track do |f| %>
+<%= form_for @track, remote: true do |f| %>
   <div class="rvt-grid">
-    <%= f.hidden_field :performance_id, value: @performance.id %>
+    <% if action_name.include? 'new' %>
+      <%= f.hidden_field :performance_id, value: @performance.id %>
+    <% end %>
     <div class="rvt-grid__item-12">
       <label for="trackName">Title</label>
       <%= f.text_field :track_name, {type: "text", 'aria-describedby': "title", value: (@track.track_name.nil? ? "Track #{@performance.tracks.size + 1}" : @track.track_name)} %>

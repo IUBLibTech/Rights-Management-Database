@@ -56,6 +56,10 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cm_waiting_on_cl', to: 'avalon_items#ajax_cm_waiting_on_cl', as: 'avalon_items_cm_waiting_on_cl'
   get '/avalon_items/ajax/cm_waiting_on_self', to: 'avalon_items#ajax_cm_waiting_on_self', as: 'avalon_items_cm_waiting_on_self'
   get '/avalon_items/ajax/cm_access_determined', to: 'avalon_items#ajax_cm_access_determined', as: 'avalon_items_cm_access_determined'
+  get '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder', as: 'ajax_people_adder_get'
+  post '/avalon_items/:id/ajax_people_adder', to: 'avalon_item#ajax_people_adder_post', as: 'ajax_people_adder_post'
+  get '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder', as: 'ajax_work_adder_get'
+  post '/avalon_items/:id/ajax_work_adder', to: 'avalon_item#ajax_work_adder_post', as: 'ajax_work_adder_post'
 
   get '/avalon_items/ajax/cl_all', to: 'avalon_items#ajax_all_cl_items', as: 'ajax_avalon_cl_all'
   get '/avalon_items/ajax/cl_initial_review', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_initial_review'
@@ -72,6 +76,7 @@ Rails.application.routes.draw do
   get '/performances/ajax/show/:id', to: 'performances#ajax_show_performance', as: 'ajax_Show_performance'
 
   get '/tracks/ajax/new/:performance_id', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
+  get '/tracks/ajax/edit/:track_id', to: 'tracks#ajax_edit_track', as: 'ajax_edit_track'
 
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'

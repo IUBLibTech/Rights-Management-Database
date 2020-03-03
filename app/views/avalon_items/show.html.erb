@@ -1,3 +1,7 @@
+<div id="adder_overlay" data-animation-offscreen="true">
+  <i id="adder_close" class="fa fa-window-close" style="font-size:30px;float: right;"><span class=sr-only>close menu</span></i>
+  <div id="adder_content"></div>
+</div>
 <h3 class="">
   <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank", id: "foo"}) do %>
     <span class="avalon_item_title rvt-text-bold">
@@ -51,7 +55,7 @@
       <tbody>
       <tr>
         <th>Title</th>
-        <td class="adder"><%= @json["title"] %></td>
+        <td colspan="3" class="adder"><%= @json["title"] %></td>
       </tr>
       <tr>
         <th>Unit</th>
@@ -60,7 +64,7 @@
         </td>
         <th>Creator</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["creator"]&.each do |mc| %>
               <li class="adder people"><%= mc %></li>
             <% end %>
@@ -90,7 +94,7 @@
       <tr>
         <th>Main Contributors</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["main_contributors"]&.each do |mc| %>
               <li class="adder people"><%= mc %></li>
             <% end %>
@@ -98,7 +102,7 @@
         </td>
         <th>Publisher</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["publisher"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -112,7 +116,7 @@
         </td>
         <th>Physical Description</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["physical_description"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -130,9 +134,9 @@
         <td><%= @json["fields"]["note"] %></td>
         <th>Contributor</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["contributor"]&.each do |mc| %>
-              <li><%= mc %></li>
+              <li class="adder"><%= mc %></li>
             <% end %>
           </ul>
         </td>
@@ -140,7 +144,7 @@
       <tr>
         <th>Language</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["language"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -152,7 +156,7 @@
       <tr>
         <th>Table of Contents</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["table_of_contents"]&.each do |mc| %>
               <li class='adder work'><%= mc %></li>
             <% end %>
@@ -171,10 +175,17 @@
     </pre>
   </div>
 </div>
+<div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">
+  <button id="addPersonButton">Add Person</button>
+  <button id="addWorkButton">Add Work</button>
+</div>
+
 <script type="text/javascript" charset="utf-8">
+    let avalon_item_id = <%= @avalon_item.id %>;
     $(document).ready(function() {
         hookAccordion();
         hookButtons();
+        hookAiContextMenu();
         <% unless @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED %>
         hookNeedsReview();
         <% end %>

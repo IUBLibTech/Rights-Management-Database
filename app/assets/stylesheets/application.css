@@ -276,9 +276,6 @@ button:focus {
     outline: .125rem solid #006298
 }
 
-label {
-    margin: 1em 0 .25em
-}
 
 input,
 select,
@@ -540,4 +537,32 @@ a:link, a:focus, a:visited, a:active {
 .badEdtf, .badYear, .badFullDate, .badUrl, .badHms {
     color: red;
     font-weight: bold;
+}
+.aiJsonMenu {
+    position: absolute;
+}
+.adder {
+    background: whitesmoke;
+    cursor: context-menu;
+}
+#adder_overlay {
+    padding: 1rem;
+    border-radius: 7px 0 0 7px;
+    position: fixed;
+    width: 50%;
+    max-width: 50%;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200,200,200,1);
+    z-index: 200;
+    overflow: auto;
+}
+#adder_close {
+    cursor: pointer;
+}
+.recording, .recoding > li, .recording > li > label {
+    color: #900;
 }

@@ -31,13 +31,11 @@
         <button class="rvt-button floatRight editPerformanceButton rvt-m-right-sm" data-performance-id="<%= performance.id %>">Edit Performance</button>
       </div>
     </div>
+    <div class="tracks rvt-p-left-lg" data-performance-id="<%= performance.id %>">
+      <h2>Tracks <span> <button class="rvt-button rvt-m-left-lg createTrackButton" data-performance-id="<%= performance.id %>" >Create New Track</button></span></h2>
+      <% performance.tracks.each do |t| %>
+        <%= render partial: 'tracks/ajax_show', locals: {track: t} %>
+      <% end %>
+    </div>
   </div>
-
-  <div class="tracks rvt-p-left-lg" data-performance-id="<%= performance.id %>">
-    <h2>Tracks <span> <button class="rvt-button rvt-m-left-lg createTrackButton" data-performance-id="<%= performance.id %>" >Create New Track</button></span></h2>
-    <% performance.tracks.each do |t| %>
-      <%= render partial: 'tracks/ajax_show', locals: {track: t} %>
-    <% end %>
-  </div>
-
 </div>

@@ -2,11 +2,16 @@ class Person < ActiveRecord::Base
   before_save :convert_edtf
   has_many :person_nationalities
   has_many :nationalities, through: :person_nationalities
-  has_many :work_contributor_people
-  has_many :works, through: :work_contributor_people
+
   has_many :person_iu_affiliations
   has_many :iu_affiliations, through: :person_iu_affiliations
+
   has_many :performance_contributor_people
+  has_many :performances, through: :performance_contributor_people
+
+  has_many :work_contributor_people
+  has_many :works, through: :work_contributor_people
+
 
   RECORDING_CONTRIBUTOR_ROLES_KEY = "recording"
   PERFORMANCE_CONTRIBUTOR_ROLES_KEY = "performance"
