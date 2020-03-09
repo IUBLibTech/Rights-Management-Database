@@ -23,7 +23,7 @@ gem 'edtf-humanize'
 
 gem 'pundit'
 
-gem 'nokogiri', ">= 1.10.4"
+gem 'nokogiri', ">= 1.10.8"
 
 # handle ADS group lookup through LDAP
 gem 'ldap_groups_lookup'
