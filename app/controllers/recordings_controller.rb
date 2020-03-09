@@ -1,6 +1,7 @@
 class RecordingsController < ApplicationController
   before_action :set_recording, only: [:show, :edit, :update, :destroy, :mark_needs_review, :mark_reviewed]
 
+
   # GET /recordings
   # GET /recordings.json
   def index
@@ -9,12 +10,17 @@ class RecordingsController < ApplicationController
 
   # GET /recordings/1
   # GET /recordings/1.json
-  def show
-    if User.belongs_to_unit?(@recording.unit)
-      render :show
-    else
-      render 'recordings/not_authorized'
-    end
+  # def show
+  #   if User.belongs_to_unit?(@recording.unit)
+  #     render :show
+  #   else
+  #     render 'recordings/not_authorized'
+  #   end
+  # end
+
+  def ajax_show
+    recording = Recording.find(params[:id])
+    render partial: 'recordings/ajax_show', locals: {recording: recording}
   end
 
   # GET /recordings/new
@@ -25,6 +31,11 @@ class RecordingsController < ApplicationController
   # GET /recordings/1/edit
   def edit
     render 'recordings/not_authorized' unless User.belongs_to_unit?(@recording.unit)
+  end
+
+  def ajax_edit
+    recording = Recording.find(params[:id])
+    render partial: 'recordings/ajax_edit', locals: {recording: recording}
   end
 
   # POST /recordings
@@ -48,10 +59,8 @@ class RecordingsController < ApplicationController
     if User.belongs_to_unit?(@recording.unit)
       respond_to do |format|
         if @recording.update(recording_params)
-          format.html { redirect_to @recording, notice: 'Recording was successfully updated.' }
-          format.json { render :show, status: :ok, location: @recording }
+          format.html { render partial: 'recordings/ajax_show', locals: {recording: @recording}, status: :ok, location: @recording }
         else
-          format.html { render :edit }
           format.json { render json: @recording.errors, status: :unprocessable_entity }
         end
       end
@@ -97,7 +106,8 @@ class RecordingsController < ApplicationController
       params.require(:recording).permit(
           :access_determination, :title, :description, :format, :published, :date_of_first_publication, :creation_date,
           :creation_end_date, :country_of_first_publication, :in_copyright, :copyright_end_date, :receipt_of_will_before_90_days_of_death,
-          :authority_source, :authority_source_url
+          :authority_source, :authority_source_url,
+          recording_notes_attributes: [:id, :creator, :text, :_destroy]
       )
     end
 end

@@ -1,0 +1,102 @@
+<%= form_for @work, url: ajax_work_adder_post_url, method: :post, remote: true do |f| %>
+<div>
+  <h3>Add Work to <i><%= @avalon_item.title %></i></h3>
+  <div>
+    <div class="rvt-grid rvt-m-top-xxs">
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Title</label>
+        <%= f.text_field :title, {type: "text", 'aria-describedby': "title"} %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Alternative Titles</label>
+        <%= f.text_field :alternative_titles, {type: "text", 'aria-describedby': "alternative titles"} %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Publication Year</label>
+        <%= f.text_field :publication_date_edtf, {type: "text", 'aria-describedby': "publication year", class: 'edtf'} %>
+      </div>
+    </div>
+    <div class="rvt-grid">
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Authority Source</label>
+        <%= f.text_field :authority_source, {type: "text", 'aria-describedby': "authority source" } %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Authority Source URL</label>
+        <%= f.text_field :authority_source_url, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator"} %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Traditional</label>
+        <%= f.select :traditional, options_for_select([['Yes'],['No']], @work.traditional), {include_blank: '', 'aria-describe': 'traditional'} %>
+      </div>
+    </div>
+    <div class="rvt-grid">
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Work in Copyright</label>
+        <%= f.select :contemporary_work_in_copyright, options_for_select([['Yes'],['No']], @work.contemporary_work_in_copyright), {include_blank: '', 'aria-describedby': "work in copyright"} %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Restored Copyright</label>
+        <%= f.select :traditional, options_for_select([['Yes'],['No']], @work.restored_copyright), {include_blank: '', 'aria-describedby': "restored copyright" } %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingTitle">Copyright Renewed</label>
+        <%= f.select :traditional, options_for_select([['Yes'],['No']], @work.copyright_renewed), {include_blank: '', 'aria-describedby': "copyright renewed"} %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="personNotes">Enters Public Domain</label>
+        <%= f.text_field :copyright_end_date_edtf, {type: "text", 'aria-describedby': "enter public domain" } %>
+      </div>
+      <div class="rvt-grid__item-12">
+        <label for="personNotes">Access Determination</label>
+        <%= select_tag :access_determination, options_for_select(AccessDeterminationHelper::ACCESS_DECISIONS.collect{|a| [a,a]}, @work.access_determination) %>
+      </div>
+      <div class="rvt-grid__item-12">
+        <label for="personNotes">Notes</label>
+        <%= f.text_area :notes, {class: "noBorder"} %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p>Add this Work to the Avalon Item's structured metadata below</p>
+  </div>
+    <%= hidden_field_tag :avalon_item_id, @avalon_item.id %>
+    <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
+    <ul class="rvt-plain-list">
+      <% @avalon_item.recordings.each do |r| %>
+        <%= f.fields_for r do |rf| %>
+          <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
+            <%= rf.check_box :id, {id: "recording_#{r.id}", type: 'checkbox'} %>
+            <label for="recording_<%= r.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
+            <div class="rvt-m-left-sm">
+              <h4 class="rvt-m-left-xs">Performances in <span class="recording"><i><%= "#{r.title} - #{r.mdpi_barcode}" %></i></span></h4>
+              <ul class="rvt-plain-list">
+                <% r.performances.each do |p| %>
+                  <%= rf.fields_for p do |pf| %>
+                    <li class="rvt-m-left-xs performance rvt-checkbox-wrapper">
+                      <%= rf.check_box :id, {id: "performance_#{p.id}", type: 'checkbox'}%>
+                      <label for="performance_<%= p.id %>" class="rvt-m-all-none"><%= "#{p.title}" %></label>
+                      <div class="rvt-m-left-sm">
+                        <h4>Tracks in <span class="recording"><i><%= "#{p.title}" %></i></span></h4>
+                        <ul class="rvt-plain-list">
+                          <% p.tracks.each do |t| %>
+                            <%= pf.fields_for t do |tf| %>
+                              <li>
+                                <%= tf.check_box :id, {id: "track_#{t.id}", type: 'checkbox', checked: false} %>
+                                <label for="track_<%= t.id %>" class="rvt-m-all-none"><%= "#{t.track_name}" %></label>
+                              </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

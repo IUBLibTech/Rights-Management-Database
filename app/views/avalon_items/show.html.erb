@@ -1,139 +1,62 @@
-<h4>Avalon Item</h4>
-<h4 class="avalon_item">
-  <%= link_to @avalon_item.title, @atom_feed_read.avalon_item_url, target: "_blank" %>
-</h4>
-<div class="rmd_metadata">
-  <%= render 'rmd_metadata' %>
+<div id="adder_overlay" data-animation-offscreen="true">
+  <i id="adder_close" class="fa fa-window-close" style="font-size:30px;float: right;"><span class=sr-only>close menu</span></i>
+  <div id="adder_content"></div>
 </div>
-<div class="clear">
-  <h4>Recordings In This Avalon Item</h4>
-  <% @avalon_item.recordings.each do |recording| %>
-  <div class="recording_div">
-    <div class="recording_barcode"><%= link_to recording.mdpi_barcode, recording_path(recording) %></div>
-    <div class="table_div">
-      <table>
-        <tbody>
-        <tr>
-          <th>Title</th>
-          <td><%= recording.title %></td>
-          <th>Producers</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td class="desc_td"><%= recording.description %></td>
-          <th>In Copyright?</th>
-          <td><%= recording.in_copyright.blank? ? '' : recording.in_copyright? ? 'Yes' : 'No' %></td>
-        </tr>
-        <tr>
-          <th>Published</th>
-          <td><%= recording.published.blank? ? '' : recording.published? ? 'Yes' : 'No'%></td>
-          <th>Copyright End Date</th>
-          <td><%= recording.copyright_end_date %></td>
-        </tr>
-        <tr>
-          <th>Date Of First Publication</th>
-          <td><%= recording.date_of_first_publication %></td>
-          <th>Reeceipt Of Will Before 90 Days Of Death?</th>
-          <td><%= recording.receipt_of_will_before_90_days_of_death.blank? ? '' : recording.receipt_of_will_before_90_days_of_death? ? 'Yes' : 'No' %></td>
-        </tr>
-        <tr>
-          <th>Creation Date</th>
-          <td><%= recording.creation_date %></td>
-          <th>Authority Source</th>d
-          <td><%= recording.authority_source%></td>
-        </tr>
-        <tr>
-          <th>Country Of First Publication</th>
-          <td><%= recording.country_of_first_publication %></td>
-          <th>Authority Source URL</th>
-          <td><%= link_to recording.authority_source_url, recording.authority_source_url, target: '_blank' unless recording.authority_source_url.blank? %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td></td>
-          <th>Access Determination</th>
-          <td><%= recording.access_determination %></td>
-        </tr>
-        <tr>
-          <th>Notes</th>
-          <td colspan="3"></td>
-        </tr>
-        </tbody>
-      </table>
+<h3 class="">
+  <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank", id: "foo"}) do %>
+    <span class="avalon_item_title rvt-text-bold">
+      <%= @avalon_item.title %>
+      <i class="fa fa-external-link xxsmall"><span class=sr-only>opens a new window</span></i>
+      <span class="">
+        <%= @avalon_item.rivet_button_badge %>
+      </span>
+    </span>
+  <% end %>
+</h3>
+<div class="avalon_item_metadata">
+  <div id="access_div" class="display-flex">
+    <div class=rvt-grid__item-lg>
+      <label for=access>Access Determination:</label>
+      <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
     </div>
-    <div class="clear ml_25">
-      <button type="button" class="add_performance_button" data-recording-id="<%= recording.id %>">Add Performance</button>
+    <div class="rvt-grid__item-lg rightButton">
+      <%
+        @cl = User.current_user_copyright_librarian?
+        @msg = nil
+        case @avalon_item.review_state
+        when AvalonItem::REVIEW_STATE_DEFAULT
+          @msg = "Request Review"
+        when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+        when AvalonItem::REVIEW_STATE_WAITING_ON_CM
+          @msg = @cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
+        when AvalonItem::REVIEW_STATE_WAITING_ON_CL
+          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+        when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+          @msg = "Access Determined"
+        else
+          raise "How did we get to this ReviewState: #{@avalon_item.review_state}"
+        end
+      %>
+      <%= render partial: 'avalon_item_buttons' %>
     </div>
-    <% if recording.performances.size > 0 %>
-      <div class="ml_25 accordion performances">
-        <h5>Performances</h5>
-        <div class="performances">
-          <% recording.performances.each do |p| %>
-            <div class="performance">
-              <h6><%= p.title %></h6>
-              <div class="left">
-                <b>Location: </b><span><%= p.location %></span>
-                <br>
-                <b>Performance Date: </b><span><%= p.performance_date.strftime("%m/%d/%Y")  %></span>
-              </div>
-              <div class="left">
-                <b>Notes:</b> <%= p.notes %>
-              </div>
-              <div class="ui-icon ui-icon-circle-close performance_delete right" title="Delete: <%= "#{p.location} - #{p.performance_date.strftime("%m/%d/%Y")}" %>" data-performance-id="<%= p.id %>" data-performance-title="<%= p.title %>" data-performance-location="<%= p.location %>"></div>
-              <div class="clear">
-                <button type="button" class="add_track_button" data-performance-id="<%= p.id %>">Add Track</button>
-              </div>
-              <% if p.tracks.size > 0 %>
-                <div class="tracks">
-                  <div class="accordion">
-                    <h5>Tracks</h5>
-                    <div class="">
-                      <% p.tracks.each do |t| %>
-                        <div class="track" data-track-id="<%= t.id %>">
-                          <h6><%= t.track_name %></h6>
-                          <table>
-                            <tbody>
-                              <tr>
-                                <th>Start Time</th>
-                                <td><%= t.recording_start_time %></td>
-                                <th>In Copyright?</th>
-                                <td><%= t.in_copyright.blank? ? '' : t.in_copyright? ? 'Yes' : 'No' %></td>
-                              </tr>
-                              <tr>
-                                <th>End Time</th>
-                                <td><%= t.recording_end_time %></td>
-                                <th>Copyright End Date</th>
-                                <td><%= t.copyright_end_date %></td>
-                              </tr>
-                              <tr>
-                                <th>Access Determination</th>
-                                <td><%= t.access_determination %></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+  </div>
+  <%= render partial: 'avalon_items/notes' %>
+  <div id="recordings_div" class="rvt-p-all-sm bgGray">
+    <h2>Recordings In This Avalon Item </h2>
+    <% @avalon_item.recordings.each do |recording| %>
+      <%= render partial: 'recordings/ajax_show', locals: {recording: recording} %>
     <% end %>
   </div>
-  <% end %>
 </div>
-<div class="accordion clear">
-  <h3>Avalon Metadata</h3>
-  <div>
+<div class="">
+  <h3 class="accordion accordion-title active">Avalon Metadata</h3>
+  <div class="rvt-grid m-fadeIn">
     <table class="json_table">
       <tbody>
       <tr>
         <th>Title</th>
-        <td class="adder"><%= @json["title"] %></td>
+        <td colspan="3" class="adder"><%= @json["title"] %></td>
       </tr>
       <tr>
         <th>Unit</th>
@@ -142,7 +65,7 @@
         </td>
         <th>Creator</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["creator"]&.each do |mc| %>
               <li class="adder people"><%= mc %></li>
             <% end %>
@@ -172,7 +95,7 @@
       <tr>
         <th>Main Contributors</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["main_contributors"]&.each do |mc| %>
               <li class="adder people"><%= mc %></li>
             <% end %>
@@ -180,7 +103,7 @@
         </td>
         <th>Publisher</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["publisher"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -194,7 +117,7 @@
         </td>
         <th>Physical Description</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["physical_description"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -212,9 +135,9 @@
         <td><%= @json["fields"]["note"] %></td>
         <th>Contributor</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["contributor"]&.each do |mc| %>
-              <li><%= mc %></li>
+              <li class="adder"><%= mc %></li>
             <% end %>
           </ul>
         </td>
@@ -222,7 +145,7 @@
       <tr>
         <th>Language</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["language"]&.each do |mc| %>
               <li><%= mc %></li>
             <% end %>
@@ -234,7 +157,7 @@
       <tr>
         <th>Table of Contents</th>
         <td>
-          <ul>
+          <ul class="rvt-plain-list">
             <% @json["fields"]["table_of_contents"]&.each do |mc| %>
               <li class='adder work'><%= mc %></li>
             <% end %>
@@ -244,17 +167,103 @@
       </tbody>
     </table>
   </div>
-  <h3>JSON</h3>
-  <div class="json">
+</div>
+<div>
+  <h3 class="accordion accordion-title active">JSON</h3>
+  <div class="rvt-grid m-fadeIn">
     <pre>
       <%= JSON.pretty_generate @json %>
     </pre>
   </div>
 </div>
-<div id="popup_menu" class="pup">
-  <ul class="pup">
-    <li class="pup add_person_button">Add Person</li>
-    <li class="pup add_work_button">Add Work</li>
-  </ul>
+<div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">
+  <button id="addPersonButton">Add Person</button>
+  <button id="addWorkButton">Add Work</button>
 </div>
-<%= render partial: 'avalon_items/rmd_javascript' %>
+
+<script type="text/javascript" charset="utf-8">
+    let avalon_item_id = <%= @avalon_item.id %>;
+    $(document).ready(function() {
+        hookAccordion();
+        hookButtons();
+        hookAiContextMenu();
+        <% unless @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED %>
+        hookNeedsReview();
+        <% end %>
+        hookReviewCommentSlide();
+        hookAvalonNoteButton();
+        $("#access").change(function() {
+            let val = $(this).find("option:selected").attr('value');
+            ajaxAccess(val);
+        })
+    });
+
+    function ajaxAccess(decision) {
+        $.ajax({
+            url: '<%= ajax_avalon_item_access_decision_path %>',
+            method: "POST",
+            data: {
+                id: <%= @avalon_item.id %>,
+                access: decision
+            },
+            success: function(response) {
+                swal.fire({
+                    title: 'Updated Record',
+                    html: "This Avalon Item was successfully updated"
+                }).then(function() {
+                    loadRmdMetadata();
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal.fire({
+                    title: "Error",
+                    heightAuto: false,
+                    type: 'error',
+                    html: "An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
+                })
+            }
+        })
+    }
+    function hookNeedsReview() {
+        $('#mark_needs_reviewed').click(function() {
+            swal.fire({
+                title: 'Comments for <%= @cl ? 'Collection Manager' : 'Copyright Librarian' %>',
+                input: "textarea",
+                showCancelButton: true,
+                confirmButtonText: '<%= if @avalon_item.needs_review
+                                      @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM ? 'Respond' : 'Add Comment'
+                                    else
+                                      'Request Review'
+                                    end
+                                %>',
+                showLoaderOnConfirm: true,
+                preConfirm: (comment) => {
+                    let form = new FormData();
+                    form.append("id", "<%= @avalon_item.id %>");
+                    form.append("comment", comment);
+                    fetch("<%= ajax_post_needs_review_path %>", {
+                        method: 'post',
+                        body: form,
+                        headers: {
+                            'X-CSRF-Token': "<%= form_authenticity_token %>"
+                        }
+                    }).then(response => {
+                        response.text().then(function(text) {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                swal.fire({
+                                    type: 'error',
+                                    title: 'Failed to Update Avalon Item',
+                                    html: text
+                                })
+                            }
+                        })
+
+                    })
+                }
+            })
+        });
+    }
+
+</script>

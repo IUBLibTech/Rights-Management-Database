@@ -22,16 +22,20 @@
       </td>
     </tr>
     <tr>
+      <th>Middle Name</th>
+      <td><%= f.text_field :middle_name %></td>
+    </tr>
+    <tr>
       <th>Last Name</th>
       <td><%= f.text_field :last_name %></td>
     </tr>
     <tr>
       <th>Date of Birth</th>
-      <td><%= f.text_field :date_of_birth_edtf, class: 'full_date' %><span class="ui-icon ui-icon-help"></span></td>
+      <td><%= f.text_field :date_of_birth_edtf, class: 'edtf_year_or_date' %></td>
     </tr>
     <tr>
       <th>Date of Death</th>
-      <td><%= f.text_field :date_of_death_edtf, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
+      <td><%= f.text_field :date_of_death_edtf, class: 'edtf_year_or_date' %></td>
     </tr>
     <tr>
       <th>Place of Birth</th>
@@ -48,6 +52,12 @@
     <tr>
       <th>AKA</th>
       <td><%= f.text_field :aka %></td>
+    </tr>
+    <tr>
+      <th>Role</th>
+      <td>
+        <%= select_tag "role", options_for_select(Person::ALL_ROLES.collect { |r| [r,r] }) %>
+      </td>
     </tr>
     <tr><th colspan="2">Notes</th></tr>
     <tr>

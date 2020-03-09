@@ -1,0 +1,60 @@
+<div id="avalon_item_metadata" class=rvt-grid>
+  <div class="rvt-grid__item-lg">
+    <label for="access">Access Determination:</label>
+    <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
+  </div>
+  <div class="rvt-grid__item-lg rightButton">
+    <div>
+      <button type="button" class="rvt-button" data-modal-trigger="modal-note">Avalon Item Note</button>
+      <div class="rvt-modal" id="modal-note" role="dialog" aria-labelledby=modal"-example-title" aria-hidden="true" tabindex="-1">
+        <div class="rvt-modal__inner">
+          <header class="rvt-modal__header"><h1 class="rvt-modal__title" id="modal-example-title">Avalon Item Notes</h1></header>
+          <div class="rvt-modal__body">
+            <div class="rvt-grid__item-12>">
+              <label for="notes1">Avalon Item Notes</label>
+              <textarea class="swal2-textarea" id="notes1" aria-labelledby="notes"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="rvt-modal__controls">
+          <button type="button" class="rvt-button">OK</button>
+          <button type="button" class="rvt-button rvt-button--secondary" data-modal-close="modal-note">Cancel</button>
+        </div>
+        <button type="button" class="rvt-button rvt-modal__close" data-modal-close="modal-example-note"><span class="rvt-sr-only">Close</span>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16">
+            <path fill="currentColor" d="M9.41,8l5.29-5.29a1,1,0,0,0-1.41-1.41L8,6.59,2.71,1.29A1,1,0,0,0,1.29,2.71L6.59,8,1.29,13.29a1,1,0,1,0,1.41,1.41L8,9.41l5.29,5.29a1,1,0,0,0,1.41-1.41Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <% if @avalon_item.reviewed? %>
+      <button class='rvt-button' data-modal-trigger=modal-example-basic>Reviewed</button>
+    <% elsif User.copyright_librarian?(User.current_username) %>
+      <% if @avalon_item.needs_cl_info? %>
+      <button id='flagCopyrightLibrarian' class='rvt-button' data-modal-trigger='modal-example-basic'>Respond</button>
+      <% else %>
+      <button id='flagCopyrightLibrarian' class='rvt-button' data-modal-trigger='modal-example-basic'>Waiting on Collection Manager</button>
+      <% end %>
+    <% else %>
+      <% if @avalon_item.needs_cm_info? %>
+      <button id='flagCopyrightLibrarian' class='rvt-button' data-modal-trigger='modal-example-basic'>Respond</button>
+      <% else %>
+      <button id='flagCopyrightLibrarian' class='rvt-button' data-modal-trigger='modal-example-basic'>Waiting on Copyright Librarian</button>
+      <% end %>
+    <% end %>
+    <button id=viewHistory class="rvt-button rvt-button--secondary" data-modal-trigger=modal-history>View History</button>
+  </div>
+</div>
+<div class="rvt-grid__item bgGray accordion-panel">
+  <h2>Recordings In This Avalon Item</h2>
+  <% @avalon_item.recordings.each do |recording| %>
+    <h3 class="simpleAccordion accordion-title"><%= recording.mdpi_barcode %></h3>
+    <div>
+      <a href="tracks.html#accordion4id" class="rvt-button rvt-button floatRight rvt-p-lr-md" style="margin-bottom:1em;">Add Performance</a>
+      <div class=rvt-container>
+        Recording metadata in an accordion...
+      </div>
+    </div>
+  <% end %>
+</div>
+

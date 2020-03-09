@@ -1,0 +1,31 @@
+<div class="track_div" data-track-id="<%= track.id %>">
+  <h5 class="accordion accordion-title active" data-track-id="<%= track.id %>"><%= track.track_name %></h5>
+  <div>
+    <div class="rvt-grid m-fadeIn">
+      <div class=rvt-grid__item-4-md-up>
+        <label for=reordingStartTime>Start Time</label>
+        <%= track.recording_start_time%>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="recordingEndTime">End Time</label>
+        <%= track.recording_end_time %>
+      </div>
+      <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">
+        <label for="track[in_copyright]" class="rvt-m-right-sm">In Copyright</label>
+        <%= track.in_copyright %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <label for="entersPublicDomain">Enters Public Domain</label>
+        <%= track.copyright_end_date %>
+      </div>
+      <div class=rvt-grid__item-4-md-up>
+        <label for=access>Access Determination:</label>
+        <%= track.access_determination %>
+      </div>
+      <div class="rvt-grid__item-12">
+        <button class="rvt-button floatRight deleteTrackButton" data-track-id="<%= track.id %>">Delete Track</button>
+        <button class="rvt-button floatRight editTrackButton rvt-m-right-sm" data-track-id="<%= track.id %>">Edit Track</button>
+      </div>
+    </div>
+  </div>
+</div>

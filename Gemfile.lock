@@ -82,11 +82,12 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     mysql2 (0.5.2)
+    nested_form (0.3.2)
     net-ldap (0.16.1)
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -168,8 +169,9 @@ DEPENDENCIES
   jquery-ui-rails
   ldap_groups_lookup
   mysql2 (~> 0.5)
+  nested_form
   net-scp
-  nokogiri (>= 1.10.4)
+  nokogiri (>= 1.10.8)
   pundit
   rails (~> 4.2.11)
   sass-rails

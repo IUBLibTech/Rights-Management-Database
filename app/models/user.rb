@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   include LDAPGroupsLookup::Behavior
 
   # FIXME: for now simply check usernames against this array for determining if a given user is a copyright librarian
-  COPYRIGHT_LIBRARIANS = %w(nazapant shmichae mcwhitak jaalbrec gfitzwat)
+  COPYRIGHT_LIBRARIANS = %w(nazapant admjaa)
   WEB_ADMINS = %w(shmichae jaalbrec mcwhitak)
 
 
@@ -28,7 +28,11 @@ class User < ActiveRecord::Base
     u
   end
 
-  def self.copyright_librarian?
+  def self.copyright_librarian?(username)
+    COPYRIGHT_LIBRARIANS.include? username
+  end
+
+  def self.current_user_copyright_librarian?
     COPYRIGHT_LIBRARIANS.include? current_username
   end
 

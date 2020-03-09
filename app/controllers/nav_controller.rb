@@ -3,12 +3,15 @@ class NavController < ApplicationController
   include AvalonItemsHelper
 
   def start
-    if User.copyright_librarian?
-      @needs_review = AvalonItem.where("needs_review = true AND reviewed is not true")
+    if User.current_user_copyright_librarian?
+      @avalon_items = AvalonItem.cl_all
     else
-      units = UnitsHelper.human_readable_units_search(User.current_username)
-      @needs_review = AvalonItem.where(needs_review: true, reviewed: [nil, false], pod_unit: units)
+      @avalon_items = AvalonItem.cm_all
     end
+  end
+
+  def test
+
   end
 
   def mdpi_barcode_search

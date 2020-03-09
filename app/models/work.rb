@@ -14,4 +14,5 @@ class Work < ActiveRecord::Base
     self.copyright_end_date = copyright_end_date_edtf.blank? ? nil : Date.edtf(copyright_end_date_edtf)
   end
 
+
 end

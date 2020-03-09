@@ -1,0 +1,32 @@
+[CPU] Detected 8 CPUs
+OpenAL device available: PulseAudio Software (default PulseAudio Software)
+OpenAL device available: ALSA Software (default PulseAudio Software)
+Available video driver: x11
+Available video driver: dummy
+NO SELFEXE: bootstrapping from CWD
+Creating save thread
+Loading discord rpc: library(/home/andrew/games/t-engine4-linux64-1.6.6/lib64/libdiscord-rpc.so) => loaded
+===top 0
+WARNING: No bootstrap code found, defaulting to working directory for engine code!
+Creating particles thread 0
+Creating particles thread 1
+Creating particles thread 2
+Creating particles thread 3
+Creating particles thread 4
+Creating particles thread 5
+Creating particles thread 6
+[DO RESIZE] Requested: 800x600 (0, 0); zoom 100%
+[GAMMA] Getting desktop gamma of 1.000000
+[DO RESIZE] Got: 800x600 (0, 0)
+OpenGL max texture size: 16384
+OpenGL max texture size: 16384
+Upgrading black texture to size 64
+Running lua loader code...
+Cleaning up!
+Terminating!
+Webcore shutdown complete
+SDL shutdown complete
+OpenAL shutdown complete
+Thanks for having fun!
+AL lib: ALc.c:1879: exit(): closing 1 Device
+AL lib: ALc.c:1808: alcCloseDevice(): destroying 1 Context(s)

@@ -30,16 +30,12 @@ class PerformancesController < ApplicationController
         if @performance.save
           @recording_performance = RecordingPerformance.new(recording_id: params[:recording_id], performance_id: @performance.id)
           if  @recording_performance.save
-            @avalon_item = AvalonItem.find(params[:avalon_item_id])
-            format.html { redirect_to @avalon_item, notice: 'Performance was successfully created.' }
-            format.json { render :show, status: :created, location: @performance }
+            format.html { render partial: 'performances/ajax_show', locals: {performance: @performance}, notice: 'Performance was successfully created.' }
           else
             format.html { render :new }
-            format.json { render json: recording_performance.errors, status: :unprocessable_entity }
           end
         else
           format.html { render :new }
-          format.json { render json: @performance.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -50,11 +46,9 @@ class PerformancesController < ApplicationController
   def update
     respond_to do |format|
       if @performance.update(performance_params)
-        format.html { redirect_to @performance, notice: 'Performance was successfully updated.' }
-        format.json { render :show, status: :ok, location: @performance }
+        format.html { render partial: 'performances/ajax_show', locals: {performance: @performance} }
       else
         format.html { render :edit }
-        format.json { render json: @performance.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,17 +57,31 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1.json
   def destroy
     begin
-      @performance.destroy
-      render text: "success", status: 200
+      if @performance.tracks.size == 0
+        @performance.destroy
+        render text: "success", status: 200
+      else
+        render text: "You cannot delete a Performance with Tracks", status: 409
+      end
     rescue
-
+      render text: "An unexpected error occurred trying to delete the specified Performance", status: 500
     end
   end
 
   def ajax_new_performance
     @recording = Recording.find(params[:recording_id])
     @performance = Performance.new
-    render partial: 'performances/form'
+    render partial: 'performances/ajax_new'
+  end
+
+  def ajax_edit_performance
+    @performance = Performance.find(params[:id])
+    render partial: "performances/ajax_edit"
+  end
+
+  def ajax_show_performance
+    @performance = Performance.find(params[:id])
+    render partial: 'performances/ajax_show', locals: {performance: @performance}
   end
 
   private
@@ -84,6 +92,6 @@ class PerformancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def performance_params
-      params.require(:performance).permit(:location, :performance_date, :performance_date_string, :title, :notes)
+      params.require(:performance).permit(:location, :performance_date, :performance_date_string, :title, :notes, :in_copyright, :copyright_end_date, :access_determination)
     end
 end

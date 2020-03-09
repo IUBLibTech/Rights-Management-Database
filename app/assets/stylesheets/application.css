@@ -15,165 +15,563 @@
  *= require_tree .
  *= require_self
  */
+
+.pointer {
+    cursor: pointer;
+}
+
+/** taken from Matt Fitzwater's styles.css file */
+
+body,
+html {
+    height: 100%;
+    min-height: 100%;
+    position: relative
+}
+
 body {
-    font-family: sans-serif;
+    padding-bottom: 60px;
+    margin: 0 0 100px
 }
 
-h4 {
-    margin: 0;
-    padding: 0;
-    background: rgba(9, 155, 231, 0.4);
+main {
+    padding: 0 0 20em
 }
 
-h5 {
-    margin: 0;
-    padding: 0;
-    background: rgba(9, 155, 231, 0.4);
-    font-size: 1em;
-}
-h6 {
-    background: none;
-    color: #D07A00;
-    font-size: 1em;
-    margin: 0;
+table a:active,
+table a:link,
+table a:visited {
+    text-decoration: none
 }
 
-div.branding {
-    font-size: 3em;
-    padding: 5px;
-    text-align: center;
-    font-weight: bold;
-    color: #007ffa;
-}
-.left {
-    float: left;
-    padding: 0 5px;
-    margin-right: 5px;
-}
-.env_div {
-    text-align: center;
-}
-.env_p {
-    background: red;
-    font-weight: bold;
-    text-align: center;
-    padding: 3px;
-    width: 200px;
-    margin: auto;
-}
-.i {
-    font-style: italic;
+iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 1500px
 }
 
-.nav_ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #2a415a;
-}
-.nav_li {
-    float: left;
-    height: 20px;
-    padding: 5px 20px;
-}
-.nav_li > a, .nav_li > a:visited, .nav_li > a:hover {
-    color: rgb(157, 193, 193);
-    background-color: #2a415a;
-}
-.nav_li > a:hover {
-    color: #7f3000;
+.rvt-footer {
+    position: static;
+    bottom: 0;
+    padding: 1rem
 }
 
-a, a:visited {
-    font-weight: bold;
-    color: #D07A00;
+h1 a {
     text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5em
+}
+
+h2 {
+    font-size: 1.3em;
+    font-weight: 700
+}
+
+h2 .rvt-button {
+    font-size: .8em
+}
+
+i.xxsmall {
+    font-size: .8em
+}
+
+.form-grid .rvt-grid__item-lg {
+    min-width: 45%
+}
+
+.rvt-grid__item-12,
+.rvt-grid__item-lg {
+    /*padding-bottom: 1em*/
+}
+
+.rightButton {
+    float: right;
+    margin: 1.65rem 0 0 0;
+    padding-right: 1.7em
+}
+
+.rightButton button {
+    float: right;
+    margin-left: 1em
+}
+
+input:not([type]),
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea {
+    border-color: #c7c7c7
+}
+
+input.avalon,
+textarea.avalon {
+    background: #f2f2f2;
+    border: none
+}
+
+.rvt-breadcrumbs li {
+    font-size: .8rem
+}
+
+a {
+    text-decoration: none
 }
 
 a:hover {
-    background-color: #fff;
-    color: #7f3000;
-}
-a.blank_title {
-    color: red;
+    color: #900
 }
 
-.search {
-    float: right;
+.rvt-grid__item-lg {
+    position: relative
 }
 
-.orange {
-    color: #D07A00;
+.btn {
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    border: none
 }
 
-.clear {
-    clear: both;
+.btn .fa-check {
+    display: none
 }
 
-ul.decisions {
-    list-style-type: none;
-    margin: 0;
-    color: rgba(0, 0, 0, 0.57);
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
 }
 
-li.first {
-    font-style: italic;
-    color: #000000;
+.titleText,
+h4 {
+    font-size: 1em;
+    font-weight: 700
 }
 
-.m_top_10 {
-margin-top: 10px
+.swal1-textarea {
+    height: 3em
 }
 
-.m_top_25 {
-margin-top: 25px;
-}
-.ml_25 {
-    margin-left: 25px;
+.floatRight {
+    float: right
 }
 
-.w_400 {
-    width: 400px;
+.rvt-tabs__panel {
+    transition: visibility 0s .25s, opacity .25s linear
 }
-.w_250 {
-    width: 200px;
+
+input.noBorder,
+input.noBorder:disabled {
+    border: none;
+    background: 0 0
 }
-.boxsizingBorder {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+
+td:nth-child(n),
+th:nth-child(n) {
+    min-width: 9em
 }
-.cl {
-    list-style-position:inside;
-    border: 1px solid green;
+
+.no-bottom-b-br {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0
 }
-th, td {
-    vertical-align: top;
+
+form {
+    /*width: 500px;*/
+    /*margin: 3em*/
+}
+
+div[data-roles=true] {
+    padding: 1em;
+    background: #ebebeb;
+    margin: .55em 0;
+    border-radius: 7px;
+    display: none;
+    position: relative
+}
+
+.btnClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 0;
+    background: 0 0
+}
+
+.btnClose svg,
+.checkMark {
+    width: 35px;
+    height: 35px;
+    transition: all .2s ease-in-out
+}
+
+.st0 {
+    fill: #fff;
+    transition: all .2s ease-in-out
+}
+
+.st1 {
+    fill: #b44010;
+    transition: all .2s ease-in-out
+}
+
+svg:hover .st0 {
+    fill: #ebebeb
+}
+
+svg:hover .st1 {
+    fill: #900
+}
+
+h3 {
+    font-weight: 700
+}
+
+.checkMark {
+    fill: green;
+    display: none
+}
+
+div.show {
+    display: block
+}
+
+.rvt-dropdown {
+    display: block
+}
+
+#btn-roles {
+    width: 100%;
+    border: 1px solid #666;
+    border-radius: 3px;
     text-align: left;
+    padding: .4em
 }
 
-.orange {
-    font-weight: bold;
-    color: #D07A00;
+#btn-roles svg {
+    position: absolute;
+    right: 8px;
+    top: 12px
 }
 
-.submit_row > th, .submit_row > td {
-    padding-top: 20px;
+button:focus {
+    outline: .125rem solid #006298
+}
+
+
+input,
+select,
+textarea {
+    margin-bottom: .5em
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out;
+    visibility: visible!important
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
+
+
+.joinedPanel {
+    margin-top: -1em
+}
+
+.accordion {
+    color: #edebeb;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 1em 1.5em;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    outline: 0;
+    transition: all .45s;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.accordionPanel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+
+.accordion:focus,
+.accordion:hover {
+    background: #fff;
+    box-shadow: 0 -3px 3px 0 rgba(0, 0, 0, .25);
+    border-radius: 10px 10px 0 0;
+}
+
+.accordion:focus {
+    outline: 4px solid transparent
+}
+
+
+.accordion button::-moz-focus-inner {
+    border: 0
+}
+
+.accordion-title {
+    display: block;
+    /*pointer-events: none;*/
+    border: transparent 2px solid;
+    border-radius: 5px;
+    padding: .25em;
+    outline: 0;
+    color: #900;
+    font-size: 1.4em;
+    font-weight: 700
+}
+
+.accordion-panel .accordion-panel .accordion-trigger {
+    background: #e0dcdc
+}
+
+.accordion-trigger:focus .accordion-title {
+    border-color: #e0dcdc
+}
+
+.accordion-icon {
+    border: solid currentColor;
+    border-width: 0 5px 5px 0;
+    height: .85rem;
+    /*pointer-events: none;*/
+    position: absolute;
+    right: 2em;
+    top: 50%;
+    transform: translateY(-60%) rotate(45deg);
+    width: .85rem
+}
+
+.accordion-trigger:focus .accordion-icon,
+.accordion-trigger:hover .accordion-icon {
+    border-color: #900
+}
+
+.accordion-trigger[aria-expanded=true] .accordion-icon {
+    transform: translateY(-50%) rotate(-135deg)
+}
+
+.accordion-trigger[aria-expanded=true] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.accordion-panel {
+    margin: 0;
+    padding: 1em 1.5em;
+    border: 1px solid #d4cece;
+    border-radius: 8px
+}
+
+.accordion-panel[hidden] {
+    display: none
+}
+
+button {
+    border-style: none
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+input {
+    border: 1px solid #6b6b6b;
+    border-radius: .3em;
+    display: block;
+    font-size: inherit;
+    padding: .3em .5em
+}
+
+.accordion-panel.slideDown[hidden] {
+    animation-name: fadeOut;
+    animation-duration: .1s;
+    animation-timing-function: ease
+}
+
+.js-hidden {
+    animation-name: fadeOut;
+    animation-duration: .55s;
+    animation-timing-function: ease;
+    visibility: visible!important
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: .55s;
+    animation-timing-function: ease;
+    visibility: visible!important
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+h3.bgWhite {
+    background: #fff;
+    border-radius: 10px
+}
+
+
+/* Andrew added CSS */
+.bgGray {
+    background: #edebeb;
+    border-radius: 7px;
+}
+.bgWhite {
+    background: white;
+    border-radius: 7px;
+}
+
+.perf_div {
+    border-radius: 7px;
+    background: whitesmoke;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+select {
+    background: white;
+}
+.avalon_item_title {
+    padding: .25em;
+    outline: 0;
+    /*color: #900;*/
+    font-size: 1.4em;
+}
+.past_access_dec_div {
+    border-bottom: 1px solid #dddddd !important;
+    border-top: 1px solid #dddddd !important;
+}
+.cl_dec {
+    font-weight: 700;
+}
+a:link, a:focus, a:visited, a:active {
+    outline: none; !important;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+/** Added by Andrew Albrecht */
+.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-disabled-button:focus, .rvt-disabled-button:active  {
+    align-items: center;
+    border-radius: 4px;
+    font-family: BentonSans, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 700;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    display: flex;
+    height: 2.5rem;
+    outline: none;
+}
+.toggle {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    top: 2.5rem;
+    left: 480px;
+    max-width: 440px;
+}
+.cl_comment {
+    background: #c9ecff;
 }
 .badEdtf, .badYear, .badFullDate, .badUrl, .badHms {
     color: red;
     font-weight: bold;
 }
-.textarea_wrap {
-    overflow: hidden;
-    padding: 0 2px 0 0;
+.aiJsonMenu {
+    position: absolute;
 }
-.tArea {
-    width: 100%;
-    height: 120px;
-    padding: 0;
+.adder {
+    background: whitesmoke;
+    cursor: context-menu;
 }
-.desc_td {
-    max-width: 600px;
+#adder_overlay {
+    padding: 1rem;
+    border-radius: 7px 0 0 7px;
+    position: fixed;
+    width: 50%;
+    max-width: 50%;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200,200,200,1);
+    z-index: 200;
+    overflow: auto;
+}
+#adder_close {
+    cursor: pointer;
+}
+.recording, .recoding > li, .recording > li > label {
+    color: #900;
+}
+
+.note {
+    max-height: 10rem;
+    overflow: auto;
 }

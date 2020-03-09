@@ -5,13 +5,15 @@ class Recording < ActiveRecord::Base
   has_many :performances, through: :recording_performances
   has_many :recording_contributor_people
   has_many :people, through: :recording_contributor_people
+  has_many :recording_notes
 
   belongs_to :atom_feed_read
   belongs_to :avalon_item
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
 
-  accepts_nested_attributes_for :recording_performances
+  #accepts_nested_attributes_for :recording_performances
+  accepts_nested_attributes_for :recording_notes, :allow_destroy => true, :reject_if => :all_blank
 
   UNITS = ["B-AAAI", "B-AAAMC", "B-AFRIST", "B-ALF", "B-ANTH", "B-ARCHIVES", "B-ASTR", "B-ATHBASKM", "B-ATHBASKW",
            "B-ATHFHOCKEY", "B-ATHFTBL", "B-ATHROWING", "B-ATHSOCCM", "B-ATHSOFTB", "B-ATHTENNM", "B-ATHVIDEO",

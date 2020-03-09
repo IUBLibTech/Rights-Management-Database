@@ -10,7 +10,9 @@
     </tr>
     <% @users.each do |user| %>
     <tr class="user_row">
-      <td data-username="<%= user.username %>"><b><%= user.username %></b></td>
+      <td class="<%= User.copyright_librarian?(user.username) ? 'cl user' : 'user' %>" data-username="<%= user.username %>">
+        <%= link_to "#{user.username}", ajax_set_user_cl_url(user.username), remote: true, method: :post %>
+      </td>
       <% units.each do |u| %>
         <% access = user.public_send(u.underscore.parameterize) ? true : false %>
       <td class="<%= access ? 'green' : 'red' %> access_td">
@@ -36,5 +38,16 @@
      }).on("ajax:error", function(xhr, status, error) {
          alert("Bad things! Very bad things!\n\n\n"+status.responseJSON.errors);
      });
+
+     $('td.user > a').on("ajax:success", function(event, data) {
+         $('td.user:contains('+data.username+')').toggleClass("cl")
+         swal({
+             title: "Updated Copyright Librarian Membership",
+             text: data.msg
+         })
+     }).on("ajax:error", function(xhr, status, error) {
+         alert("Bad things! Very bad things!\n\n\n"+status.responseJSON.errors);
+     });
+
   });
 </script>
