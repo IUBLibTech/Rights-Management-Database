@@ -117,6 +117,35 @@ function hookButtons() {
     hookCreateTrackButtons();
     hookEditTrackButtons();
     hookDeleteTrackButtons();
+    hookAvalonNoteButton();
+}
+
+function hookAvalonNoteButton() {
+    $('#avalon_item_note_button').click(function() {
+        Swal.fire({
+            title: 'Add Note',
+            input: "textarea",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '../avalon_items/' + avalon_item_id +"/ajax_add_note",
+                    method: 'POST',
+                    data: {text: result.value},
+                    success: function (result) {
+                        $('#avalon_item_notes').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        swal.fire({
+                            icon: '',
+                            title: "Ajax Error trying to add an Avalon Item Note",
+                            text: xhr.responseText
+                        })
+                    }
+                })
+            }
+        })
+    });
 }
 function rehookButtons() {
     $(".editRecordingButton").unbind('click', editRecording).click(editRecording);

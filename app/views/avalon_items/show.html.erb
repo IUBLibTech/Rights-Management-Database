@@ -41,6 +41,7 @@
       <%= render partial: 'avalon_item_buttons' %>
     </div>
   </div>
+  <%= render partial: 'avalon_items/notes' %>
   <div id="recordings_div" class="rvt-p-all-sm bgGray">
     <h2>Recordings In This Avalon Item </h2>
     <% @avalon_item.recordings.each do |recording| %>
@@ -190,6 +191,7 @@
         hookNeedsReview();
         <% end %>
         hookReviewCommentSlide();
+        hookAvalonNoteButton();
         $("#access").change(function() {
             let val = $(this).find("option:selected").attr('value');
             ajaxAccess(val);

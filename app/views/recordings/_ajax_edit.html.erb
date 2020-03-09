@@ -51,6 +51,7 @@
         <label for="notes">Recording Notes</label>
         <div class="rvt-grid__item-12">
           <%= f.fields_for :recording_notes do |ff| %>
+            <%= ff.hidden_field :creator, value: User.current_username %>
             <label for="">Recording Note</label>
             <%= ff.text_area :text, {class: "swal2-textarea", 'aria-labelledby': "notes"}%>
             <%= ff.link_to_remove "Delete", class: 'rvt-button'%>

@@ -82,7 +82,7 @@
                           <% p.tracks.each do |t| %>
                             <%= pf.fields_for t do |tf| %>
                               <li>
-                                <%= tf.check_box :id, {id: "track_#{t.id}", type: 'checkbox'}%>
+                                <%= tf.check_box :id, {id: "track_#{t.id}", type: 'checkbox', checked: false} %>
                                 <label for="track_<%= t.id %>" class="rvt-m-all-none"><%= "#{t.track_name}" %></label>
                               </li>
                             <% end %>

@@ -2,8 +2,10 @@
   <h3 class="accordion accordion-title active"><%= recording.title %> <%= recording.mdpi_barcode %></h3>
   <div>
     <div class="rvt-grid m-fadeIn">
-      <h3>Recording Description</h3>
-      <p><%= recording.description %></p>
+      <div class="rvt-grid__item-12">
+        <h3>Recording Description</h3>
+        <p><%= recording.description %></p>
+      </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="inCopyright">In Copyright</label> <br>
         <%= recording.in_copyright %>
@@ -40,14 +42,16 @@
         <label for="authoritySourceURL">Authority Source URL</label>
         <br><%= recording.authority_source_url %>
       </div>
-      <div class="rvt-grid__item-12">
-        <label for="notes">Recording Notes</label>
-        <% recording.recording_notes.each do |note| %>
-          <div>
-            <h4>Creator: <%= note.creator %></h4>
-            <p><%= note.text %></p>
-          </div>
-        <% end %>
+      <div class="rvt-grid__item-12 rvt-m-top-xs">
+        <h4>Recording Notes</h4>
+        <div class="rvt-grid">
+          <% recording.recording_notes.each do |note| %>
+            <div class="bgWhite rvt-p-all-xxs rvt-grid__item-4-md-up rvt-m-right-xxs note">
+              <label class="rvt-m-bottom-none">Creator:&nbsp;</label><%= note.creator %> <label class="rvt-m-bottom-none">Date: </label> <%= note.created_at.strftime("%d/%m/%Y") %>
+              <p class="rvt-m-top-none"><%= simple_format(note.text) %></p>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div class="rvt-grid__item-12">
         <button class="rvt-button floatRight editRecordingButton" data-recording-id="<%= recording.id %>">Edit Recording</button>

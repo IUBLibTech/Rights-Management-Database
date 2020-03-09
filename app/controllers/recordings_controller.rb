@@ -1,6 +1,7 @@
 class RecordingsController < ApplicationController
   before_action :set_recording, only: [:show, :edit, :update, :destroy, :mark_needs_review, :mark_reviewed]
 
+
   # GET /recordings
   # GET /recordings.json
   def index
@@ -105,7 +106,8 @@ class RecordingsController < ApplicationController
       params.require(:recording).permit(
           :access_determination, :title, :description, :format, :published, :date_of_first_publication, :creation_date,
           :creation_end_date, :country_of_first_publication, :in_copyright, :copyright_end_date, :receipt_of_will_before_90_days_of_death,
-          :authority_source, :authority_source_url
+          :authority_source, :authority_source_url,
+          recording_notes_attributes: [:id, :creator, :text, :_destroy]
       )
     end
 end

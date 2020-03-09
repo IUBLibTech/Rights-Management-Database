@@ -1,0 +1,17 @@
+<div id="avalon_item_notes" class="rvt-m-bottom-sm">
+  <% if @avalon_item.avalon_item_notes.size > 0 %>
+  <h2>Avalon Item Notes</h2>
+    <div class=rvt-flex>
+      <% @avalon_item.avalon_item_notes.each do |note| %>
+        <div class="avalon_item_note rvt-grid__item-4-md-up bgGray rvt-m-right-xxs rvt-p-all-xs note">
+          <label>Creator:</label> <%= note.creator %>
+          <label>Date:</label> <%= note.created_at.strftime("%d/%m/%Y") %>
+          <% if note.creator == User.current_username %>
+<!--            <span><i class="note_delete_button fa fa-window-close" data-note_id="<%#= note.id %>" style="font-size:30px;float: right;" aria-hidden="true"><span class="sr-only">close menu</span></i></span>-->
+          <% end %>
+          <p class="rvt-m-all-remove"><%= simple_format(note.text)%></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

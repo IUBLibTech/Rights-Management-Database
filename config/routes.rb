@@ -59,7 +59,8 @@ Rails.application.routes.draw do
   get '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder', as: 'ajax_people_adder_get'
   post '/avalon_items/:id/ajax_people_adder', to: 'avalon_item#ajax_people_adder_post', as: 'ajax_people_adder_post'
   get '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder', as: 'ajax_work_adder_get'
-  post '/avalon_items/:id/ajax_work_adder', to: 'avalon_item#ajax_work_adder_post', as: 'ajax_work_adder_post'
+  post '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder_post', as: 'ajax_work_adder_post'
+  post 'avalon_items/:id/ajax_add_note', to: 'avalon_items#ajax_add_note', as: 'ajax_avalon_item_add_note'
 
   get '/avalon_items/ajax/cl_all', to: 'avalon_items#ajax_all_cl_items', as: 'ajax_avalon_cl_all'
   get '/avalon_items/ajax/cl_initial_review', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_initial_review'

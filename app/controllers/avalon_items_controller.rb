@@ -187,6 +187,12 @@ class AvalonItemsController < ApplicationController
 
   end
 
+  def ajax_add_note
+    @avalon_item = AvalonItem.find(params[:id])
+    ain = AvalonItemNote.new(text: params[:text], creator: User.current_username, avalon_item_id: @avalon_item.id)
+    ain.save
+    render partial: 'avalon_items/notes'
+  end
 
   private
   def parse_bc(ids)

@@ -1,8 +1,8 @@
 class AvalonItemNotesController < ApplicationController
 
   def new
-    @avalon_item = AvalonItem.find(params[:avalon_item_id]);
-    @avalon_item_note = AvalonItemNote.new(avalon_item_id: @avalon_item.id);
+    @avalon_item = AvalonItem.find(params[:avalon_item_id])
+    @avalon_item_note = AvalonItemNote.new(avalon_item_id: @avalon_item.id)
     render partial: 'avalon_item_notes/form'
   end
 
