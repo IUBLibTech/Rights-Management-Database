@@ -5,6 +5,8 @@ class Work < ActiveRecord::Base
   has_many :avalon_item_works
   has_many :avalon_items, through: :avalon_item_works
   before_save :convert_edtf
+  has_many :track_works
+  has_many :tracks, through: :track_works
   #alias_attribute :work_contributors, :people
 
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying

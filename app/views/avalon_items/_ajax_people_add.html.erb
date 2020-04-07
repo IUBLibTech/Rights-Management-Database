@@ -1,0 +1,91 @@
+<%= form_for @avalon_item, url: ajax_people_adder_post_url, method: :post, remote: true do |f| %>
+  <%= fields_for @person do |pf| %>
+    <div>
+      <h3>Add Person to <i><%= @avalon_item.title %></i></h3>
+      <div class="rvt-grid rvt-m-top-xxs">
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">First Name</label>
+          <%= pf.text_field :first_name, {type: "text", 'aria-describedby': "first name"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Middle Name</label>
+          <%= pf.text_field :middle_name, {type: "text", 'aria-describedby': "middle name"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Last Name</label>
+          <%= pf.text_field :last_name, {type: "text", 'aria-describedby': "last name"} %>
+        </div>
+      </div>
+      <div class="rvt-grid">
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Date of Birth</label>
+          <%= pf.text_field :date_of_birth_edtf, {type: "text", 'aria-describedby': "date of birth", class: "edtf_year_or_date"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Date of Death</label>
+          <%= pf.text_field :date_of_death_edtf, {type: "text", 'aria-describedby': "date of death", class: "edtf_year_or_date"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Place of Birth</label>
+          <%= pf.text_field :place_of_birth, {type: "text", 'aria-describedby': "first name"} %>
+        </div>
+      </div>
+      <div class="rvt-grid">
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Authority Source</label>
+          <%= pf.text_field :authority_source, {type: "text", 'aria-describedby': "authority source"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Authority Source URL</label>
+          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator"} %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">AKA</label>
+          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "also know as"} %>
+        </div>
+        <div class="rvt-grid__item-12">
+          <label for="personNotes">Notes</label>
+          <%= pf.text_area :notes, {class: "noBorder"} %>
+        </div>
+      </div>
+      <div>
+        <p>Add this Person to the Avalon Item's structured metadata below</p>
+      </div>
+    </div>
+  <% end %>
+  <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
+  <ul class="rvt-plain-list">
+    <% @avalon_item.recordings.each do |r| %>
+      <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
+        <%= check_box_tag "recordings[#{r.id}]", r.id, false,  {type: "checkbox"}  %>
+        <label for="recordings_<%= r.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
+        <% if r.performances.size > 0 %>
+          <h4 class="rvt-m-left-sm">Performances in <span class="recording"><i><%= "#{r.title}" %></i></span></h4>
+          <ul class="rvt-plain-list rvt-m-left-sm">
+              <% r.performances.each do |p| %>
+                <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
+                  <%= check_box_tag "performances[#{p.id}]", p.id, false,  {type: "checkbox"}  %>
+                  <label for="performances_<%= p.id %>" class="rvt-m-all-none rvt-"><%= "#{p.title} #{p.performance_date.blank? ? "" : "| "+p.performance_date.strftime("%m/%d/%Y")}" %></label>
+                  <% if p.tracks.size > 0 %>
+                    <ul class="rvt-plain-list rvt-m-left-md">
+                    <h4 class="rvt-m-left-md">Tracks for <%= p.title %></h4>
+                    <% p.tracks.each do |t| %>
+                      <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
+                        <%= check_box_tag "tracks[#{t.id}]", p.id, false,  {type: "checkbox"}  %>
+                        <label for="tracks_<%= t.id %>" class="rvt-m-all-none rvt-"><%= "#{t.track_name}" %></label>
+                      </li>
+                    <% end %>
+                    </ul>
+                  <% end %>
+                </li>
+              <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <div>
+    <button type="submit" class="peopleButtonAdderCreate rvt-button">Add Person</button>
+    <button type="button" class="peopleButtonAdderCancel rvt-button rvt-m-left-sm">Cancel</button>
+  </div>
+<% end %>

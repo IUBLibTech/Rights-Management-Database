@@ -1,5 +1,9 @@
 class Track < ActiveRecord::Base
   belongs_to :performance
+  has_many :track_works
+  has_many :works, through: :track_works
+  has_many :track_contributor_people
+  has_many :people, through: :track_contributor_people
 
   # recording_start_time is input as hh:mm:ss but stored as seconds
   def recording_start_time=(time)

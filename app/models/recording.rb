@@ -14,6 +14,7 @@ class Recording < ActiveRecord::Base
 
   #accepts_nested_attributes_for :recording_performances
   accepts_nested_attributes_for :recording_notes, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :performances
 
   UNITS = ["B-AAAI", "B-AAAMC", "B-AFRIST", "B-ALF", "B-ANTH", "B-ARCHIVES", "B-ASTR", "B-ATHBASKM", "B-ATHBASKW",
            "B-ATHFHOCKEY", "B-ATHFTBL", "B-ATHROWING", "B-ATHSOCCM", "B-ATHSOFTB", "B-ATHTENNM", "B-ATHVIDEO",

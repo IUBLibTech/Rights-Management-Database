@@ -25,5 +25,6 @@ module Rmd
 
     # addes the fonts folder to the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
   end
 end

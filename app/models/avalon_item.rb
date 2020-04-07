@@ -1,10 +1,13 @@
 class AvalonItem < ActiveRecord::Base
   include AccessDeterminationHelper
   has_many :recordings
+  has_many :performances, through: :recordings
   has_many :past_access_decisions
   has_many :avalon_item_notes
   has_many :review_comments
   belongs_to :current_access_determination, class_name: 'PastAccessDecision', foreign_key: 'current_access_determination_id', autosave: true
+
+  accepts_nested_attributes_for :performances
 
   REVIEW_STATE_DEFAULT = 0
   REVIEW_STATE_REVIEW_REQUESTED = 1

@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    render 'people/_ajax_show'
   end
 
   # GET /people/new

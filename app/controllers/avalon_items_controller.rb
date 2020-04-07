@@ -154,7 +154,7 @@ class AvalonItemsController < ApplicationController
   end
 
   def ajax_people_adder
-    @avalon_item = AvalonItem.includes(recordings: [performances: [:tracks]]).find(params[:id])
+    @avalon_item = AvalonItem.find(params[:id])
     @person = Person.new
     if params[:text]
       if params[:text].include?(',')
@@ -169,10 +169,43 @@ class AvalonItemsController < ApplicationController
         @person.first_name = params[:text]
       end
     end
-    render partial: 'avalon_items/ajax_people_adder'
+    # render partial: 'avalon_items/ajax_people_adder'
+    render partial: 'avalon_items/ajax_people_add'
   end
   def ajax_people_adder_post
-
+    Person.transaction do
+      @person = Person.new(
+          first_name: params[:person][:first_name], middle_name: params[:person][:middle_name], last_name: params[:person][:last_name],
+          date_of_birth_edtf: params[:person][:date_of_birth_edtf], date_of_death_edtf: params[:person][:date_of_death_edtf],
+          place_of_birth: params[:person][:place_of_birth], authority_source: params[:person][:authority_source], aka: params[:person][:aka],
+          notes: params[:person][:notes]
+      )
+      saved = @person.save
+      if params[:recordings]
+        params[:recordings].keys.each do |id|
+          RecordingContributorPerson.new(recording_id: id.to_i, person_id: @person.id).save
+        end
+      end
+      if params[:performances]
+        params[:performances].keys.each do |id|
+          PerformanceContributorPerson.new(person_id: @person.id, performance_id: id.to_i).save
+        end
+      end
+      if params[:tracks]
+        params[:tracks].keys.each do |id|
+          TrackContributorPerson.new(person_id: @person.id, track_id: id.to_i).save
+        end
+      end
+      respond_to do |format|
+        if saved
+          format.html { redirect_to @avalon_item, notice: 'Person was successfully created.' }
+          format.js   {}
+          format.json { render json: @avalon_item, status: :created, location: @avalon_item }
+        else
+          format.json { render json: @person.errors, status: :unprocessable_entity }
+        end
+      end
+    end
   end
 
   def ajax_work_adder
@@ -184,6 +217,30 @@ class AvalonItemsController < ApplicationController
     render partial: 'avalon_items/ajax_work_adder'
   end
   def ajax_work_adder_post
+    Work.transaction do
+      @work = Work.new(work_params)
+      params[:work][:recording][:performance][:track].each do |t|
+        # t is an array with the first string number being the track id and the second number being either 1 or 0. This signifies
+        # the checkbox being checked or not.
+        # FIXME: when we have looking up Works working we need to check for removing the work/track association
+        if t[1] == "1"
+          track = Track.find(t[0].to_i)
+          tw = TrackWork.new
+          tw.track = track
+          tw.work = @work
+          tw.save
+        end
+      end
+      respond_to do |format|
+        if @work.save
+          format.html { redirect_to @avalon_item, notice: 'Work was successfully created.' }
+          format.js   {}
+          format.json { render json: @avalon_item, status: :created, location: @avalon_item }
+        else
+          format.json { render json: @work.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 
   end
 
@@ -197,6 +254,14 @@ class AvalonItemsController < ApplicationController
   private
   def parse_bc(ids)
     ids.select{|id| id.match(/4[\d]{13}/)}
+  end
+
+  def work_params
+    params.require(:work).permit([
+     :title, :alternative_titles, :publication_date_edtf, :authority_source, :authority_source_url,
+     :traditional, :contemporary_work_in_copyright, :restored_copyright, :copyright_renewed,
+     :copyright_end_date_edtf, :access_determination, :notes
+     ])
   end
 
 end

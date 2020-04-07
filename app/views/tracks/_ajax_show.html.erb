@@ -1,5 +1,5 @@
 <div class="track_div" data-track-id="<%= track.id %>">
-  <h5 class="accordion accordion-title active" data-track-id="<%= track.id %>"><%= track.track_name %></h5>
+  <h5 class="accordion accordion-title active accordion-trigger" aria-expanded="true" data-track-id="<%= track.id %>"><%= track.track_name %> <span class="accordion-icon"></span></h5>
   <div>
     <div class="rvt-grid m-fadeIn">
       <div class=rvt-grid__item-4-md-up>
@@ -18,9 +18,37 @@
         <label for="entersPublicDomain">Enters Public Domain</label>
         <%= track.copyright_end_date %>
       </div>
-      <div class=rvt-grid__item-4-md-up>
+      <div class="rvt-grid__item-4-md-up rvt-m-bottom-md">
         <label for=access>Access Determination:</label>
         <%= track.access_determination %>
+      </div>
+      <% if track.works.size > 0 %>
+        <div class="rvt-grid__item-12">
+          <h4 class="">Works on this Track</h4>
+          <% track.works.each_with_index do |w, i| %>
+            <% @work = w %>
+            <div class="rvt-grid__item-4-md-up rvt-m-right-xxs rvt-p-all-xs tooltip work">
+              <%= link_to w.title, work_path(w), target: '_blank', class: 'red_700' %>
+              <span class="tooltiptext <%= i % 3 == 0 ? 'left_one' : i % 3 == 1 ? 'middle_one' : 'right_one' %>">
+                <%= render partial: 'works/ajax_show' %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="rvt-grid__item-12 rvt-m-top-xs">
+        <h4>Contributors</h4>
+        <div class="rvt-grid">
+          <% track.people.each_with_index do |p, i| %>
+            <% @person = p %>
+            <div class="rvt-grid__item-4-md-up rvt-m-right-xxs rvt-p-all-xs tooltip person">
+              <%= link_to p.full_name, person_path(p), target: '_blank', class: 'red_700' %>
+              <span class="tooltiptext <%= i % 3 == 0 ? 'left_one' : i % 3 == 1 ? 'middle_one' : 'right_one' %>">
+                  <%= render partial: 'people/ajax_show' %>
+                </span>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div class="rvt-grid__item-12">
         <button class="rvt-button floatRight deleteTrackButton" data-track-id="<%= track.id %>">Delete Track</button>

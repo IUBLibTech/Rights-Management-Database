@@ -50,7 +50,7 @@
   </div>
 </div>
 <div class="">
-  <h3 class="accordion accordion-title active">Avalon Metadata</h3>
+  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded=true>Avalon Metadata <span class="accordion-icon"></span></h3>
   <div class="rvt-grid m-fadeIn">
     <table class="json_table">
       <tbody>
@@ -169,7 +169,7 @@
   </div>
 </div>
 <div>
-  <h3 class="accordion accordion-title active">JSON</h3>
+  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded="true">JSON <span class="accordion-icon"></span></h3>
   <div class="rvt-grid m-fadeIn">
     <pre>
       <%= JSON.pretty_generate @json %>
@@ -195,7 +195,7 @@
         $("#access").change(function() {
             let val = $(this).find("option:selected").attr('value');
             ajaxAccess(val);
-        })
+        });
     });
 
     function ajaxAccess(decision) {

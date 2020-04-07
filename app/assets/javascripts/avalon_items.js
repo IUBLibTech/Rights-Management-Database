@@ -1,4 +1,31 @@
 let adder_event_target = null;
+
+// function hookHoverListeners() {
+//     $(".hover_work").hoverIntent(
+//         function() {
+//             let el = $(this);
+//             let title = el.attr('title');
+//             if (title === undefined) {
+//                 let work_id = $(this).attr('data-work-id');
+//                 $.ajax({
+//                     url: '../works/ajax/' + work_id,
+//                     success: function(response) {
+//                         el.attr('title', response);
+//                     },
+//                     error: function() {
+//                         swal.fire({
+//                             title: "Ajax Error",
+//                             html: 'An error occurred while calling /works/ajax/'+work_id
+//                         })
+//                     }
+//                 })
+//             }
+//         },
+//         function() {
+//
+//         }
+//     )
+// }
 function hookAiContextMenu() {
     $('.adder').contextmenu(function(event) {
         showMenu(event);
@@ -44,7 +71,7 @@ function addPerson(e) {
                 toggleOverlay($('#adder_overlay'));
             });
             $('.peopleButtonAdderCreate').click(function() {
-
+                toggleOverlay($('#adder_overlay'));
             });
             toggleOverlay(el);
         },
@@ -70,11 +97,8 @@ function addWork(e) {
         success: function(result) {
             let el = $( "#adder_overlay" );
             $('#adder_content').html(result);
-            $('.peopleButtonAdderCancel').click(function(){
+            $('.workButtonAdderCancel').click(function(){
                 toggleOverlay($('#adder_overlay'));
-            });
-            $('.peopleButtonAdderCreate').click(function() {
-
             });
             toggleOverlay(el);
         },
@@ -86,6 +110,17 @@ function addWork(e) {
             })
         }
     })
+}
+
+function createWork() {
+    $('form#new_work').ajaxSuccess(function(e, data, status, xhr) {
+        location.reload();
+    }).ajaxError( function(xhr, status, error) {
+        swal.fire({
+            title: "Ajax Error",
+            text: xhr.responseText
+        })
+    });
 }
 
 function toggleOverlay(el) {

@@ -21,8 +21,10 @@ function handleAccordionToggle(event) {
     el.classList.toggle("active");
     let panel = el.nextElementSibling;
     if (on) {
+        $(el).attr('aria-expanded', false);
         panel.style.display = 'none';
     } else {
+        $(el).attr('aria-expanded', true);
         panel.style.display = "block";
     }
 }

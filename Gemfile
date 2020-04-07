@@ -28,6 +28,8 @@ gem 'nokogiri', ">= 1.10.8"
 # handle ADS group lookup through LDAP
 gem 'ldap_groups_lookup'
 
+gem 'will_paginate', '~> 3.1.0'
+
 gem 'net-scp'
 
 # Use jquery as the JavaScript library

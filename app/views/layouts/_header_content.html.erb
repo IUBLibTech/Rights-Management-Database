@@ -14,6 +14,14 @@
     <nav class="rvt-header__main-nav" role="navigation">
       <ul>
         <li>
+          <div class="rvt-input-group">
+            <input id="mdpi_barcode_input" class="rvt-input-group__input" type="text" id="search">
+            <div class="rvt-input-group__append">
+              <button id="mdpi_barcode_button" class="rvt-button">MDPI Barcode Search</button>
+            </div>
+          </div>
+        </li>
+        <li>
           <% if controller_name == 'nav' && action_name == 'start' %>
             <%= link_to "Home", root_path, "aria-current":"page" %>
           <% else %>

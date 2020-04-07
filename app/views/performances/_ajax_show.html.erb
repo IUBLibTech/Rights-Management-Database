@@ -1,5 +1,5 @@
 <div class="perf_div" data-performance-id="<%= performance.id %>">
-  <h5 class="accordion accordion-title active" data-performance-id="<%= performance.id %>"><%= performance.title %></h5>
+  <h5 class="accordion accordion-title active accordion-trigger" aria-expanded="true" data-performance-id="<%= performance.id %>"><%= performance.title %><span class="accordion-icon"></span></h5>
   <div>
     <div class=rvt-grid__item-lg>
       <label for=access>Access Determination:</label>
@@ -21,6 +21,20 @@
       <div class="rvt-grid__item-4-md-up">
         <label for="copyrightEndDate">Copyright End Date</label> <br>
         <%= performance.copyright_end_date %>
+      </div>
+      <div class="rvt-grid__item-12 rvt-m-top-xs">
+        <h4>Contributors</h4>
+        <div class="rvt-grid">
+          <% performance.people.each_with_index do |p, i| %>
+            <% @person = p %>
+            <div class="rvt-grid__item-4-md-up rvt-m-right-xxs rvt-p-all-xs tooltip person">
+              <%= link_to p.full_name, person_path(p), target: '_blank', class: 'red_700' %>
+              <span class="tooltiptext <%= i % 3 == 0 ? 'left_one' : i % 3 == 1 ? 'middle_one' : 'right_one' %>">
+                  <%= render partial: 'people/ajax_show' %>
+                </span>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div class="rvt-grid__item-12">
         <% if performance.tracks.size == 0 %>

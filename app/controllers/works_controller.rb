@@ -10,6 +10,7 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+    render 'works/show'
   end
 
   # GET /works/new
@@ -69,6 +70,11 @@ class WorksController < ApplicationController
     @work = Work.new(title: params[:title])
     @ajax = true
     render partial: 'works/form'
+  end
+
+  def ajax_show
+    @work = Work.find(params[:id])
+    render partial: 'works/ajax_show'
   end
 
   private
