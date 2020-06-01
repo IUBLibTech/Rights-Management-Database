@@ -13,15 +13,17 @@
       </div>
       <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">
         <label for="recording[in_copyright]" class="rvt-m-right-sm">In Copyright</label>
-        <%= f.select :in_copyright, options_for_select([['Yes'],['No']], recording.in_copyright), {include_blank: ''} %>
+        <%= f.select :in_copyright, options_for_select([['Yes', true],['No', false]], recording.in_copyright), {include_blank: ''} %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="copyrightEnd">Copyright End Date</label>
         <%= f.text_field :copyright_end_date, {type:"date", 'aria-describedby':"copyrightEnd"} %>
       </div>
       <div class="rvt-grid__item-4-md-up">
-        <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label>
-        <%= f.text_field :receipt_of_will_before_90_days_of_death, {type: "text", 'aria-describedby': "receiptOfWill"} %>
+        <% if recording.avalon_item.pod_unit == 'B-ATM' %>
+          <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label>
+          <%= f.text_field :receipt_of_will_before_90_days_of_death, {type: "text", 'aria-describedby': "receiptOfWill"} %>
+        <% end %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="published">Published</label>

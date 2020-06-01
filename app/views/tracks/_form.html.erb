@@ -17,7 +17,7 @@
     </div>
     <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">
       <label for="track[in_copyright]" class="rvt-m-right-sm">In Copyright</label>
-      <%= f.select :in_copyright, options_for_select([['Yes'],['No']], @track.in_copyright), {include_blank: ''} %>
+      <%= f.select :in_copyright, options_for_select([['Yes', true],['No', false]], @track.in_copyright), {include_blank: ''} %>
     </div>
     <div class="rvt-grid__item-4-md-up">
       <label for="entersPublicDomain">Enters Public Domain</label>

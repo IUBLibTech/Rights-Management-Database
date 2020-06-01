@@ -50,10 +50,14 @@
   </div>
 </div>
 <div class="">
-  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded=true>Avalon Metadata <span class="accordion-icon"></span></h3>
+  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded=true>Avalon Metadata
+    <span class="accordion-icon"></span></h3>
   <div class="rvt-grid m-fadeIn">
     <table class="json_table">
       <tbody>
+      <tr>
+        <td colspan="4"><button id="add_person_button"  class="rvt-button rvt-m-left-lg">Add Person/Entity</button><button id="add_work_button" class="rvt-button rvt-m-left-lg">Add Work</button></td>
+      </tr>
       <tr>
         <th>Title</th>
         <td colspan="3" class="adder"><%= @json["title"] %></td>
@@ -177,7 +181,7 @@
   </div>
 </div>
 <div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">
-  <button id="addPersonButton">Add Person</button>
+  <button id="addPersonButton">Add Person/Entity</button>
   <button id="addWorkButton">Add Work</button>
 </div>
 

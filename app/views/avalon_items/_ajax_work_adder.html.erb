@@ -1,12 +1,16 @@
-<%= form_for @work, url: ajax_work_adder_post_url, method: :post, remote: true do |f| %>
+<%= form_for @work, url: (@existing ? ajax_work_setter_post_path : ajax_work_adder_post_url), method: :post, remote: true do |f| %>
   <%= hidden_field_tag "avalon_item_id", @avalon_item.id %>
+  <% if @existing %>
+    <%= f.hidden_field :id, value: @work.id %>
+  <% end %>
 <div>
-  <h3>Add Work to <i><%= @avalon_item.title %></i></h3>
+  <h3><%= @existing ? "Update" : "Add" %> Work <%= @existing ? "for" : "to" %> <i class="blue_700"><%= @avalon_item.title %></i></h3>
   <div>
     <div class="rvt-grid rvt-m-top-xxs">
       <div class="rvt-grid__item-4-md-up">
         <label for="recordingTitle">Title</label>
         <%= f.text_field :title, {type: "text", 'aria-describedby': "title"} %>
+        <%= render partial: 'works/autocomplete_work_tooltip' %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="recordingTitle">Alternative Titles</label>
@@ -38,11 +42,11 @@
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="recordingTitle">Restored Copyright</label>
-        <%= f.select :traditional, options_for_select([['Yes'],['No']], @work.restored_copyright), {include_blank: '', 'aria-describedby': "restored copyright" } %>
+        <%= f.select :restored_copyright, options_for_select([['Yes'],['No']], @work.restored_copyright), {include_blank: '', 'aria-describedby': "restored copyright" } %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="recordingTitle">Copyright Renewed</label>
-        <%= f.select :traditional, options_for_select([['Yes'],['No']], @work.copyright_renewed), {include_blank: '', 'aria-describedby': "copyright renewed"} %>
+        <%= f.select :copyright_renewed, options_for_select([['Yes'],['No']], @work.copyright_renewed), {include_blank: '', 'aria-describedby': "copyright renewed"} %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="personNotes">Enters Public Domain</label>
@@ -50,7 +54,7 @@
       </div>
       <div class="rvt-grid__item-12">
         <label for="personNotes">Access Determination</label>
-        <%= select_tag :access_determination, options_for_select(AccessDeterminationHelper::ACCESS_DECISIONS.collect{|a| [a,a]}, @work.access_determination) %>
+        <%= select_tag "work[access_determination]", options_for_select(AccessDeterminationHelper::ACCESS_DECISIONS.collect{|a| [a,a]}, @work.access_determination) %>
       </div>
       <div class="rvt-grid__item-12">
         <label for="personNotes">Notes</label>
@@ -65,42 +69,34 @@
     <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
     <ul class="rvt-plain-list">
       <% @avalon_item.recordings.each do |r| %>
-        <%= f.fields_for r do |rf| %>
-          <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
-            <%#= rf.check_box :id, {id: "recording_#{r.id}", type: 'checkbox'} %>
-            <label for="recording_<%= r.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
-            <div class="rvt-m-left-sm">
-              <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
-              <ul class="rvt-plain-list">
-                <% r.performances.each do |p| %>
-                  <%= rf.fields_for p do |pf| %>
-                    <li class="rvt-m-left-xs performance rvt-checkbox-wrapper">
-                      <%#= rf.check_box :id, {id: "performance_#{p.id}", type: 'checkbox'}%>
-                      <label for="performance_<%= p.id %>" class="rvt-m-all-none"><%= "#{p.title}" %></label>
-                      <div class="rvt-m-left-sm">
-                        <h4>Tracks in <span class="recording"><i><%= "#{p.title}" %></i></span></h4>
-                        <ul class="rvt-plain-list">
-                          <% p.tracks.each do |t| %>
-                            <%= pf.fields_for t do |tf| %>
-                              <li>
-                                <%= tf.check_box t.id, {type: 'checkbox', checked: false} %>
-                                <%= tf.label t.id, t.track_name %>
-<!--                                <label for="tracks[<%#= t.id %>]" class="rvt-m-all-none"><%#= "#{t.track_name}" %></label>-->
-                              </li>
-                            <% end %>
-                          <% end %>
-                        </ul>
-                      </div>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </li>
-        <% end %>
+        <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
+          <label for="recording_<%= r.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
+          <div class="rvt-m-left-sm">
+            <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
+            <ul class="rvt-plain-list">
+              <% r.performances.each do |p| %>
+                <li class="rvt-m-left-xs performance rvt-checkbox-wrapper">
+                  <label for="performance_<%= p.id %>" class="rvt-m-all-none"><%= "#{p.title}" %></label>
+                  <div class="rvt-m-left-sm">
+                    <h4>Tracks in <span class="recording"><i><%= "#{p.title}" %></i></span></h4>
+                    <ul class="rvt-plain-list">
+                      <% p.tracks.each do |t| %>
+                        <% contributes = @work.performed_on_track?(t.id) %>
+                        <li>
+                          <%= check_box_tag "tracks[#{t.id}]", t.id, checked=contributes,  {type: "checkbox"} %>
+                          <label for="tracks_<%= t.id %>" class="rvt-m-all-none rvt-"><%= "#{t.track_name}"%></label>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </li>
       <% end %>
     </ul>
-  <button type="submit" class="workButtonAdderCreate rvt-button">Add Work</button>
+  <button type="submit" class="workButtonAdderCreate rvt-button"><%= @existing ? "Update Work" : "Add Work" %></button>
   <button type="button" class="workButtonAdderCancel rvt-button rvt-m-left-sm">Cancel</button>
   <% end %>
 </div>

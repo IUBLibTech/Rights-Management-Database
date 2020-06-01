@@ -18,6 +18,9 @@ class Person < ActiveRecord::Base
   has_many :work_contributor_people
   has_many :works, through: :work_contributor_people
 
+# for json population
+#   attr_accessor :value
+#   attr_accessor :label
 
   RECORDING_CONTRIBUTOR_ROLES_KEY = "recording"
   PERFORMANCE_CONTRIBUTOR_ROLES_KEY = "performance"
@@ -34,6 +37,41 @@ class Person < ActiveRecord::Base
   end
   def full_name
     "#{first_name} #{middle_name} #{last_name}"
+  end
+
+  def label
+    self.entity? ? company_name : full_name
+  end
+  def value
+    id
+  end
+
+  def recording_producer?(r_id)
+    recording_contributor_people.where(recording_id: r_id, recording_producer: true).size > 0
+  end
+  def recording_depositor?(r_id)
+    recording_contributor_people.where(recording_id: r_id, recording_depositor: true).size > 0
+  end
+
+  def performance_interviewer?(p_id)
+    performance_contributor_people.where(performance_id: p_id, interviewer: true).size > 0
+  end
+  def performance_performer?(p_id)
+    performance_contributor_people.where(performance_id: p_id, performer: true).size > 0
+  end
+  def performance_conductor?(p_id)
+    performance_contributor_people.where(performance_id: p_id, conductor: true).size > 0
+  end
+  def performance_interviewee?(p_id)
+    performance_contributor_people.where(performance_id: p_id, interviewee: true).size > 0
+  end
+
+  def track_contributor?(t_id)
+    track_contributor_people.where(track_id: t_id, contributor: true).size > 0
+  end
+
+  def as_json(options)
+    super(methods: [:label, :value])
   end
 
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying

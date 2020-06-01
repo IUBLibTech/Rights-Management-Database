@@ -3,7 +3,8 @@ class Track < ActiveRecord::Base
   has_many :track_works
   has_many :works, through: :track_works
   has_many :track_contributor_people
-  has_many :people, through: :track_contributor_people
+  has_many :contributors, -> { where "contributor = true " }, class_name: "TrackContributorPerson"
+  has_many :people, through: :contributors
 
   # recording_start_time is input as hh:mm:ss but stored as seconds
   def recording_start_time=(time)

@@ -22,7 +22,7 @@
     </div>
     <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">
       <label for="recording[in_copyright]" class="rvt-m-right-sm">In Copyright</label>
-      <%= f.select :in_copyright, options_for_select([['Yes'],['No']], @performance.in_copyright), {include_blank: ''} %>
+      <%= f.select :in_copyright, options_for_select([['Yes', true],['No', false]], @performance.in_copyright), {include_blank: ''} %>
     </div>
     <div class="rvt-grid__item-4-md-up">
       <label for="copyrightEndDate">Copyright End Date</label>

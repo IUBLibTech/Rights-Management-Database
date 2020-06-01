@@ -15,8 +15,10 @@
         <%= recording.copyright_end_date %>
       </div>
       <div class="rvt-grid__item-4-md-up">
-        <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label><br>
-        <%= recording.receipt_of_will_before_90_days_of_death %>
+        <% if @avalon_item.pod_unit == 'B-ATM' %>
+          <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label><br>
+          <%= recording.receipt_of_will_before_90_days_of_death %>
+        <% end %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="published">Published</label>
@@ -53,20 +55,22 @@
           <% end %>
         </div>
       </div>
-      <div class="rvt-grid__item-12 rvt-m-top-xs">
-        <h4>Contributors</h4>
-        <div class="rvt-grid">
-          <% recording.people.each_with_index do |p, i| %>
-            <% @person = p %>
-            <div class="rvt-grid__item-4-md-up rvt-m-right-xxs rvt-p-all-xs tooltip person">
-              <%= link_to p.full_name, person_path(p), target: '_blank', class: 'red_700' %>
-              <span class="tooltiptext <%= i % 3 == 0 ? 'left_one' : i % 3 == 1 ? 'middle_one' : 'right_one' %>">
-                  <%= render partial: 'people/ajax_show' %>
-                </span>
-            </div>
-          <% end %>
+      <% if recording.people.size > 0 %>
+        <div class="rvt-grid__item-12 rvt-m-top-xs">
+          <h4>Contributors</h4>
+          <div class="rvt-grid">
+            <% recording.people.each_with_index do |p, i| %>
+              <% @person = p %>
+              <div class="rvt-grid__item-4-md-up rvt-m-right-xxs rvt-p-all-xs tooltip person">
+                <%= link_to (p.entity? ? p.company_name : p.full_name), ajax_edit_person_path(p.id), class: 'red_700', remote: true %>
+                <span class="tooltiptext <%= i % 3 == 0 ? 'left_one' : i % 3 == 1 ? 'middle_one' : 'right_one' %>">
+                    <%= render partial: 'people/ajax_show' %>
+                  </span>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div class="rvt-grid__item-12">
         <button class="rvt-button floatRight editRecordingButton" data-recording-id="<%= recording.id %>">Edit Recording</button>
       </div>

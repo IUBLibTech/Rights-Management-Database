@@ -561,7 +561,6 @@ a:link, a:focus, a:visited, a:active {
     right: 0;
     bottom: 0;
     background-color: rgba(200,200,200,1);
-    z-index: 200;
     overflow: auto;
 }
 #adder_close {
@@ -586,6 +585,9 @@ a:link, a:focus, a:visited, a:active {
 .tooltip {
     position: relative;
     display: inline-block;
+}
+.tooltip > a {
+    border-bottom: 1px dotted #900;
 }
 .tooltip .tooltiptext {
     visibility: hidden;
@@ -630,4 +632,106 @@ a:link, a:focus, a:visited, a:active {
 .work, .person {
     max-width: 30%;
     flex-basis: 30%;
+}
+.person_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -290px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    width: 300px;
+    border-radius: 7px;
+    padding: 5px;
+}
+.entity_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 290px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    width: 300px;
+    border-radius: 7px;
+    padding: 5px;
+}
+.person_ac_tooltip::after, .entity_ac_tooltip::after {
+    /*content: "";*/
+    /*position: absolute;*/
+    /*left: 304px;*/
+    /*margin-left: -5px;*/
+    /*border-width: 10px;*/
+    /*border-style: solid;*/
+    /*border-color: black transparent transparent transparent;*/
+    /*color: black;*/
+    /*transform: rotate(270deg);*/
+}
+
+#add_person_button, #add_work_button {
+    font-size: 1rem;
+}
+#add_work_button {
+    margin-right: 75px;
+}
+#mdpi_barcode_input, #mdpi_barcode_button {
+    /* Need this to overright Rivets input group z-index of 200... why?*/
+    z-index: 0;
+}
+
+.blue_700 {
+    color: #006298;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.work_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 300px;
+    width: 450px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    border-radius: 7px;
+    padding: 5px;
+}
+.work_ac_tooltip::after {
+    /*content: "";*/
+    /*position: absolute;*/
+    /*left: 304px;*/
+    /*margin-left: -5px;*/
+    /*border-width: 10px;*/
+    /*border-style: solid;*/
+    /*border-color: black transparent transparent transparent;*/
+    /*color: black;*/
+    /*transform: rotate(270deg);*/
+}
+
+.entity_attributes {
+    display: none;
+}
+.recording_title, .performance_title, .track_title {
+    float: left;
+    margin-right: 2rem;
+}
+ul.roles > li {
+    display: inline;
 }

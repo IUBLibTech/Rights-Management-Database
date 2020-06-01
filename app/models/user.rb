@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   # FIXME: for now simply check usernames against this array for determining if a given user is a copyright librarian
   COPYRIGHT_LIBRARIANS = %w(nazapant admjaa)
-  WEB_ADMINS = %w(shmichae jaalbrec mcwhitak)
+  WEB_ADMINS = %w(shmichae jaalbrec mcwhitak gfitzwat)
 
 
   def self.authenticate(username)

@@ -66,6 +66,15 @@ class WorksController < ApplicationController
     end
   end
 
+  def ajax_autocomplete_title
+    @hits = Work.where("title like ?", "%#{params[:term]}%")
+    render json: @hits
+  end
+  def ajax_match_authority_source_url
+    @hit = Work.where(authority_source_url: params[:term])
+    render json: @hit
+  end
+
   def ajax_new_work
     @work = Work.new(title: params[:title])
     @ajax = true
@@ -75,6 +84,10 @@ class WorksController < ApplicationController
   def ajax_show
     @work = Work.find(params[:id])
     render partial: 'works/ajax_show'
+  end
+
+  def ajax_edit_work
+    render partial: 'works/ajax_edit_work'
   end
 
   private

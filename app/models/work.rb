@@ -15,6 +15,18 @@ class Work < ActiveRecord::Base
     self.publication_date = publication_date_edtf.blank? ? nil : Date.edtf(publication_date_edtf)
     self.copyright_end_date = copyright_end_date_edtf.blank? ? nil : Date.edtf(copyright_end_date_edtf)
   end
+  def label
+    title
+  end
+  def value
+    id
+  end
+  def as_json(options)
+    json = super(methods: [:label, :value])
+    Hash[*json.map{|k, v| [k, v || ""]}.flatten]
+  end
 
-
+  def performed_on_track?(tid)
+    track_works.where(track_id: tid).size > 0
+  end
 end

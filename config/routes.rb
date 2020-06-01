@@ -56,8 +56,15 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cm_waiting_on_cl', to: 'avalon_items#ajax_cm_waiting_on_cl', as: 'avalon_items_cm_waiting_on_cl'
   get '/avalon_items/ajax/cm_waiting_on_self', to: 'avalon_items#ajax_cm_waiting_on_self', as: 'avalon_items_cm_waiting_on_self'
   get '/avalon_items/ajax/cm_access_determined', to: 'avalon_items#ajax_cm_access_determined', as: 'avalon_items_cm_access_determined'
+  # new person
   get '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder', as: 'ajax_people_adder_get'
   post '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder_post', as: 'ajax_people_adder_post'
+  # existing person
+  get '/avalon_items/:id/ajax_people_setter/:pid', to: 'avalon_items#ajax_people_setter', as: 'ajax_people_setter_get'
+  post '/avalon_items/:id/ajax_people_setter/:pid', to: 'avalon_items#ajax_people_setter_post', as: 'ajax_people_setter_post'
+  get '/avalon_items/:id/ajax_work_setter/:wid', to: 'avalon_items#ajax_work_setter', as: 'ajax_work_setter_get'
+  post '/avalon_items/:id/ajax_work_setter/:wid', to: 'avalon_items#ajax_work_setter_post', as: 'ajax_work_setter_post'
+
   get '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder', as: 'ajax_work_adder_get'
   post '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder_post', as: 'ajax_work_adder_post'
   post 'avalon_items/:id/ajax_add_note', to: 'avalon_items#ajax_add_note', as: 'ajax_avalon_item_add_note'
@@ -71,6 +78,9 @@ Rails.application.routes.draw do
   get 'recordings/ajax/show/:id', to: 'recordings#ajax_show', as: 'ajax_show_recording'
 
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
+  get '/people/ajax/autocomplete', to: 'people#ajax_autocomplete', as: 'people_ajax_autocomplete'
+  get '/people/ajax/autocomplete_company', to: "people#ajax_autocomplete_company", as: "people_ajax_autocomplete_company"
+  get '/people/ajax/edit/:id', to: 'people#ajax_edit_person', as: 'ajax_edit_person'
 
   get '/performances/ajax/new/:recording_id', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
   get '/performances/ajax/edit/:id', to: 'performances#ajax_edit_performance', as: 'ajax_edit_performance'
@@ -83,6 +93,8 @@ Rails.application.routes.draw do
   post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
   get '/works/ajax/:id', to: 'works#ajax_show', as: 'ajax_show_work'
+  get '/work/ajax/autocomplete_title', to: 'works#ajax_autocomplete_title', as: 'work_ajax_autocomplete_title'
+  get '/work/ajax/edit/:id', to: 'works#ajax_edit_work', as: 'ajax_edit_work'
 
   root 'nav#start'
   # The priority is based upon order of creation: first created -> highest priority.

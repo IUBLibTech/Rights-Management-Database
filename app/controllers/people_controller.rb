@@ -22,6 +22,21 @@ class PeopleController < ApplicationController
   def edit
   end
 
+  def ajax_edit_person
+    render partial: 'people/ajax_edit_person'
+  end
+
+  # GET /people/
+  def ajax_autocomplete
+    @hits = Person.where("last_name like ?", "%#{params[:term]}%")
+    render json: @hits
+  end
+
+  def ajax_autocomplete_company
+    @hits = Person.where("company_name like ?", "%#{params[:term]}%")
+    render json: @hits
+  end
+
   # POST /people
   # POST /people.json
   def create
@@ -81,7 +96,8 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(
-          :first_name, :middle_name, :last_name, :date_of_birth_edtf, :date_of_death_edtf, :place_of_birth, :authority_source, :aka, :notes, :authority_source_url
+          :first_name, :middle_name, :last_name, :date_of_birth_edtf, :date_of_death_edtf, :place_of_birth,
+          :authority_source, :aka, :notes, :authority_source_url, :entity, :company_name, :entity_nationality
       )
     end
 end
