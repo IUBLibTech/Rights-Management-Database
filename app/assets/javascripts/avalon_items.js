@@ -75,6 +75,7 @@ function addPersonForm(e) {
             }
             hookPeopleAutocomplete();
             hookPeopleEntity();
+            hookMassAssigners();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -123,6 +124,7 @@ function setPersonForm(person_id) {
             }
             hookPeopleAutocomplete();
             hookPeopleEntity();
+            hookMassAssigners();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -132,6 +134,25 @@ function setPersonForm(person_id) {
             })
         }
     })
+}
+
+function hookMassAssigners() {
+    $('.mass_interviewer').click(function() {
+        let p_id = $(this).attr('data-performance-id');
+        $('ul[data-performance-id='+p_id+']').find('.interviewer_checkbox').prop('checked', true)
+    });
+    $('.mass_interviewee').click(function() {
+        let p_id = $(this).attr('data-performance-id');
+        $('ul[data-performance-id='+p_id+']').find('.interviewee_checkbox').prop('checked', true)
+    });
+    $('.mass_conductor').click(function() {
+        let p_id = $(this).attr('data-performance-id');
+        $('ul[data-performance-id='+p_id+']').find('.conductor_checkbox').prop('checked', true)
+    });
+    $('.mass_performer').click(function() {
+        let p_id = $(this).attr('data-performance-id');
+        $('ul[data-performance-id='+p_id+']').find('.performer_checkbox').prop('checked', true)
+    });
 }
 
 function validatePerson(event) {

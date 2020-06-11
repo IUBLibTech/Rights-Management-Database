@@ -13,7 +13,8 @@ class Person < ActiveRecord::Base
   has_many :performances, through: :performance_contributor_people
 
   has_many :track_contributor_people
-  has_many :tracks, through: :track_contributor_people
+  has_many :contributions, -> { where "interviewer = true OR interviewee = true OR conductor = true OR performer = true" }, class_name: "TrackContributorPerson"
+  has_many :tracks, through: :contributions
 
   has_many :work_contributor_people
   has_many :works, through: :work_contributor_people
@@ -24,10 +25,11 @@ class Person < ActiveRecord::Base
 
   RECORDING_CONTRIBUTOR_ROLES_KEY = "recording"
   PERFORMANCE_CONTRIBUTOR_ROLES_KEY = "performance"
+  TRACK_CONTRIBUTOR_ROLES_KEY = "track"
   WORK_CONTRIBUTOR_ROLES_KEY = "work"
   ROLES = {
       RECORDING_CONTRIBUTOR_ROLES_KEY => ["Depositor (R)", "Recording Producer (R)"],
-      PERFORMANCE_CONTRIBUTOR_ROLES_KEY => ["Interviewer (P)", "Performer (P)", "Conductor (P)", "Interviewee (P)"],
+      TRACK_CONTRIBUTOR_ROLES_KEY => ["Interviewer (P)", "Performer (P)", "Conductor (P)", "Interviewee (P)"],
       WORK_CONTRIBUTOR_ROLES_KEY => ["Contributor (W)", "Principle Creator (W)"]
   }
   ALL_ROLES = Person::ROLES.keys.collect{|k| Person::ROLES[k]}.flatten.sort
@@ -53,17 +55,17 @@ class Person < ActiveRecord::Base
     recording_contributor_people.where(recording_id: r_id, recording_depositor: true).size > 0
   end
 
-  def performance_interviewer?(p_id)
-    performance_contributor_people.where(performance_id: p_id, interviewer: true).size > 0
+  def track_interviewer?(t_id)
+    track_contributor_people.where(track_id: t_id, interviewer: true).size > 0
   end
-  def performance_performer?(p_id)
-    performance_contributor_people.where(performance_id: p_id, performer: true).size > 0
+  def track_performer?(t_id)
+    track_contributor_people.where(track_id: t_id, performer: true).size > 0
   end
-  def performance_conductor?(p_id)
-    performance_contributor_people.where(performance_id: p_id, conductor: true).size > 0
+  def track_conductor?(t_id)
+    track_contributor_people.where(track_id: t_id, conductor: true).size > 0
   end
-  def performance_interviewee?(p_id)
-    performance_contributor_people.where(performance_id: p_id, interviewee: true).size > 0
+  def track_interviewee?(t_id)
+    track_contributor_people.where(track_id: t_id, interviewee: true).size > 0
   end
 
   def track_contributor?(t_id)

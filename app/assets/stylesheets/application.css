@@ -735,3 +735,12 @@ a:link, a:focus, a:visited, a:active {
 ul.roles > li {
     display: inline;
 }
+.mass_assign {
+    float: left;
+}
+.mass_assign > p {
+    margin: 0;
+}
+.clear {
+    clear: both;
+}
