@@ -28,11 +28,11 @@
       <div class="rvt-grid person_attributes">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Birth</label>
-          <%= pf.text_field :date_of_birth_edtf, {type: "text", 'aria-describedby': "date of birth", class: "edtf_year_or_date"} %>
+          <%= pf.text_field :date_of_birth_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Death</label>
-          <%= pf.text_field :date_of_death_edtf, {type: "text", 'aria-describedby': "date of death", class: "edtf_year_or_date"} %>
+          <%= pf.text_field :date_of_death_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Place of Birth</label>

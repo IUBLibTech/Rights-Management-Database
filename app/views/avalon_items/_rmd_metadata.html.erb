@@ -20,13 +20,6 @@
     <% elsif !User.copyright_librarian?(User.current_username) %>
       <p class="review_not_needed button">Click to Mark 'Needs Copyright Review'</p>
     <% end %>
-    <div class="toggle">
-      <% @avalon_item.review_comments.order("id DESC").each do |c| %>
-        <p class="<%= c.copyright_librarian? ? "cl_comment" : "cm_comment"%>">
-          <b><%= c.creator %> (<%= c.created_at.strftime('%m/%d/%Y') %>)</b>: <%= c.comment %>
-        </p>
-      <% end %>
-    </div>
   </div>
 </div>
 <div class="left">

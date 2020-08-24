@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  before_save :convert_edtf
+  before_save :edtf_dates
   has_many :person_nationalities
   has_many :nationalities, through: :person_nationalities
 
@@ -15,6 +15,8 @@ class Person < ActiveRecord::Base
   has_many :track_contributor_people
   has_many :contributions, -> { where "interviewer = true OR interviewee = true OR conductor = true OR performer = true" }, class_name: "TrackContributorPerson"
   has_many :tracks, through: :contributions
+
+  has_many :avalon_items, through: :recordings
 
   has_many :work_contributor_people
   has_many :works, through: :work_contributor_people
@@ -38,7 +40,7 @@ class Person < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   def full_name
-    "#{first_name} #{middle_name} #{last_name}"
+    "#{first_name}#{middle_name.blank? ? '' : " "+middle_name} #{last_name}"
   end
 
   def label
@@ -78,9 +80,14 @@ class Person < ActiveRecord::Base
 
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying
   # DB Date reflects that
-  def convert_edtf
-    self.date_of_birth = date_of_birth_edtf.blank? ? nil : Date.edtf(date_of_birth_edtf)
-    self.date_of_death = date_of_death_edtf.blank? ? nil : Date.edtf(date_of_death_edtf)
+  def edtf_dates
+    date = Date.edtf(date_of_birth_edtf.gsub('/', '-'))
+    self.date_of_birth = date
+    puts "Set date_of_birth to #{date}, calling self.date_of_birth: #{self.date_of_birth}"
+
+    date = Date.edtf(date_of_death_edtf.gsub('/', '-'))
+    self.date_of_death = date
+    puts "Set date_of_death to #{date}, calling self.date_of_death: #{self.date_of_death}"
   end
 
 

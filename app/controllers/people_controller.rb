@@ -4,13 +4,15 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = Person.where(entity: false)
+    @entities = Person.where(entity: true)
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
-    render 'people/_ajax_show'
+    #render 'people/_ajax_show'
+    render 'people/show'
   end
 
   # GET /people/new
@@ -74,10 +76,13 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
-    @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
-      format.json { head :no_content }
+      if @person.avalon_items.size + @person.works.size> 0
+        format.html { redirect_to people_url, notice: "The Person/Entity <i>#{@person.entity? ? @person.company_name : @person.full_name}</i> could not be destroyed because it is associated with Avalon Items or Works" }
+      else
+        @person.destroy
+        format.html { redirect_to people_url, notice: "The Person/Entity <i>#{@person.entity? ? @person.company_name : @person.full_name}</i> was successfully destroyed." }
+      end
     end
   end
 
@@ -85,6 +90,16 @@ class PeopleController < ApplicationController
     @person = Person.new(last_name: params[:last_name], first_name: params[:first_name])
     @ajax = true
     render partial: 'people/form'
+  end
+
+  def ajax_show
+    @person = Person.find(params[:id])
+    render partial: 'person/ajax_show'
+  end
+
+  def ajax_work_person_form
+    @person = Person.find(params[:id])
+    render partial: 'ajax_work_person_form'
   end
 
   private

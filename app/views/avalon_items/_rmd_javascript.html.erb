@@ -2,11 +2,6 @@
   let popupVal = null;
 
   $(document).ready(function() {
-    // $('.accordion').accordion({
-    //     collapsible: true,
-    //     active: 0,
-    //     heightStyle: "content"
-    // });
     hookListeners();
   });
 
@@ -29,10 +24,6 @@
   response need to have event listeners installed after being added to the DOM.
    */
   function hookListeners() {
-    $("#access").change(function() {
-        let val = $(this).find("option:selected").attr('value');
-        ajaxAccess(val);
-    });
     hookNeedsReview();
     hookReviewCommentSlide();
     hookMarkReviewed();
@@ -44,6 +35,7 @@
     hookAddAvalonItemNote();
     hookAddRecordingNote();
     hookAddPerformanceNote();
+    hookAccessSelects();
   }
 
   function hookAddPerformanceNote() {
@@ -569,7 +561,7 @@
                       },
                       preConfirm: () => {
                           var name = $('#person_first_name').val().length > 0 || $('#person_last_name').val().length > 0;
-                          var dates = validFullOrYearEDTF($('#person_date_of_birth_edtf').val()) && validFullOrYearEDTF($('#person_date_of_death_edtf').val());
+                          var dates = validEdtfDate($('#person_date_of_birth_edtf').val()) && validEdtfDate($('#person_date_of_death_edtf').val());
                           var url = validURL($('#person_authority_source_url').val());
                           if (name && dates && url) {
                               return true;
@@ -645,7 +637,7 @@
                       },
                       preConfirm: () => {
                           let title = $('#work_title').val().length > 0;
-                          let dates =  validEdtfYear($('#work_publication_date').val()) && validEdtfYear($('#work_copyright_end_date').val());
+                          let dates =  validEdtfDate($('#work_publication_date').val()) && validEdtfDate($('#work_copyright_end_date').val());
                           let url = validURL($('#work_authority_source_url').val());
                           if (title && dates && url) {
                               return true;

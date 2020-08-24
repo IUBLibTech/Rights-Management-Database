@@ -17,8 +17,8 @@
         <%= f.text_field :alternative_titles, {type: "text", 'aria-describedby': "alternative titles"} %>
       </div>
       <div class="rvt-grid__item-4-md-up">
-        <label for="recordingTitle">Publication Year</label>
-        <%= f.text_field :publication_date_edtf, {type: "text", 'aria-describedby': "publication year", class: 'edtf'} %>
+        <label for="recordingTitle">Publication Date</label>
+        <%= f.text_field :publication_date_edtf, {type: "text", 'aria-describedby': "publication year", class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %>
       </div>
     </div>
     <div class="rvt-grid">
@@ -49,8 +49,8 @@
         <%= f.select :copyright_renewed, options_for_select([['Yes'],['No']], @work.copyright_renewed), {include_blank: '', 'aria-describedby': "copyright renewed"} %>
       </div>
       <div class="rvt-grid__item-4-md-up">
-        <label for="personNotes">Enters Public Domain</label>
-        <%= f.text_field :copyright_end_date_edtf, {type: "text", 'aria-describedby': "enter public domain" } %>
+        <label for="personNotes">Copyright End Date</label>
+        <%= f.text_field :copyright_end_date_edtf, {type: "text", 'aria-describedby': "enter public domain", class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)' } %>
       </div>
       <div class="rvt-grid__item-12">
         <label for="personNotes">Access Determination</label>
@@ -62,6 +62,25 @@
       </div>
     </div>
   </div>
+
+
+  <div class="work_people">
+    <h4>People Contributing to This Work</h4>
+    <div class="work_people_autocomplete_div">
+      <div>
+        <label for="">Last Name</label>
+        <%= text_field_tag "last_name", "", {type: "search", class: "autocomplete", autocomplete: "off", id: 'work_people_autocomplete'} %>
+      </div>
+      <%= render partial: 'people/autocomplete_work_person_tooltip' %>
+    </div>
+    <div id="work_people_div">
+      <% @work.people.each do |p| %>
+        <% @person = p %>
+        <%= render partial: 'people/ajax_work_person_form' %>
+      <% end %>
+    </div>
+  </div>
+
   <div>
     <p>Add this Work to the Avalon Item's structured metadata below</p>
   </div>

@@ -23,6 +23,8 @@ class Recording < ActiveRecord::Base
   accepts_nested_attributes_for :recording_notes, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :performances
 
+  before_save :edtf_dates
+
   UNITS = ["B-AAAI", "B-AAAMC", "B-AFRIST", "B-ALF", "B-ANTH", "B-ARCHIVES", "B-ASTR", "B-ATHBASKM", "B-ATHBASKW",
            "B-ATHFHOCKEY", "B-ATHFTBL", "B-ATHROWING", "B-ATHSOCCM", "B-ATHSOFTB", "B-ATHTENNM", "B-ATHVIDEO",
            "B-ATHVOLLW", "B-ATM", "B-BCC", "B-BFCA", "B-BUSSPEA", "B-CAC", "B-CDEL", "B-CEDIR", "B-CELCAR", "B-CELTIE",
@@ -42,6 +44,20 @@ class Recording < ActiveRecord::Base
 
   end
 
+  def edtf_dates
+    # copyright end date
+    date = Date.edtf(copyright_end_date_text.gsub('/', '-'))
+    self.copyright_end_date = date
+    puts "Set copyright_end_date to #{date}, calling self.copyright_end_date: #{self.copyright_end_date}"
 
+    # creation date
+    date = Date.edtf(creation_date_text.gsub('/', '-'))
+    self.creation_date = date
+    puts "Set creation_date to #{date}, calling self.creation_date: #{self.creation_date}"
 
+    # date of first pub
+    date = Date.edtf(date_of_first_publication_text.gsub('/', '-'))
+    self.date_of_first_publication = date
+    puts "Set date_of_first_publication to #{date}, calling self.date_of_first_publication: #{self.date_of_first_publication}"
+  end
 end

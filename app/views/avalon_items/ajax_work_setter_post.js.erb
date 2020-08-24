@@ -1,7 +1,6 @@
-location.reload();
-$(document).ready( function() {
-    swal.fire({
-        title: "Success",
-        text: "You have successfully updated the Work."
-    })
-});
+swal.fire({
+    title: "Update",
+    text: "You have successfully updated the Work. The page will now reload."
+}).then(function() {
+  location.reload();
+})

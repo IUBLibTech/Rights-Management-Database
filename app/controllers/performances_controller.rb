@@ -84,6 +84,15 @@ class PerformancesController < ApplicationController
     render partial: 'performances/ajax_show', locals: {performance: @performance}
   end
 
+  def ajax_access_determination
+    @performance = Performance.find(params[:id])
+    access = params[:access]
+    if AccessDeterminationHelper::ACCESS_DECISIONS.include? access
+      @saved = @performance.update_attributes(access_determination: access)
+    end
+    render text: "success"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_performance
@@ -92,6 +101,6 @@ class PerformancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def performance_params
-      params.require(:performance).permit(:location, :performance_date, :performance_date_string, :title, :notes, :in_copyright, :copyright_end_date, :access_determination)
+      params.require(:performance).permit(:location, :performance_date_string, :performance_date, :title, :notes, :access_determination)
     end
 end

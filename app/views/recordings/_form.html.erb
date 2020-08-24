@@ -40,15 +40,15 @@
     </tr>
     <tr>
       <th>Date of First Publication</th>
-      <td><%= f.text_field :date_of_first_publication, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
+      <td><%= f.text_field :date_of_first_publication, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Creation Date</th>
-      <td><%= f.text_field :creation_date, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
+      <td><%= f.text_field :creation_date, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Creation End Date</th>
-      <td><%= f.text_field :creation_end_date, class: 'edtf' %><span class="ui-icon ui-icon-help"></span></td>
+      <td><%= f.text_field :creation_end_date, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'}%><span class="ui-icon ui-icon-help"></span></td>
     </tr>
     <tr>
       <th>Country of First Publication</th>
@@ -63,8 +63,8 @@
       <td><%= f.select :in_copyright, [['', nil], ['Yes', true], ['No', false]] %></td>
     </tr>
     <tr>
-      <th>Enters Public Domain</th>
-      <td><%= f.text_field :copyright_end_date, class: 'year' %></td>
+      <th>Copyright End Date</th>
+      <td><%= f.text_field :copyright_end_date, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %></td>
     </tr>
     <% if @recording.avalon_item == 'B-ATM' %>
       <tr>

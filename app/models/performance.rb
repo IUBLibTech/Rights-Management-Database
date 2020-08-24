@@ -9,10 +9,22 @@ class Performance < ActiveRecord::Base
   has_many :avalon_items, through: :recordings
 
   accepts_nested_attributes_for :tracks
-  #before_save :normalize_date
 
-  def normalize_date
-    self.performance_date = Date.strptime(self.performance_date_string, "%m/%d/%Y")
+  before_save :edtf_dates
+  before_update :edtf_dates
+
+  def performance_date_string=(str)
+    super
+  end
+
+  def edtf_dates
+    if performance_date_string.nil?
+      self.performance_date = nil
+    else
+      date = Date.edtf(performance_date_string.gsub('/', '-'))
+      self.performance_date = date
+      puts "Set performance_date to #{date}, calling self.performance_date: #{self.performance_date}"
+    end
   end
 
 end

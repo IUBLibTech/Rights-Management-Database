@@ -2,46 +2,87 @@
   <i id="adder_close" class="fa fa-window-close" style="font-size:30px;float: right;"><span class=sr-only>close menu</span></i>
   <div id="adder_content"></div>
 </div>
-<h3 class="">
-  <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank", id: "foo"}) do %>
-    <span class="avalon_item_title rvt-text-bold">
-      <%= @avalon_item.title %>
-      <i class="fa fa-external-link xxsmall"><span class=sr-only>opens a new window</span></i>
-      <span class="">
-        <%= @avalon_item.rivet_button_badge %>
+<div class="title_div">
+  <%
+    @cl = User.current_user_copyright_librarian?
+    @msg = nil
+    case @avalon_item.review_state
+    when AvalonItem::REVIEW_STATE_DEFAULT
+      @msg = "Request Review"
+    when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+      @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+    when AvalonItem::REVIEW_STATE_WAITING_ON_CM
+      @msg = @cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
+    when AvalonItem::REVIEW_STATE_WAITING_ON_CL
+      @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
+    when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+      @msg = "Access Determined"
+    else
+      raise "How did we get to this ReviewState: #{@avalon_item.review_state}"
+    end
+  %>
+  <h3 class="">
+    <%= link_to(@atom_feed_read.avalon_item_url, {target: "_blank", id: "foo"}) do %>
+      <span class="avalon_item_title rvt-text-bold">
+        <%= @avalon_item.title %>
+        <i class="fa fa-external-link xxsmall"><span class=sr-only>opens a new window</span></i>
       </span>
+    <% end %>
+    <span class="avalon_item_title rvt-text-bold">
+      <%= @avalon_item.rivet_button_badge %>
     </span>
-  <% end %>
-</h3>
+    <div>
+        <% c = (@avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED ? "rvt-disabled-button" : 'rvt-button')  %>
+        <button id="mark_needs_reviewed" class='lower_tooltip <%= c %>' data-avalon-item-id=<%= @avalon_item.id %>>
+          <%= @msg %>
+          <% unless @avalon_item.review_comments.size == 0 %>
+            <div class="lower_tooltiptext">
+              <ul class="rvt-plain-list conversation">
+                <% @avalon_item.review_comments.order("id DESC").each do |c| %>
+                  <li class="<%= c.copyright_librarian? ? "cl_comment" : "cm_comment"%>">
+                    <b><%= c.creator %> (<%= c.created_at.strftime('%m/%d/%Y') %>)</b>: <%= c.comment %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </button>
+    </div>
+  </h3>
+</div>
 <div class="avalon_item_metadata">
-  <div id="access_div" class="display-flex">
-    <div class=rvt-grid__item-lg>
+  <div id="access_div">
+    <div>
       <label for=access>Access Determination:</label>
       <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
     </div>
-    <div class="rvt-grid__item-lg rightButton">
-      <%
-        @cl = User.current_user_copyright_librarian?
-        @msg = nil
-        case @avalon_item.review_state
-        when AvalonItem::REVIEW_STATE_DEFAULT
-          @msg = "Request Review"
-        when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
-          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
-        when AvalonItem::REVIEW_STATE_WAITING_ON_CM
-          @msg = @cl ? "Add Additional Comments" : "Respond to Copyright Librarian"
-        when AvalonItem::REVIEW_STATE_WAITING_ON_CL
-          @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
-        when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
-          @msg = "Access Determined"
-        else
-          raise "How did we get to this ReviewState: #{@avalon_item.review_state}"
-        end
-      %>
-      <%= render partial: 'avalon_item_buttons' %>
+    <div>
+      <label for=access>System Calculated Access Determination:</label><br>
+      <span id="sys_acc">
+        <%= @avalon_item.calc_access %>
+      </span>
     </div>
   </div>
-  <%= render partial: 'avalon_items/notes' %>
+  <div id="history_div">
+    <div class="rvt-dropdown">
+      <button type="button" class="rvt-button" data-dropdown-toggle="dropdown-navigation" aria-haspopup="true" aria-expanded="false" >
+        <span>History</span>
+        <svg aria-hidden="true" class="rvt-m-left-xs" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+          <path fill="currentColor" d="M8,12.46a2,2,0,0,1-1.52-.7L1.24,5.65a1,1,0,1,1,1.52-1.3L8,10.46l5.24-6.11a1,1,0,0,1,1.52,1.3L9.52,11.76A2,2,0,0,1,8,12.46Z"/>
+        </svg>
+      </button>
+      <div class="rvt-dropdown__menu" id="dropdown-navigation" aria-hidden="true" role="menu" >
+        <% @avalon_item.past_access_decisions.order("id DESC").each do |d| %>
+          <div class="past_access_dec_div noselect <%= d.copyright_librarian? ? 'cl_dec' : '' %>">
+            <%= d.decision %> (<%= d.changed_by %>: <%= d.created_at.strftime("%l:%M%p %Y/%m/%d") %> )
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="note_div">
+    <%= render partial: 'avalon_items/notes' %>
+  </div>
   <div id="recordings_div" class="rvt-p-all-sm bgGray">
     <h2>Recordings In This Avalon Item </h2>
     <% @avalon_item.recordings.each do |recording| %>
@@ -194,12 +235,9 @@
         <% unless @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED %>
         hookNeedsReview();
         <% end %>
-        hookReviewCommentSlide();
+        //hookReviewCommentSlide();
         hookAvalonNoteButton();
-        $("#access").change(function() {
-            let val = $(this).find("option:selected").attr('value');
-            ajaxAccess(val);
-        });
+        hookAccessSelects();
     });
 
     function ajaxAccess(decision) {
@@ -211,20 +249,53 @@
                 access: decision
             },
             success: function(response) {
-                swal.fire({
-                    title: 'Updated Record',
-                    html: "This Avalon Item was successfully updated"
-                }).then(function() {
-                    loadRmdMetadata();
-                })
+              swal.fire({
+	              title: 'Updated Record',
+	              text: "This Avalon Item's Access Determination was successfully updated."
+              })
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                swal.fire({
-                    title: "Error",
-                    heightAuto: false,
-                    type: 'error',
-                    html: "An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>"
-                })
+              reloadPage("Error","An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>")
+            }
+        })
+    }
+    function ajaxPerformanceAccess(performance_id, decision) {
+        $.ajax({
+            url: '<%= ajax_performance_access_determination_path %>',
+            method: "POST",
+            data: {
+                id: performance_id,
+                access: decision
+            },
+            success: function(response) {
+	            loadCalcedAccess();
+            	swal.fire({
+                title: 'Updated',
+                html: "This Performance's access determination was successfully updated"
+              })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            	reloadPage("Error", "An error occurred while trying to update the Performance's access determination. Please contact Andrew Albrecht")
+            }
+        })
+    }
+    function ajaxTrackAccess(performance_id, decision) {
+        $.ajax({
+            url: '<%= ajax_track_access_determination_path %>',
+            method: "POST",
+            data: {
+                id: performance_id,
+                access: decision
+            },
+            success: function(response) {
+	            loadCalcedAccess();
+              swal.fire({
+                title: 'Updated',
+                html: "This Track's access determination was successfully updated"
+              })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            	reloadPage("Error", "An error occurred while trying to set this Track's access determination. Please contact Andrew Albrecht")
             }
         })
     }

@@ -24,14 +24,15 @@ Rails.application.routes.draw do
   get '/atom_tester/json/:id', to: 'atom_feed_reader#read_json', as: 'atom_feed_read_json'
   get '/atom_tester/load_avalon_record/:id', to: 'atom_feed_reader#load_avalon_record', as: 'load_avalon_record'
 
-  # specify single barcode
-  post '/services/access_decision_by_barcode/:mdpi_barcode', to: 'services#access_decision_by_barcode', as: 'access_decision_by_barcode'
-  # specify json array of barcodes in request body
-  post '/services/access_decision_by_barcodes', to: 'services#access_decision_by_barcodes', as: 'access_decision_by_barcodes'
-  get '/services/access_decision_by_fedora_id/:fid', to: 'services#access_decision_by_fedora_id', as: 'access_decision_by_fedora_id'
-  get '/services/access_decisions_by_barcodes', to: 'services#access_decisions_by_barcodes', as: 'access_decisions_by_barcodes'
-  get '/services/access_decisions_by_fedora_ids', to: 'services#access_decisions_by_fedora_ids', as: 'access_decisions_by_fedora_ids'
-  get '/services/access_decisions_tester', to: 'test#test_access_decisions', as: 'test_access_decisions'
+  # # specify single barcode
+  # post '/services/access_decision_by_barcode/:mdpi_barcode', to: 'services#access_decision_by_barcode', as: 'access_decision_by_barcode'
+  # # specify json array of barcodes in request body
+  # post '/services/access_decision_by_barcodes', to: 'services#access_decision_by_barcodes', as: 'access_decision_by_barcodes'
+  # get '/services/access_decision_by_fedora_id/:fid', to: 'services#access_decision_by_fedora_id', as: 'access_decision_by_fedora_id'
+  # get '/services/access_decisions_by_barcodes', to: 'services#access_decisions_by_barcodes', as: 'access_decisions_by_barcodes'
+  # get '/services/access_decisions_by_fedora_ids', to: 'services#access_decisions_by_fedora_ids', as: 'access_decisions_by_fedora_ids'
+  # get '/services/access_decisions_tester', to: 'test#test_access_decisions', as: 'test_access_decisions'
+  get '/services/access_determination/:avalon_identifier', to: 'services#access_determination', as: 'access_determination'
 
   match '/signin', to: 'sessions#new', via: :get
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
   resources :works
 
   # ajax calls
-  get '/avalon_items/:id/rmd_metadata', to: 'avalon_items#ajax_rmd_metadata', as: 'ajax_avalon_item_rmd_metadata'
+  # get '/avalon_items/:id/rmd_metadata', to: 'avalon_items#ajax_rmd_metadata', as: 'ajax_avalon_item_rmd_metadata'
   post '/avalon_items/access_decision', to: 'avalon_items#ajax_post_access_decision', as: 'ajax_avalon_item_access_decision'
   post '/avalon_items/ajax_needs_review', to: 'avalon_items#ajax_post_needs_review', as: 'ajax_post_needs_review'
   post '/avalon_items/ajax_reviewed', to: 'avalon_items#ajax_post_reviewed', as: 'ajax_post_reviewed'
@@ -56,6 +57,8 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cm_waiting_on_cl', to: 'avalon_items#ajax_cm_waiting_on_cl', as: 'avalon_items_cm_waiting_on_cl'
   get '/avalon_items/ajax/cm_waiting_on_self', to: 'avalon_items#ajax_cm_waiting_on_self', as: 'avalon_items_cm_waiting_on_self'
   get '/avalon_items/ajax/cm_access_determined', to: 'avalon_items#ajax_cm_access_determined', as: 'avalon_items_cm_access_determined'
+  get '/avalon_items/ajax/calced_access_determination/:id', to: 'avalon_items#ajax_calced_access', as: 'ajax_avalon_item_calced_access'
+
   # new person
   get '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder', as: 'ajax_people_adder_get'
   post '/avalon_items/:id/ajax_people_adder', to: 'avalon_items#ajax_people_adder_post', as: 'ajax_people_adder_post'
@@ -64,6 +67,7 @@ Rails.application.routes.draw do
   post '/avalon_items/:id/ajax_people_setter/:pid', to: 'avalon_items#ajax_people_setter_post', as: 'ajax_people_setter_post'
   get '/avalon_items/:id/ajax_work_setter/:wid', to: 'avalon_items#ajax_work_setter', as: 'ajax_work_setter_get'
   post '/avalon_items/:id/ajax_work_setter/:wid', to: 'avalon_items#ajax_work_setter_post', as: 'ajax_work_setter_post'
+  get '/ajax/people/ajax_work_person_form', to: "people#ajax_work_person_form", as: 'ajax_work_person_form'
 
   get '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder', as: 'ajax_work_adder_get'
   post '/avalon_items/:id/ajax_work_adder', to: 'avalon_items#ajax_work_adder_post', as: 'ajax_work_adder_post'
@@ -85,9 +89,11 @@ Rails.application.routes.draw do
   get '/performances/ajax/new/:recording_id', to: 'performances#ajax_new_performance', as: 'ajax_new_performance'
   get '/performances/ajax/edit/:id', to: 'performances#ajax_edit_performance', as: 'ajax_edit_performance'
   get '/performances/ajax/show/:id', to: 'performances#ajax_show_performance', as: 'ajax_Show_performance'
+  post '/performances/ajax/access_determination', to: 'performances#ajax_access_determination', as: 'ajax_performance_access_determination'
 
   get '/tracks/ajax/new/:performance_id', to: 'tracks#ajax_new_track', as: 'ajax_new_track'
   get '/tracks/ajax/edit/:track_id', to: 'tracks#ajax_edit_track', as: 'ajax_edit_track'
+  post '/tracks/ajax/access_determination', to: 'tracks#ajax_access_determination', as: 'ajax_track_access_determination'
 
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
   post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'

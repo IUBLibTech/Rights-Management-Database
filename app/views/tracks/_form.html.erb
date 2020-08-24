@@ -20,8 +20,8 @@
       <%= f.select :in_copyright, options_for_select([['Yes', true],['No', false]], @track.in_copyright), {include_blank: ''} %>
     </div>
     <div class="rvt-grid__item-4-md-up">
-      <label for="entersPublicDomain">Enters Public Domain</label>
-      <%= f.text_field :copyright_end_date, {'aria-describedby': "copyrightEndDate"} %>
+      <label for="entersPublicDomain">Copyright End Date</label>
+      <%= f.text_field :copyright_end_date_text, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %>
     </div>
     <div class=rvt-grid__item-4-md-up>
       <label for=access>Access Determination:</label>

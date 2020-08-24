@@ -6,6 +6,7 @@ class AvalonItem < ActiveRecord::Base
   has_many :avalon_item_notes
   has_many :review_comments
   belongs_to :current_access_determination, class_name: 'PastAccessDecision', foreign_key: 'current_access_determination_id', autosave: true
+  has_many :tracks, through: :performances
 
   accepts_nested_attributes_for :performances
 
@@ -104,6 +105,25 @@ class AvalonItem < ActiveRecord::Base
   end
   def access_determined?
     review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+  end
+
+  # determines the most restrictive access of any constituents of this Avalon Item (Recordings, Tracks, People, Works)
+  def calc_access
+    perf_acc = performances.collect{|p| p.access_determination }
+    track_acc = tracks.collect{|t| t.access_determination }
+    work_acc = tracks.collect{|t| t.works }.flatten.uniq.collect{|w| w.access_determination }
+    all = (perf_acc + track_acc + work_acc).uniq
+    if all.include? AccessDeterminationHelper::RESTRICTED_ACCESS
+      AccessDeterminationHelper::RESTRICTED_ACCESS
+    elsif all.include? AccessDeterminationHelper::IU_ACCESS
+      AccessDeterminationHelper::IU_ACCESS
+    elsif all.include? AccessDeterminationHelper::DEFAULT_ACCESS
+      AccessDeterminationHelper::DEFAULT_ACCESS
+    elsif all.include? AccessDeterminationHelper::WORLD_WIDE_ACCESS
+      AccessDeterminationHelper::WORLD_WIDE_ACCESS
+    else
+      AccessDeterminationHelper::DEFAULT_ACCESS
+    end
   end
 
   def rivet_button_badge

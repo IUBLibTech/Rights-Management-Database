@@ -76,6 +76,7 @@ function addPersonForm(e) {
             hookPeopleAutocomplete();
             hookPeopleEntity();
             hookMassAssigners();
+            hookEdtfValidation();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -125,6 +126,7 @@ function setPersonForm(person_id) {
             hookPeopleAutocomplete();
             hookPeopleEntity();
             hookMassAssigners();
+            hookEdtfValidation();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -357,6 +359,7 @@ function addWorkForm(e) {
                 showOverlay();
             };
             hookWorkAutocomplete();
+            hookEdtfValidation();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -403,6 +406,8 @@ function setWorkForm(work_id) {
                 showOverlay();
             }
             hookWorkAutocomplete();
+            hookWorkPeopleRemoval();
+            hookEdtfValidation();
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -479,6 +484,57 @@ function hookWorkAutocomplete() {
             return false;
         }
     });
+    $('#work_people_autocomplete').autocomplete({
+	    minLength: 2,
+	    source: function(request, response) {
+		    let el = $('#work_people_autocomplete_summary');
+		    if (el.is(":visible")) {
+			    el.toggle();
+		    }
+		    let url = "../people/ajax/autocomplete";
+		    $.ajax({
+			    url: url,
+			    dataType: "json",
+			    data: {
+				    term: request.term,
+			    },
+			    success: function(data) {
+				    response(data)
+			    },
+			    error: function(jqXHR, textStatus, errorThrown) {
+				    swal({
+					    title: 'Ajax Error',
+					    text: 'An error occurred while auto-completing the Last Name field. If this problem persists, please contact Sherri Michaels or Andrew Albrecht.'
+				    });
+			    }
+		    });
+	    },
+	    focus: function (event, person) {
+		    $('#ac_full_name').text(person.item.label);
+		    $('#ac_dob').text(person.item.date_of_birth_edtf);
+		    $('#ac_dod').text(person.item.date_of_death_edtf);
+		    $('#ac_pob').text(person.item.place_of_birth);
+		    $('#ac_aka').text(person.item.aka);
+		    $('#ac_auth').text(person.item.authority_source);
+		    $('#ac_auth_url').text(person.item.authority_source_url);
+		    $('#ac_notes').text(person.item.notes);
+
+		    let el = $('#autocomplete_work_person_summary');
+		    if (el.is(":hidden")) {
+			    el.toggle();
+		    }
+		    return false;
+	    },
+	    select: function (event, person) {
+		    let el = $('#autocomplete_work_person_summary');
+		    if (el.is(":visible")) {
+			    el.toggle();
+		    }
+		    addWorkPerson(person.item);
+		    $(this).val('');
+		    return false;
+	    }
+    })
     $('#title').focusout(function(event) {
         let el = $('#work_autocomplete_summary');
         if (el.is(":visible")) {
@@ -489,27 +545,30 @@ function hookWorkAutocomplete() {
         return false;
     });
 }
-// function createWork() {
-//     $('form#new_work').ajaxSuccess(function(e, data, status, xhr) {
-//         location.reload();
-//     }).ajaxError( function(xhr, status, error) {
-//         swal.fire({
-//             title: "Ajax Error",
-//             text: xhr.responseText
-//         })
-//     });
-// }
-// function toggleOverlay(el) {
-//     if (el.attr("data-animation-offscreen") === "true") {
-//         el.animate({left: "50%"}, 400);
-//         el.attr("data-animation-offscreen", "false");
-//         $('#main_content').animate({'max-width': '50%'}, 400);
-//     } else {
-//         el.animate({left: "100%"}, 400);
-//         el.attr("data-animation-offscreen", "true");
-//         $('#main_content').animate({'max-width': '100%'}, 400);
-//     }
-// }
+function addWorkPerson(person) {
+	let el = $('div.people');
+	$.ajax({
+		url: "../ajax/people/ajax_work_person_form",
+		data: {"id": person.id},
+		success: function (result) {
+			$('#work_people_div').append(result);
+			hookWorkPeopleRemoval();
+		},
+		error: function (xhr, status, error) {
+			swal.fire({
+				icon: '',
+				title: "Ajax Error trying to add an Avalon Item Note",
+				text: xhr.responseText
+			});
+		}
+	});
+}
+
+function hookWorkPeopleRemoval() {
+	$('.workPersonRemover').off('click').click(function(event) {
+		$("#"+$(this).attr('data-remove-target')).remove();
+	})
+}
 
 function overlayOnscreen() {
     let val = $('#adder_overlay').attr('data-animation-offscreen');
@@ -563,6 +622,7 @@ function hookAvalonNoteButton() {
                     data: {text: result.value},
                     success: function (result) {
                         $('#avalon_item_notes').html(result);
+                        hookAvalonNoteButton();
                     },
                     error: function (xhr, status, error) {
                         swal.fire({
@@ -576,6 +636,22 @@ function hookAvalonNoteButton() {
         })
     });
 }
+function hookAccessSelects() {
+    $("#access").unbind("change").change(function() {
+        let val = $(this).find("option:selected").attr('value');
+        ajaxAccess(val);
+    });
+    $('.performance_access_select').unbind("change").change(function() {
+        let id = $(this).attr('data-performance-id');
+        let val = $(this).find("option:selected").attr('value');
+        ajaxPerformanceAccess(id, val);
+    });
+    $('.track_access_select').unbind("change").change(function() {
+        let id = $(this).attr('data-track-id');
+        let val = $(this).find("option:selected").attr('value');
+        ajaxTrackAccess(id, val);
+    });
+}
 function rehookButtons() {
     $(".editRecordingButton").unbind('click', editRecording).click(editRecording);
     $('.createPerformanceButton').unbind('click', loadNewPerformance).click(loadNewPerformance);
@@ -585,6 +661,7 @@ function rehookButtons() {
     $('.createTrackButton').unbind('click', createNewTrack).click(createNewTrack);
     $('.editTrackButton').unbind('click', loadEditTrackForm).click(loadEditTrackForm);
     $('.deleteTrackButton').unbind('click', deleteTrack).click(deleteTrack);
+    hookAccessSelects();
 }
 /** AJAX functionality for editing Recording metadata **/
 function hookEditRecordings() {
@@ -615,6 +692,7 @@ function deletePerformance(event) {
                     method: 'DELETE',
                     success: function (result) {
                         $('.perf_div[data-performance-id=' + performanceId + ']').remove();
+                        loadCalcedAccess();
                     },
                     error: function (xhr, status, error) {
                         swal.fire({
@@ -629,7 +707,7 @@ function deletePerformance(event) {
     } else {
         swal.fire({
             title: "Cannot Delete Performance",
-            text: "Performances with Tracks and cannot be deleted. Delete all tracks first.",
+            text: "Performances with Tracks cannot be deleted. You must first delete all tracks.",
             icon: 'warning',
         })
     }
@@ -649,6 +727,7 @@ function loadEditRecordingForm(recordingId) {
                 submitRecordingEditResponse(recordingId, e, data, status, xhr);
             });
             rehookButtons();
+            hookEdtfValidation();
         },
         error: function(xhr,status,error) {
             swal.fire({
@@ -680,6 +759,7 @@ function submitRecordingEditResponse(recordingId, e, data, status, xhr) {
     $(".recording_div[data-recording-id="+recordingId+"]").replaceWith(xhr.responseText);
     rehookButtons();
     rehookAccordion();
+    loadCalcedAccess();
 }
 /** END AJAX functionality for editing Recordings **/
 
@@ -698,7 +778,8 @@ function loadNewPerformanceForm(recordingId) {
             });
             newForm.find('.performanceCreateCancelButton').click(function() {
                 newForm.remove();
-            })
+            });
+            hookEdtfValidation();
         },
         error: function(xhr,status,error) {
             swal.fire({
@@ -713,6 +794,7 @@ function submitNewPerformanceResponse(recordingId, e, data, status, xhr) {
     $(e.target).parent().replaceWith(xhr.responseText);
     rehookButtons();
     rehookAccordion();
+    loadCalcedAccess();
 }
 function loadEditPerformanceForm(event) {
     let performanceId = event.target.getAttribute('data-performance-id');
@@ -725,7 +807,8 @@ function loadEditPerformanceForm(event) {
             });
             $('form#edit_performance_'+performanceId).on("ajax:success", function(e, data, status, xhr) {
                 submitPerformanceEditResponse(performanceId, e, data, status, xhr);
-            })
+            });
+            hookEdtfValidation();
         },
         error: function(xhr,status,error) {
             swal.fire({
@@ -757,6 +840,7 @@ function submitPerformanceEditResponse(performanceId, e, data, status, xhr) {
     $(".edit_performance_div[data-performance-id="+performanceId+"]").replaceWith(xhr.responseText);
     rehookButtons();
     rehookAccordion();
+    loadCalcedAccess();
 }
 /** END AJAX functionality for editing Performances */
 
@@ -765,18 +849,18 @@ function hookRequestReviewButton() {
     $('#mark_needs_reviewed').click('');
 }
 
-function hookReviewCommentSlide() {
-    $('#mark_needs_reviewed').hoverIntent(function() {
-        let toggle = $('.toggle');
-        if ( !toggle.is(":animated") ) {
-            if (toggle.is(":visible")) {
-                toggle.slideUp(200);
-            } else {
-                toggle.slideDown(200)
-            }
-        }
-    });
-}
+// function hookReviewCommentSlide() {
+//     $('#mark_needs_reviewed').hoverIntent(function() {
+//         let toggle = $('.toggle');
+//         if ( !toggle.is(":animated") ) {
+//             if (toggle.is(":visible")) {
+//                 toggle.slideUp(200);
+//             } else {
+//                 toggle.slideDown(200)
+//             }
+//         }
+//     });
+// }
 /** END AJAX functionality for CL/CM review comments history */
 /** AJAX functionality for Tracks */
 function hookCreateTrackButtons() {
@@ -795,7 +879,8 @@ function createNewTrack(event) {
             });
             newForm.find('.trackCreateCancelButton').click(function() {
                 newForm.remove();
-            })
+            });
+            hookEdtfValidation();
         },
         error: function(xhr,status,error) {
             swal.fire({
@@ -807,15 +892,19 @@ function createNewTrack(event) {
     })
 }
 function submitNewTrackResponse(performanceId, event, data, status, xhr) {
-    if (status === "success") {
-        let target = $(event.target);
-        let parent = target.parent();
-        parent.append(xhr.responseText);
-        target.remove();
-        rehookButtons();
-    } else {
+	if (status === "success") {
+      let target = $(event.target);
+      let parent = target.parent();
+      parent.append(xhr.responseText);
+      target.remove();
+      rehookButtons();
+      hookAccessSelects();
+	    loadCalcedAccess();
+      // disabled Performance button
+      parent.closest('.perf_div').find('.deletePerformanceButton').addClass('rvt-disabled-button').removeClass('rvt-button')
+  } else {
 
-    }
+	}
 }
 function hookEditTrackButtons() {
     $('.editTrackButton').click(loadEditTrackForm);
@@ -832,6 +921,7 @@ function loadEditTrackForm(event) {
             $('form#edit_track_'+trackId).on("ajax:success", function(e, data, status, xhr) {
                 submitTrackEditResponse(trackId, e, data, status, xhr);
             })
+            hookEdtfValidation();
         },
         error: function(xhr,status,error) {
             swal.fire({
@@ -843,15 +933,15 @@ function loadEditTrackForm(event) {
     })
 }
 function submitTrackEditResponse(trackId, event, data, status, xhr) {
-    if (status === "success") {
-        $(event.target).replaceWith(xhr.responseText);
-        rehookButtons();
-        rehookAccordion();
-    } else {
+  if (status === "success") {
+    $(event.target).replaceWith(xhr.responseText);
+    rehookButtons();
+    rehookAccordion();
+    loadCalcedAccess();
+  } else {
 
-    }
+  }
 }
-
 function cancelTrackEdit(trackId) {
     $.ajax({
         url: '../tracks/'+trackId,
@@ -875,30 +965,70 @@ function hookDeleteTrackButtons() {
     $('.deleteTrackButton').click(deleteTrack)
 }
 function deleteTrack(event) {
-    Swal.fire({
-        title: 'Confirm Track Delete',
-        text: "Are you sure you want to permanently delete this Track?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#006298',
-        confirmButtonText: 'Delete'
-    }).then((result) => {
-        if (result.value) {
-            let trackId = $(event.target).attr('data-track-id');
-            $.ajax({
-                url: '../tracks/' + trackId,
-                method: 'DELETE',
-                success: function (result) {
-                    $('.track_div[data-track-id=' + trackId + ']').remove();
-                },
-                error: function (xhr, status, error) {
-                    swal.fire({
-                        icon: 'warning',
-                        title: "Ajax Error trying to delete Track",
-                        text: xhr.responseText
-                    })
-                }
-            })
-        }
+  let perf_div = $(event.target).closest('.perf_div')
+  let work_count = $(event.target).closest('.track_div').find('.work').length;
+  let people_count = $(event.target).closest('.track_div').find('.person').length;
+  if (work_count + people_count > 0) {
+    swal.fire({
+      title: "Cannot Delete Track",
+      text: "Tracks with Works and/or People cannot be deleted. You must first remove all Work and People associations.",
+      icon: 'warning',
     })
+  } else {
+    Swal.fire({
+	    title: 'Confirm Track Delete',
+	    text: "Are you sure you want to permanently delete this Track?",
+	    icon: 'warning',
+	    showCancelButton: true,
+	    confirmButtonColor: '#006298',
+	    confirmButtonText: 'Delete'
+    }).then((result) => {
+	    if (result.value) {
+		    let trackId = $(event.target).attr('data-track-id');
+		    $.ajax({
+			    url: '../tracks/' + trackId,
+			    method: 'DELETE',
+			    success: function (result) {
+				    $('.track_div[data-track-id=' + trackId + ']').remove();
+				    // finally check to see if we can enable to the Performance delete button
+				    let track_count = perf_div.find('.track_div').size()
+				    if (track_count === 0) {
+					    perf_div.find('button.deletePerformanceButton').removeClass('rvt-disabled-button').addClass('rvt-button');
+				    }
+				    loadCalcedAccess();
+			    },
+			    error: function (xhr, status, error) {
+				    swal.fire({
+					    icon: 'warning',
+					    title: "Ajax Error trying to delete Track",
+					    text: xhr.responseText
+				    })
+			    }
+		    })
+	    }
+    });
+  }
+}
+
+function loadCalcedAccess() {
+	$.ajax({
+		url: './ajax/calced_access_determination/'+avalon_item_id,
+		method: 'GET',
+		success: function(result) {
+			$('#sys_acc').html(result);
+		},
+		error: function(xhr, status, error) {
+			reloadPage("Error", "An error occurred while trying to load the System Calculated Access Determination. Please contact Andrew Albrecht.")
+		}
+	})
+}
+function reloadPage(title='Reloading', msg="The Avalon Item will reload.") {
+	swal.fire({
+		title: title,
+		html: msg
+	}).then(function() {
+		$('body').fadeOut("400", function() {
+			location.reload();
+		});
+	})
 }

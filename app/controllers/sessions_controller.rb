@@ -28,6 +28,7 @@ class SessionsController < ActionController::Base
     request.ssl_version = :TLSv1_2
     response = request.get("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
     @resp = response.body
+    puts "CAS Response: #{@resp}"
     if @resp.slice(0,3) == 'yes'
       @resp_true = @resp.slice(0,3)
       @nlength=@resp.length - 7

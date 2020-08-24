@@ -24,9 +24,14 @@ class AvalonItemsController < ApplicationController
   def update
   end
 
-  def ajax_rmd_metadata
-    @avalon_item = AvalonItem.find(params[:id])
-    render partial: 'avalon_items/rmd_metadata'
+  # def ajax_rmd_metadata
+  #   @avalon_item = AvalonItem.find(params[:id])
+  #   render partial: 'avalon_items/rmd_metadata'
+  # end
+
+  def ajax_calced_access
+    ai = AvalonItem.find(params[:id])
+    render text: ai.calc_access
   end
 
   def ajax_post_access_decision
@@ -260,7 +265,8 @@ class AvalonItemsController < ApplicationController
           e.update!(interviewer: true)
         end
         add_interviewee_ids = track_interviewee_ids - existing_interviewees.pluck(:id)
-        add_interviewee_ids.each do |i|
+        add_interviewee_ids.each do |i|bugs
+
           e = existing_tcp.where(track_id: i).first
           if e.nil?
             e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
@@ -374,6 +380,11 @@ class AvalonItemsController < ApplicationController
         delete.each do |tid|
           TrackWork.where(track_id: tid, work_id: @work.id).delete_all
         end
+        # process people:
+        # need to re-save @work as any NEW people are enqueued into @work.work_contributor_people and the save results in the
+        # new work contributor people persisting in the database
+        process_work_contributors
+        @updated = @work.save
       end
       if @updated
         format.html { redirect_to @avalon_item, notice: 'Work successfully updated' }
@@ -400,6 +411,7 @@ class AvalonItemsController < ApplicationController
         new_ones.each do |t|
           @work.track_works << TrackWork.new(track_id: t.to_i, work_id: @work.id)
         end
+        process_work_contributors
       end
       @work.save!
       respond_to do |format|
@@ -439,6 +451,29 @@ class AvalonItemsController < ApplicationController
         :first_name, :middle_name, :last_name, :date_of_birth_edtf, :date_of_death_edtf, :place_of_birth,
     :authority_source, :authority_source_url, :aka, :notes, :entity, :company_name, :entity_nationality
     )
+  end
+
+  def process_work_contributors
+    # now handle any additions/subtractions from the work contributors
+    existing_contributors = @work.people
+    existing_contributor_ids = existing_contributors.collect{|p| p.id}
+    form_people_ids = params[:work_people].blank? ? [] : params[:work_people].keys.map(&:to_i)
+    # people ids that appear in the form but are not already associated with the work
+    new_people_ids = form_people_ids - existing_contributor_ids
+    new_people_ids.each do |pid|
+      roles = params[:work_people][pid.to_s]
+      wc = WorkContributorPerson.new(work_id: @work.id, person_id: pid, principle_creator: roles.keys.include?("principle_creator"), contributor: roles.keys.include?("contributor"))
+      @work.work_contributor_people << wc
+    end
+    # people ids that appear in the form AND currently exist on the work may have had their roles change
+    existing_people_ids = existing_contributor_ids & form_people_ids
+    existing_people_ids.each do |pid|
+      roles = params[:work_people][pid.to_s]
+      WorkContributorPerson.where(work_id: @work.id, person_id: pid).update_all(principle_creator: roles.keys.include?("principle_creator"), contributor: roles.keys.include?("contributor"))
+    end
+    # existing contributors that DO NOT appear in the form have had their associations remove, delete these
+    remove_contributors = existing_contributor_ids - form_people_ids
+    WorkContributorPerson.where(work_id: @work.id, person_id: remove_contributors).delete_all
   end
 
   # all recording ids that @person contributes to in SOME way

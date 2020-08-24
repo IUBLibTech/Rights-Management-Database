@@ -1,16 +1,15 @@
-<p id="notice"><%= notice %></p>
-<table>
+<p id="notice"><%= notice %>
+<h3>
+  Work: <span class="avalon_item_title rvt-text-bold" style="color: #006298"><%= @work.title %></span>
+</h3>
+<table class="rvt-table-compact">
   <tbody>
-  <tr>
-    <th>Title</th>
-    <td><%= @work.title %></td>
-  </tr>
   <tr>
     <th>Alternative Titles</th>
     <td><%= @work.alternative_titles %></td>
   </tr>
   <tr>
-    <th>Publication Year</th>
+    <th>Publication Date</th>
     <td><%= @work.publication_date_edtf %></td>
   </tr>
   <tr>
@@ -49,5 +48,13 @@
       <%= @work.notes %>
     </td>
   </tr>
+  </tbody>
+</table>
+<h4>Appears on these Avalon Items</h4>
+<table class="rvt_table_compact">
+  <tbody>
+  <% @work.avalon_items.each do |ai| %>
+    <tr><td><%= link_to "#{ai.title}", avalon_item_path(ai.id) %></td></tr>
+  <% end %>
   </tbody>
 </table>

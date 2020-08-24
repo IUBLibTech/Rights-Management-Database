@@ -4,7 +4,7 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.json
   def index
-    @works = Work.all
+    @works = Work.includes(:avalon_items).all
   end
 
   # GET /works/1
@@ -33,7 +33,6 @@ class WorksController < ApplicationController
           AvalonItemWork.new(work_id: @work.id, avalon_item_id: params[:avalon_item_id].to_i).save
         end
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
-        format.js {}
         format.json { render text: "success"}
       else
         format.html { render :new }
@@ -59,10 +58,15 @@ class WorksController < ApplicationController
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy
-    @work.destroy
-    respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
-      format.json { head :no_content }
+    if @work.avalon_items.size > 0
+      respond_to do |format|
+        format.html { redirect_to works_url, notice: "The Work <i>#{@work.title}</i> cannot be destroyed because it is currently associated with Avalon Items".html_safe }
+      end
+    else
+      @work.destroy
+      respond_to do |format|
+        format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+      end
     end
   end
 
