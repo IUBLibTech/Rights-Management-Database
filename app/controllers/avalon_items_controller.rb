@@ -41,8 +41,13 @@ class AvalonItemsController < ApplicationController
       if is_less_restrictive_than?(params[:access], last_decision&.decision) || User.current_user_copyright_librarian?
         pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
         @avalon_item.past_access_decisions << pad
-        rs = pad.decision != AccessDeterminationHelper::DEFAULT_ACCESS ? AvalonItem::REVIEW_STATE_ACCESS_DETERMINED : AvalonItem::REVIEW_STATE_DEFAULT
-        @avalon_item.update_attributes!(reviewed: pad.decision != AccessDeterminationHelper::DEFAULT_ACCESS, review_state: rs)
+        # someone reset the review status on the item and has initiated a re-review
+        if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
+          @avalon_item.update_attributes!(reviewed: false, needs_review: true, review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
+        # someone set some access determination other than Default (not reviewed) so mark record reviewed
+        else
+          @avalon_item.update_attributes!(reviewed: true, needs_review: false, review_state: pad.decision)
+        end
         render text: "success"
       else
         render text: "Cannot set access to something less restrictive than last Copyright Librarian access determination", status: 400
@@ -68,14 +73,14 @@ class AvalonItemsController < ApplicationController
             @msg = "Only a collection manager can request review of an item. (You are currently flagged as a Copyright Librarian)"
           elsif cl
             comment = ReviewComment.new(avalon_item_id: @avalon_item.id, creator: creator, copyright_librarian: cl, comment: params[:comment])
-            @avalon_item.update_attributes!(reviewed: params[:reviewed], review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
-            @msg = "The collection manager will be notified of your review/comment."
+            @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
+            @msg = "The collection manager will be notified of your comment."
             comment.save!
           else
             comment = ReviewComment.new(avalon_item_id: @avalon_item.id, creator: creator, copyright_librarian: cl, comment: params[:comment])
             # differentiate between the FIRST request to review something, and subsequent responses from the CM that provide more information to the CL
             rs = @avalon_item.needs_review ? AvalonItem::REVIEW_STATE_WAITING_ON_CL : AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
-            @avalon_item.update_attributes!(needs_review: true, review_state: rs)
+            @avalon_item.update_attributes!(reviewed: false, needs_review: true, review_state: rs)
             @msg = "The copyright librarian will be notified of your request/comment."
             comment.save!
           end
@@ -103,10 +108,10 @@ class AvalonItemsController < ApplicationController
         ReviewComment.transaction do
           comment.save!
           if cl
-            @avalon_item.update_attributes!(reviewed: params[:reviewed], review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
+            @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
             @msg = "The collection manager will be notified of your review/comment."
           else
-            @avalon_item.update_attributes!(needs_review: true, review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CL)
+            @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CL)
             @msg = "The copyright librarian will be notified of your request/comment."
           end
         end
@@ -151,6 +156,10 @@ class AvalonItemsController < ApplicationController
   end
   def ajax_cl_waiting_on_self
     @avalon_items = AvalonItem.cl_waiting_on_self
+    render partial: 'nav/cl_avalon_items_table'
+  end
+  def ajax_cl_access_determined
+    @avalon_items = AvalonItem.joins(:past_access_decisions).where(past_access_decisions: {copyright_librarian: true}).uniq
     render partial: 'nav/cl_avalon_items_table'
   end
   def ajax_cl_waiting_on_cm

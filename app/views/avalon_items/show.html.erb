@@ -8,7 +8,11 @@
     @msg = nil
     case @avalon_item.review_state
     when AvalonItem::REVIEW_STATE_DEFAULT
-      @msg = "Request Review"
+      if @avalon_item.reviewed?
+        @msg = "Request Re-Review"
+      else
+        @msg = "Request Review"
+      end
     when AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
       @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
     when AvalonItem::REVIEW_STATE_WAITING_ON_CM

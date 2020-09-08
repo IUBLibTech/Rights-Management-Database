@@ -594,8 +594,11 @@ a:link, a:focus, a:visited, a:active {
     color: #900;
     font-weight: 700;
 }
-#mdpi_barcode_input, #mdpi_barcode_button {
+#search_input, #search_button {
     height: 1.5rem;
+}
+#search_input {
+    margin-right: 4px;
 }
 .tooltip {
     position: relative;
@@ -815,4 +818,11 @@ ul.roles > li {
 .notice {
     color: green;
     font-weight: 700;
+}
+.left_kids {
+    overflow: auto;
+    display: flex;
+}
+.left_kids > * {
+
 }

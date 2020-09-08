@@ -12,11 +12,17 @@
     <tr>
       <td>
         <% if avalon_item.initial_review? %>
-          <span class="rvt-badge rvt-badge--info pointer">Initial Review</span>
+          <% if avalon_item.any_determinations? %>
+            <span class="rvt-badge rvt-badge--info pointer">Re-Review</span>
+          <% else %>
+            <span class="rvt-badge rvt-badge--info pointer">Initial Review</span>
+          <% end %>
         <% elsif avalon_item.needs_cm_info? %>
           <span class="rvt-badge rvt-badge--warning">Needs Information</span>
         <% elsif avalon_item.needs_cl_info? %>
           <span class="rvt-badge rvt-badge--danger">Responses</span>
+        <% elsif avalon_item.cl_determined? %>
+          <span class="rvt-badge rvt-badge--success">Access Determined</span>
         <% else %>
           <i>missing badge?</i>
         <% end %>

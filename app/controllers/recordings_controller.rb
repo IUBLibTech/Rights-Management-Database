@@ -107,7 +107,7 @@ class RecordingsController < ApplicationController
     def recording_params
       params.require(:recording).permit(
           :access_determination, :title, :description, :format, :published, :date_of_first_publication, :date_of_first_publication_text,
-          :creation_date, :creation_date_text, :creation_end_date, :country_of_first_publication, :in_copyright,
+          :creation_date, :creation_date_text, :creation_end_date, :country_of_first_publication, :in_copyright, :commercial,
           :copyright_end_date, :copyright_end_date_text, :receipt_of_will_before_90_days_of_death,
           :authority_source, :authority_source_url,
           recording_notes_attributes: [:id, :creator, :text, :_destroy]

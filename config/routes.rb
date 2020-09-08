@@ -15,8 +15,12 @@ Rails.application.routes.draw do
   end
   resources :tracks
 
-  post '/nav/search', to: 'nav#mdpi_barcode_search', as: "mdpi_barcode_search"
+  get '/nav/search', to: 'nav#search', as: "search"
+  get '/date_search', to: 'nav#date_search_get', as: 'date_search_get'
+  post '/date_search', to: 'nav#date_search_post', as: 'date_search_post'
+
   get '/nav/test', to: 'nav#test', as: 'nav_test'
+  get '/atom_tester/search', to: 'atom_feed_reader#search', as: 'atom_feed_search'
 
   get '/atom_tester', to: 'atom_feed_reader#index', as: 'atom_feed_tester'
   get '/atom_tester/prepopulate', to: 'atom_feed_reader#prepopulate', as: 'atom_feed_prepopulate'
@@ -76,7 +80,8 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cl_all', to: 'avalon_items#ajax_all_cl_items', as: 'ajax_avalon_cl_all'
   get '/avalon_items/ajax/cl_initial_review', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_initial_review'
   get '/avalon_items/ajax/cl_waiting_on_cm', to: 'avalon_items#ajax_cl_waiting_on_cm', as: 'avalon_items_cl_waiting_on_cm'
-  get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_initial_review', as: 'avalon_items_cl_waiting_on_self'
+  get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_waiting_on_self', as: 'avalon_items_cl_waiting_on_self'
+  get '/avalon_items/ajax/cl_access_determined', to: 'avalon_items#ajax_cl_access_determined', as: 'avalon_items_cl_access_determined'
 
   get 'recordings/ajax/edit/:id', to: 'recordings#ajax_edit', as: 'ajax_edit_recording'
   get 'recordings/ajax/show/:id', to: 'recordings#ajax_show', as: 'ajax_show_recording'

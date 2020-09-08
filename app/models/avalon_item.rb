@@ -103,8 +103,9 @@ class AvalonItem < ActiveRecord::Base
   def needs_cm_info?
     needs_review && !reviewed && review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM
   end
+
   def access_determined?
-    review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+    reviewed
   end
 
   # determines the most restrictive access of any constituents of this Avalon Item (Recordings, Tracks, People, Works)
@@ -126,44 +127,58 @@ class AvalonItem < ActiveRecord::Base
     end
   end
 
+  def cl_determined?
+    past_access_decisions.where(copyright_librarian: true).any?
+  end
+
+  def any_determinations?
+    past_access_decisions.where.not(decision: AccessDeterminationHelper::DEFAULT_ACCESS).any?
+  end
+
   def rivet_button_badge
     text = ""
     css = ""
-    if User.current_user_copyright_librarian?
-      case review_state
-      when REVIEW_STATE_DEFAULT
-        return ""
-      when REVIEW_STATE_REVIEW_REQUESTED
-        text = "Initial Review"
-        css = "rvt-badge rvt-badge--info"
-      when REVIEW_STATE_WAITING_ON_CM
-        text = "Needs Information"
-        css = "rvt-badge rvt-badge--warning"
-      when REVIEW_STATE_WAITING_ON_CL
-        text = "Responses"
-        css = "rvt-badge rvt-badge--danger"
-      else
-        return ""
-      end
+    if reviewed?
+      text = "Access Determined"
+      css = "rvt-badge rvt-badge--success"
     else
-      case review_state
-      when REVIEW_STATE_DEFAULT
-        text = "Default Access"
-        css = "rvt-badge rvt-badge--info"
-      when REVIEW_STATE_REVIEW_REQUESTED
-        text = "Review Requested"
-        css = "rvt-badge rvt-badge--warning"
-      when REVIEW_STATE_WAITING_ON_CM
-        text = "Responses"
-        css = "rvt-badge rvt-badge--danger"
-      when REVIEW_STATE_WAITING_ON_CL
-        text = "Review Requested"
-        css = "rvt-badge rvt-badge--warning"
-      when REVIEW_STATE_ACCESS_DETERMINED
-        text = "Access Determined"
-        css = "rvt-badge rvt-badge--success"
+      if User.current_user_copyright_librarian?
+        case review_state
+        when REVIEW_STATE_DEFAULT
+          text = "Default Access"
+          css = "rvt-badge rvt-badge--info"
+        when REVIEW_STATE_REVIEW_REQUESTED
+          text = (any_determinations? ? "Re-Review" : "Initial Review")
+          css = "rvt-badge rvt-badge--info"
+        when REVIEW_STATE_WAITING_ON_CM
+          text = "Needs Information"
+          css = "rvt-badge rvt-badge--warning"
+        when REVIEW_STATE_WAITING_ON_CL
+          text = "Responses"
+          css = "rvt-badge rvt-badge--danger"
+        else
+          return ""
+        end
       else
-        return ""
+        case review_state
+        when REVIEW_STATE_DEFAULT
+          text = "Default Access"
+          css = "rvt-badge rvt-badge--info"
+        when REVIEW_STATE_REVIEW_REQUESTED
+          text = "Review Requested"
+          css = "rvt-badge rvt-badge--warning"
+        when REVIEW_STATE_WAITING_ON_CM
+          text = "Responses"
+          css = "rvt-badge rvt-badge--danger"
+        when REVIEW_STATE_WAITING_ON_CL
+          text = "Review Requested"
+          css = "rvt-badge rvt-badge--warning"
+        when REVIEW_STATE_ACCESS_DETERMINED
+          text = "Access Determined"
+          css = "rvt-badge rvt-badge--success"
+        else
+          return ""
+        end
       end
     end
     "<span class='#{css}'>#{text}</span>".html_safe

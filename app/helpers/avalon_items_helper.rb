@@ -17,7 +17,8 @@ module AvalonItemsHelper
       barcodes.each do |bc|
         recording = Recording.new(
             mdpi_barcode: bc.to_i, title: title, description: summary, access_determination: Recording::DEFAULT_ACCESS,
-            published: publication_date, fedora_item_id: json["id"], atom_feed_read_id: @atom_feed_read.id, unit: unit, avalon_item_id: avalon_item.id
+            published: publication_date, fedora_item_id: json["id"], atom_feed_read_id: @atom_feed_read.id, unit: unit, avalon_item_id: avalon_item.id,
+            copyright_end_date_text: '', date_of_first_publication_text: '', creation_date_text: ''
         )
         recording.save!
       end

@@ -53,6 +53,12 @@ function clLoadWaitingOnSelf() {
         '#cl_waiting_on_self_badge'
     );
 }
+function clLoadAccessDetermined() {
+		ajaxItems('./avalon_items/ajax/cl_access_determined',
+			"<p>An error occurred generating the Avalon Item list: Responses</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
+			'#cl_determined_badge'
+		);
+}
 
 /**
  * function for calling the ajax to render a list of Avalon Items.

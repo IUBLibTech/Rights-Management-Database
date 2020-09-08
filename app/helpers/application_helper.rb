@@ -42,6 +42,14 @@ module ApplicationHelper
     generate_barcode(true, seed, 4)
   end
 
+  def boolean_to_yes_no(bool)
+    if bool.nil?
+      ""
+    else
+      bool == false ? 'No' : 'Yes'
+    end
+  end
+
   private
   def ApplicationHelper.generate_barcode(valid = true, seed = 0, prefix = 0)
     if prefix.zero?

@@ -3,7 +3,7 @@ class AtomFeedReaderController < ApplicationController
   before_action :set_atom_feed_read, only: [:read_json, :load_avalon_record]
 
   def index
-    @atom_feed_reads = AtomFeedRead.where(successfully_read: false).order('avalon_last_updated ASC')
+    @atom_feed_reads ||= [] #AtomFeedRead.where(successfully_read: false).order('avalon_last_updated ASC')
   end
 
   # action for pre loading the first (oldest) recordings in MCO
@@ -20,6 +20,11 @@ class AtomFeedReaderController < ApplicationController
     render 'atom_feed_reader/index'
   end
 
+  def search
+    @atom_feed_reads = AtomFeedRead.where("title like '%#{params[:search]}%'")
+    render :index
+  end
+
   def load_avalon_record
     json_text = AtomFeedReaderHelper.read_avalon_json(@atom_feed_read.json_url)
     avalon_item = save_json(json_text)
@@ -30,6 +35,10 @@ class AtomFeedReaderController < ApplicationController
       flash[:notice] = "New record(s) were loaded into RMD"
       redirect_to avalon_item_path(avalon_item)
     end
+  end
+
+  def manually_load_record(avalon_id)
+
   end
 
   def read_all_available

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   include Pundit
+  include ApplicationHelper
 
   before_action :signed_in_user
   around_filter :scope_current_username

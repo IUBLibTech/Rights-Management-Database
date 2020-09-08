@@ -15,14 +15,12 @@
         <%= recording.copyright_end_date_text %>
       </div>
       <div class="rvt-grid__item-4-md-up">
-        <% if @avalon_item.pod_unit == 'B-ATM' %>
-          <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label><br>
-          <%= recording.receipt_of_will_before_90_days_of_death %>
-        <% end %>
+        <label for="commercial">Commercial</label> <br>
+        <%= boolean_to_yes_no recording.commercial %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="published">Published</label>
-        <br><%= recording.published %>
+        <br><%= boolean_to_yes_no recording.published %>
       </div>
       <div class="rvt-grid__item-4-md-up">
         <label for="dateOfFirstPublication">Date Of First Publication</label>
@@ -43,6 +41,12 @@
       <div class="rvt-grid__item-12">
         <label for="authoritySourceURL">Authority Source URL</label>
         <br><%= recording.authority_source_url %>
+      </div>
+      <div class="rvt-grid__item-4-md-up">
+        <% if @avalon_item.pod_unit == 'B-ATM' %>
+          <label for="receiptOfWill">Receipt Of Will Before 90 Days Of Death</label><br>
+          <%= recording.receipt_of_will_before_90_days_of_death %>
+        <% end %>
       </div>
       <div class="rvt-grid__item-12 rvt-m-top-xs">
         <h4>Recording Notes</h4>
