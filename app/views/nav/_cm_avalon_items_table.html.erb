@@ -12,11 +12,13 @@
   <% @avalon_items.each_with_index do |avalon_item, i| %>
     <tr>
       <td>
-        <% if avalon_item.iu_default_only? %>
+        <% if avalon_item.default_access? %>
           <span class="rvt-badge rvt-badge--info">Default Access</span>
-        <% elsif avalon_item.initial_review? || avalon_item.needs_cl_info? %>
+        <% elsif avalon_item.review_requested? %>
           <span class="rvt-badge rvt-badge--warning">Review Requested</span>
-        <% elsif avalon_item.needs_cm_info? %>
+        <% elsif avalon_item.waiting_on_cl? %>
+          <span class="rvt-badge rvt-badge--warning">Review Requested</span>
+        <% elsif avalon_item.waiting_on_cm? %>
           <span class="rvt-badge rvt-badge--danger">Responses</span>
         <% elsif avalon_item.access_determined? %>
           <span class="rvt-badge rvt-badge--success">Access Determined</span>

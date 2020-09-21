@@ -395,8 +395,7 @@
             title: 'Comments for Copyright Librarian',
             input: "textarea",
             showCancelButton: true,
-            confirmButtonText: '<%= if @avalon_item.needs_review
-                                      @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM ? 'Respond' : 'Add Comment'
+            confirmButtonText: '<%= if @avalon_item.review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM ? 'Respond' : 'Add Comment'
                                     else
                                       'Request Review'
                                     end

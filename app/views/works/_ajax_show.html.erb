@@ -55,7 +55,7 @@
 <div class="ajax_work_show_contributors">
   <% @work.people.each do |p| %>
   <div class="contributor">
-    <%= link_to p.full_name, "#", class: 'red_700', remote: true %> <%= @work.roles(p).join(", ") %>
+    <%= link_to "#{p.full_name}", "#", class: 'red_700', remote: true %> <%= "(#{p.birth_death_text})" %> <%= @work.roles(p).join(", ") %>
   </div>
   <% end %>
 </div>

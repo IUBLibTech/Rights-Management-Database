@@ -43,10 +43,10 @@ class AvalonItemsController < ApplicationController
         @avalon_item.past_access_decisions << pad
         # someone reset the review status on the item and has initiated a re-review
         if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
-          @avalon_item.update_attributes!(reviewed: false, needs_review: true, review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
+          @avalon_item.update_attributes!(review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
         # someone set some access determination other than Default (not reviewed) so mark record reviewed
         else
-          @avalon_item.update_attributes!(reviewed: true, needs_review: false, review_state: pad.decision)
+          @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_ACCESS_DETERMINED)
         end
         render text: "success"
       else
@@ -69,7 +69,7 @@ class AvalonItemsController < ApplicationController
       begin
         ReviewComment.transaction do
           # CLs cannot initiate review
-          if cl && !@avalon_item.needs_review?
+          if cl && @avalon_item.default_access?
             @msg = "Only a collection manager can request review of an item. (You are currently flagged as a Copyright Librarian)"
           elsif cl
             comment = ReviewComment.new(avalon_item_id: @avalon_item.id, creator: creator, copyright_librarian: cl, comment: params[:comment])
@@ -78,9 +78,17 @@ class AvalonItemsController < ApplicationController
             comment.save!
           else
             comment = ReviewComment.new(avalon_item_id: @avalon_item.id, creator: creator, copyright_librarian: cl, comment: params[:comment])
-            # differentiate between the FIRST request to review something, and subsequent responses from the CM that provide more information to the CL
-            rs = @avalon_item.needs_review ? AvalonItem::REVIEW_STATE_WAITING_ON_CL : AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
-            @avalon_item.update_attributes!(reviewed: false, needs_review: true, review_state: rs)
+            rs = @avalon_item.review_state
+            if @avalon_item.default_access? || @avalon_item.access_determined?
+              # CM is making initial review request, or a re-review request
+              rs = AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+            elsif @avalon_item.waiting_on_cm?
+              # CM is responding to CL so switch it to waiting on CL
+              rs = AvalonItem::REVIEW_STATE_WAITING_ON_CL
+            else
+              # CM is adding additional comments - no switch is necessary
+            end
+            @avalon_item.update_attributes!(review_state: rs)
             @msg = "The copyright librarian will be notified of your request/comment."
             comment.save!
           end

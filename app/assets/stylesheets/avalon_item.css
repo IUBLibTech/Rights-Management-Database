@@ -92,7 +92,6 @@ span.avalon_item_title {
     display: flex;
 }
 .contributor > a {
-    margin-right: 1rem;
-    flex-basis: 30%;
+    margin-right: 0.5rem;
 }
 

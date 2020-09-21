@@ -50,6 +50,14 @@ class Person < ActiveRecord::Base
     id
   end
 
+  def birth_death_text
+    if date_of_birth_edtf.blank? && date_of_death_edtf.blank?
+      ""
+    else
+      "#{date_of_birth_edtf} - #{date_of_death_edtf}"
+    end
+  end
+
   def recording_producer?(r_id)
     recording_contributor_people.where(recording_id: r_id, recording_producer: true).size > 0
   end

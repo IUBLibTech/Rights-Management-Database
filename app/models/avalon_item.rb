@@ -17,16 +17,16 @@ class AvalonItem < ActiveRecord::Base
   REVIEW_STATE_ACCESS_DETERMINED = 4
 
   scope :cl_all, -> {
-    where(needs_review: true, reviewed: [false, nil])
+    where(review_state: [REVIEW_STATE_REVIEW_REQUESTED, REVIEW_STATE_WAITING_ON_CM, REVIEW_STATE_WAITING_ON_CL])
   }
   scope :cl_initial_review, -> {
-    AvalonItem.where(needs_review: true, review_state: REVIEW_STATE_REVIEW_REQUESTED)
+    AvalonItem.where(review_state: REVIEW_STATE_REVIEW_REQUESTED)
   }
   scope :cl_waiting_on_self, -> {
-    where(reviewed: [false, nil], needs_review: true, review_state: REVIEW_STATE_WAITING_ON_CL)
+    where(review_state: REVIEW_STATE_WAITING_ON_CL)
   }
   scope :cl_waiting_on_cm, -> {
-    where(reviewed: [false, nil], needs_review: true, review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
+    where(review_state: AvalonItem::REVIEW_STATE_WAITING_ON_CM)
   }
 
   scope :cm_all, -> {
@@ -35,8 +35,7 @@ class AvalonItem < ActiveRecord::Base
     where(:pod_unit => UnitsHelper.human_readable_units_search(User.current_username))
   }
   scope :cm_iu_default, -> {
-    AvalonItem.where(needs_review: [nil,false], pod_unit: UnitsHelper.human_readable_units_search(User.current_username))
-        .joins(:current_access_determination).where("past_access_decisions.decision = '#{AccessDeterminationHelper::DEFAULT_ACCESS}'")
+    AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username)).where("review_state = #{AvalonItem::REVIEW_STATE_DEFAULT}")
   }
   scope :cm_waiting_on_cl, -> {
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username))
@@ -90,22 +89,24 @@ class AvalonItem < ActiveRecord::Base
     Rails.application.secrets.avalon_media_url.gsub!(":id", self.avalon_id)
   end
 
-  # returns true if the AvalonItem has NOT been flagged for review AND access detemriniation is DEFAULT_ACCESS
-  def iu_default_only?
-    access_determination == DEFAULT_ACCESS && !needs_review
+  def default_access?
+    review_state == REVIEW_STATE_DEFAULT
   end
-  def initial_review?
-    needs_review && review_state == AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+  def review_requested?
+    review_state == REVIEW_STATE_REVIEW_REQUESTED
   end
-  def needs_cl_info?
-    needs_review && !reviewed && review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CL
+  def waiting_on_cm?
+    review_state == REVIEW_STATE_WAITING_ON_CM
   end
-  def needs_cm_info?
-    needs_review && !reviewed && review_state == AvalonItem::REVIEW_STATE_WAITING_ON_CM
+  def waiting_on_cl?
+    review_state == REVIEW_STATE_WAITING_ON_CL
+  end
+  def access_determined?
+    review_state == REVIEW_STATE_ACCESS_DETERMINED
   end
 
-  def access_determined?
-    reviewed
+  def in_review?
+    [REVIEW_STATE_REVIEW_REQUESTED, REVIEW_STATE_WAITING_ON_CM, REVIEW_STATE_WAITING_ON_CL].include? review_state
   end
 
   # determines the most restrictive access of any constituents of this Avalon Item (Recordings, Tracks, People, Works)
@@ -133,6 +134,14 @@ class AvalonItem < ActiveRecord::Base
 
   def any_determinations?
     past_access_decisions.where.not(decision: AccessDeterminationHelper::DEFAULT_ACCESS).any?
+  end
+
+  # this function reads the MCO atom feed for this item, comparing it's <updated> timestamp to
+  # the stored timestamp from its last read atom feed object. If the read has a newer date, there is potentially
+  # new data that the user will want to import into RMD.
+  def new_mco_data?
+    afr = AtomFeedRead.where(avalon_id: self.avalon_id).first
+
   end
 
   def rivet_button_badge

@@ -1,8 +1,8 @@
 <div>
   <div class='reviewed_div'>
-    <% if @avalon_item.reviewed?%>
+    <% if @avalon_item.cl_determined?%>
       <p class="reviewed">This Item has been Reviewed by a Copyright Librarian</p>
-    <% elsif @avalon_item.needs_review? %>
+    <% elsif @avalon_item.in_review? %>
       <p class="needs_review" data-comment="<% @avalon_item.review_comments.last.comment %>">
         <% if User.current_user_copyright_librarian? %>
           <span>Review Requested</span>

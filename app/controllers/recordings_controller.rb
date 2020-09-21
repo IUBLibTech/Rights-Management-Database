@@ -85,17 +85,17 @@ class RecordingsController < ApplicationController
     end
   end
 
-  def mark_needs_review
-    @recording.needs_review = true
-    @recording.save!
-    redirect_to recording_path(@recording)
-  end
+  # def mark_needs_review
+  #   @recording.needs_review = true
+  #   @recording.save!
+  #   redirect_to recording_path(@recording)
+  # end
 
-  def mark_reviewed
-    @recording.needs_review = false
-    @recording.save!
-    redirect_to recording_path(@recording)
-  end
+  # def mark_reviewed
+  #   @recording.needs_review = false
+  #   @recording.save!
+  #   redirect_to recording_path(@recording)
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

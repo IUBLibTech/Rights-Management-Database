@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   resources :policies
   resources :recording_contributors
   resources :recording_notes, only: [:new, :create]
-  resources :recordings do
-    member do
-      post 'mark_needs_review'
-      post 'mark_reviewed'
-    end
-  end
+  resources :recordings #do
+  #   member do
+  #     post 'mark_needs_review'
+  #     post 'mark_reviewed'
+  #   end
+  # end
   resources :tracks
 
   get '/nav/search', to: 'nav#search', as: "search"
