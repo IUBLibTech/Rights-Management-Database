@@ -845,9 +845,9 @@ function submitPerformanceEditResponse(performanceId, e, data, status, xhr) {
 /** END AJAX functionality for editing Performances */
 
 /** AJAX functionality for CL/CM review comments history */
-function hookRequestReviewButton() {
-    $('#mark_needs_reviewed').click('');
-}
+// function hookRequestReviewButton() {
+//     $('#mark_needs_reviewed').click('');
+// }
 
 // function hookReviewCommentSlide() {
 //     $('#mark_needs_reviewed').hoverIntent(function() {

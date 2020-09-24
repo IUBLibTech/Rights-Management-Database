@@ -8,7 +8,7 @@
     @msg = nil
     case @avalon_item.review_state
     when AvalonItem::REVIEW_STATE_DEFAULT
-      if @avalon_item.reviewed?
+      if @avalon_item.any_determinations?
         @msg = "Request Re-Review"
       else
         @msg = "Request Review"
@@ -20,7 +20,7 @@
     when AvalonItem::REVIEW_STATE_WAITING_ON_CL
       @msg = @cl ? "Respond to Collection Manager" : "Add Additional Comments"
     when AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
-      @msg = "Access Determined"
+      @msg = "Request Re-review"
     else
       raise "How did we get to this ReviewState: #{@avalon_item.review_state}"
     end
@@ -36,8 +36,7 @@
       <%= @avalon_item.rivet_button_badge %>
     </span>
     <div>
-        <% c = (@avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED ? "rvt-disabled-button" : 'rvt-button')  %>
-        <button id="mark_needs_reviewed" class='lower_tooltip <%= c %>' data-avalon-item-id=<%= @avalon_item.id %>>
+        <button id="mark_needs_reviewed" class='lower_tooltip rvt-button' data-avalon-item-id=<%= @avalon_item.id %>>
           <%= @msg %>
           <% unless @avalon_item.review_comments.size == 0 %>
             <div class="lower_tooltiptext">
@@ -236,9 +235,7 @@
         hookAccordion();
         hookButtons();
         hookAiContextMenu();
-        <% unless @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED %>
         hookNeedsReview();
-        <% end %>
         //hookReviewCommentSlide();
         hookAvalonNoteButton();
         hookAccessSelects();

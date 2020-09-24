@@ -82,6 +82,12 @@ class AvalonItemsController < ApplicationController
             if @avalon_item.default_access? || @avalon_item.access_determined?
               # CM is making initial review request, or a re-review request
               rs = AvalonItem::REVIEW_STATE_REVIEW_REQUESTED
+              if @avalon_item.access_determined?
+                # reset the access determination
+                pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: AccessDeterminationHelper::DEFAULT_ACCESS)
+                @avalon_item.past_access_decisions << pad
+                @avalon_item.save!
+              end
             elsif @avalon_item.waiting_on_cm?
               # CM is responding to CL so switch it to waiting on CL
               rs = AvalonItem::REVIEW_STATE_WAITING_ON_CL
