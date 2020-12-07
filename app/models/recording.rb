@@ -38,10 +38,20 @@ class Recording < ActiveRecord::Base
            "SB-ARCHIVES", "SB-PHYS", "SB-ULIB", "SE-ARCHIVES"]
 
   validates :access_determination, :inclusion => {:in => ACCESS_DECISIONS}
-  validates :mdpi_barcode, mdpi_barcode: true
+  #validates :mdpi_barcode, mdpi_barcode: true
+
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :title, :description
+  #   text :mdpi_barcode do
+  #     "#{mdpi_barcode}"
+  #   end
+  # end
 
   def contributors
-
+    people.map { |p| p.name }
   end
 
   def edtf_dates

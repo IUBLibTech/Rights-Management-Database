@@ -1,12 +1,12 @@
-<% if !@avalon_item %>
-  <p class=""> No results found for search term: <i class="red_700"><%= params[:search] %></i></p>
+<% if @avalon_items.size == 0 %>
+  <p class=""> No results found for: <i class="red_700"><%= params[:search] %></i></p>
+<% else %>
+  <p class=""> Search results for: <i class="bg-green"><%= params[:search] %></i></p>
 <% end %>
-<!--<h4>The feed read for the barcode <%#= params[:mdpi_barcode] %></h4>-->
-<!--<pre>-->
-  <%#= JSON.pretty_generate JSON.parse @atom_feed_read.to_json unless @atom_feed_read.nil? %>
-<!--</pre>-->
-
-<!--<h4>The existing record</h4>-->
-<!--<pre>-->
-  <%#= JSON.pretty_generate JSON.parse @existing.to_json unless @existing.nil?%>
-<!--</pre>-->
+<ul>
+  <% @avalon_items.each do |ai| %>
+    <li>
+      <%= link_to ai.title, avalon_item_path(ai) %>
+    </li>
+  <% end %>
+</ul>

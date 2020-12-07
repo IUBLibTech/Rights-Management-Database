@@ -7,8 +7,11 @@ class AvalonItem < ActiveRecord::Base
   has_many :review_comments
   belongs_to :current_access_determination, class_name: 'PastAccessDecision', foreign_key: 'current_access_determination_id', autosave: true
   has_many :tracks, through: :performances
+  has_many :works, through: :tracks
 
   accepts_nested_attributes_for :performances
+
+  # after_create :index_solr
 
   REVIEW_STATE_DEFAULT = 0
   REVIEW_STATE_REVIEW_REQUESTED = 1
@@ -48,6 +51,29 @@ class AvalonItem < ActiveRecord::Base
   scope :cm_access_determined, -> {
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username), review_state: REVIEW_STATE_ACCESS_DETERMINED)
   }
+
+  # searchable do
+  #   text :title, :avalon_id
+  #   text :recordings do
+  #     recordings.map{ |r| [r.title, r.description, r.mdpi_barcode.to_s]}
+  #   end
+  #   text :performances do
+  #     performances.map{ |p| p.title }
+  #   end
+  #   text :tracks do
+  #     tracks.map {|t| t.track_name}
+  #   end
+  #   text :works do
+  #     works.map { |w| [w.title, w.people.map {|p| p.name }]}
+  #   end
+  #   text :people do
+  #     recordings.map {|r| r.contributors}
+  #   end
+  #
+  #   string :current_access_determination do
+  #     current_access_determination.nil? ? AccessDeterminationHelper::DEFAULT_ACCESS : current_access_determination.decision
+  #   end
+  # end
 
   def has_rmd_metadata?
     recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0
@@ -193,5 +219,8 @@ class AvalonItem < ActiveRecord::Base
     "<span class='#{css}'>#{text}</span>".html_safe
   end
 
+  # def index_solr
+  #   Sunspot.index(self)
+  # end
 
 end

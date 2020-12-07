@@ -1,12 +1,13 @@
 class NavController < ApplicationController
   include RecordingsHelper
   include AvalonItemsHelper
+  include Pagy::Backend
 
   def start
     if User.current_user_copyright_librarian?
-      @avalon_items = AvalonItem.cl_all
+      @pagy, @avalon_items = pagy(AvalonItem.cl_all)
     else
-      @avalon_items = AvalonItem.cm_all
+      @pagy, @avalon_items = pagy(AvalonItem.cm_all)
     end
   end
 
@@ -37,12 +38,7 @@ class NavController < ApplicationController
   end
 
   def search
-    @avalon_item = AvalonItem.where(avalon_id: params[:search]).first
-    if @avalon_item
-      redirect_to @avalon_item
-    else
-      # try to load atom feed read
-    end
+    @avalon_items = AvalonItem.where(:pod_unit => UnitsHelper.human_readable_units_search(User.current_username)).where('title like ?', "%#{params[:search]}%")
   end
 
   # Search is no longer based on MDPI barcodes, eventually it will entail fedora ids and free text

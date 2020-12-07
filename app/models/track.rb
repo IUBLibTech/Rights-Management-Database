@@ -7,6 +7,12 @@ class Track < ActiveRecord::Base
   has_many :people, through: :contributors
 
   before_save :edtf_dates
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :track_name
+  # end
 
   # recording_start_time is input as hh:mm:ss but stored as seconds
   def recording_start_time=(time)

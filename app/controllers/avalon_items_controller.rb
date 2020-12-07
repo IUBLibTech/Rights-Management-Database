@@ -1,5 +1,6 @@
 class AvalonItemsController < ApplicationController
   include AccessDeterminationHelper
+  include Pagy::Backend
 
   def index
     if User.current_user_copyright_librarian?
@@ -138,30 +139,54 @@ class AvalonItemsController < ApplicationController
     end
   end
 
-  def ajax_all_cm_items
-    @avalon_items = AvalonItem.cm_all
-    render partial: 'nav/cm_avalon_items_table'
+  def cm_all_items
+    @pagy, @avalon_items = pagy(AvalonItem.cm_all)
+    render 'nav/start'
   end
-  def ajax_cm_iu_default_only_items
-    @avalon_items = AvalonItem.cm_iu_default
-    render partial: 'nav/cm_avalon_items_table'
+  def cm_iu_default_only
+    @pagy, @avalon_items = pagy(AvalonItem.cm_iu_default)
+    render 'nav/start'
   end
-  def ajax_cm_waiting_on_cl
-    @avalon_items = AvalonItem.cm_waiting_on_cl
-    render partial: 'nav/cm_avalon_items_table'
+  def cm_waiting_on_cl
+    @pagy, @avalon_items = pagy(AvalonItem.cm_waiting_on_cl)
+    render 'nav/start'
   end
-  def ajax_cm_waiting_on_self
-    @avalon_items = AvalonItem.cm_waiting_on_self
-    render partial: 'nav/cm_avalon_items_table'
+  def cm_waiting_on_self
+    @pagy, @avalon_items = pagy(AvalonItem.cm_waiting_on_self)
+    render 'nav/start'
   end
-  def ajax_cm_access_determined
+  def cm_access_determined
     # FIXME: when RMD is capable of determining when an Avalon Item is published in MCO, this action should omit those items from the result set
-    @avalon_items = AvalonItem.cm_access_determined
-    render partial: 'nav/cm_avalon_items_table'
+    @pagy, @avalon_items = pagy(AvalonItem.cm_access_determined)
+    render 'nav/start'
   end
 
+  # def ajax_all_cm_items
+  #   @pagy, @avalon_items = pagy(AvalonItem.cm_all)
+  #   #render partial: 'nav/cm_avalon_items_table'
+  #   render 'nav/start'
+  # end
+  # def ajax_cm_iu_default_only_items
+  #   @pagy, @avalon_items = pagy(AvalonItem.cm_iu_default)
+  #   render partial: 'nav/cm_avalon_items_table'
+  # end
+  # def ajax_cm_waiting_on_cl
+  #   @pagy, @avalon_items = pagy(AvalonItem.cm_waiting_on_cl)
+  #   render partial: 'nav/cm_avalon_items_table'
+  # end
+  # def ajax_cm_waiting_on_self
+  #   @pagy, @avalon_items = pagy(AvalonItem.cm_waiting_on_self)
+  #   render partial: 'nav/cm_avalon_items_table'
+  # end
+  # def ajax_cm_access_determined
+  #   # FIXME: when RMD is capable of determining when an Avalon Item is published in MCO, this action should omit those items from the result set
+  #   @pagy, @avalon_items = pagy(AvalonItem.cm_access_determined)
+  #   render partial: 'nav/cm_avalon_items_table'
+  # end
+
+
   def ajax_all_cl_items
-    @avalon_items = AvalonItem.cl_all
+    @pagy, @avalon_items = pagy(AvalonItem.cl_all)
     render partial: 'nav/cl_avalon_items_table'
   end
   def ajax_cl_initial_review

@@ -253,6 +253,8 @@
               swal.fire({
 	              title: 'Updated Record',
 	              text: "This Avalon Item's Access Determination was successfully updated."
+              }).then(function (){
+                document.location.reload();
               })
             },
             error: function(jqXHR, textStatus, errorThrown) {

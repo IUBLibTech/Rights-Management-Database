@@ -1,4 +1,7 @@
 module ApplicationHelper
+
+  include Pagy::Frontend
+
   # this method is based on the Luhn algorithm (aka Mod 10)
   # wikipedia provides a clear explanation of it:
   # http://en.wikipedia.org/wiki/Luhn_algorithm#Implementation_of_standard_Mod_10
@@ -47,6 +50,14 @@ module ApplicationHelper
       ""
     else
       bool == false ? 'No' : 'Yes'
+    end
+  end
+
+  def self.fulltext_search(text)
+    AvalonItem.search do
+      fulltext text do
+        fields(:avalon_id, :recordings, :performances, :tracks, :title => 2.0)
+      end
     end
   end
 

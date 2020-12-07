@@ -7,5 +7,6 @@
   <span id="cl_determined_badge" class="filter-badge rvt-badge rvt-badge--success-secondary pointer" onclick="clLoadAccessDetermined()">Access Determined</span>
 </div>
 <div id="results_table_div">
-  <%= render partial: 'cl_avalon_items_table' %>
+  <%== pagy_nav(@pagy) %>
+  <% render partial: 'cl_avalon_items_table' %>
 </div>

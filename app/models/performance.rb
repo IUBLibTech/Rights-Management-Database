@@ -13,6 +13,13 @@ class Performance < ActiveRecord::Base
   before_save :edtf_dates
   before_update :edtf_dates
 
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :title
+  # end
+
   def performance_date_string=(str)
     super
   end

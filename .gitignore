@@ -21,6 +21,14 @@ config/settings/production.yml
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+config/sunspot.yml
+
+# local solr files
+solr/data
+solr/test/data
+solr/development/data
+solr/default/data
+solr/pids
 
 db/schema.rb
 

@@ -4,30 +4,30 @@ function cmLoadAll() {
         "<p>An error occurred generating the Avalon Item list: All Items</p><br><p>Status: :jqXHR.status, Error: <i>:errorThrown</i></p>",
         '#cm_all_badge');
 }
-function cmLoadDefaultAccess() {
-    ajaxItems('./avalon_items/ajax/cm_iu_default_only_items',
-        "<p>An error occurred generating the Avalon Item list: IU Default</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
-        '#cm_default_badge'
-        );
-}
-function cmLoadWaitingOnCL() {
-    ajaxItems('./avalon_items/ajax/cm_waiting_on_cl',
-        "<p>An error occurred generating the Avalon Item list: Review Requested</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
-        '#cm_review_badge'
-    );
-}
-function cmLoadWaitingOnSelf() {
-    ajaxItems('./avalon_items/ajax/cm_waiting_on_self',
-        "<p>An error occurred generating the Avalon Item list: Responses</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
-        '#cm_responses_badge'
-    );
-}
-function cmLoadAccessDetermined() {
-    ajaxItems('./avalon_items/ajax/cm_access_determined',
-        "<p>An error occurred generating the Avalon Item list: Access Determined</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
-        '#cm_determined_badge'
-    );
-}
+// function cmLoadDefaultAccess() {
+//     ajaxItems('./avalon_items/ajax/cm_iu_default_only_items',
+//         "<p>An error occurred generating the Avalon Item list: IU Default</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
+//         '#cm_default_badge'
+//         );
+// }
+// function cmLoadWaitingOnCL() {
+//     ajaxItems('./avalon_items/ajax/cm_waiting_on_cl',
+//         "<p>An error occurred generating the Avalon Item list: Review Requested</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
+//         '#cm_review_badge'
+//     );
+// }
+// function cmLoadWaitingOnSelf() {
+//     ajaxItems('./avalon_items/ajax/cm_waiting_on_self',
+//         "<p>An error occurred generating the Avalon Item list: Responses</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
+//         '#cm_responses_badge'
+//     );
+// }
+// function cmLoadAccessDetermined() {
+//     ajaxItems('./avalon_items/ajax/cm_access_determined',
+//         "<p>An error occurred generating the Avalon Item list: Access Determined</p><br><p>Status: :jqXHR.status Error: <i>:errorThrown</i></p>",
+//         '#cm_determined_badge'
+//     );
+// }
 
 function clLoadAll() {
     ajaxItems('./avalon_items/ajax/cl_all',

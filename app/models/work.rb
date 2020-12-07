@@ -9,6 +9,13 @@ class Work < ActiveRecord::Base
   #alias_attribute :work_contributors, :people
   before_save :edtf_dates
 
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :title, :alternative_titles, :notes
+  # end
+
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying
   # DB Date reflects that
   def edtf_dates
