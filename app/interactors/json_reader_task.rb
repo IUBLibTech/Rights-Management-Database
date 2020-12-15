@@ -23,11 +23,7 @@ class JsonReaderTask
     unread.each do |afr|
       AtomFeedRead.transaction do
         begin
-          logger.info "\n\n\n\n\nReading JSON for #{afr.avalon_id}\n\n\n\n\n\n"
-          json_text = read_avalon_json(afr.json_url)
-          @atom_feed_read = afr
-          save_json(json_text)
-          afr.update_attributes(successfully_read: true)
+          load_single(afr)
         rescue => error
           if error.is_a? Net::ReadTimeout
             # In the event of a timeout, set the error message but leave the json_failed flag set to false. This will
@@ -41,6 +37,14 @@ class JsonReaderTask
         end
       end
     end
+  end
+
+  def load_single(afr)
+    logger.info "\n\n\n\n\nReading JSON for #{afr.avalon_id}\n\n\n\n\n\n"
+    json_text = read_avalon_json(afr.json_url)
+    @atom_feed_read = afr
+    save_json(json_text)
+    afr.update_attributes(successfully_read: true)
   end
 
   private

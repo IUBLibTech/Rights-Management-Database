@@ -83,7 +83,6 @@ module AtomFeedReaderHelper
     atom_feed_reads = []
     @xml =  @xml = Nokogiri::XML(response.body).remove_namespaces!
     @xml.xpath('//entry').each do |e|
-      debugger
       title = e.xpath('title').first.content
       avalon_last_updated = DateTime.parse e.xpath('updated').first.content
       json_url = e.xpath('link/@href').first.value

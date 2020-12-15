@@ -19,7 +19,6 @@ class Recording < ActiveRecord::Base
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
 
-  #accepts_nested_attributes_for :recording_performances
   accepts_nested_attributes_for :recording_notes, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :performances
 
@@ -38,7 +37,6 @@ class Recording < ActiveRecord::Base
            "SB-ARCHIVES", "SB-PHYS", "SB-ULIB", "SE-ARCHIVES"]
 
   validates :access_determination, :inclusion => {:in => ACCESS_DECISIONS}
-  #validates :mdpi_barcode, mdpi_barcode: true
 
   # searchable do
   #   integer :id do

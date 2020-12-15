@@ -3,6 +3,7 @@ class Performance < ActiveRecord::Base
   has_many :recordings, through: :recording_performances
   has_many :tracks, dependent: :delete_all
   has_many :performance_notes
+  # no longer contributions at this level, only at recording and track level
   # has_many :performance_contributor_people
   # has_many :contributors, -> { where "interviewer = true OR interviewee = true OR performer = true OR conductor = true" }, class_name: "PerformanceContributorPerson"
   # has_many :people, through: :contributors

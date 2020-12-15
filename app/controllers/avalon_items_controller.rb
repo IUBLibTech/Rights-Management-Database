@@ -16,7 +16,6 @@ class AvalonItemsController < ApplicationController
     @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
     @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
     redirect_to avalon_items_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
-      #render 'avalon_items/scratch_pad'
   end
 
   def edit

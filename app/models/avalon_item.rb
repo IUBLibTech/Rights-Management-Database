@@ -2,12 +2,12 @@ class AvalonItem < ActiveRecord::Base
   include AccessDeterminationHelper
   has_many :recordings
   has_many :performances, through: :recordings
+  has_many :tracks, through: :performances
+  has_many :works, through: :tracks
   has_many :past_access_decisions
   has_many :avalon_item_notes
   has_many :review_comments
   belongs_to :current_access_determination, class_name: 'PastAccessDecision', foreign_key: 'current_access_determination_id', autosave: true
-  has_many :tracks, through: :performances
-  has_many :works, through: :tracks
 
   accepts_nested_attributes_for :performances
 
@@ -138,7 +138,10 @@ class AvalonItem < ActiveRecord::Base
   # determines the most restrictive access of any constituents of this Avalon Item (Recordings, Tracks, People, Works)
   def calc_access
     perf_acc = performances.collect{|p| p.access_determination }
-    track_acc = tracks.collect{|t| t.access_determination }
+    # FIXME: for some inexplicable reason this hangs indefinitely
+    # track_acc = tracks.collect{|t| t.access_determination }
+    tracks = performances.collect{|p| p.tracks}.flatten
+    track_acc = tracks.collect{|t| t.access_determination}.flatten
     work_acc = tracks.collect{|t| t.works }.flatten.uniq.collect{|w| w.access_determination }
     all = (perf_acc + track_acc + work_acc).uniq
     if all.include? AccessDeterminationHelper::RESTRICTED_ACCESS
