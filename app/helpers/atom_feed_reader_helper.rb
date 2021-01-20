@@ -71,7 +71,7 @@ module AtomFeedReaderHelper
   end
 
   def self.gen_prepop_url
-    URI.parse(Rails.application.secrets[:avalon_url].gsub('<identifier>', POD_GROUP_KEY_SOLR_Q).gsub('<order>', 'asc').gsub('<row_count>', "100").gsub('<page_count>', "1"))
+    URI.parse(Rails.application.secrets[:avalon_url].gsub('<identifier>', AtomFeedReaderTask::POD_GROUP_KEY_SOLR_Q).gsub('<order>', 'asc').gsub('<row_count>', "100").gsub('<page_count>', "1"))
   end
 
   def self.single_record_url(avalon_id)
@@ -96,7 +96,7 @@ module AtomFeedReaderHelper
     @xml =  @xml = Nokogiri::XML(response.body).remove_namespaces!
   end
 
-  def self.read(order, rows, page, identifier = POD_GROUP_KEY_SOLR_Q)
+  def self.read(order, rows, page, identifier = AtomFeedReaderTask::POD_GROUP_KEY_SOLR_Q)
     uri = URI.parse(Rails.application.secrets[:avalon_url].gsub('<identifier>', identifier).gsub('<order>', order).gsub('<row_count>', rows.to_s).gsub('<page_count>', page.to_s))
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
