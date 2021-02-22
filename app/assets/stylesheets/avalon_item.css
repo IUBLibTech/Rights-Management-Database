@@ -73,10 +73,6 @@ ul.conversation {
     float: left;
     width: 25%;
 }
-#history_div {
-    float: left;
-    width: 25%;
-}
 #note_div {
     overflow: auto;
     clear: both;
@@ -93,5 +89,48 @@ span.avalon_item_title {
 }
 .contributor > a {
     margin-right: 0.5rem;
+}
+.notes {
+    width: 440px;
+}
+
+div.access_div {
+    float: left;
+    width: 20%;
+}
+div.access_div > select {
+    max-width: 85%;
+}
+div.calced_access_div {
+    float: left;
+    width: 20%;
+}
+div#history_div {
+    float: left;
+    width: 15%;
+}
+div.legal {
+    float: left;
+    width: 45%;
+    overflow: auto;
+}
+div.legal > h2 {
+    padding: .5rem;
+}
+div.contracts {
+    /*max-width: 890px;*/
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+}
+div.contract {
+    width: 400px;
+    padding-right: 1rem;
+    float: left;
+    height: 275px;
+}
+#contract_notes, .contract_notes {
+    overflow: auto;
+    height: 4rem;
+    margin-bottom: .5rem;
 }
 

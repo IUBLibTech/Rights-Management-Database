@@ -53,18 +53,16 @@
     </div>
   </h3>
 </div>
-<div class="avalon_item_metadata">
-  <div id="access_div">
-    <div>
-      <label for=access>Access Determination:</label>
-      <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
-    </div>
-    <div>
-      <label for=access>System Calculated Access Determination:</label><br>
-      <span id="sys_acc">
-        <%= @avalon_item.calc_access %>
-      </span>
-    </div>
+<div class="foo">
+  <div class="access_div">
+    <label for=access>Access Determination:</label>
+    <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
+  </div>
+  <div class="calced_access_div">
+    <label for=access>System Calculated Access Determination:</label><br>
+    <span id="sys_acc">
+      <%= @avalon_item.calc_access %>
+    </span>
   </div>
   <div id="history_div">
     <div class="rvt-dropdown">
@@ -83,6 +81,10 @@
       </div>
     </div>
   </div>
+  <%= render partial: 'avalon_items/contracts' %>
+</div>
+<div class="avalon_item_metadata">
+
   <div id="note_div">
     <%= render partial: 'avalon_items/notes' %>
   </div>

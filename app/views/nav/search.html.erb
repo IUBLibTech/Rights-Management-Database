@@ -3,10 +3,59 @@
 <% else %>
   <p class=""> Search results for: <i class="bg-green"><%= params[:search] %></i></p>
 <% end %>
-<ul>
-  <% @avalon_items.each do |ai| %>
-    <li>
-      <%= link_to ai.title, avalon_item_path(ai) %>
-    </li>
-  <% end %>
-</ul>
+<div class="flex_row">
+  <div class="column_20">
+    <div class="rvt-p-all-xs">
+      <span class="rvt-badge rvt-badge--info pointer">Avalon Items (<%= @avalon_items.size %>)</span>
+    </div>
+    <div class="rvt-p-all-xs">
+      <span class="rvt-badge rvt-badge--info-secondary pointer">People (<%= @people.size %>)</span>
+    </div>
+    <div class="rvt-p-all-xs">
+      <span class="rvt-badge rvt-badge--info-secondary pointer">Works (<%= @works.size %>)</span>
+    </div>
+  </div>
+  <div class="column_80">
+    <div class="avalon_items">
+      <table id="avalon_items_table" class="rvt-table-compact rvt-table-cells show_me">
+        <thead>
+        <tr>
+          <th class="no_sort">Title</th>
+          <th class="no_sort">Access Determination</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @avalon_items.each do |ai| %>
+          <tr>
+            <th><%= link_to ai.title, avalon_items_path, {target: '_blank'} %></th>
+            <th><%= ai.access_determination %></th>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="people">
+      <table id="people_table" class="rvt-table-compact rvt-table-cells show_me">
+        <thead>
+        <tr>
+          <th class="no_sort">Full Name</th>
+          <th class="no_sort">Date of Birth</th>
+          <th>Date of Death</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="works">
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+
+  })
+</script>
+

@@ -7,6 +7,7 @@ class AvalonItem < ActiveRecord::Base
   has_many :past_access_decisions
   has_many :avalon_item_notes
   has_many :review_comments
+  has_many :contracts
   belongs_to :current_access_determination, class_name: 'PastAccessDecision', foreign_key: 'current_access_determination_id', autosave: true
 
   accepts_nested_attributes_for :performances
@@ -52,28 +53,29 @@ class AvalonItem < ActiveRecord::Base
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username), review_state: REVIEW_STATE_ACCESS_DETERMINED)
   }
 
-  # searchable do
-  #   text :title, :avalon_id
-  #   text :recordings do
-  #     recordings.map{ |r| [r.title, r.description, r.mdpi_barcode.to_s]}
-  #   end
-  #   text :performances do
-  #     performances.map{ |p| p.title }
-  #   end
-  #   text :tracks do
-  #     tracks.map {|t| t.track_name}
-  #   end
-  #   text :works do
-  #     works.map { |w| [w.title, w.people.map {|p| p.name }]}
-  #   end
-  #   text :people do
-  #     recordings.map {|r| r.contributors}
-  #   end
-  #
-  #   string :current_access_determination do
-  #     current_access_determination.nil? ? AccessDeterminationHelper::DEFAULT_ACCESS : current_access_determination.decision
-  #   end
-  # end
+  searchable do
+    text :title
+    text :current_access_determination do
+      current_access_determination.decision
+    end
+    string :pod_unit
+    text :mdpi_barcodes do
+      recordings.map{ |r| r.mdpi_barcode}
+    end
+  end
+
+  def self.solr_search(term)
+    ai = AvalonItem.search do fulltext term end
+    ai.results
+  end
+
+  def self.solr_search_ads(term)
+    ai = AvalonItem.search do
+      fulltext term
+      with(:pod_unit, UnitsHelper.human_readable_units_search(User.current_username))
+    end
+    ai.results
+  end
 
   def has_rmd_metadata?
     recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0

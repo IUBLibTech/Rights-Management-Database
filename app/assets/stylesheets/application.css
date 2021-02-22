@@ -847,4 +847,16 @@ span.active {
     color: #999999;
     border: 1px solid #dddddd;
 }
+.flex_row {
+    display: flex;
+}
+.column_20 {
+    flex: 20%;
+    padding: 10px;
+}
+.column_80 {
+    flex: 80%;
+    padding: 10px;
+}
+
 

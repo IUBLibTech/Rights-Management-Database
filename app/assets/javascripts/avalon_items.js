@@ -606,8 +606,142 @@ function hookButtons() {
     hookEditTrackButtons();
     hookDeleteTrackButtons();
     hookAvalonNoteButton();
+    hookNewContractButton();
+    hookEditContractButtons();
+    hookRemoveContractButtons();
+}
+function hookNewContractButton() {
+	$('.newContractButton').click( function() {
+		$.ajax({
+			url: '/contracts/ajax/new/'+avalon_item_id,
+			method: 'GET',
+			success: function(response) {
+				Swal.fire({
+					title: 'New Agreement',
+					html: response,
+					showCancelButton: true,
+					preConfirm: () => {
+						const avalon_item_id = $('#contract_avalon_item_id').val()
+						const contract_type = $("#contract_contract_type").val()
+						const end_date = $('#contract_end_date').val();
+						const perpetual = $('#contract_perpetual').val();
+						const contract_notes = $('#contract_notes').val();
+						return {contract_type: contract_type, end_date: end_date, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+					}
+				}).then((result) => {
+					if (result.value) {
+						$.ajax({
+							url: '/contracts/ajax/create',
+							method: 'POST',
+							data: {contract: result.value},
+							success: function (result) {
+								$('.contracts').prepend(result)
+								hookRemoveContractButtons();
+								hookEditContractButtons();
+							},
+							error: function (xhr, status, error) {
+								swal.fire({
+									icon: '',
+									title: "Ajax Error trying to create a new Agreement",
+									text: xhr.responseText
+								})
+							}
+						})
+					}
+				})
+			},
+			error: function (xhr, status, error) {
+				swal.fire({
+					icon: '',
+					title: "Ajax Error trying to add a new Agreement",
+					text: xhr.responseText
+				})
+			}
+		});
+	});
 }
 
+function hookEditContractButtons() {
+	$('.editContractButton').click(function() {
+		let contract_id = $(this).attr('data-contract-id')
+		$.ajax({
+			url: '/contracts/ajax/edit/'+contract_id,
+			method: "GET",
+			success: function(response) {
+				Swal.fire({
+					title: 'Edit Agreement',
+					html: response,
+					showCancelButton: true,
+					preConfirm: () => {
+						const avalon_item_id = $('#contract_avalon_item_id').val()
+						const contract_type = $("#contract_contract_type").val()
+						const end_date = $('#contract_end_date').val();
+						const perpetual = $('#contract_perpetual').val();
+						const contract_notes = $('#contract_notes').val();
+						return {contract_type: contract_type, end_date: end_date, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+					}
+				}).then((result) => {
+					if (result.value) {
+						$.ajax({
+							url: '/contracts/'+contract_id,
+							method: 'PATCH',
+							data: {contract: result.value},
+							success: function (result) {
+								$('div.contract[data-contract-id='+ contract_id+']').replaceWith(result);
+								hookRemoveContractButtons();
+								hookEditContractButtons();
+							},
+							error: function (xhr, status, error) {
+								swal.fire({
+									icon: '',
+									title: "Ajax Error trying to create a new Agreement",
+									text: xhr.responseText
+								})
+							}
+						})
+					}
+				})
+			},
+			error: function(xhr, status, error) {
+				swal.fire({
+					icon: '',
+					title: "Ajax Error trying to add a new Agreement",
+					text: xhr.responseText
+				})
+			}
+		})
+	});
+}
+function hookRemoveContractButtons() {
+	$('.deleteContractButton').click(function(event) {
+		let contractId = $(this).attr('data-contract-id');
+		Swal.fire({
+			title: 'Confirm Agreement Delete',
+			text: "Are you sure you want to permanently delete this Agreement?",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#006298',
+			confirmButtonText: 'Delete'
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+					url: '/contracts/' + contractId,
+					method: 'DELETE',
+					success: function (result) {
+						$('div.contract[data-contract-id='+contractId+']').remove();
+					},
+					error: function (xhr, status, error) {
+						swal.fire({
+							icon: 'warning',
+							title: "Ajax Error trying to delete Track",
+							text: xhr.responseText
+						})
+					}
+				})
+			}
+		});
+	})
+}
 function hookAvalonNoteButton() {
     $('#avalon_item_note_button').click(function() {
         Swal.fire({
@@ -1022,13 +1156,19 @@ function loadCalcedAccess() {
 		}
 	})
 }
-function reloadPage(title='Reloading', msg="The Avalon Item will reload.") {
-	swal.fire({
-		title: title,
-		html: msg
-	}).then(function() {
+function reloadPage(title='Reloading', msg="The Avalon Item will reload.", prompt) {
+	if (prompt) {
+		swal.fire({
+			title: title,
+			html: msg
+		}).then(function() {
+			$('body').fadeOut("400", function() {
+				location.reload();
+			});
+		})
+	} else {
 		$('body').fadeOut("400", function() {
 			location.reload();
 		});
-	})
+	}
 }

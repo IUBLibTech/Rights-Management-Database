@@ -9,13 +9,14 @@ class Work < ActiveRecord::Base
   #alias_attribute :work_contributors, :people
   before_save :edtf_dates
 
-  # searchable do
-  #   integer :id do
-  #     id
-  #   end
-  #   text :title, :alternative_titles, :notes
-  # end
+  searchable do
+    text :title, :alternative_titles
+  end
 
+  def self.solr_search(term)
+    w = Work.search do fulltext term end
+    w.results
+  end
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying
   # DB Date reflects that
   def edtf_dates

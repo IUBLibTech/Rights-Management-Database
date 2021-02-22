@@ -7,13 +7,9 @@ Rails.application.routes.draw do
   resources :policies
   resources :recording_contributors
   resources :recording_notes, only: [:new, :create]
-  resources :recordings #do
-  #   member do
-  #     post 'mark_needs_review'
-  #     post 'mark_reviewed'
-  #   end
-  # end
+  resources :recordings
   resources :tracks
+  resources :contracts
 
   get '/nav/search', to: 'nav#search', as: "search"
   get '/date_search', to: 'nav#date_search_get', as: 'date_search_get'
@@ -87,6 +83,12 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cl_waiting_on_cm', to: 'avalon_items#ajax_cl_waiting_on_cm', as: 'avalon_items_cl_waiting_on_cm'
   get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_waiting_on_self', as: 'avalon_items_cl_waiting_on_self'
   get '/avalon_items/ajax/cl_access_determined', to: 'avalon_items#ajax_cl_access_determined', as: 'avalon_items_cl_access_determined'
+
+  get '/contracts/ajax/new/:ai_id', to: 'contracts#ajax_new', as: 'ajax_new_contract'
+  post '/contracts/ajax/create', to: 'contracts#ajax_create', as: 'ajax_create_contract'
+  get '/contracts/ajax/edit/:id', to: 'contracts#ajax_edit', as: 'ajax_edit_contract'
+  post '/contracts/ajax/update', to: 'contracts#ajax_update', as: 'ajax_update_contract'
+  get '/contracts/ajax/show/:id', to: 'contracts#ajax_show', as: 'ajax_show_contract'
 
   get 'recordings/ajax/edit/:id', to: 'recordings#ajax_edit', as: 'ajax_edit_recording'
   get 'recordings/ajax/show/:id', to: 'recordings#ajax_show', as: 'ajax_show_recording'

@@ -38,7 +38,10 @@ class NavController < ApplicationController
   end
 
   def search
-    @avalon_items = AvalonItem.where(:pod_unit => UnitsHelper.human_readable_units_search(User.current_username)).where('title like ?', "%#{params[:search]}%")
+    #@avalon_items = AvalonItem.where(:pod_unit => UnitsHelper.human_readable_units_search(User.current_username)).where('title like ?', "%#{params[:search]}%")
+    @avalon_items = AvalonItem.solr_search_ads(params[:search])
+    @people = Person.solr_search(params[:search])
+    @works = Work.solr_search(params[:search])
   end
 
   # Search is no longer based on MDPI barcodes, eventually it will entail fedora ids and free text

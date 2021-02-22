@@ -36,19 +36,21 @@ class Person < ActiveRecord::Base
   }
   ALL_ROLES = Person::ROLES.keys.collect{|k| Person::ROLES[k]}.flatten.sort
 
-  # searchable do
-  #   integer :id do
-  #     id
-  #   end
-  #   text :last_name, :company_name
-  #   text "full_name" do
-  #     if entity?
-  #       "#{company_name}"
-  #     else
-  #       "#{first_name} #{middle_name} #{last_name}"
-  #     end
-  #   end
-  # end
+  searchable do
+    text :aka
+    text "name" do
+      if entity?
+        "#{company_name}"
+      else
+        "#{full_name}"
+      end
+    end
+  end
+
+  def self.solr_search(term)
+    p = Person.search do fulltext term end
+    p.results
+  end
 
   def name
     "#{first_name} #{last_name}"
