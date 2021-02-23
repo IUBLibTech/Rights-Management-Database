@@ -51,6 +51,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem for utilizing the solr server
 # gem 'rsolr'
 gem 'sunspot_rails'
+# progress bar for sunspot rake tasks (like reindexing...)
+gem 'progress_bar'
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'

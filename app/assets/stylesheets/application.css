@@ -850,13 +850,16 @@ span.active {
 .flex_row {
     display: flex;
 }
-.column_20 {
-    flex: 20%;
+.column_05 {
+    flex: 5%;
     padding: 10px;
 }
 .column_80 {
     flex: 80%;
     padding: 10px;
+}
+.hidden {
+    display: none;
 }
 
 
