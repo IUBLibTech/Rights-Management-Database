@@ -218,18 +218,18 @@
     </table>
   </div>
 </div>
-<div>
-  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded="true">JSON <span class="accordion-icon"></span></h3>
-  <div class="rvt-grid m-fadeIn">
-    <pre>
-      <%= JSON.pretty_generate @json %>
-    </pre>
-  </div>
-</div>
-<div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">
-  <button id="addPersonButton">Add Person/Entity</button>
-  <button id="addWorkButton">Add Work</button>
-</div>
+<!--<div>-->
+<!--  <h3 class="accordion accordion-title active accordion-trigger" aria-expanded="true">JSON<span class="accordion-icon"></span></h3>-->
+<!--  <div class="rvt-grid m-fadeIn">-->
+<!--    <pre>-->
+      <%#= JSON.pretty_generate @json %>
+<!--    </pre>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">-->
+<!--  <button id="addPersonButton">Add Person/Entity</button>-->
+<!--  <button id="addWorkButton">Add Work</button>-->
+<!--</div>-->
 
 <script type="text/javascript" charset="utf-8">
     let avalon_item_id = <%= @avalon_item.id %>;

@@ -6,7 +6,7 @@ class Work < ActiveRecord::Base
   has_many :tracks, through: :track_works
   has_many :performances, through: :tracks
   has_many :avalon_items, through: :performances
-  #alias_attribute :work_contributors, :people
+  # alias_attribute :work_contributors, :people
   before_save :edtf_dates
 
   searchable do

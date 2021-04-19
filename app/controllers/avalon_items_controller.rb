@@ -1,6 +1,7 @@
 class AvalonItemsController < ApplicationController
   include AccessDeterminationHelper
   include Pagy::Backend
+  include AfrHelper
 
   def index
     if User.current_user_copyright_librarian?
@@ -12,6 +13,7 @@ class AvalonItemsController < ApplicationController
 
   def show
     @avalon_item = AvalonItem.includes(:recordings).find(params[:id])
+    read_json(@avalon_item)
     @json = JSON.parse(@avalon_item.json)
     @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
     @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first

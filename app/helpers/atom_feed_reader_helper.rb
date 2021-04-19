@@ -105,5 +105,17 @@ module AtomFeedReaderHelper
     http.request(request)
   end
 
+  def self.updated_in_mco?(avalon_id)
+    uri = AtomFeedReaderHelper.single_record_url(avalon_id)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri)
+    request['Avalon-Api-Key'] = Rails.application.secrets[:avalon_token]
+    xml = parse_xml( http.request(request) )
+    ts = DateTime.parse(xml.xpath('//updated').first.content)
+    afr = AtomFeedRead.where(avalon_id: avalon_id).first
+    # puts "Comparing original: #{afr.created_at} to updated_at: #{ts}"
+    afr.created_at != ts
+  end
 
 end
