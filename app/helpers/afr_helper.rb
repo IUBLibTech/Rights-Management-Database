@@ -24,7 +24,8 @@ module AfrHelper
     more_pages = true
     AtomFeedRead.transaction do
       while more_pages && !timestamp_reached
-        response = read('desc', ITEMS_PER_PAGE, page)
+        uri = gen_atom_feed_uri('desc', ITEMS_PER_PAGE, page)
+        response = read_uri(uri)
         xml = parse_xml(response)
         total_records = xml.xpath('//totalResults').first.content.to_f # convert to a float so ceiling will work in division
         start_index = xml.xpath('//startIndex').first.content.to_i
@@ -89,6 +90,7 @@ module AfrHelper
 
   # makes a HTTPS request at the specified URI and returns the response
   def read_uri(uri)
+    puts "Making MCO service request: #{uri.to_s}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(uri)

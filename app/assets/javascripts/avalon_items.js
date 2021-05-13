@@ -623,10 +623,10 @@ function hookNewContractButton() {
 					preConfirm: () => {
 						const avalon_item_id = $('#contract_avalon_item_id').val()
 						const contract_type = $("#contract_contract_type").val()
-						const end_date = $('#contract_end_date').val();
+						const date_edtf_text = $('#contract_date_edtf_text').val();
 						const perpetual = $('#contract_perpetual').val();
 						const contract_notes = $('#contract_notes').val();
-						return {contract_type: contract_type, end_date: end_date, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+						return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
 					}
 				}).then((result) => {
 					if (result.value) {

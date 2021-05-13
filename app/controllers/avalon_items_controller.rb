@@ -40,7 +40,7 @@ class AvalonItemsController < ApplicationController
     @avalon_item = AvalonItem.find(params[:id])
     if @avalon_item
       last_decision = @avalon_item.last_copyright_librarian_access_decision
-      if is_less_restrictive_than?(params[:access], last_decision&.decision) || User.current_user_copyright_librarian?
+      if is_more_restrictive_than?(params[:access], last_decision&.decision) || User.current_user_copyright_librarian?
         pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
         @avalon_item.past_access_decisions << pad
         # someone reset the review status on the item and has initiated a re-review

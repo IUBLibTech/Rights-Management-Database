@@ -99,13 +99,15 @@ class JsonReaderTask
   # Does the heavy lifting of creating the AvalonItem in RMD
   def write_avalon_item(json, json_text)
     title = json["title"]
+    collection = json["collection"]
     publication_date = json["publication_date"]
     summary = json["summary"]
     barcodes = json["fields"]["other_identifier"].select{|i| i.match(/4[0-9]{13}/) }
     unit = pod_metadata_unit(barcodes.first)
-    avalon_item = AvalonItem.new(avalon_id: json["id"], title: title, json: json_text, pod_unit: unit, review_state: AvalonItem::REVIEW_STATE_DEFAULT)
+    avalon_item = AvalonItem.new(avalon_id: json["id"], title: title, collection: collection, json: json_text, pod_unit: unit, review_state: AvalonItem::REVIEW_STATE_DEFAULT)
     decision = PastAccessDecision.new(avalon_item: avalon_item, decision: AccessDeterminationHelper::DEFAULT_ACCESS, changed_by: 'automated ingest')
     decision.save!
+    avalon_item.current_access_determination = decision
     avalon_item.save!
     barcodes.each do |bc|
       recording = Recording.new(

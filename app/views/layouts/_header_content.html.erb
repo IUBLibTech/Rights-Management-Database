@@ -30,6 +30,15 @@
             <%= link_to "Home", root_path %>
           <% end %>
         </li>
+        <% if User.collection_manager? User.current_username %>
+        <li>
+          <% if controller_name == "collections" %>
+            <%= link_to "Collections", collections_index_path, "aria-current":"page" %>
+          <% else %>
+            <%= link_to "Collections", collections_index_path %>
+          <% end %>
+        </li>
+        <% end %>
         <li>
           <% if controller_name == 'avalon_items' && action_name == 'index' %>
             <%= link_to "Avalon Items", avalon_items_path, "aria-current":"page" %>

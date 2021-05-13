@@ -16,7 +16,7 @@ module AccessDeterminationHelper
 
   # compares access to bounding_access and returns true if and only if access is less restrictive or the same access
   # level as defined by the rankings in ACCESS_RANKING
-  def is_less_restrictive_than?(access, bounding_access)
+  def is_more_restrictive_than?(access, bounding_access)
     return true if bounding_access.nil? && ACCESS_DECISIONS.include?(access)
     raise "Invalid Access Determination: #{access}" unless ACCESS_DECISIONS.include?(access)
     raise "Invalid Access Determination: #{bounding_access}" unless ACCESS_DECISIONS.include?(bounding_access)

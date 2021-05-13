@@ -52,10 +52,16 @@ class AvalonItem < ActiveRecord::Base
     AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username), review_state: REVIEW_STATE_ACCESS_DETERMINED)
   }
 
+
+
   searchable do
     text :title
     text :current_access_determination do
-      current_access_determination.decision
+      if current_access_determination.nil?
+        AccessDeterminationHelper::DEFAULT_ACCESS
+      else
+        current_access_determination.decision
+      end
     end
     string :pod_unit
     text :mdpi_barcodes do

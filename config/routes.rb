@@ -84,6 +84,10 @@ Rails.application.routes.draw do
   get '/avalon_items/ajax/cl_waiting_on_self', to: 'avalon_items#ajax_cl_waiting_on_self', as: 'avalon_items_cl_waiting_on_self'
   get '/avalon_items/ajax/cl_access_determined', to: 'avalon_items#ajax_cl_access_determined', as: 'avalon_items_cl_access_determined'
 
+  get '/collections/', to: "collections#index", as: 'collections_index'
+  post '/collections/', to: "collections#assign_access", as: 'collection_assign'
+  get '/collection/:collection_name', to: "collections#collection_list", as: "collection_list"
+
   get '/contracts/ajax/new/:ai_id', to: 'contracts#ajax_new', as: 'ajax_new_contract'
   post '/contracts/ajax/create', to: 'contracts#ajax_create', as: 'ajax_create_contract'
   get '/contracts/ajax/edit/:id', to: 'contracts#ajax_edit', as: 'ajax_edit_contract'

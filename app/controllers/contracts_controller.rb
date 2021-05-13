@@ -59,7 +59,7 @@ class ContractsController < ApplicationController
   end
   def contract_params
     params.require(:contract).permit(
-      :avalon_item_id, :end_date, :contract_type, :notes, :perpetual
+      :avalon_item_id, :date_edtf_text, :contract_type, :notes, :perpetual
     )
   end
 end
