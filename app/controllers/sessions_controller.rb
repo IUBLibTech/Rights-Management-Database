@@ -36,7 +36,7 @@ class SessionsController < ActionController::Base
     request.use_ssl = true
     request.verify_mode = OpenSSL::SSL::VERIFY_PEER
     request.ssl_version = :TLSv1_2
-    response = request.get("#{iu_login_stagin}/cas/validate?ticket=#{@casticket}&service=#{root_url}")
+    response = request.get("#{iu_login_staging}/cas/validate?ticket=#{@casticket}&service=#{root_url}")
     @resp = response.body.strip
     if User.authenticate(@resp)
       sign_in(@resp)
