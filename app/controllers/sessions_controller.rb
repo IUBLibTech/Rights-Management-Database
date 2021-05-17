@@ -7,40 +7,41 @@ class SessionsController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def cas_reg
-    "https://cas-reg.uits.iu.edu"
-  end
-  def cas
-    "https://cas.iu.edu"
+  # def cas_reg
+  #   "https://cas-reg.uits.iu.edu"
+  # end
+
+  # def cas
+  #   "https://cas.iu.edu"
+  # end
+
+  def iu_login_staging
+    "https://idp-stg.login.iu.edu/idp/profile"
   end
 
   def new
-    redirect_to("#{cas}/cas/login?cassvc=ANY&casurl=#{root_url}sessions/validate_login")
+    #redirect_to("#{cas}/cas/login?cassvc=ANY&casurl=#{root_url}sessions/validate_login")
+    new_iu_login
+  end
+
+  def new_iu_login
+    redirect_to("#{iu_login_staging}/cas/login?service=#{root_url}sessions/validate_login")
   end
 
   def validate_login
     @casticket=params[:casticket]
-    uri = URI.parse("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
+    #uri = URI.parse("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
+    uri = URI.parse("#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}")
     request = Net::HTTP.new(uri.host, uri.port)
     request.use_ssl = true
-    #request.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request.verify_mode = OpenSSL::SSL::VERIFY_PEER
     request.ssl_version = :TLSv1_2
-    response = request.get("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
-    @resp = response.body
-    puts "CAS Response: #{@resp}"
-    if @resp.slice(0,3) == 'yes'
-      @resp_true = @resp.slice(0,3)
-      @nlength=@resp.length - 7
-      @resp_user=@resp.slice(5,@nlength)
-      if User.authenticate(@resp_user)
-        sign_in(@resp_user)
-        redirect_back_or_to root_url
-      else
-        redirect_to "#{root_url}denied.html"
-      end
+    response = request.get("#{iu_login_stagin}/cas/validate?ticket=#{@casticket}&service=#{root_url}")
+    @resp = response.body.strip
+    if User.authenticate(@resp)
+      sign_in(@resp)
+      redirect_back_or_to root_url
     else
-      @resp_true = @resp.slice(0,2)
       redirect_to "#{root_url}denied.html"
     end
   end
