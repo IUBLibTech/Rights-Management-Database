@@ -15,31 +15,40 @@ class SessionsController < ActionController::Base
   #   "https://cas.iu.edu"
   # end
 
+  def logger
+    @@logger ||= Logger.new("#{Rails.root}/log/iu_login.log")
+  end
+
   def iu_login_staging
     "https://idp-stg.login.iu.edu/idp/profile"
   end
 
   def new
-    #redirect_to("#{cas}/cas/login?cassvc=ANY&casurl=#{root_url}sessions/validate_login")
     new_iu_login
   end
 
   def new_iu_login
-    redirect_to("#{iu_login_staging}/cas/login?service=#{root_url}sessions/validate_login")
+    url = "#{iu_login_staging}/cas/login?service=#{root_url}sessions/validate_login"
+    logger.warn "Redirecting to IU Login for authentication: #{url}"
+    redirect_to(url)
   end
 
   def validate_login
-    @casticket=params[:casticket]
-    #uri = URI.parse("#{cas}/cas/validate?cassvc=ANY&casticket=#{@casticket}&casurl=#{root_url}")
-    uri = URI.parse("#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}")
+    @casticket=params[:ticket]
+    logger.warn "Returning from IU Login, cas ticket: #{params}"
+    url = "#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}"
+    uri = URI.parse(url)
     request = Net::HTTP.new(uri.host, uri.port)
     request.use_ssl = true
     request.verify_mode = OpenSSL::SSL::VERIFY_PEER
     request.ssl_version = :TLSv1_2
-    response = request.get("#{iu_login_staging}/cas/validate?ticket=#{@casticket}&service=#{root_url}")
-    @resp = response.body.strip
-    if User.authenticate(@resp)
-      sign_in(@resp)
+    logger.warn "Validating CAS Ticket: #{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}"
+    response = request.get("#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}sessions/validate_login")
+    @resp = response.body
+    logger.warn "IU Login Response:\n#{@resp}"
+    user = extract_username(@resp)
+    if User.authenticate(user)
+      sign_in(user)
       redirect_back_or_to root_url
     else
       redirect_to "#{root_url}denied.html"
@@ -48,7 +57,18 @@ class SessionsController < ActionController::Base
 
   def destroy
     sign_out
-    redirect_to 'https://cas.iu.edu/cas/logout'
+    redirect_to 'https://idp-stg.login.iu.edu/idp/profile/cas/logout'
+  end
+
+  private
+  def extract_username(response)
+    doc = Nokogiri::XML(response)
+    node = doc.xpath("//cas:user").first
+    if node
+      node.content
+    else
+      nil
+    end
   end
 
 end

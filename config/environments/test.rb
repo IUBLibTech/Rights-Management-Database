@@ -37,6 +37,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # allow writing to consold from the Application IP address on Helium
+  config.web_console.permissions = '149.159.54.187'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

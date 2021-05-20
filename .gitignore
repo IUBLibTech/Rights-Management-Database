@@ -22,6 +22,7 @@ config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 config/sunspot.yml
+config/*.pem
 
 # local solr files
 solr/data
