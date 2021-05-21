@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :tracks
   resources :contracts
 
+
   get '/nav/search', to: 'nav#search', as: "search"
   get '/date_search', to: 'nav#date_search_get', as: 'date_search_get'
   post '/date_search', to: 'nav#date_search_post', as: 'date_search_post'
@@ -112,7 +113,7 @@ Rails.application.routes.draw do
   post '/tracks/ajax/access_determination', to: 'tracks#ajax_access_determination', as: 'ajax_track_access_determination'
 
   post '/users/ajax/set_user_unit/:username/:unit/:access', to: 'user#ajax_set_user_unit', as: 'ajax_set_user_unit'
-  post '/users/ajax/set_user_cl/:username', to: 'user#ajax_toggle_cl', as: 'ajax_set_user_cl'
+  post '/users/ajax/set_user_cl/:username', to: 'users#ajax_toggle_cl', as: 'ajax_set_user_cl'
   get '/works/ajax/new', to: 'works#ajax_new_work', as: 'ajax_new_work'
   get '/works/ajax/:id', to: 'works#ajax_show', as: 'ajax_show_work'
   get '/work/ajax/autocomplete_title', to: 'works#ajax_autocomplete_title', as: 'work_ajax_autocomplete_title'
