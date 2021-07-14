@@ -3,16 +3,34 @@ module AccessDeterminationHelper
   IU_ACCESS = "IU Access - Reviewed"
   WORLD_WIDE_ACCESS = "World Wide Access"
   RESTRICTED_ACCESS = "Restricted Access"
-  ACCESS_DECISIONS = [DEFAULT_ACCESS, IU_ACCESS, WORLD_WIDE_ACCESS, RESTRICTED_ACCESS]
+  RA_ETHICAL = "Restricted Access - Ethical"
+  RA_LICENCE = "Restricted Access - Licence"
+  RA_PRIVACY =  "Restricted Access - Privacy"
+
+  ACCESS_DECISIONS = [DEFAULT_ACCESS, IU_ACCESS, WORLD_WIDE_ACCESS, RESTRICTED_ACCESS, RA_ETHICAL, RA_LICENCE, RA_PRIVACY]
   ORDERED_ACCESS_DECISIONS = [RESTRICTED_ACCESS, IU_ACCESS, DEFAULT_ACCESS, WORLD_WIDE_ACCESS]
   # default access is the highest rank so that it is omitted from subsequent access requests - any access determination
   # after the default value is considered 'reviewed'
   ACCESS_RANKING = {
-      RESTRICTED_ACCESS => 1,
-      IU_ACCESS => 2,
-      WORLD_WIDE_ACCESS => 3,
-      DEFAULT_ACCESS => 2
+    RA_ETHICAL => 1,
+    RA_LICENCE => 1,
+    RA_PRIVACY => 1,
+    RESTRICTED_ACCESS => 1,
+    IU_ACCESS => 2,
+    WORLD_WIDE_ACCESS => 3,
+    DEFAULT_ACCESS => 2
   }
+
+  ACCESS_FROM_RANKING = {
+    1 => "Restricted Access",
+    2 => "IU Access",
+    3 => "World Wide Access"
+  }
+
+  def self.avalon_access_level(access)
+    raise "Unknown access level: #{access}" unless ACCESS_DECISIONS.include?(access)
+    ACCESS_FROM_RANKING[ACCESS_RANKING[access]]
+  end
 
   # compares access to bounding_access and returns true if and only if access is less restrictive or the same access
   # level as defined by the rankings in ACCESS_RANKING

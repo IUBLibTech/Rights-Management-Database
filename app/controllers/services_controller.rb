@@ -103,7 +103,7 @@ class ServicesController < ApplicationController
     if avalon_item
       response[:status] = "success"
       response[:avalon_identifier] = avalon_item.avalon_id
-      response[:accessDetermination] = avalon_item.access_determination
+      response[:accessDetermination] = AccessDeterminationHelper.avalon_access_level(avalon_item.access_determination)
     else
       response[:status] = "failure"
       response[:avalon_identifier] = "#{params[:avalon_identifier]}"

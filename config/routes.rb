@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # get '/services/access_decision_by_fedora_id/:fid', to: 'services#access_decision_by_fedora_id', as: 'access_decision_by_fedora_id'
   # get '/services/access_decisions_by_barcodes', to: 'services#access_decisions_by_barcodes', as: 'access_decisions_by_barcodes'
   # get '/services/access_decisions_by_fedora_ids', to: 'services#access_decisions_by_fedora_ids', as: 'access_decisions_by_fedora_ids'
-  # get '/services/access_decisions_tester', to: 'test#test_access_decisions', as: 'test_access_decisions'
+  get '/services/access_decisions_tester', to: 'test#test_access_decisions', as: 'test_access_decisions'
   get '/services/access_determination/:avalon_identifier', to: 'services#access_determination', as: 'access_determination'
 
   match '/signin', to: 'sessions#new', via: :get
