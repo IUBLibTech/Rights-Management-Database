@@ -1,12 +1,12 @@
 <h4>This page provides a simple UI to test the Access Determination service of RMD</h4>
 <div>
-  <p>Specify a single MDPI barcode to retrieve the access determination for the recording</p>
+  <p>Specify a single Avalon Identifier to retrieve the access determination for the recording</p>
   <form action="" id="barcode_form">
     <table>
       <tbody>
       <tr>
         <td>
-          <label for="barcode">Barcode</label><input type="text" id="test_mdpi_barcode" name="mdpi_barcode">
+          <label for="barcode">Avalon ID</label><input type="text" id="test_mdpi_barcode" name="mdpi_barcode">
         </td>
         <td>
           <%= button_to "Test", "#", id: 'test_barcode' %>
@@ -17,24 +17,6 @@
   </form>
 </div>
 <div id="barcode_response"></div>
-<div>
-  <p>Specify multiple MDPI barcodes (one per line) to retrieve the most restrictive access determination for all recordings</p>
-  <form action="" id="barcodes_form">
-    <table>
-      <tbody>
-      <tr>
-        <td>
-          <textarea rows="4" cols="15" id="test_mdpi_barcodes" name="_test_mdpi_barcodes"></textarea>
-        </td>
-        <td>
-          <%= button_to "Test", "#", id: 'test_barcodes' %>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </form>
-</div>
-<div id="barcodes_response"></div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
      $('#barcode_form').submit(function(event) {
@@ -42,52 +24,19 @@
          $("#barcode_response").html("");
          var bc = $('#test_mdpi_barcode').val();
          $.ajax({
-             url: './access_decision_by_barcode/'+bc,
+             url: './access_determination/'+bc,
              dataType: 'json',
-             method: "POST",
+             method: "GET",
              beforeSend: function(xhr) {
                  xhr.setRequestHeader("Authorization", "Basic " + btoa("<%= @username %>"+":"+"<%= @password %>"))
              },
              success: function(response) {
-                 if (response.status === "success") {
                      $("#barcode_response").html("<code>"+JSON.stringify(response, null, 2)+"</code>");
-                 } else {
-                     $("#barcode_response").html("<ul><li>"+
-                        "The check for access determination on "+response.mdpiBarcode+"</li><li>"+
-                        "failed for the following reason:"+
-                        response.errorMessage+"</li>"
-                    );
-                 }
              },
              error: function(jqXHR, textStatus, errorThrown) {
                  alert("Something went wrong with RMD...");
              }
          });
       });
-
-     $('#barcodes_form').submit(function(event) {
-         event.preventDefault();
-         var bcs = $('#test_mdpi_barcodes').val().split(('\n'));
-         $("#barcodes_response").html("");
-         $.ajax({
-             url: "<%= access_decision_by_barcodes_path %>",
-             data: JSON.stringify(bcs),
-             dataType: 'json',
-             method: 'POST',
-             beforeSend: function(xhr) {
-                 xhr.setRequestHeader("Authorization", "Basic " + btoa("<%= @username %>"+":"+"<%= @password %>"))
-             },
-             success: function(response) {
-                 if (response.status === "success") {
-                     $("#barcodes_response").html("<code>"+JSON.stringify(response, null, 2)+"</code>");
-                 } else {
-                     $("#barcode_response").html("<code>"+response+"</code>");
-                 }
-             },
-             error: function(jqXHR, textStatus, errorThrown) {
-                 $("#barcodes_response").html("<code>"+errorThrown+"</code>");
-             }
-         });
-     });
   });
 </script>

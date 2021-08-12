@@ -1,5 +1,4 @@
-<%= link_to 'New Person', new_person_path %>
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= flash[:notice]&.html_safe %></p>
 <h1>Listing People</h1>
 <table>
   <thead>
@@ -11,6 +10,7 @@
       <th>Authority Source</th>
       <th>Authority Source URL</th>
       <th>AKA</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,14 +23,51 @@
         <td><%= person.authority_source %></td>
         <td><%= link_to "#{person.authority_source_url}", person.authority_source_url unless person.authority_source_url.blank? %></td>
         <td></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', person %>
+          <% if person.avalon_items.size > 0 %>
+            <span style="color: #111">Destroy</span> |
+            <%= link_to "Try Anyway", person, method: :delete  %>
+          <% else %>
+            <%= link_to 'Destroy', person, method: :delete%>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
+<h1>Listing Entities</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Company Name</th>
+    <th>Nationality</th>
+    <th>Authority Source</th>
+    <th>Authority Source URL</th>
+    <th>AKA</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @entities.each_with_index do |person, i| %>
+    <tr class=<%= "#{i.odd? ? 'odd' : 'even'}" %>>
+      <td><%= person.company_name %></td>
+      <td><%= person.entity_nationality %></td>
+      <td><%= person.authority_source %></td>
+      <td><%= link_to "#{person.authority_source_url}", person.authority_source_url, target: '_blank' unless person.authority_source_url.blank? %></td>
+      <td></td>
+      <td>
+        <%= link_to 'Show', person %>
+        <% if person.avalon_items.size > 0 %>
+          <span style="color: #111">Destroy</span> |
+          <%= link_to "Try Anyway", person, method: :delete  %>
+        <% else %>
+          <%= link_to 'Destroy', person, method: :delete %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 

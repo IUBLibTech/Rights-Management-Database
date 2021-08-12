@@ -18,16 +18,16 @@
     </div>
     <div class="rvt-grid__item-4-md-up">
       <label for="performanceDateString">Date</label>
-      <%= f.text_field :performance_date_string, {'aria-describedby':"performanceDate"} %>
+      <%= f.text_field :performance_date_string, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %>
     </div>
-    <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">
-      <label for="recording[in_copyright]" class="rvt-m-right-sm">In Copyright</label>
-      <%= f.select :in_copyright, options_for_select([['Yes'],['No']], @performance.in_copyright), {include_blank: ''} %>
-    </div>
-    <div class="rvt-grid__item-4-md-up">
-      <label for="copyrightEndDate">Copyright End Date</label>
-      <%= f.text_field :copyright_end_date, {'aria-describedby': "copyrightEndDate"} %>
-    </div>
+<!--    <div class="rvt-grid__item-4-md-up rvt-checkbox-wrapper">-->
+<!--      <label for="recording[in_copyright]" class="rvt-m-right-sm">In Copyright</label>-->
+      <%#= f.select :in_copyright, options_for_select([['Yes', true],['No', false]], @performance.in_copyright), {include_blank: ''} %>
+<!--    </div>-->
+<!--    <div class="rvt-grid__item-4-md-up">-->
+<!--      <label for="copyrightEndDate">Copyright End Date</label>-->
+      <%#= f.text_field :copyright_end_date, {'aria-describedby': "copyrightEndDate", class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %>
+<!--    </div>-->
     <div class="rvt-m-all-sm">
       <% if action_name.include?('new') %>
         <button type="submit" class="performanceCreateButton rvt-button " data-recording-id="<%= @recording.id %>">Create Performance</button>

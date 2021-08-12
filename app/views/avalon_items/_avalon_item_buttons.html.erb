@@ -1,7 +1,5 @@
 <div class="rvt-grid__item-lg">
   <div id="avalon_item_buttons_div">
-    <button id="avalon_item_note_button" type=button class="rvt-button" >Avalon Item Note</button>
-    <button id="mark_needs_reviewed" class=' <%= @avalon_item.review_state == AvalonItem::REVIEW_STATE_ACCESS_DETERMINED ? "rvt-disabled-button" : 'rvt-button'  %>' data-avalon-item-id=<%= @avalon_item.id %>><%= @msg %></button>
     <div class="rvt-dropdown">
       <button type="button" class="rvt-button" data-dropdown-toggle="dropdown-navigation" aria-haspopup="true" aria-expanded="false" >
         <span>History</span>
@@ -17,6 +15,6 @@
         <% end %>
       </div>
     </div>
-    <%= render partial: 'avalon_items/review_comments' %>
+    <%#= render partial: 'avalon_items/review_comments' %>
   </div>
 </div>

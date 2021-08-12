@@ -1,7 +1,7 @@
 module SessionsHelper
   def sign_in(username)
     self.current_username = username
-    User.save_session_user(@resp_user)
+    User.save_session_user(username)
   end
 
   def current_username=(username)

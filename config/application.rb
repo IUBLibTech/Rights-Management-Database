@@ -23,7 +23,12 @@ module Rmd
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # sets the timezone for the application - this has impact on how delayed_job sets the time a job should run,
+    # if not set it defaults to GMT so everything is off by 5 hours
+    config.time_zone = 'Eastern Time (US & Canada)'
+    config.active_record.default_timezone = :local
     # addes the fonts folder to the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
   end
 end

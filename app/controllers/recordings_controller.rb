@@ -20,6 +20,7 @@ class RecordingsController < ApplicationController
 
   def ajax_show
     recording = Recording.find(params[:id])
+    @avalon_item = recording.avalon_item
     render partial: 'recordings/ajax_show', locals: {recording: recording}
   end
 
@@ -59,6 +60,7 @@ class RecordingsController < ApplicationController
     if User.belongs_to_unit?(@recording.unit)
       respond_to do |format|
         if @recording.update(recording_params)
+          @avalon_item = @recording.avalon_item
           format.html { render partial: 'recordings/ajax_show', locals: {recording: @recording}, status: :ok, location: @recording }
         else
           format.json { render json: @recording.errors, status: :unprocessable_entity }
@@ -83,17 +85,17 @@ class RecordingsController < ApplicationController
     end
   end
 
-  def mark_needs_review
-    @recording.needs_review = true
-    @recording.save!
-    redirect_to recording_path(@recording)
-  end
+  # def mark_needs_review
+  #   @recording.needs_review = true
+  #   @recording.save!
+  #   redirect_to recording_path(@recording)
+  # end
 
-  def mark_reviewed
-    @recording.needs_review = false
-    @recording.save!
-    redirect_to recording_path(@recording)
-  end
+  # def mark_reviewed
+  #   @recording.needs_review = false
+  #   @recording.save!
+  #   redirect_to recording_path(@recording)
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -104,8 +106,9 @@ class RecordingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def recording_params
       params.require(:recording).permit(
-          :access_determination, :title, :description, :format, :published, :date_of_first_publication, :creation_date,
-          :creation_end_date, :country_of_first_publication, :in_copyright, :copyright_end_date, :receipt_of_will_before_90_days_of_death,
+          :access_determination, :title, :description, :format, :published, :date_of_first_publication, :date_of_first_publication_text,
+          :creation_date, :creation_date_text, :creation_end_date, :country_of_first_publication, :in_copyright, :commercial,
+          :copyright_end_date, :copyright_end_date_text, :receipt_of_will_before_90_days_of_death,
           :authority_source, :authority_source_url,
           recording_notes_attributes: [:id, :creator, :text, :_destroy]
       )

@@ -289,6 +289,18 @@ textarea {
     animation-timing-function: ease-in-out;
     visibility: visible!important
 }
+.m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+    display: none;
+}
+.m-fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+    display: flex;
+}
 
 @keyframes fadeIn {
     0% {
@@ -513,7 +525,7 @@ a:link, a:focus, a:visited, a:active {
 }
 
 /** Added by Andrew Albrecht */
-.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-disabled-button:focus, .rvt-disabled-button:active  {
+.rvt-disabled-button, .rvt-disabled-button:hover, .rvt-dgisabled-button:focus, .rvt-disabled-button:active  {
     align-items: center;
     border-radius: 4px;
     font-family: BentonSans, "Helvetica Neue", Helvetica, sans-serif;
@@ -561,7 +573,6 @@ a:link, a:focus, a:visited, a:active {
     right: 0;
     bottom: 0;
     background-color: rgba(200,200,200,1);
-    z-index: 200;
     overflow: auto;
 }
 #adder_close {
@@ -574,4 +585,281 @@ a:link, a:focus, a:visited, a:active {
 .note {
     max-height: 10rem;
     overflow: auto;
+    width: 33%;
+    margin-bottom: .5rem;
+    flex-basis: 33%;
 }
+
+.red_700 {
+    color: #900;
+    font-weight: 700;
+}
+#search_input, #search_button {
+    height: 1.5rem;
+}
+#search_input {
+    margin-right: 4px;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+.tooltip > a {
+    border-bottom: 1px dotted #900;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 500px;
+    max-width: 500px;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: 1px solid black;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    margin-left: -80px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+    color: black;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.left_one {
+
+}
+.middle_one {
+    left: 89px;
+}
+.right_one {
+    left: 89px;
+}
+.work, .person {
+    max-width: 30%;
+    flex-basis: 30%;
+}
+.person_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -290px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    width: 300px;
+    border-radius: 7px;
+    padding: 5px;
+}
+.entity_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 290px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    width: 300px;
+    border-radius: 7px;
+    padding: 5px;
+}
+.person_ac_tooltip::after, .entity_ac_tooltip::after {
+    /*content: "";*/
+    /*position: absolute;*/
+    /*left: 304px;*/
+    /*margin-left: -5px;*/
+    /*border-width: 10px;*/
+    /*border-style: solid;*/
+    /*border-color: black transparent transparent transparent;*/
+    /*color: black;*/
+    /*transform: rotate(270deg);*/
+}
+
+#add_person_button, #add_work_button {
+    font-size: 1rem;
+}
+#add_work_button {
+    margin-right: 75px;
+}
+#mdpi_barcode_input, #mdpi_barcode_button {
+    /* Need this to overright Rivets input group z-index of 200... why?*/
+    z-index: 0;
+}
+
+.blue_700 {
+    color: #006298;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.work_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 300px;
+    width: 450px;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    border-radius: 7px;
+    padding: 5px;
+}
+.work_ac_tooltip::after {
+    /*content: "";*/
+    /*position: absolute;*/
+    /*left: 304px;*/
+    /*margin-left: -5px;*/
+    /*border-width: 10px;*/
+    /*border-style: solid;*/
+    /*border-color: black transparent transparent transparent;*/
+    /*color: black;*/
+    /*transform: rotate(270deg);*/
+}
+.work_person_ac_tooltip {
+    display: none;
+    content: "";
+    position: absolute;
+    margin-left: -5px;
+    /* border-width: 10px; */
+    border: 1px solid;
+    /* border-color: black transparent transparent transparent; */
+    color: black;
+    z-index: 5;
+    background: white;
+    width: 300px;
+    border-radius: 7px;
+    padding: 5px;
+    left: 290px;
+    top: 25px;
+}
+.work_people_autocomplete_div {
+    max-width: 30%;
+    position: relative;
+}
+.work_person_template {
+    display: none;
+}
+.work_person {
+    display: flex;
+}
+#work_people_div {
+    display: flex;
+    flex-direction: column;
+}
+.work_person > * {
+    margin: auto 0;
+    padding: 3px;
+}
+.work_person div:nth-child(1) {
+    margin-right: 1.5rem;
+    flex-basis: 25%;
+}
+.work_person > div.roles > label:nth-child(2) {
+    margin-right: 1rem;
+}
+.work_person > div.actions {
+    margin-left: 1rem;
+}
+
+.entity_attributes {
+    display: none;
+}
+.recording_title, .performance_title, .track_title {
+    float: left;
+    margin-right: 2rem;
+}
+ul.roles > li {
+    display: inline;
+}
+.mass_assign {
+    float: left;
+}
+.mass_assign > p {
+    margin: 0;
+}
+.clear {
+    clear: both;
+}
+
+.warning {
+    color: red;
+    font-weight: 700;
+}
+.notice {
+    color: green;
+    font-weight: 700;
+}
+.left_kids {
+    overflow: auto;
+    display: flex;
+}
+.left_kids > * {
+
+}
+
+span.page {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5;
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px;
+}
+span.active {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1;
+}
+.pagination > span.disabled {
+    color: #999999;
+    border: 1px solid #dddddd;
+}
+.flex_row {
+    display: flex;
+}
+.column_05 {
+    flex: 5%;
+    padding: 10px;
+}
+.column_80 {
+    flex: 80%;
+    padding: 10px;
+}
+.hidden {
+    display: none;
+}
+
+

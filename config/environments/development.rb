@@ -36,6 +36,10 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # allow writing to consold from the Application IP address on Helium
+  config.web_console.permissions = '149.159.54.187'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.force_ssl = false
 end

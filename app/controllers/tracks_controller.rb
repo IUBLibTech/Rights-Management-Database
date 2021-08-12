@@ -43,6 +43,15 @@ class TracksController < ApplicationController
     end
   end
 
+  def ajax_access_determination
+    @track = Track.find(params[:id])
+    access = params[:access]
+    if AccessDeterminationHelper::ACCESS_DECISIONS.include? access
+      @saved = @track.update_attributes(access_determination: access)
+    end
+    render text: "success"
+  end
+
   # DELETE /performances/1
   # DELETE /performances/1.json
   def destroy
@@ -70,7 +79,7 @@ class TracksController < ApplicationController
   end
   def track_params
     params.require(:track).permit(
-        :performance_id, :track_name, :recording_start_time, :recording_end_time, :in_copyright, :copyright_end_date, :access_determination
+        :performance_id, :track_name, :recording_start_time, :recording_end_time, :in_copyright, :copyright_end_date_text, :access_determination
     )
   end
 end

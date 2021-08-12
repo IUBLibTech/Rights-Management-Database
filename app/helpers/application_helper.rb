@@ -1,4 +1,7 @@
 module ApplicationHelper
+
+  include Pagy::Frontend
+
   # this method is based on the Luhn algorithm (aka Mod 10)
   # wikipedia provides a clear explanation of it:
   # http://en.wikipedia.org/wiki/Luhn_algorithm#Implementation_of_standard_Mod_10
@@ -40,6 +43,22 @@ module ApplicationHelper
 
   def ApplicationHelper.valid_mdpi_barcode(seed = 0, prefix = 0)
     generate_barcode(true, seed, 4)
+  end
+
+  def boolean_to_yes_no(bool)
+    if bool.nil?
+      ""
+    else
+      bool == false ? 'No' : 'Yes'
+    end
+  end
+
+  def self.fulltext_search(text)
+    AvalonItem.search do
+      fulltext text do
+        fields(:avalon_id, :recordings, :performances, :tracks, :title => 2.0)
+      end
+    end
   end
 
   private

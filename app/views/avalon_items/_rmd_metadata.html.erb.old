@@ -1,8 +1,8 @@
 <div>
   <div class='reviewed_div'>
-    <% if @avalon_item.reviewed?%>
+    <% if @avalon_item.cl_determined?%>
       <p class="reviewed">This Item has been Reviewed by a Copyright Librarian</p>
-    <% elsif @avalon_item.needs_review? %>
+    <% elsif @avalon_item.in_review? %>
       <p class="needs_review" data-comment="<% @avalon_item.review_comments.last.comment %>">
         <% if User.current_user_copyright_librarian? %>
           <span>Review Requested</span>
@@ -20,13 +20,6 @@
     <% elsif !User.copyright_librarian?(User.current_username) %>
       <p class="review_not_needed button">Click to Mark 'Needs Copyright Review'</p>
     <% end %>
-    <div class="toggle">
-      <% @avalon_item.review_comments.order("id DESC").each do |c| %>
-        <p class="<%= c.copyright_librarian? ? "cl_comment" : "cm_comment"%>">
-          <b><%= c.creator %> (<%= c.created_at.strftime('%m/%d/%Y') %>)</b>: <%= c.comment %>
-        </p>
-      <% end %>
-    </div>
   </div>
 </div>
 <div class="left">

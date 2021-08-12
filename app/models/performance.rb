@@ -3,11 +3,36 @@ class Performance < ActiveRecord::Base
   has_many :recordings, through: :recording_performances
   has_many :tracks, dependent: :delete_all
   has_many :performance_notes
+  # no longer contributions at this level, only at recording and track level
+  # has_many :performance_contributor_people
+  # has_many :contributors, -> { where "interviewer = true OR interviewee = true OR performer = true OR conductor = true" }, class_name: "PerformanceContributorPerson"
+  # has_many :people, through: :contributors
+  has_many :avalon_items, through: :recordings
 
-  #before_save :normalize_date
+  accepts_nested_attributes_for :tracks
 
-  def normalize_date
-    self.performance_date = Date.strptime(self.performance_date_string, "%m/%d/%Y")
+  before_save :edtf_dates
+  before_update :edtf_dates
+
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :title
+  # end
+
+  def performance_date_string=(str)
+    super
+  end
+
+  def edtf_dates
+    if performance_date_string.nil?
+      self.performance_date = nil
+    else
+      date = Date.edtf(performance_date_string.gsub('/', '-'))
+      self.performance_date = date
+      puts "Set performance_date to #{date}, calling self.performance_date: #{self.performance_date}"
+    end
   end
 
 end

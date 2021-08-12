@@ -1,0 +1,50 @@
+<% if flash[:warn] %>
+  <div class="rvt-alert rvt-alert--danger" role="alert" aria-labelledby="error-alert-title">
+    <h1 class="rvt-alert__title" id="danger-alert-title">Invalid Select</h1>
+    <%= flash[:warn] %>
+  </div>
+<% elsif flash[:notice] %>
+  <div class="rvt-alert rvt-alert--success rvt-m-bottom-md" role="alertdialog" aria-labelledby="success-alert-title">
+    <h1 class="rvt-alert__title" id="success-alert-title">The following updates were successful:</h1>
+    <%= flash[:notice] %>
+    <button type="button" class="rvt-alert__dismiss" data-alert-close>
+      <span class="v-hide">Dismiss this alert</span>
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+        <path fill="currentColor" d="M9.41,8l5.29-5.29a1,1,0,0,0-1.41-1.41L8,6.59,2.71,1.29A1,1,0,0,0,1.29,2.71L6.59,8,1.29,13.29a1,1,0,1,0,1.41,1.41L8,9.41l5.29,5.29a1,1,0,0,0,1.41-1.41Z"/>
+      </svg>
+    </button>
+  </div>
+<% end %>
+
+<%= form_tag "/collections", method: :post do %>
+  <p>Mass assign Access Determination, Legal Agreement, and/or Note to selected Collection Avalon Items</p>
+  <div class="access_div">
+    <label for=access>Access Determination:</label>
+    <%= select_tag :access, options_for_select(AccessDeterminationHelper::ACCESS_DECISIONS.collect{|a| [a,a]}), include_blank: true  %>
+  </div>
+  <div class="access_div rvt-m-right-md" >
+    <label for="agreement">Agreement Type</label> <%= select_tag :contract_type, options_for_select([['License'],['Contract'],['Policy'],['Deed of Gift'],['Other']]), include_blank: true %>
+    <label for="date">End Date</label> <%= text_field_tag :end_date %>
+    <label for="contract_perpetual">Perpetual?</label><%= select_tag :perpetual, options_for_select([['Yes', true],['No', false]]), { include_blank: '' } %>
+    <label for="notes">Notes</label> <%= text_area_tag :agreement_notes %>
+  </div>
+  <div class="access_div">
+    <label for="note">Avalon Item Note</label><%= text_area_tag :note %>
+  </div>
+  <div class="clear">
+    <%= submit_tag "Submit" %>
+  </div>
+  <h4 class="clear">Collections</h4>
+  <div>
+    <ul class="rvt-plain-list">
+      <% @collection_names.each do |cn| %>
+        <li class="rvt-checkbox-wrapper rvt-m-right-md">
+          <%= check_box_tag "collections[#{cn}]", id: "#{cn}" %>
+          <%= label_tag "#{"collections_"+cn}", "#{cn}"  do %>
+            <%= link_to cn, collection_list_path(cn) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

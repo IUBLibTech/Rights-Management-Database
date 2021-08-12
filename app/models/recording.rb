@@ -3,8 +3,15 @@ class Recording < ActiveRecord::Base
 
   has_many :recording_performances
   has_many :performances, through: :recording_performances
+
+  # this one is wonky because recording_contributor_people holds the role booleans (producer and depositor). A Person only
+  # contributes if a role is set. But the RecordingContributorPerson can exist with any roles being set to true so we have
+  # to abstract the actual people through the middle query of :contributors
   has_many :recording_contributor_people
-  has_many :people, through: :recording_contributor_people
+  has_many :contributors, -> { where "recording_producer = true OR recording_depositor = true" }, class_name: "RecordingContributorPerson"
+  has_many :people, through: :contributors
+
+
   has_many :recording_notes
 
   belongs_to :atom_feed_read
@@ -12,8 +19,10 @@ class Recording < ActiveRecord::Base
   has_one :pod_physical_object, class_name: 'PodPhysicalObject', foreign_key: 'mdpi_barcode', primary_key: 'mdpi_barcode'
   has_one :pod_unit, through: :pod_physical_object
 
-  #accepts_nested_attributes_for :recording_performances
   accepts_nested_attributes_for :recording_notes, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :performances
+
+  before_save :edtf_dates
 
   UNITS = ["B-AAAI", "B-AAAMC", "B-AFRIST", "B-ALF", "B-ANTH", "B-ARCHIVES", "B-ASTR", "B-ATHBASKM", "B-ATHBASKW",
            "B-ATHFHOCKEY", "B-ATHFTBL", "B-ATHROWING", "B-ATHSOCCM", "B-ATHSOFTB", "B-ATHTENNM", "B-ATHVIDEO",
@@ -28,10 +37,35 @@ class Recording < ActiveRecord::Base
            "SB-ARCHIVES", "SB-PHYS", "SB-ULIB", "SE-ARCHIVES"]
 
   validates :access_determination, :inclusion => {:in => ACCESS_DECISIONS}
-  validates :mdpi_barcode, mdpi_barcode: true
 
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :title, :description
+  #   text :mdpi_barcode do
+  #     "#{mdpi_barcode}"
+  #   end
+  # end
 
+  def contributors
+    people.map { |p| p.name }
+  end
 
+  def edtf_dates
+    # copyright end date
+    date = Date.edtf(copyright_end_date_text.gsub('/', '-'))
+    self.copyright_end_date = date
+    puts "Set copyright_end_date to #{date}, calling self.copyright_end_date: #{self.copyright_end_date}"
 
+    # creation date
+    date = Date.edtf(creation_date_text.gsub('/', '-'))
+    self.creation_date = date
+    puts "Set creation_date to #{date}, calling self.creation_date: #{self.creation_date}"
 
+    # date of first pub
+    date = Date.edtf(date_of_first_publication_text.gsub('/', '-'))
+    self.date_of_first_publication = date
+    puts "Set date_of_first_publication to #{date}, calling self.date_of_first_publication: #{self.date_of_first_publication}"
+  end
 end

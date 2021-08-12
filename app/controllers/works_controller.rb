@@ -4,12 +4,13 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.json
   def index
-    @works = Work.all
+    @works = Work.includes(:avalon_items).all
   end
 
   # GET /works/1
   # GET /works/1.json
   def show
+    render 'works/show'
   end
 
   # GET /works/new
@@ -32,7 +33,6 @@ class WorksController < ApplicationController
           AvalonItemWork.new(work_id: @work.id, avalon_item_id: params[:avalon_item_id].to_i).save
         end
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
-        format.js {}
         format.json { render text: "success"}
       else
         format.html { render :new }
@@ -58,17 +58,40 @@ class WorksController < ApplicationController
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy
-    @work.destroy
-    respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
-      format.json { head :no_content }
+    if @work.avalon_items.size > 0
+      respond_to do |format|
+        format.html { redirect_to works_url, notice: "The Work <i>#{@work.title}</i> cannot be destroyed because it is currently associated with Avalon Items".html_safe }
+      end
+    else
+      @work.destroy
+      respond_to do |format|
+        format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+      end
     end
+  end
+
+  def ajax_autocomplete_title
+    @hits = Work.where("title like ?", "%#{params[:term]}%")
+    render json: @hits
+  end
+  def ajax_match_authority_source_url
+    @hit = Work.where(authority_source_url: params[:term])
+    render json: @hit
   end
 
   def ajax_new_work
     @work = Work.new(title: params[:title])
     @ajax = true
     render partial: 'works/form'
+  end
+
+  def ajax_show
+    @work = Work.find(params[:id])
+    render partial: 'works/ajax_show'
+  end
+
+  def ajax_edit_work
+    render partial: 'works/ajax_edit_work'
   end
 
   private

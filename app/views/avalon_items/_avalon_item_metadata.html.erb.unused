@@ -48,7 +48,7 @@
 <div class="rvt-grid__item bgGray accordion-panel">
   <h2>Recordings In This Avalon Item</h2>
   <% @avalon_item.recordings.each do |recording| %>
-    <h3 class="simpleAccordion accordion-title"><%= recording.mdpi_barcode %></h3>
+    <h3 class="simpleAccordion accordion-title"><%= recording.mdpi_barcode %><span class="accordion-title">Avalon Metadata</span></h3>
     <div>
       <a href="tracks.html#accordion4id" class="rvt-button rvt-button floatRight rvt-p-lr-md" style="margin-bottom:1em;">Add Performance</a>
       <div class=rvt-container>

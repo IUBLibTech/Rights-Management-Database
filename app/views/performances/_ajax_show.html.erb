@@ -1,9 +1,10 @@
 <div class="perf_div" data-performance-id="<%= performance.id %>">
-  <h5 class="accordion accordion-title active" data-performance-id="<%= performance.id %>"><%= performance.title %></h5>
+  <h5 class="accordion accordion-title active accordion-trigger" aria-expanded="true" data-performance-id="<%= performance.id %>"><%= performance.title %><span class="accordion-icon"></span></h5>
   <div>
-    <div class=rvt-grid__item-lg>
+    <div class="rvt-grid__item-lg access_div">
       <label for=access>Access Determination:</label>
-      <%= select_tag :access_determination, options_for_select(AvalonItem::ACCESS_DECISIONS.collect{|a| [a,a]}, performance.access_determination) %>
+      <%= select_tag :access_determination, options_for_select(AvalonItem::ACCESS_DECISIONS.collect{|a| [a,a]}, performance.access_determination),
+                     {id: "p_#{performance.id}", class: "performance_access_select","data-performance-id": performance.id } %>
     </div>
     <div class="rvt-grid m-fadeIn">
       <div class="rvt-grid__item-4-md-up">
@@ -13,14 +14,6 @@
       <div class="rvt-grid__item-4-md-up">
         <label for="performanceDate">Date</label> <br>
         <%= performance.performance_date_string %>
-      </div>
-      <div class="rvt-grid__item-4-md-up">
-        <label for="inCopyright">In Copyright</label> <br>
-        <%= performance.in_copyright %>
-      </div>
-      <div class="rvt-grid__item-4-md-up">
-        <label for="copyrightEndDate">Copyright End Date</label> <br>
-        <%= performance.copyright_end_date %>
       </div>
       <div class="rvt-grid__item-12">
         <% if performance.tracks.size == 0 %>

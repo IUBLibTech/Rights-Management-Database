@@ -31,11 +31,11 @@
     </tr>
     <tr>
       <th>Date of Birth</th>
-      <td><%= f.text_field :date_of_birth_edtf, class: 'edtf_year_or_date' %></td>
+      <td><%= f.text_field :date_of_birth_edtf, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %></td>
     </tr>
     <tr>
       <th>Date of Death</th>
-      <td><%= f.text_field :date_of_death_edtf, class: 'edtf_year_or_date' %></td>
+      <td><%= f.text_field :date_of_death_edtf, {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'} %></td>
     </tr>
     <tr>
       <th>Place of Birth</th>

@@ -1,5 +1,18 @@
 class Track < ActiveRecord::Base
   belongs_to :performance
+  has_many :track_works
+  has_many :works, through: :track_works
+  has_many :track_contributor_people
+  has_many :contributors, -> { where "interviewer = true OR interviewee = true OR conductor = true OR performer = true" }, class_name: "TrackContributorPerson"
+  has_many :people, through: :contributors
+
+  before_save :edtf_dates
+  # searchable do
+  #   integer :id do
+  #     id
+  #   end
+  #   text :track_name
+  # end
 
   # recording_start_time is input as hh:mm:ss but stored as seconds
   def recording_start_time=(time)
@@ -27,6 +40,16 @@ class Track < ActiveRecord::Base
   def recording_end_time
     unless super.nil?
       hh_mm_sec(super)
+    end
+  end
+
+  def edtf_dates
+    if copyright_end_date_text.nil?
+      self.copyright_end_date = nil
+    else
+      date = Date.edtf(copyright_end_date_text.gsub('/', '-'))
+      self.copyright_end_date = date
+      puts "Set Track copyright_end_date to #{date}, calling self.copyright_end_date: #{self.copyright_end_date}"
     end
   end
 

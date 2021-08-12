@@ -10,6 +10,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem "nested_form"
 
+gem 'sidekiq'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -28,6 +30,9 @@ gem 'nokogiri', ">= 1.10.8"
 # handle ADS group lookup through LDAP
 gem 'ldap_groups_lookup'
 
+#gem 'will_paginate', '~> 3.1.0'
+gem 'pagy'
+
 gem 'net-scp'
 
 # Use jquery as the JavaScript library
@@ -42,6 +47,20 @@ gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+# gem for utilizing the solr server
+# gem 'rsolr'
+gem 'sunspot_rails'
+# progress bar for sunspot rake tasks (like reindexing...)
+gem 'progress_bar'
+
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem "daemons"
+# Handles background jobs for ingest of Avalon records - based on delayed_job but extended to handle recurring tasks
+gem 'delayed_job_recurring'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -63,5 +82,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'puma'
 end
 

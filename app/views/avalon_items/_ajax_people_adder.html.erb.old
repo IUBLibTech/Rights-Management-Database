@@ -48,23 +48,22 @@
           <%= f.text_area :notes, {class: "noBorder"} %>
         </div>
       </div>
-    <div>
+      <div>
       <p>Add this Person to the Avalon Item's structured metadata below</p>
     </div>
-    <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
-    <ul class="rvt-plain-list">
-      <% @avalon_item.recordings.each do |r| %>
-        <%= f.fields_for r do |rf| %>
+      <h4>Recordings in <span class="recording"><i><%= "#{@avalon_item.title}" %></i></span></h4>
+      <ul class="rvt-plain-list">
+        <%= f.fields_for :recordings do |rf| %>
           <li class="rvt-m-all-xxs rvt-checkbox-wrapper">
-            <%= rf.check_box :id, {id: "recording_#{r.id}", type: 'checkbox'} %>
-            <label for="recording_<%= r.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
+            <%= rf.check_box :id, {type: 'checkbox'} %>
+            <label for="recording_<%= r.object.id %>" class="rvt-m-all-none rvt-"><%= "#{r.title} - #{r.mdpi_barcode}" %></label>
             <div class="rvt-m-left-sm">
               <h4 class="rvt-m-left-xs">Performances in <span class="recording"><i><%= "#{r.title} - #{r.mdpi_barcode}" %></i></span></h4>
                 <ul class="rvt-plain-list">
                   <% r.performances.each do |p| %>
                     <%= rf.fields_for p do |pf| %>
                       <li class="rvt-m-left-xs performance rvt-checkbox-wrapper">
-                        <%= rf.check_box :id, {id: "performance_#{p.id}", type: 'checkbox'}%>
+                        <%= rf.check_box :id, {type: 'checkbox'}%>
                         <label for="performance_<%= p.id %>" class="rvt-m-all-none"><%= "#{p.title}" %></label>
                         <div class="rvt-m-left-sm">
                           <h4>Tracks in <span class="recording"><i><%= "#{p.title}" %></i></span></h4>
@@ -72,7 +71,7 @@
                             <% p.tracks.each do |t| %>
                               <%= pf.fields_for t do |tf| %>
                               <li>
-                                <%= tf.check_box :id, {id: "track_#{t.id}", type: 'checkbox', checked: false}%>
+                                <%= tf.check_box :id, {type: 'checkbox'}%>
                                 <label for="track_<%= t.id %>" class="rvt-m-all-none"><%= "#{t.track_name}" %></label>
                               </li>
                               <% end %>
@@ -88,7 +87,7 @@
         <% end %>
       <% end %>
     </ul>
-    <button type="submit" class="peopleButtonAdderCreate rvt-button">Add Person</button>
-    <button type="button" class="peopleButtonAdderCancel rvt-button rvt-m-left-sm">Cancel</button>
+      <button type="submit" class="peopleButtonAdderCreate rvt-button">Add Person</button>
+      <button type="button" class="peopleButtonAdderCancel rvt-button rvt-m-left-sm">Cancel</button>
+    </div>
   <% end %>
-</div>

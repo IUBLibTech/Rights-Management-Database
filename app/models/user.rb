@@ -1,11 +1,20 @@
 class User < ActiveRecord::Base
   attr_accessor :ldap_lookup_key
   include LDAPGroupsLookup::Behavior
+  include Nokogiri
+
+
 
   # FIXME: for now simply check usernames against this array for determining if a given user is a copyright librarian
   COPYRIGHT_LIBRARIANS = %w(nazapant admjaa)
-  WEB_ADMINS = %w(shmichae jaalbrec mcwhitak)
+  WEB_ADMINS = %w(shmichae jaalbrec mcwhitak gfitzwat)
 
+  scope :user_collections, -> {
+    AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username)).pluck(:collection).uniq.sort
+  }
+  scope :user_collection_ais, -> (collection) {
+    AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username), collection: collection)
+  }
 
   def self.authenticate(username)
     # FIXME: update this to check against ADS groups and unit access
@@ -30,6 +39,9 @@ class User < ActiveRecord::Base
 
   def self.copyright_librarian?(username)
     COPYRIGHT_LIBRARIANS.include? username
+  end
+  def self.collection_manager?(username)
+    ! self.copyright_librarian?(username)
   end
 
   def self.current_user_copyright_librarian?

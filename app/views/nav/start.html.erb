@@ -1,8 +1,8 @@
 <div class="rvt_container">
   <% if User.copyright_librarian?(User.current_username) %>
-    <%= render partial: 'cl_start' %>
+    <%= render partial: 'nav/cl_start' %>
   <% else %>
-    <%= render partial: 'cm_start' %>
+    <%= render partial: 'nav/cm_start' %>
   <% end %>
 </div>
 <script type="text/javascript" charset="utf-8">

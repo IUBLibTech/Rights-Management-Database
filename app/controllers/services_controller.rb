@@ -4,6 +4,11 @@ class ServicesController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :authenticate
 
+  def access_determination
+    aid = params[:avalon_identifier]
+    render json: avalon_item_access_hash(AvalonItem.where(avalon_id: aid).first)
+  end
+
   # json response given a barcode what the access decision is for the recording
   # get /services/access_decision_by_barcode/:mdpi_barcode
   def access_decision_by_barcode
@@ -88,6 +93,21 @@ class ServicesController < ApplicationController
       response[:status] = "failure"
       response[:mdpi_barcode] = "#{params[:mdpi_barcode]}"
       response[:errorMessage] = "RMD could not find a record with MDPI Barcode: "+params[:mdpi_barcode]
+    end
+    response
+  end
+
+
+  def avalon_item_access_hash(avalon_item)
+    response = {}
+    if avalon_item
+      response[:status] = "success"
+      response[:avalon_identifier] = avalon_item.avalon_id
+      response[:accessDetermination] = AccessDeterminationHelper.avalon_access_level(avalon_item.access_determination)
+    else
+      response[:status] = "failure"
+      response[:avalon_identifier] = "#{params[:avalon_identifier]}"
+      response[:errorMessage] = "RMD could not find an Avalon Item based on the provided identifier: #{params[:avalon_identifier]}"
     end
     response
   end
