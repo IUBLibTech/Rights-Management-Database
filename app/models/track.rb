@@ -1,4 +1,4 @@
-class Track < ActiveRecord::Base
+class Track < ApplicationRecord
   belongs_to :performance
   has_many :track_works
   has_many :works, through: :track_works

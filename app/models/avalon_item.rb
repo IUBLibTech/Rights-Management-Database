@@ -1,4 +1,4 @@
-class AvalonItem < ActiveRecord::Base
+class AvalonItem < ApplicationRecord
   include AccessDeterminationHelper
   has_many :recordings
   has_many :performances, through: :recordings

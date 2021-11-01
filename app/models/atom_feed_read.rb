@@ -1,4 +1,4 @@
-class AtomFeedRead < ActiveRecord::Base
+class AtomFeedRead < ApplicationRecord
 
   def mco_id
     # converts the avalon_id from JSON which is actually a URL like https://mco-staging.dlib.indiana.edu/media_objects/gb19f9998

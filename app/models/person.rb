@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   before_save :edtf_dates
   has_many :person_nationalities
   has_many :nationalities, through: :person_nationalities

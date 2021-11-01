@@ -1,4 +1,4 @@
-class RecordingContributorPerson < ActiveRecord::Base
+class RecordingContributorPerson < ApplicationRecord
   belongs_to :recording
   belongs_to :role
   belongs_to :contract

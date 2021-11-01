@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   attr_accessor :ldap_lookup_key
   include LDAPGroupsLookup::Behavior
   include Nokogiri

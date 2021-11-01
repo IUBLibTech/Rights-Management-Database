@@ -1,4 +1,4 @@
-class Recording < ActiveRecord::Base
+class Recording < ApplicationRecord
   include AccessDeterminationHelper
 
   has_many :recording_performances

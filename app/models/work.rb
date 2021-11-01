@@ -1,4 +1,4 @@
-class Work < ActiveRecord::Base
+class Work < ApplicationRecord
   has_many :work_contributor_people
   has_many :people, through: :work_contributor_people
 

@@ -1,4 +1,4 @@
-class PastAccessDecision < ActiveRecord::Base
+class PastAccessDecision < ApplicationRecord
   belongs_to :avalon_item
   after_create :set_current_access
 

@@ -1,0 +1,13 @@
+development:
+  solr:
+    # localhost
+#    hostname: localhost
+#    port: 8983
+#    log_level: WARNING
+#    path: /solr/rmd_test
+
+    # LIT solr rmd_test instance
+    hostname: possum.dlib.indiana.edu
+    port: 8216
+    log_level: WARNING
+    path: /solr/rmd_test

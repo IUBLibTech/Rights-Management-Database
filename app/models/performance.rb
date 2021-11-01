@@ -1,4 +1,4 @@
-class Performance < ActiveRecord::Base
+class Performance < ApplicationRecord
   has_many :recording_performances
   has_many :recordings, through: :recording_performances
   has_many :tracks, dependent: :delete_all

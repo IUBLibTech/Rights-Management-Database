@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   before_action :signed_in_user
-  around_filter :scope_current_username
-  before_filter :set_browser_no_cache
+  around_action :scope_current_username
+  before_action :set_browser_no_cache
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def true?(obj)

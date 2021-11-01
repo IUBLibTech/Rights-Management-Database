@@ -1,2 +1,2 @@
-class TakeDownNotice < ActiveRecord::Base
+class TakeDownNotice < ApplicationRecord
 end

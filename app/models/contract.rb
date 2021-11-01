@@ -1,3 +1,3 @@
-class Contract < ActiveRecord::Base
+class Contract < ApplicationRecord
   belongs_to :avalon_item
 end
