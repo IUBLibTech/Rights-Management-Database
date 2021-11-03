@@ -287,7 +287,7 @@ textarea {
     animation-name: fadeIn;
     animation-duration: .4s;
     animation-timing-function: ease-in-out;
-    visibility: visible!important
+    visibility: visible !important
 }
 .m-fadeOut {
     visibility: hidden;
@@ -449,14 +449,14 @@ input {
     animation-name: fadeOut;
     animation-duration: .55s;
     animation-timing-function: ease;
-    visibility: visible!important
+    visibility: visible !important
 }
 
 .slideDown {
     animation-name: slideDown;
     animation-duration: .55s;
     animation-timing-function: ease;
-    visibility: visible!important
+    visibility: visible !important
 }
 
 @keyframes slideDown {
@@ -512,7 +512,7 @@ select {
     font-weight: 700;
 }
 a:link, a:focus, a:visited, a:active {
-    outline: none; !important;
+    outline: none !important;
 }
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
