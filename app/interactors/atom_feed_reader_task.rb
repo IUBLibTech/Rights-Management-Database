@@ -3,7 +3,7 @@ class AtomFeedReaderTask
   include AfrHelper
 
   timezone 'US/Eastern'
-  run_every 10.seconds
+  run_every 1.hour
   run_at Time.now
   queue 'feed-reader'
 

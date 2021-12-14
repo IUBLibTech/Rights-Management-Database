@@ -1,0 +1,779 @@
+top - 09:54:55 up 44 days, 27 min,  1 user,  load average: 1.24, 1.02, 0.88
+Tasks: 382 total,   1 running, 304 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 13.4 us,  5.7 sy,  0.1 ni, 79.6 id,  0.0 wa,  0.0 hi,  1.2 si,  0.0 st
+KiB Mem : 16251892 total,   556224 free,  6461480 used,  9234188 buff/cache
+KiB Swap:  2097148 total,  1555884 free,   541264 used.  8962312 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 3401 andrew    20   0  616020  44276  15364 S  26.3  0.3  72:11.53 /usr/bin/python3 /usr/bin/touchpad-indicator
+ 2760 andrew    20   0 1051188  86504  57748 S  21.1  0.5 161:07.38 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose 3
+18320 andrew    20   0   44372   4304   3480 R  15.8  0.0   0:00.06 top -b -c
+ 1524 andrew    20   0  725884  42392  28736 S   5.3  0.3   0:59.24 /usr/lib/gnome-terminal/gnome-terminal-server
+ 2786 andrew    20   0  560848   4264   2592 S   5.3  0.0   0:15.36 /usr/lib/gnome-session/gnome-session-binary --session=ubuntu
+ 2916 andrew    20   0 4313528 439536 105128 S   5.3  2.7 185:35.17 /usr/bin/gnome-shell
+ 2961 andrew    20   0  357600   8556   3184 S   5.3  0.1   8:58.68 ibus-daemon --xim --panel disable
+ 3093 andrew    20   0  670812  26252   6088 S   5.3  0.2  38:20.90 /usr/lib/gnome-settings-daemon/gsd-color
+ 3166 andrew    20   0 7518976 166932  53868 S   5.3  1.0  80:34.86 /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
+ 3344 andrew    20   0 13.670g 315956  55036 S   5.3  1.9 909:34.13 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3575 andrew    20   0 16.790g 340368 178056 S   5.3  2.1  21:59.64 /opt/google/chrome/chrome --enable-crashpad
+12027 andrew    20   0 20.733g 505444 109724 S   5.3  3.1  32:18.30 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+    1 root      20   0  226148   7188   4428 S   0.0  0.0   5:24.46 /sbin/init splash
+    2 root      20   0       0      0      0 S   0.0  0.0   0:02.39 [kthreadd]
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [rcu_gp]
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [rcu_par_gp]
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/0:0H-kb]
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [mm_percpu_wq]
+   10 root      20   0       0      0      0 S   0.0  0.0   0:24.45 [ksoftirqd/0]
+   11 root      20   0       0      0      0 I   0.0  0.0  41:19.82 [rcu_sched]
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:07.81 [migration/0]
+   13 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/0]
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/0]
+   15 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/1]
+   16 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/1]
+   17 root      rt   0       0      0      0 S   0.0  0.0   0:07.50 [migration/1]
+   18 root      20   0       0      0      0 S   0.0  0.0   0:11.71 [ksoftirqd/1]
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/1:0H-kb]
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/2]
+   22 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/2]
+   23 root      rt   0       0      0      0 S   0.0  0.0   0:08.00 [migration/2]
+   24 root      20   0       0      0      0 S   0.0  0.0   0:06.29 [ksoftirqd/2]
+   26 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/2:0H-kb]
+   27 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/3]
+   28 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/3]
+   29 root      rt   0       0      0      0 S   0.0  0.0   0:07.92 [migration/3]
+   30 root      20   0       0      0      0 S   0.0  0.0   0:04.22 [ksoftirqd/3]
+   32 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/3:0H-kb]
+   33 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/4]
+   34 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/4]
+   35 root      rt   0       0      0      0 S   0.0  0.0   0:07.32 [migration/4]
+   36 root      20   0       0      0      0 S   0.0  0.0   0:10.30 [ksoftirqd/4]
+   38 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/4:0H-kb]
+   39 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/5]
+   40 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/5]
+   41 root      rt   0       0      0      0 S   0.0  0.0   0:07.58 [migration/5]
+   42 root      20   0       0      0      0 S   0.0  0.0   0:45.72 [ksoftirqd/5]
+   44 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/5:0H-kb]
+   45 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/6]
+   46 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/6]
+   47 root      rt   0       0      0      0 S   0.0  0.0   0:07.63 [migration/6]
+   48 root      20   0       0      0      0 S   0.0  0.0   0:05.47 [ksoftirqd/6]
+   51 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/7]
+   52 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/7]
+   53 root      rt   0       0      0      0 S   0.0  0.0   0:07.97 [migration/7]
+   54 root      20   0       0      0      0 S   0.0  0.0   0:03.06 [ksoftirqd/7]
+   57 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [kdevtmpfs]
+   58 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [netns]
+   59 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [rcu_tasks_kthre]
+   60 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [kauditd]
+   61 root      20   0       0      0      0 S   0.0  0.0   0:04.21 [khungtaskd]
+   62 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [oom_reaper]
+   63 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [writeback]
+   64 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [kcompactd0]
+   65 root      25   5       0      0      0 S   0.0  0.0   0:00.00 [ksmd]
+   66 root      39  19       0      0      0 S   0.0  0.0   0:08.71 [khugepaged]
+  113 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kintegrityd]
+  114 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kblockd]
+  115 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [blkcg_punt_bio]
+  117 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [tpm_dev_wq]
+  119 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ata_sff]
+  120 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [md]
+  121 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [edac-poller]
+  122 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [devfreq_wq]
+  124 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 [watchdogd]
+  132 root      20   0       0      0      0 S   0.0  0.0   0:08.61 [kswapd0]
+  133 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [ecryptfs-kthrea]
+  135 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kthrotld]
+  136 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/122-aerdrv]
+  137 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/124-aerdrv]
+  138 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [acpi_thermal_pm]
+  140 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [vfio-irqfd-clea]
+  141 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ipv6_addrconf]
+  150 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kstrp]
+  153 root       0 -20       0      0      0 I   0.0  0.0   0:11.81 [kworker/u17:0-h]
+  168 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [charger_manager]
+  227 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [scsi_eh_0]
+  228 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_0]
+  229 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [scsi_eh_1]
+  230 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_1]
+  231 root      20   0       0      0      0 S   0.0  0.0   0:00.02 [scsi_eh_2]
+  232 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_2]
+  235 root       0 -20       0      0      0 I   0.0  0.0   0:16.41 [kworker/0:1H-ev]
+  256 root       0 -20       0      0      0 I   0.0  0.0   0:23.56 [kworker/6:1H-ev]
+  259 root       0 -20       0      0      0 I   0.0  0.0   0:32.08 [kworker/5:1H-ev]
+  260 root      20   0       0      0      0 S   0.0  0.0  15:46.45 [jbd2/sda5-8]
+  261 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ext4-rsv-conver]
+  263 root       0 -20       0      0      0 I   0.0  0.0   0:08.68 [kworker/3:1H-ev]
+  275 root       0 -20       0      0      0 I   0.0  0.0   0:10.08 [kworker/2:1H-ev]
+  280 root       0 -20       0      0      0 I   0.0  0.0   0:14.03 [kworker/1:1H-ev]
+  294 root       0 -20       0      0      0 I   0.0  0.0   0:23.52 [kworker/7:1H-ev]
+  311 root      19  -1  473888 212788 210336 S   0.0  1.3   1:02.22 /lib/systemd/systemd-journald
+  337 root      20   0   48000   3912   2204 S   0.0  0.0   0:48.22 /lib/systemd/systemd-udevd
+  348 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop1]
+  350 root       0 -20       0      0      0 S   0.0  0.0   0:00.02 [loop2]
+  355 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop3]
+  357 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop5]
+  358 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop6]
+  377 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop9]
+  380 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop10]
+  387 root       0 -20       0      0      0 S   0.0  0.0   0:00.03 [loop11]
+  412 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop12]
+  417 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop13]
+  418 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/67-smo8800]
+  421 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop14]
+  426 root       0 -20       0      0      0 S   0.0  0.0   0:00.12 [loop15]
+  454 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [cfg80211]
+  463 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kmemstick]
+  488 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop18]
+  498 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ath10k_wq]
+  499 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ath10k_aux_wq]
+  500 root     -51   0       0      0      0 S   0.0  0.0   2:42.10 [irq/51-DELL0817]
+  503 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop19]
+  504 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [cryptd]
+  514 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/u17:1-h]
+  602 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop22]
+  603 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop23]
+  613 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop25]
+  619 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop26]
+  627 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop27]
+  666 root       0 -20       0      0      0 S   0.0  0.0   0:00.96 [loop28]
+  730 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop29]
+  740 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop30]
+  812 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop33]
+  823 systemd+  20   0   72284   3200   2552 S   0.0  0.0   7:33.71 /lib/systemd/systemd-resolved
+  833 systemd+  20   0  145964    516    472 S   0.0  0.0   0:04.92 /lib/systemd/systemd-timesyncd
+  847 root       0 -20       0      0      0 S   0.0  0.0   0:00.07 [loop37]
+  885 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop34]
+  917 root      20   0 2128912  21860  10496 S   0.0  0.1   5:08.33 /usr/lib/snapd/snapd
+  990 root      20   0  434440   4524   3560 S   0.0  0.0   0:00.54 /usr/sbin/ModemManager --filter-policy=strict
+  991 root      20   0  110492   1124    964 S   0.0  0.0   2:41.61 /usr/sbin/irqbalance --foreground
+  993 root      20   0   31324    656    556 S   0.0  0.0   0:03.25 /usr/sbin/cron -f
+  996 syslog    20   0  263040   1808    604 S   0.0  0.0   0:22.75 /usr/sbin/rsyslogd -n
+  998 avahi     20   0   47552   2116   1600 S   0.0  0.0   3:37.37 avahi-daemon: running [andrew-Latitude-5590.local]
+ 1001 root      20   0  504196   7284   4464 S   0.0  0.0   2:38.75 /usr/lib/udisks2/udisksd
+ 1003 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop36]
+ 1007 root      20   0   70584   2104   1840 S   0.0  0.0   0:20.35 /lib/systemd/systemd-logind
+ 1019 message+  20   0   52888   4944   2444 S   0.0  0.0   7:34.42 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 1020 avahi     20   0   47080     44      0 S   0.0  0.0   0:00.00 avahi-daemon: chroot helper
+ 1056 root      20   0   45876   4724   4040 S   0.0  0.0   0:17.19 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+ 1058 root      20   0  832500  12032   7932 S   0.0  0.1  35:52.90 /usr/sbin/NetworkManager --no-daemon
+ 1062 root      20   0  287632   4012   3416 S   0.0  0.0   0:40.61 /usr/lib/accountsservice/accounts-daemon
+ 1066 root      20   0  170536   1032    908 S   0.0  0.0   0:00.06 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+ 1071 root      20   0    4556    632    544 S   0.0  0.0   0:35.20 /usr/sbin/acpid
+ 1082 root      20   0  179892   1912   1732 S   0.0  0.0   3:55.37 /usr/sbin/thermald --no-daemon --dbus-enable
+ 1112 root      20   0  296612   6948   3796 S   0.0  0.0   0:05.62 /usr/lib/policykit-1/polkitd --no-debug
+ 1334 root      20   0  187244   1224    828 S   0.0  0.0   0:00.08 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ 1357 root      20   0 1720488  10560   3208 S   0.0  0.1  36:08.32 /usr/bin/containerd
+ 1369 root      20   0  300952   3068   2528 S   0.0  0.0   0:00.08 /usr/sbin/gdm3
+ 1406 root      20   0  254448    484    484 S   0.0  0.0   0:00.01 gdm-session-worker [pam/gdm-launch-environment]
+ 1412 mysql     20   0 2838356 312888  17924 S   0.0  1.9 113:05.69 /usr/sbin/mysqld
+ 1431 redis     20   0   51448    272    136 S   0.0  0.0  49:42.68 /usr/bin/redis-server 127.0.0.1:6379
+ 1463 gdm       20   0   77144   4028   3108 S   0.0  0.0   0:00.85 /lib/systemd/systemd --user
+ 1464 gdm       20   0  114192    272      0 S   0.0  0.0   0:00.00 (sd-pam)
+ 1498 gdm       20   0  190692    468    468 S   0.0  0.0   0:00.00 /usr/lib/gdm3/gdm-wayland-session gnome-session --autostart /usr/share/gdm/greeter/autostart
+ 1502 gdm       20   0   50412   2676   1988 S   0.0  0.0   0:00.16 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 1511 gdm       20   0  625592   1616    852 S   0.0  0.0   0:00.82 /usr/lib/gnome-session/gnome-session-binary --autostart /usr/share/gdm/greeter/autostart
+ 1551 gdm       20   0 4262284 107632  74944 S   0.0  0.7  34:23.62 /usr/bin/gnome-shell
+ 1576 root      20   0  315484   5088   4052 S   0.0  0.0   3:17.15 /usr/lib/upower/upowerd
+ 1668 gdm       20   0 1785096   3488   2708 S   0.0  0.0   0:02.06 /usr/bin/Xwayland :1024 -rootless -terminate -accessx -core -listen 4 -listen 5 -displayfd 6
+ 1707 gdm       20   0  349424    232    232 S   0.0  0.0   0:00.00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 1712 gdm       20   0   49932    544    472 S   0.0  0.0   0:00.00 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+ 1714 gdm       20   0  220768    448    348 S   0.0  0.0   0:00.01 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+ 1720 gdm       20   0 1584464   2024   1464 S   0.0  0.0   0:00.34 /usr/bin/pulseaudio --daemonize=no
+ 1721 rtkit     21   1  183512    212    208 S   0.0  0.0   0:31.93 /usr/lib/rtkit/rtkit-daemon
+ 1798 gdm       20   0  428104    488    488 S   0.0  0.0   0:00.12 ibus-daemon --xim --panel disable
+ 1801 gdm       20   0  273640      8      8 S   0.0  0.0   0:00.00 /usr/lib/ibus/ibus-dconf
+ 1804 gdm       20   0  706968   2976   2180 S   0.0  0.0   0:00.12 /usr/lib/ibus/ibus-x11 --kill-daemon
+ 1806 gdm       20   0  271452     28     28 S   0.0  0.0   0:00.01 /usr/lib/ibus/ibus-portal
+ 1815 gdm       20   0  264456     36     36 S   0.0  0.0   0:00.00 /usr/libexec/xdg-permission-store
+ 1828 root      20   0  289768   2928   2472 S   0.0  0.0   0:09.29 /usr/lib/x86_64-linux-gnu/boltd
+ 1839 root      20   0  515536  68000   8176 S   0.0  0.4   2:12.46 /usr/lib/packagekit/packagekitd
+ 1859 gdm       20   0  857684   5988   4092 S   0.0  0.0   0:00.19 /usr/lib/gnome-settings-daemon/gsd-xsettings
+ 1862 gdm       20   0  271200    240    240 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-a11y-settings
+ 1864 gdm       20   0  706564   3200   2272 S   0.0  0.0   0:00.12 /usr/lib/gnome-settings-daemon/gsd-clipboard
+ 1865 gdm       20   0 1034404  13836   5376 S   0.0  0.1  34:17.07 /usr/lib/gnome-settings-daemon/gsd-color
+ 1867 gdm       20   0  386612    512    512 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-datetime
+ 1869 gdm       20   0  276636     28     28 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-housekeeping
+ 1870 gdm       20   0  861176   4092   3296 S   0.0  0.0   0:00.14 /usr/lib/gnome-settings-daemon/gsd-keyboard
+ 1874 gdm       20   0 1368860   5860   4204 S   0.0  0.0   0:01.62 /usr/lib/gnome-settings-daemon/gsd-media-keys
+ 1876 gdm       20   0  194892      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-mouse
+ 1878 gdm       20   0 1152896  10848   5512 S   0.0  0.1   0:12.33 /usr/lib/gnome-settings-daemon/gsd-power
+ 1879 gdm       20   0  259916    288    288 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-print-notifications
+ 1886 gdm       20   0  194912      0      0 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-rfkill
+ 1888 gdm       20   0  268628      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-screensaver-proxy
+ 1889 gdm       20   0  298168    232    232 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-sharing
+ 1895 gdm       20   0  371116      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-smartcard
+ 1904 gdm       20   0  325912    188    188 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-sound
+ 1907 gdm       20   0  791620   7928   4256 S   0.0  0.0   0:00.21 /usr/lib/gnome-settings-daemon/gsd-wacom
+ 1920 gdm       20   0  197784    424    424 S   0.0  0.0   0:00.03 /usr/lib/ibus/ibus-engine-simple
+ 1982 colord    20   0  317924   4848   3912 S   0.0  0.0   0:00.27 /usr/lib/colord/colord
+ 2082 root      20   0  408496   5132   3820 S   0.0  0.0   0:00.21 gdm-session-worker [pam/gdm-password]
+ 2285 whoopsie  20   0  539800   9672   4532 S   0.0  0.1   0:09.30 /usr/bin/whoopsie -f
+ 2299 kernoops  20   0   56944    424    424 S   0.0  0.0   1:35.21 /usr/sbin/kerneloops --test
+ 2309 kernoops  20   0   56944    464    416 S   0.0  0.0   1:35.31 /usr/sbin/kerneloops
+ 2376 andrew    20   0 16.697g  70184  59600 S   0.0  0.4   0:35.33 /opt/google/chrome/chrome --type=utility --utility-sub-type=audio.mojom.AudioService --field-trial-handle=9356682892816427284,13652163+
+ 2397 root      20   0    4512      0      0 S   0.0  0.0   0:00.03 bpfilter_umh
+ 2439 root      20   0   36552   3724   3364 S   0.0  0.0   0:00.01 /usr/lib/bluetooth/bluetoothd
+ 2740 andrew    20   0   77268   5232   3952 S   0.0  0.0   0:03.07 /lib/systemd/systemd --user
+ 2741 andrew    20   0  114192    276      0 S   0.0  0.0   0:00.00 (sd-pam)
+ 2754 andrew    20   0  576480   6256   4984 S   0.0  0.0   0:04.00 /usr/bin/gnome-keyring-daemon --daemonize --login
+ 2758 andrew    20   0  205028   2128   1852 S   0.0  0.0   0:00.02 /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+ 2778 andrew    20   0   51504   4440   2484 S   0.0  0.0   0:25.98 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 2882 andrew    20   0   11312     40      0 S   0.0  0.0   0:09.88 /usr/bin/ssh-agent /usr/bin/im-launch env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+ 2888 andrew    20   0  349484    632    452 S   0.0  0.0   0:00.01 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 2893 andrew    20   0   50188   2108   1684 S   0.0  0.0   0:07.40 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+ 2895 andrew    20   0  220792   1868   1532 S   0.0  0.0   0:44.17 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+ 2926 andrew    20   0  284988   1024    444 S   0.0  0.0   0:00.16 /usr/lib/gvfs/gvfsd
+ 2931 andrew    20   0  416116      0      0 S   0.0  0.0   0:00.00 /usr/lib/gvfs/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+ 2941 andrew     9 -11 2394152  12408   9632 S   0.0  0.1  34:30.99 /usr/bin/pulseaudio --daemonize=no
+ 2959 root      10 -10       0      0      0 S   0.0  0.0   0:00.00 [krfcommd]
+ 2965 andrew    20   0  273676   1068    420 S   0.0  0.0   0:00.01 /usr/lib/ibus/ibus-dconf
+ 2967 andrew    20   0  342004  16344   4760 S   0.0  0.1   1:01.74 /usr/lib/ibus/ibus-x11 --kill-daemon
+ 2969 andrew    20   0  271584   1668    768 S   0.0  0.0   0:01.01 /usr/lib/ibus/ibus-portal
+ 2979 andrew    20   0  264456    448      0 S   0.0  0.0   0:00.02 /usr/libexec/xdg-permission-store
+ 2984 andrew    20   0  690104   6192   2796 S   0.0  0.0   0:00.14 /usr/lib/gnome-shell/gnome-shell-calendar-server
+ 2988 andrew    20   0 1365252   6740   2336 S   0.0  0.0   0:00.32 /usr/lib/evolution/evolution-source-registry
+ 2996 andrew    20   0  784052   6200    224 S   0.0  0.0   0:03.11 /usr/lib/gnome-online-accounts/goa-daemon
+ 3019 andrew    20   0  188624   2424   1080 S   0.0  0.0   0:02.02 /usr/lib/dconf/dconf-service
+ 3029 andrew    20   0  296256    832      0 S   0.0  0.0   0:10.07 /usr/lib/gnome-online-accounts/goa-identity-service
+ 3033 andrew    20   0  299696   4284   1992 S   0.0  0.0   1:37.39 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 3037 andrew    20   0  266940   1024    448 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 3041 andrew    20   0  281684   1312    452 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 3045 andrew    20   0  371724   1176    300 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 3050 andrew    20   0  268764   1220    552 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 3056 andrew    20   0  793836  23624   6080 S   0.0  0.1   0:39.28 /usr/lib/gnome-settings-daemon/gsd-power
+ 3058 andrew    20   0  342236   3304   1828 S   0.0  0.0   0:01.31 /usr/lib/gnome-settings-daemon/gsd-print-notifications
+ 3059 andrew    20   0  416236   1152    376 S   0.0  0.0   0:02.10 /usr/lib/gnome-settings-daemon/gsd-rfkill
+ 3060 andrew    20   0  268628   1220    640 S   0.0  0.0   0:01.08 /usr/lib/gnome-settings-daemon/gsd-screensaver-proxy
+ 3061 andrew    20   0  446324   4560   2000 S   0.0  0.0   6:33.53 /usr/lib/gnome-settings-daemon/gsd-sharing
+ 3063 andrew    20   0  371148   1844    912 S   0.0  0.0   0:01.08 /usr/lib/gnome-settings-daemon/gsd-smartcard
+ 3067 andrew    20   0  492516  17064   5056 S   0.0  0.1   0:24.43 /usr/lib/gnome-settings-daemon/gsd-xsettings
+ 3079 andrew    20   0  427232  19500   4504 S   0.0  0.1   0:21.85 /usr/lib/gnome-settings-daemon/gsd-wacom
+ 3081 andrew    20   0  325944   1016     88 S   0.0  0.0   0:01.07 /usr/lib/gnome-settings-daemon/gsd-sound
+ 3092 andrew    20   0  271232    864    300 S   0.0  0.0   0:01.07 /usr/lib/gnome-settings-daemon/gsd-a11y-settings
+ 3094 andrew    20   0  341868  15652   4560 S   0.0  0.1   0:19.67 /usr/lib/gnome-settings-daemon/gsd-clipboard
+ 3097 andrew    20   0  357680   3724   2824 S   0.0  0.0   1:52.86 /usr/lib/gnome-settings-daemon/gsd-housekeeping
+ 3100 andrew    20   0  462824   1976    100 S   0.0  0.0   0:01.18 /usr/lib/gnome-settings-daemon/gsd-datetime
+ 3104 andrew    20   0  937104  17984   6152 S   0.0  0.1   0:23.77 /usr/lib/gnome-settings-daemon/gsd-media-keys
+ 3108 andrew    20   0  504684  17692   6088 S   0.0  0.1   0:20.75 /usr/lib/gnome-settings-daemon/gsd-keyboard
+ 3114 andrew    20   0  271240    816    260 S   0.0  0.0   0:01.19 /usr/lib/gnome-settings-daemon/gsd-mouse
+ 3146 andrew    20   0 1369312  53588  30356 S   0.0  0.3   0:29.44 nautilus-desktop
+ 3150 andrew    20   0  271936   1840    160 S   0.0  0.0   0:01.00 /usr/lib/gnome-disk-utility/gsd-disk-utility-notify
+ 3174 andrew    20   0  361372   3376   1876 S   0.0  0.0   0:28.84 /usr/lib/gvfs/gvfsd-trash --spawner :1.22 /org/gtk/gvfs/exec_spaw/0
+ 3182 andrew    20   0  885708  42436   1956 S   0.0  0.3   0:00.29 /usr/lib/evolution/evolution-calendar-factory
+ 3187 andrew    20   0  387792   7664    352 S   0.0  0.0   0:00.02 /usr/share/teams/teams --type=zygote --no-zygote-sandbox
+ 3188 andrew    20   0  387792  10616   3288 S   0.0  0.1   0:02.68 /usr/share/teams/teams --type=zygote
+ 3194 andrew    20   0  501672   2092    360 S   0.0  0.0   0:00.05 /usr/lib/gnome-settings-daemon/gsd-printer
+ 3211 andrew    20   0  197916   2176   1384 S   0.0  0.0   2:40.35 /usr/lib/ibus/ibus-engine-simple
+ 3226 andrew    20   0 1129620  42516   2652 S   0.0  0.3   0:04.03 /usr/lib/evolution/evolution-calendar-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend.Ca+
+ 3240 andrew    20   0  725792   3912    508 S   0.0  0.0   0:00.05 /usr/lib/evolution/evolution-addressbook-factory
+ 3253 andrew    20   0 1010308   5648   1868 S   0.0  0.0   0:03.62 /usr/lib/evolution/evolution-addressbook-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend+
+ 3289 andrew    20   0 1225308  42032  12384 S   0.0  0.3 734:02.64 /usr/share/teams/teams --type=gpu-process --field-trial-handle=12992011693680117189,12039368134618553535,131072 --enable-features=WebC+
+ 3296 andrew    20   0 1595304  35712  21300 S   0.0  0.2  48:26.79 /usr/share/teams/teams --type=utility --utility-sub-type=network.mojom.NetworkService --field-trial-handle=12992011693680117189,120393+
+ 3329 andrew    20   0 5722736  25348   7872 S   0.0  0.2   0:11.49 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3345 andrew    20   0  392476   7724    144 S   0.0  0.0   0:00.00 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3369 andrew    20   0 1190092   8536    476 S   0.0  0.1   0:24.28 /usr/share/teams/teams --type=utility --utility-sub-type=audio.mojom.AudioService --field-trial-handle=12992011693680117189,1203936813+
+ 3378 andrew    20   0  197716   2228   1272 S   0.0  0.0   0:00.26 /usr/lib/gvfs/gvfsd-metadata
+ 3492 andrew    20   0 5769532 123396  38180 S   0.0  0.8   1:37.66 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3494 andrew    20   0  392476   7724    144 S   0.0  0.0   0:00.00 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3547 andrew    20   0 8701672  72332  32652 S   0.0  0.4  81:24.89 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3582 andrew    20   0    7612    784    720 S   0.0  0.0   0:00.00 cat
+ 3583 andrew    20   0    7612    784    720 S   0.0  0.0   0:00.00 cat
+ 3585 andrew    20   0 16.032g   3284   3056 S   0.0  0.0   0:00.00 /opt/google/chrome/crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/andrew/.config/go+
+ 3587 andrew    20   0 16.023g   1520   1376 S   0.0  0.0   0:00.00 /opt/google/chrome/crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/andrew/.conf+
+ 3594 andrew    20   0 16.388g  53976  44028 S   0.0  0.3   0:00.01 /opt/google/chrome/chrome --type=zygote --no-zygote-sandbox --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1b+
+ 3595 andrew    20   0 16.388g  54432  44476 S   0.0  0.3   0:00.01 /opt/google/chrome/chrome --type=zygote --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c98-+
+ 3596 andrew    20   0 16.029g   3792   3460 S   0.0  0.0   0:00.00 /opt/google/chrome/nacl_helper
+ 3599 andrew    20   0 16.388g  16072   6100 S   0.0  0.1   0:01.48 /opt/google/chrome/chrome --type=zygote --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c98-+
+ 3622 andrew    20   0 16.581g 134636  83136 S   0.0  0.8  10:59.09 /opt/google/chrome/chrome --type=gpu-process --field-trial-handle=9356682892816427284,1365216333309670878,131072 --enable-crashpad --c+
+ 3624 andrew    20   0 16.477g 114888  87088 S   0.0  0.7   8:37.51 /opt/google/chrome/chrome --type=utility --utility-sub-type=network.mojom.NetworkService --field-trial-handle=9356682892816427284,1365+
+ 3626 andrew    20   0 16.435g  52872  39008 S   0.0  0.3   0:06.35 /opt/google/chrome/chrome --type=utility --utility-sub-type=storage.mojom.StorageService --field-trial-handle=9356682892816427284,1365+
+ 3712 andrew    20   0 20.527g  97412  78300 S   0.0  0.6   0:02.65 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3773 andrew    20   0 20.527g 117888  84396 S   0.0  0.7   0:51.83 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3781 andrew    20   0 20.528g 209224  88484 S   0.0  1.3   1:21.91 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3784 andrew    20   0  426520   4452   2788 S   0.0  0.0   0:02.58 /usr/bin/zeitgeist-daemon
+ 3791 andrew    20   0  326740   4564   1916 S   0.0  0.0   0:01.10 /usr/lib/zeitgeist/zeitgeist/zeitgeist-fts
+ 3813 andrew    20   0 20.529g 104624  79912 S   0.0  0.6   0:17.60 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3826 andrew    20   0 20.511g  96044  76624 S   0.0  0.6   0:01.47 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3951 root      20   0  613552  72064  21112 S   0.0  0.4   0:00.97 /usr/lib/fwupd/fwupd
+ 4170 andrew    20   0 1401044 540328  24932 S   0.0  3.3   2:07.60 /usr/bin/gnome-software --gapplication-service
+ 4173 andrew    20   0  647228  31552  17600 S   0.0  0.2   1:06.07 update-notifier
+ 4516 andrew    20   0  797400   8428   2248 S   0.0  0.1   0:03.36 /usr/lib/deja-dup/deja-dup-monitor
+ 4757 andrew    20   0 20.585g 215900 103708 S   0.0  1.3   3:48.34 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 5051 andrew    20   0   12888   3248   2984 S   0.0  0.0   0:00.01 /bin/bash /usr/bin/mysql-workbench
+ 5097 andrew    20   0   12024   1068    948 S   0.0  0.0   0:00.00 /bin/sh /usr/bin/catchsegv /usr/bin/mysql-workbench-bin
+ 5099 andrew    20   0 1300664 146844  83972 S   0.0  0.9   0:20.46 /usr/bin/mysql-workbench-bin
+ 5124 root      20   0       0      0      0 I   0.0  0.0   0:00.25 [kworker/2:0-eve]
+ 5209 root      20   0       0      0      0 I   0.0  0.0   0:00.03 [kworker/1:0-mm_]
+ 5579 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop24]
+ 5599 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop8]
+ 6081 andrew    20   0   52300   6144   5440 S   0.0  0.0   0:00.03 ssh jaalbrec@squirrel.dlib.indiana.edu
+ 6821 root      20   0       0      0      0 I   0.0  0.0   0:00.11 [kworker/u16:0-e]
+ 7018 root      20   0       0      0      0 I   0.0  0.0   0:00.59 [kworker/5:0-eve]
+ 8354 andrew    30  10  921156 172228 102788 S   0.0  1.1   0:05.25 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+ 8628 root      20   0       0      0      0 I   0.0  0.0   0:00.45 [kworker/0:1-rcu]
+ 8727 andrew    20   0   11312    904    584 S   0.0  0.0   0:00.12 /usr/bin/ssh-agent -D -a /run/user/1000/keyring/.ssh
+ 9096 root      20   0  101212   8028   6848 S   0.0  0.0   0:00.02 /usr/sbin/cupsd -l
+ 9253 andrew    20   0 16.421g  42248  31744 S   0.0  0.3   0:00.02 /opt/google/chrome/chrome --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --field-trial-handle=935668289281642+
+ 9321 root      20   0       0      0      0 I   0.0  0.0   0:00.02 [kworker/4:1-eve]
+ 9395 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop32]
+10799 root      20   0       0      0      0 I   0.0  0.0   0:00.99 [kworker/6:1-eve]
+11019 andrew    20   0  720732   4744   3156 S   0.0  0.0   0:06.25 /usr/libexec/xdg-desktop-portal
+11028 andrew    20   0  488288   1084    444 S   0.0  0.0   0:01.06 /usr/libexec/xdg-document-portal
+11048 andrew    20   0  560680  16040   4748 S   0.0  0.1   0:20.43 /usr/libexec/xdg-desktop-portal-gtk
+11072 root      20   0       0      0      0 I   0.0  0.0   0:00.13 [kworker/2:2-eve]
+11190 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/1:2-eve]
+11192 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/4:0-eve]
+11399 andrew    20   0   22848   5340   3484 S   0.0  0.0   0:00.21 bash
+11850 root       0 -20       0      0      0 I   0.0  0.0   3:11.49 [kworker/4:2H-kb]
+12206 root      20   0  103052   7616   6120 S   0.0  0.0   0:01.74 /usr/local/pulse/pulsesvc
+12447 andrew    20   0 20.543g 150364  96860 S   0.0  0.9   0:05.29 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+12565 root      20   0       0      0      0 I   0.0  0.0   0:00.16 [kworker/3:2-eve]
+12602 root      20   0       0      0      0 I   0.0  0.0   0:01.75 [kworker/1:1-eve]
+12826 andrew    20   0 20.535g 127616  89312 S   0.0  0.8   0:02.41 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+13140 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/6:2H-kb]
+13176 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:2H-kb]
+14025 andrew    20   0  274004  17696   6164 S   0.0  0.1   0:00.16 spring server | rmd | started 33 mins ago
+14028 andrew    20   0  551872  80044  16456 S   0.0  0.5   0:07.57 spring app    | rmd | started 33 mins ago | development mode
+14043 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/5:2-eve]
+15030 uuidd     20   0   28144      8      0 S   0.0  0.0   0:00.18 /usr/sbin/uuidd --socket-activation
+15390 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop35]
+15420 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:0]
+15525 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop38]
+15946 andrew    20   0 20.555g 142036  97572 S   0.0  0.9   0:03.09 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+16048 andrew    20   0  363468   3232   1900 S   0.0  0.0   0:00.12 /usr/lib/gvfs/gvfsd-network --spawner :1.22 /org/gtk/gvfs/exec_spaw/1
+16056 andrew    20   0 20.488g  59868  44852 S   0.0  0.4   0:00.04 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+16179 andrew    20   0  374188   1024    108 S   0.0  0.0   0:00.81 /usr/lib/gvfs/gvfsd-dnssd --spawner :1.22 /org/gtk/gvfs/exec_spaw/5
+16209 andrew    20   0    4632   1732   1632 S   0.0  0.0   0:00.05 /bin/sh /snap/rubymine/261/bin/rubymine.sh
+16258 andrew    20   0 9712332 2.538g 472676 S   0.0 16.4  24:24.71 /snap/rubymine/261/jbr/bin/java -classpath /snap/rubymine/261/lib/util.jar:/snap/rubymine/261/lib/bootstrap.jar -Xms128m -Xmx750m -XX:+
+16324 andrew    20   0   11704   5044   1524 S   0.0  0.0   0:06.39 /snap/rubymine/261/bin/fsnotifier
+16546 root      20   0       0      0      0 I   0.0  0.0   0:00.05 [kworker/0:2-eve]
+17876 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop7]
+18014 root      20   0       0      0      0 I   0.0  0.0   0:01.01 [kworker/3:0-eve]
+18455 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:2-mm_]
+18461 andrew    20   0 20.562g 143020  99380 S   0.0  0.9   0:08.62 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+18474 root      20   0       0      0      0 I   0.0  0.0   0:05.23 [kworker/6:0-eve]
+19486 root      20   0       0      0      0 I   0.0  0.0   0:01.93 [kworker/0:0-rcu]
+19734 andrew    20   0 20.535g 149292  98520 S   0.0  0.9   0:11.00 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+20705 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [xfsalloc]
+20706 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [xfs_mru_cache]
+20718 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsIO]
+20719 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20720 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20721 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20722 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20723 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20724 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20725 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20726 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20727 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsSync]
+20806 root      20   0       0      0      0 I   0.0  0.0   0:01.80 [kworker/u16:1-e]
+20953 root       0 -20       0      0      0 S   0.0  0.0   0:00.31 [loop21]
+23203 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop20]
+23396 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop4]
+25518 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/3:1-mm_]
+25540 root      20   0 1429204  86516  47840 S   0.0  0.5   4:43.31 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+26387 root      20   0       0      0      0 I   0.0  0.0   0:27.94 [kworker/5:1-eve]
+27001 andrew    20   0   22960   5424   3564 S   0.0  0.0   0:00.15 bash
+28482 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/2:1-eve]
+29252 gdm       20   0  187776    992    476 S   0.0  0.0   0:00.00 /usr/lib/dconf/dconf-service
+29612 root      20   0       0      0      0 I   0.0  0.0   0:01.34 [kworker/7:1-eve]
+30337 root      20   0       0      0      0 I   0.0  0.0   0:00.37 [kworker/4:2-eve]
+30349 root      20   0       0      0      0 I   0.0  0.0   0:01.42 [kworker/u16:2-i]
+30352 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop0]
+30557 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop17]
+30635 andrew    20   0 20.570g 189692 100672 S   0.0  1.2   0:09.04 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+31542 root      20   0       0      0      0 I   0.0  0.0   0:04.47 [kworker/u16:13-]
+31594 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/128-mei_me]
+31887 root      20   0   25988   6260   4976 S   0.0  0.0   0:00.01 /sbin/dhclient -d -q -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /run/dhclient-wlp2s0.pid -lf /var/lib/NetworkManager/dhclient-e3a5+
+32198 root      20   0   25988   6460   5160 S   0.0  0.0   0:00.00 /sbin/dhclient -d -q -6 -N -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /run/dhclient6-wlp2s0.pid -lf /var/lib/NetworkManager/dhclie+
+32395 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/6:2-eve]
+
+top - 09:54:58 up 44 days, 27 min,  1 user,  load average: 1.24, 1.02, 0.88
+Tasks: 382 total,   1 running, 304 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  3.2 us,  4.1 sy,  0.0 ni, 92.0 id,  0.0 wa,  0.0 hi,  0.7 si,  0.0 st
+KiB Mem : 16251892 total,   571900 free,  6462584 used,  9217408 buff/cache
+KiB Swap:  2097148 total,  1555884 free,   541264 used.  8978120 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 3401 andrew    20   0  616020  44276  15364 S  10.6  0.3  72:11.85 /usr/bin/python3 /usr/bin/touchpad-indicator
+ 2760 andrew    20   0 1050792  86332  57576 S   7.9  0.5 161:07.62 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose 3
+ 3344 andrew    20   0 13.670g 315956  55036 S   3.3  1.9 909:34.23 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3289 andrew    20   0 1225308  42032  12384 S   3.0  0.3 734:02.73 /usr/share/teams/teams --type=gpu-process --field-trial-handle=12992011693680117189,12039368134618553535,131072 --enable-features=WebC+
+12027 andrew    20   0 20.733g 505444 109724 S   3.0  3.1  32:18.39 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 2916 andrew    20   0 4313528 439568 105128 S   1.3  2.7 185:35.21 /usr/bin/gnome-shell
+ 3575 andrew    20   0 16.790g 340368 178056 S   1.0  2.1  21:59.67 /opt/google/chrome/chrome --enable-crashpad
+18320 andrew    20   0   44372   4304   3480 R   1.0  0.0   0:00.09 top -b -c
+ 3093 andrew    20   0  670812  26252   6088 S   0.7  0.2  38:20.92 /usr/lib/gnome-settings-daemon/gsd-color
+ 5099 andrew    20   0 1300664 146844  83972 S   0.7  0.9   0:20.48 /usr/bin/mysql-workbench-bin
+16258 andrew    20   0 9712332 2.538g 472676 S   0.7 16.4  24:24.73 /snap/rubymine/261/jbr/bin/java -classpath /snap/rubymine/261/lib/util.jar:/snap/rubymine/261/lib/bootstrap.jar -Xms128m -Xmx750m -XX:+
+29612 root      20   0       0      0      0 I   0.7  0.0   0:01.36 [kworker/7:1-kec]
+   11 root      20   0       0      0      0 I   0.3  0.0  41:19.83 [rcu_sched]
+  260 root      20   0       0      0      0 S   0.3  0.0  15:46.46 [jbd2/sda5-8]
+  917 root      20   0 2128912  21860  10496 S   0.3  0.1   5:08.34 /usr/lib/snapd/snapd
+ 1412 mysql     20   0 2838356 312888  17924 S   0.3  1.9 113:05.70 /usr/sbin/mysqld
+ 1431 redis     20   0   51448    272    136 S   0.3  0.0  49:42.69 /usr/bin/redis-server 127.0.0.1:6379
+ 1865 gdm       20   0 1034404  13836   5376 S   0.3  0.1  34:17.08 /usr/lib/gnome-settings-daemon/gsd-color
+ 2778 andrew    20   0   51504   4440   2484 S   0.3  0.0   0:25.99 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 2786 andrew    20   0  560848   4264   2592 S   0.3  0.0   0:15.37 /usr/lib/gnome-session/gnome-session-binary --session=ubuntu
+ 3067 andrew    20   0  492516  17064   5056 S   0.3  0.1   0:24.44 /usr/lib/gnome-settings-daemon/gsd-xsettings
+ 3108 andrew    20   0  504684  17692   6088 S   0.3  0.1   0:20.76 /usr/lib/gnome-settings-daemon/gsd-keyboard
+ 3166 andrew    20   0 7518976 166932  53868 S   0.3  1.0  80:34.87 /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
+ 3296 andrew    20   0 1595304  35712  21300 S   0.3  0.2  48:26.80 /usr/share/teams/teams --type=utility --utility-sub-type=network.mojom.NetworkService --field-trial-handle=12992011693680117189,120393+
+ 3773 andrew    20   0 20.527g 117888  84396 S   0.3  0.7   0:51.84 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 8354 andrew    30  10  921156 172228 102788 S   0.3  1.1   0:05.26 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+10799 root      20   0       0      0      0 I   0.3  0.0   0:01.00 [kworker/6:1-eve]
+31542 root      20   0       0      0      0 I   0.3  0.0   0:04.48 [kworker/u16:13-]
+    1 root      20   0  226148   7188   4428 S   0.0  0.0   5:24.46 /sbin/init splash
+    2 root      20   0       0      0      0 S   0.0  0.0   0:02.39 [kthreadd]
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [rcu_gp]
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [rcu_par_gp]
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/0:0H-kb]
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [mm_percpu_wq]
+   10 root      20   0       0      0      0 S   0.0  0.0   0:24.45 [ksoftirqd/0]
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:07.81 [migration/0]
+   13 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/0]
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/0]
+   15 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/1]
+   16 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/1]
+   17 root      rt   0       0      0      0 S   0.0  0.0   0:07.50 [migration/1]
+   18 root      20   0       0      0      0 S   0.0  0.0   0:11.71 [ksoftirqd/1]
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/1:0H-kb]
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/2]
+   22 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/2]
+   23 root      rt   0       0      0      0 S   0.0  0.0   0:08.00 [migration/2]
+   24 root      20   0       0      0      0 S   0.0  0.0   0:06.29 [ksoftirqd/2]
+   26 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/2:0H-kb]
+   27 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/3]
+   28 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/3]
+   29 root      rt   0       0      0      0 S   0.0  0.0   0:07.92 [migration/3]
+   30 root      20   0       0      0      0 S   0.0  0.0   0:04.22 [ksoftirqd/3]
+   32 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/3:0H-kb]
+   33 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/4]
+   34 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/4]
+   35 root      rt   0       0      0      0 S   0.0  0.0   0:07.32 [migration/4]
+   36 root      20   0       0      0      0 S   0.0  0.0   0:10.30 [ksoftirqd/4]
+   38 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/4:0H-kb]
+   39 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [cpuhp/5]
+   40 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/5]
+   41 root      rt   0       0      0      0 S   0.0  0.0   0:07.58 [migration/5]
+   42 root      20   0       0      0      0 S   0.0  0.0   0:45.72 [ksoftirqd/5]
+   44 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/5:0H-kb]
+   45 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/6]
+   46 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/6]
+   47 root      rt   0       0      0      0 S   0.0  0.0   0:07.63 [migration/6]
+   48 root      20   0       0      0      0 S   0.0  0.0   0:05.47 [ksoftirqd/6]
+   51 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [cpuhp/7]
+   52 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [idle_inject/7]
+   53 root      rt   0       0      0      0 S   0.0  0.0   0:07.97 [migration/7]
+   54 root      20   0       0      0      0 S   0.0  0.0   0:03.06 [ksoftirqd/7]
+   57 root      20   0       0      0      0 S   0.0  0.0   0:00.01 [kdevtmpfs]
+   58 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [netns]
+   59 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [rcu_tasks_kthre]
+   60 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [kauditd]
+   61 root      20   0       0      0      0 S   0.0  0.0   0:04.21 [khungtaskd]
+   62 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [oom_reaper]
+   63 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [writeback]
+   64 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [kcompactd0]
+   65 root      25   5       0      0      0 S   0.0  0.0   0:00.00 [ksmd]
+   66 root      39  19       0      0      0 S   0.0  0.0   0:08.71 [khugepaged]
+  113 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kintegrityd]
+  114 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kblockd]
+  115 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [blkcg_punt_bio]
+  117 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [tpm_dev_wq]
+  119 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ata_sff]
+  120 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [md]
+  121 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [edac-poller]
+  122 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [devfreq_wq]
+  124 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 [watchdogd]
+  132 root      20   0       0      0      0 S   0.0  0.0   0:08.61 [kswapd0]
+  133 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [ecryptfs-kthrea]
+  135 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kthrotld]
+  136 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/122-aerdrv]
+  137 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/124-aerdrv]
+  138 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [acpi_thermal_pm]
+  140 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [vfio-irqfd-clea]
+  141 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ipv6_addrconf]
+  150 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kstrp]
+  153 root       0 -20       0      0      0 I   0.0  0.0   0:11.81 [kworker/u17:0-h]
+  168 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [charger_manager]
+  227 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [scsi_eh_0]
+  228 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_0]
+  229 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [scsi_eh_1]
+  230 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_1]
+  231 root      20   0       0      0      0 S   0.0  0.0   0:00.02 [scsi_eh_2]
+  232 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [scsi_tmf_2]
+  235 root       0 -20       0      0      0 I   0.0  0.0   0:16.41 [kworker/0:1H-ev]
+  256 root       0 -20       0      0      0 I   0.0  0.0   0:23.56 [kworker/6:1H-kb]
+  259 root       0 -20       0      0      0 I   0.0  0.0   0:32.08 [kworker/5:1H-ev]
+  261 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ext4-rsv-conver]
+  263 root       0 -20       0      0      0 I   0.0  0.0   0:08.68 [kworker/3:1H-ev]
+  275 root       0 -20       0      0      0 I   0.0  0.0   0:10.08 [kworker/2:1H-kb]
+  280 root       0 -20       0      0      0 I   0.0  0.0   0:14.03 [kworker/1:1H-ev]
+  294 root       0 -20       0      0      0 I   0.0  0.0   0:23.52 [kworker/7:1H-ev]
+  311 root      19  -1  473888 212788 210336 S   0.0  1.3   1:02.22 /lib/systemd/systemd-journald
+  337 root      20   0   48000   3912   2204 S   0.0  0.0   0:48.22 /lib/systemd/systemd-udevd
+  348 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop1]
+  350 root       0 -20       0      0      0 S   0.0  0.0   0:00.02 [loop2]
+  355 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop3]
+  357 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop5]
+  358 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop6]
+  377 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop9]
+  380 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop10]
+  387 root       0 -20       0      0      0 S   0.0  0.0   0:00.03 [loop11]
+  412 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop12]
+  417 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop13]
+  418 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/67-smo8800]
+  421 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop14]
+  426 root       0 -20       0      0      0 S   0.0  0.0   0:00.12 [loop15]
+  454 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [cfg80211]
+  463 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kmemstick]
+  488 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop18]
+  498 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ath10k_wq]
+  499 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [ath10k_aux_wq]
+  500 root     -51   0       0      0      0 S   0.0  0.0   2:42.10 [irq/51-DELL0817]
+  503 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop19]
+  504 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [cryptd]
+  514 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/u17:1-h]
+  602 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop22]
+  603 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop23]
+  613 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop25]
+  619 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop26]
+  627 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop27]
+  666 root       0 -20       0      0      0 S   0.0  0.0   0:00.96 [loop28]
+  730 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop29]
+  740 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop30]
+  812 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop33]
+  823 systemd+  20   0   72284   3200   2552 S   0.0  0.0   7:33.71 /lib/systemd/systemd-resolved
+  833 systemd+  20   0  145964    516    472 S   0.0  0.0   0:04.92 /lib/systemd/systemd-timesyncd
+  847 root       0 -20       0      0      0 S   0.0  0.0   0:00.07 [loop37]
+  885 root       0 -20       0      0      0 S   0.0  0.0   0:00.01 [loop34]
+  990 root      20   0  434440   4524   3560 S   0.0  0.0   0:00.54 /usr/sbin/ModemManager --filter-policy=strict
+  991 root      20   0  110492   1124    964 S   0.0  0.0   2:41.61 /usr/sbin/irqbalance --foreground
+  993 root      20   0   31324    656    556 S   0.0  0.0   0:03.25 /usr/sbin/cron -f
+  996 syslog    20   0  263040   1808    604 S   0.0  0.0   0:22.75 /usr/sbin/rsyslogd -n
+  998 avahi     20   0   47552   2116   1600 S   0.0  0.0   3:37.37 avahi-daemon: running [andrew-Latitude-5590.local]
+ 1001 root      20   0  504196   7284   4464 S   0.0  0.0   2:38.75 /usr/lib/udisks2/udisksd
+ 1003 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop36]
+ 1007 root      20   0   70584   2104   1840 S   0.0  0.0   0:20.35 /lib/systemd/systemd-logind
+ 1019 message+  20   0   52888   4944   2444 S   0.0  0.0   7:34.42 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 1020 avahi     20   0   47080     44      0 S   0.0  0.0   0:00.00 avahi-daemon: chroot helper
+ 1056 root      20   0   45876   4724   4040 S   0.0  0.0   0:17.19 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+ 1058 root      20   0  832500  12032   7932 S   0.0  0.1  35:52.90 /usr/sbin/NetworkManager --no-daemon
+ 1062 root      20   0  287632   4012   3416 S   0.0  0.0   0:40.61 /usr/lib/accountsservice/accounts-daemon
+ 1066 root      20   0  170536   1032    908 S   0.0  0.0   0:00.06 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+ 1071 root      20   0    4556    632    544 S   0.0  0.0   0:35.20 /usr/sbin/acpid
+ 1082 root      20   0  179892   1912   1732 S   0.0  0.0   3:55.37 /usr/sbin/thermald --no-daemon --dbus-enable
+ 1112 root      20   0  296612   6948   3796 S   0.0  0.0   0:05.62 /usr/lib/policykit-1/polkitd --no-debug
+ 1334 root      20   0  187244   1224    828 S   0.0  0.0   0:00.08 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ 1357 root      20   0 1720488  10560   3208 S   0.0  0.1  36:08.32 /usr/bin/containerd
+ 1369 root      20   0  300952   3068   2528 S   0.0  0.0   0:00.08 /usr/sbin/gdm3
+ 1406 root      20   0  254448    484    484 S   0.0  0.0   0:00.01 gdm-session-worker [pam/gdm-launch-environment]
+ 1463 gdm       20   0   77144   4028   3108 S   0.0  0.0   0:00.85 /lib/systemd/systemd --user
+ 1464 gdm       20   0  114192    272      0 S   0.0  0.0   0:00.00 (sd-pam)
+ 1498 gdm       20   0  190692    468    468 S   0.0  0.0   0:00.00 /usr/lib/gdm3/gdm-wayland-session gnome-session --autostart /usr/share/gdm/greeter/autostart
+ 1502 gdm       20   0   50412   2676   1988 S   0.0  0.0   0:00.16 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 1511 gdm       20   0  625592   1616    852 S   0.0  0.0   0:00.82 /usr/lib/gnome-session/gnome-session-binary --autostart /usr/share/gdm/greeter/autostart
+ 1524 andrew    20   0  725884  42392  28736 S   0.0  0.3   0:59.24 /usr/lib/gnome-terminal/gnome-terminal-server
+ 1551 gdm       20   0 4262284 107632  74944 S   0.0  0.7  34:23.62 /usr/bin/gnome-shell
+ 1576 root      20   0  315484   5088   4052 S   0.0  0.0   3:17.15 /usr/lib/upower/upowerd
+ 1668 gdm       20   0 1785096   3488   2708 S   0.0  0.0   0:02.06 /usr/bin/Xwayland :1024 -rootless -terminate -accessx -core -listen 4 -listen 5 -displayfd 6
+ 1707 gdm       20   0  349424    232    232 S   0.0  0.0   0:00.00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 1712 gdm       20   0   49932    544    472 S   0.0  0.0   0:00.00 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+ 1714 gdm       20   0  220768    448    348 S   0.0  0.0   0:00.01 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+ 1720 gdm       20   0 1584464   2024   1464 S   0.0  0.0   0:00.34 /usr/bin/pulseaudio --daemonize=no
+ 1721 rtkit     21   1  183512    212    208 S   0.0  0.0   0:31.93 /usr/lib/rtkit/rtkit-daemon
+ 1798 gdm       20   0  428104    488    488 S   0.0  0.0   0:00.12 ibus-daemon --xim --panel disable
+ 1801 gdm       20   0  273640      8      8 S   0.0  0.0   0:00.00 /usr/lib/ibus/ibus-dconf
+ 1804 gdm       20   0  706968   2976   2180 S   0.0  0.0   0:00.12 /usr/lib/ibus/ibus-x11 --kill-daemon
+ 1806 gdm       20   0  271452     28     28 S   0.0  0.0   0:00.01 /usr/lib/ibus/ibus-portal
+ 1815 gdm       20   0  264456     36     36 S   0.0  0.0   0:00.00 /usr/libexec/xdg-permission-store
+ 1828 root      20   0  289768   2928   2472 S   0.0  0.0   0:09.29 /usr/lib/x86_64-linux-gnu/boltd
+ 1839 root      20   0  515536  68000   8176 S   0.0  0.4   2:12.46 /usr/lib/packagekit/packagekitd
+ 1859 gdm       20   0  857684   5988   4092 S   0.0  0.0   0:00.19 /usr/lib/gnome-settings-daemon/gsd-xsettings
+ 1862 gdm       20   0  271200    240    240 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-a11y-settings
+ 1864 gdm       20   0  706564   3200   2272 S   0.0  0.0   0:00.12 /usr/lib/gnome-settings-daemon/gsd-clipboard
+ 1867 gdm       20   0  386612    512    512 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-datetime
+ 1869 gdm       20   0  276636     28     28 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-housekeeping
+ 1870 gdm       20   0  861176   4092   3296 S   0.0  0.0   0:00.14 /usr/lib/gnome-settings-daemon/gsd-keyboard
+ 1874 gdm       20   0 1368860   5860   4204 S   0.0  0.0   0:01.62 /usr/lib/gnome-settings-daemon/gsd-media-keys
+ 1876 gdm       20   0  194892      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-mouse
+ 1878 gdm       20   0 1152896  10848   5512 S   0.0  0.1   0:12.33 /usr/lib/gnome-settings-daemon/gsd-power
+ 1879 gdm       20   0  259916    288    288 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-print-notifications
+ 1886 gdm       20   0  194912      0      0 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-rfkill
+ 1888 gdm       20   0  268628      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-screensaver-proxy
+ 1889 gdm       20   0  298168    232    232 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-sharing
+ 1895 gdm       20   0  371116      0      0 S   0.0  0.0   0:00.00 /usr/lib/gnome-settings-daemon/gsd-smartcard
+ 1904 gdm       20   0  325912    188    188 S   0.0  0.0   0:00.01 /usr/lib/gnome-settings-daemon/gsd-sound
+ 1907 gdm       20   0  791620   7928   4256 S   0.0  0.0   0:00.21 /usr/lib/gnome-settings-daemon/gsd-wacom
+ 1920 gdm       20   0  197784    424    424 S   0.0  0.0   0:00.03 /usr/lib/ibus/ibus-engine-simple
+ 1982 colord    20   0  317924   4848   3912 S   0.0  0.0   0:00.27 /usr/lib/colord/colord
+ 2082 root      20   0  408496   5132   3820 S   0.0  0.0   0:00.21 gdm-session-worker [pam/gdm-password]
+ 2285 whoopsie  20   0  539800   9672   4532 S   0.0  0.1   0:09.30 /usr/bin/whoopsie -f
+ 2299 kernoops  20   0   56944    424    424 S   0.0  0.0   1:35.21 /usr/sbin/kerneloops --test
+ 2309 kernoops  20   0   56944    464    416 S   0.0  0.0   1:35.31 /usr/sbin/kerneloops
+ 2376 andrew    20   0 16.697g  70184  59600 S   0.0  0.4   0:35.33 /opt/google/chrome/chrome --type=utility --utility-sub-type=audio.mojom.AudioService --field-trial-handle=9356682892816427284,13652163+
+ 2397 root      20   0    4512      0      0 S   0.0  0.0   0:00.03 bpfilter_umh
+ 2439 root      20   0   36552   3724   3364 S   0.0  0.0   0:00.01 /usr/lib/bluetooth/bluetoothd
+ 2740 andrew    20   0   77268   5232   3952 S   0.0  0.0   0:03.07 /lib/systemd/systemd --user
+ 2741 andrew    20   0  114192    276      0 S   0.0  0.0   0:00.00 (sd-pam)
+ 2754 andrew    20   0  576480   6256   4984 S   0.0  0.0   0:04.00 /usr/bin/gnome-keyring-daemon --daemonize --login
+ 2758 andrew    20   0  205028   2128   1852 S   0.0  0.0   0:00.02 /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+ 2882 andrew    20   0   11312     40      0 S   0.0  0.0   0:09.88 /usr/bin/ssh-agent /usr/bin/im-launch env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+ 2888 andrew    20   0  349484    632    452 S   0.0  0.0   0:00.01 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 2893 andrew    20   0   50188   2108   1684 S   0.0  0.0   0:07.40 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+ 2895 andrew    20   0  220792   1868   1532 S   0.0  0.0   0:44.17 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+ 2926 andrew    20   0  284988   1024    444 S   0.0  0.0   0:00.16 /usr/lib/gvfs/gvfsd
+ 2931 andrew    20   0  416116      0      0 S   0.0  0.0   0:00.00 /usr/lib/gvfs/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+ 2941 andrew     9 -11 2394152  12408   9632 S   0.0  0.1  34:30.99 /usr/bin/pulseaudio --daemonize=no
+ 2959 root      10 -10       0      0      0 S   0.0  0.0   0:00.00 [krfcommd]
+ 2961 andrew    20   0  357600   8556   3184 S   0.0  0.1   8:58.68 ibus-daemon --xim --panel disable
+ 2965 andrew    20   0  273676   1068    420 S   0.0  0.0   0:00.01 /usr/lib/ibus/ibus-dconf
+ 2967 andrew    20   0  342004  16344   4760 S   0.0  0.1   1:01.74 /usr/lib/ibus/ibus-x11 --kill-daemon
+ 2969 andrew    20   0  271584   1668    768 S   0.0  0.0   0:01.01 /usr/lib/ibus/ibus-portal
+ 2979 andrew    20   0  264456    448      0 S   0.0  0.0   0:00.02 /usr/libexec/xdg-permission-store
+ 2984 andrew    20   0  690104   6192   2796 S   0.0  0.0   0:00.14 /usr/lib/gnome-shell/gnome-shell-calendar-server
+ 2988 andrew    20   0 1365252   6740   2336 S   0.0  0.0   0:00.32 /usr/lib/evolution/evolution-source-registry
+ 2996 andrew    20   0  784052   6200    224 S   0.0  0.0   0:03.11 /usr/lib/gnome-online-accounts/goa-daemon
+ 3019 andrew    20   0  188624   2424   1080 S   0.0  0.0   0:02.02 /usr/lib/dconf/dconf-service
+ 3029 andrew    20   0  296256    832      0 S   0.0  0.0   0:10.07 /usr/lib/gnome-online-accounts/goa-identity-service
+ 3033 andrew    20   0  299696   4284   1992 S   0.0  0.0   1:37.39 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 3037 andrew    20   0  266940   1024    448 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 3041 andrew    20   0  281684   1312    452 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 3045 andrew    20   0  371724   1176    300 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 3050 andrew    20   0  268764   1220    552 S   0.0  0.0   0:00.05 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 3056 andrew    20   0  793836  23624   6080 S   0.0  0.1   0:39.28 /usr/lib/gnome-settings-daemon/gsd-power
+ 3058 andrew    20   0  342236   3304   1828 S   0.0  0.0   0:01.31 /usr/lib/gnome-settings-daemon/gsd-print-notifications
+ 3059 andrew    20   0  416236   1152    376 S   0.0  0.0   0:02.10 /usr/lib/gnome-settings-daemon/gsd-rfkill
+ 3060 andrew    20   0  268628   1220    640 S   0.0  0.0   0:01.08 /usr/lib/gnome-settings-daemon/gsd-screensaver-proxy
+ 3061 andrew    20   0  446324   4560   2000 S   0.0  0.0   6:33.53 /usr/lib/gnome-settings-daemon/gsd-sharing
+ 3063 andrew    20   0  371148   1844    912 S   0.0  0.0   0:01.08 /usr/lib/gnome-settings-daemon/gsd-smartcard
+ 3079 andrew    20   0  427232  19500   4504 S   0.0  0.1   0:21.85 /usr/lib/gnome-settings-daemon/gsd-wacom
+ 3081 andrew    20   0  325944   1016     88 S   0.0  0.0   0:01.07 /usr/lib/gnome-settings-daemon/gsd-sound
+ 3092 andrew    20   0  271232    864    300 S   0.0  0.0   0:01.07 /usr/lib/gnome-settings-daemon/gsd-a11y-settings
+ 3094 andrew    20   0  341868  15652   4560 S   0.0  0.1   0:19.67 /usr/lib/gnome-settings-daemon/gsd-clipboard
+ 3097 andrew    20   0  357680   3724   2824 S   0.0  0.0   1:52.86 /usr/lib/gnome-settings-daemon/gsd-housekeeping
+ 3100 andrew    20   0  462824   1976    100 S   0.0  0.0   0:01.18 /usr/lib/gnome-settings-daemon/gsd-datetime
+ 3104 andrew    20   0  937104  17984   6152 S   0.0  0.1   0:23.77 /usr/lib/gnome-settings-daemon/gsd-media-keys
+ 3114 andrew    20   0  271240    816    260 S   0.0  0.0   0:01.19 /usr/lib/gnome-settings-daemon/gsd-mouse
+ 3146 andrew    20   0 1369312  53588  30356 S   0.0  0.3   0:29.44 nautilus-desktop
+ 3150 andrew    20   0  271936   1840    160 S   0.0  0.0   0:01.00 /usr/lib/gnome-disk-utility/gsd-disk-utility-notify
+ 3174 andrew    20   0  361372   3376   1876 S   0.0  0.0   0:28.84 /usr/lib/gvfs/gvfsd-trash --spawner :1.22 /org/gtk/gvfs/exec_spaw/0
+ 3182 andrew    20   0  885708  42436   1956 S   0.0  0.3   0:00.29 /usr/lib/evolution/evolution-calendar-factory
+ 3187 andrew    20   0  387792   7664    352 S   0.0  0.0   0:00.02 /usr/share/teams/teams --type=zygote --no-zygote-sandbox
+ 3188 andrew    20   0  387792  10616   3288 S   0.0  0.1   0:02.68 /usr/share/teams/teams --type=zygote
+ 3194 andrew    20   0  501672   2092    360 S   0.0  0.0   0:00.05 /usr/lib/gnome-settings-daemon/gsd-printer
+ 3211 andrew    20   0  197916   2176   1384 S   0.0  0.0   2:40.35 /usr/lib/ibus/ibus-engine-simple
+ 3226 andrew    20   0 1129620  42516   2652 S   0.0  0.3   0:04.03 /usr/lib/evolution/evolution-calendar-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend.Ca+
+ 3240 andrew    20   0  725792   3912    508 S   0.0  0.0   0:00.05 /usr/lib/evolution/evolution-addressbook-factory
+ 3253 andrew    20   0 1010308   5648   1868 S   0.0  0.0   0:03.62 /usr/lib/evolution/evolution-addressbook-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend+
+ 3329 andrew    20   0 5722736  25348   7872 S   0.0  0.2   0:11.49 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3345 andrew    20   0  392476   7724    144 S   0.0  0.0   0:00.00 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3369 andrew    20   0 1190092   8536    476 S   0.0  0.1   0:24.28 /usr/share/teams/teams --type=utility --utility-sub-type=audio.mojom.AudioService --field-trial-handle=12992011693680117189,1203936813+
+ 3378 andrew    20   0  197716   2228   1272 S   0.0  0.0   0:00.26 /usr/lib/gvfs/gvfsd-metadata
+ 3492 andrew    20   0 5769532 123396  38180 S   0.0  0.8   1:37.66 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3494 andrew    20   0  392476   7724    144 S   0.0  0.0   0:00.00 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3547 andrew    20   0 8701672  72332  32652 S   0.0  0.4  81:24.89 /usr/share/teams/teams --type=renderer --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --field-trial-+
+ 3582 andrew    20   0    7612    784    720 S   0.0  0.0   0:00.00 cat
+ 3583 andrew    20   0    7612    784    720 S   0.0  0.0   0:00.00 cat
+ 3585 andrew    20   0 16.032g   3284   3056 S   0.0  0.0   0:00.00 /opt/google/chrome/crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/andrew/.config/go+
+ 3587 andrew    20   0 16.023g   1520   1376 S   0.0  0.0   0:00.00 /opt/google/chrome/crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/andrew/.conf+
+ 3594 andrew    20   0 16.388g  53976  44028 S   0.0  0.3   0:00.01 /opt/google/chrome/chrome --type=zygote --no-zygote-sandbox --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1b+
+ 3595 andrew    20   0 16.388g  54432  44476 S   0.0  0.3   0:00.01 /opt/google/chrome/chrome --type=zygote --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c98-+
+ 3596 andrew    20   0 16.029g   3792   3460 S   0.0  0.0   0:00.00 /opt/google/chrome/nacl_helper
+ 3599 andrew    20   0 16.388g  16072   6100 S   0.0  0.1   0:01.48 /opt/google/chrome/chrome --type=zygote --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c98-+
+ 3622 andrew    20   0 16.581g 134636  83136 S   0.0  0.8  10:59.09 /opt/google/chrome/chrome --type=gpu-process --field-trial-handle=9356682892816427284,1365216333309670878,131072 --enable-crashpad --c+
+ 3624 andrew    20   0 16.477g 114888  87088 S   0.0  0.7   8:37.51 /opt/google/chrome/chrome --type=utility --utility-sub-type=network.mojom.NetworkService --field-trial-handle=9356682892816427284,1365+
+ 3626 andrew    20   0 16.435g  52872  39008 S   0.0  0.3   0:06.35 /opt/google/chrome/chrome --type=utility --utility-sub-type=storage.mojom.StorageService --field-trial-handle=9356682892816427284,1365+
+ 3712 andrew    20   0 20.527g  97412  78300 S   0.0  0.6   0:02.65 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3781 andrew    20   0 20.528g 209224  88484 S   0.0  1.3   1:21.91 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3784 andrew    20   0  426520   4452   2788 S   0.0  0.0   0:02.58 /usr/bin/zeitgeist-daemon
+ 3791 andrew    20   0  326740   4564   1916 S   0.0  0.0   0:01.10 /usr/lib/zeitgeist/zeitgeist/zeitgeist-fts
+ 3813 andrew    20   0 20.529g 104624  79912 S   0.0  0.6   0:17.60 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3826 andrew    20   0 20.511g  96044  76624 S   0.0  0.6   0:01.47 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 3951 root      20   0  613552  72064  21112 S   0.0  0.4   0:00.97 /usr/lib/fwupd/fwupd
+ 4170 andrew    20   0 1401044 540328  24932 S   0.0  3.3   2:07.60 /usr/bin/gnome-software --gapplication-service
+ 4173 andrew    20   0  647228  31552  17600 S   0.0  0.2   1:06.07 update-notifier
+ 4516 andrew    20   0  797400   8428   2248 S   0.0  0.1   0:03.36 /usr/lib/deja-dup/deja-dup-monitor
+ 4757 andrew    20   0 20.585g 215900 103708 S   0.0  1.3   3:48.34 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+ 5051 andrew    20   0   12888   3248   2984 S   0.0  0.0   0:00.01 /bin/bash /usr/bin/mysql-workbench
+ 5097 andrew    20   0   12024   1068    948 S   0.0  0.0   0:00.00 /bin/sh /usr/bin/catchsegv /usr/bin/mysql-workbench-bin
+ 5124 root      20   0       0      0      0 I   0.0  0.0   0:00.25 [kworker/2:0-eve]
+ 5209 root      20   0       0      0      0 I   0.0  0.0   0:00.03 [kworker/1:0-mm_]
+ 5579 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop24]
+ 5599 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop8]
+ 6081 andrew    20   0   52300   6144   5440 S   0.0  0.0   0:00.03 ssh jaalbrec@squirrel.dlib.indiana.edu
+ 6821 root      20   0       0      0      0 I   0.0  0.0   0:00.11 [kworker/u16:0-e]
+ 7018 root      20   0       0      0      0 I   0.0  0.0   0:00.59 [kworker/5:0-eve]
+ 8628 root      20   0       0      0      0 I   0.0  0.0   0:00.45 [kworker/0:1-rcu]
+ 8727 andrew    20   0   11312    904    584 S   0.0  0.0   0:00.12 /usr/bin/ssh-agent -D -a /run/user/1000/keyring/.ssh
+ 9096 root      20   0  101212   8028   6848 S   0.0  0.0   0:00.02 /usr/sbin/cupsd -l
+ 9253 andrew    20   0 16.421g  42248  31744 S   0.0  0.3   0:00.02 /opt/google/chrome/chrome --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --field-trial-handle=935668289281642+
+ 9321 root      20   0       0      0      0 I   0.0  0.0   0:00.02 [kworker/4:1-eve]
+ 9395 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop32]
+11019 andrew    20   0  720732   4744   3156 S   0.0  0.0   0:06.25 /usr/libexec/xdg-desktop-portal
+11028 andrew    20   0  488288   1084    444 S   0.0  0.0   0:01.06 /usr/libexec/xdg-document-portal
+11048 andrew    20   0  560680  16040   4748 S   0.0  0.1   0:20.43 /usr/libexec/xdg-desktop-portal-gtk
+11072 root      20   0       0      0      0 I   0.0  0.0   0:00.13 [kworker/2:2-eve]
+11190 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/1:2-eve]
+11192 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/4:0-eve]
+11399 andrew    20   0   22848   5340   3484 S   0.0  0.0   0:00.21 bash
+11850 root       0 -20       0      0      0 I   0.0  0.0   3:11.49 [kworker/4:2H-kb]
+12206 root      20   0  103052   7616   6120 S   0.0  0.0   0:01.74 /usr/local/pulse/pulsesvc
+12447 andrew    20   0 20.543g 150364  96860 S   0.0  0.9   0:05.29 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+12565 root      20   0       0      0      0 I   0.0  0.0   0:00.16 [kworker/3:2-eve]
+12602 root      20   0       0      0      0 I   0.0  0.0   0:01.75 [kworker/1:1-eve]
+12826 andrew    20   0 20.535g 127616  89312 S   0.0  0.8   0:02.41 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+13140 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/6:2H-kb]
+13176 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:2H-kb]
+14025 andrew    20   0  274004  17696   6164 S   0.0  0.1   0:00.16 spring server | rmd | started 33 mins ago
+14028 andrew    20   0  551872  80044  16456 S   0.0  0.5   0:07.57 spring app    | rmd | started 33 mins ago | development mode
+14043 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/5:2-eve]
+15030 uuidd     20   0   28144      8      0 S   0.0  0.0   0:00.18 /usr/sbin/uuidd --socket-activation
+15390 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop35]
+15420 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:0]
+15525 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop38]
+15946 andrew    20   0 20.555g 142036  97572 S   0.0  0.9   0:03.09 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+16048 andrew    20   0  363468   3232   1900 S   0.0  0.0   0:00.12 /usr/lib/gvfs/gvfsd-network --spawner :1.22 /org/gtk/gvfs/exec_spaw/1
+16056 andrew    20   0 20.488g  59868  44852 S   0.0  0.4   0:00.04 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+16179 andrew    20   0  374188   1024    108 S   0.0  0.0   0:00.81 /usr/lib/gvfs/gvfsd-dnssd --spawner :1.22 /org/gtk/gvfs/exec_spaw/5
+16209 andrew    20   0    4632   1732   1632 S   0.0  0.0   0:00.05 /bin/sh /snap/rubymine/261/bin/rubymine.sh
+16324 andrew    20   0   11704   5044   1524 S   0.0  0.0   0:06.39 /snap/rubymine/261/bin/fsnotifier
+16546 root      20   0       0      0      0 I   0.0  0.0   0:00.05 [kworker/0:2-eve]
+17876 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop7]
+18014 root      20   0       0      0      0 I   0.0  0.0   0:01.01 [kworker/3:0-eve]
+18455 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/7:2-mm_]
+18461 andrew    20   0 20.562g 143020  99380 S   0.0  0.9   0:08.62 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+18474 root      20   0       0      0      0 I   0.0  0.0   0:05.23 [kworker/6:0-eve]
+19486 root      20   0       0      0      0 I   0.0  0.0   0:01.93 [kworker/0:0-rcu]
+19734 andrew    20   0 20.535g 149292  98520 S   0.0  0.9   0:11.00 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+20705 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [xfsalloc]
+20706 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 [xfs_mru_cache]
+20718 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsIO]
+20719 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20720 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20721 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20722 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20723 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20724 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20725 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20726 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsCommit]
+20727 root      20   0       0      0      0 S   0.0  0.0   0:00.00 [jfsSync]
+20806 root      20   0       0      0      0 I   0.0  0.0   0:01.80 [kworker/u16:1-e]
+20953 root       0 -20       0      0      0 S   0.0  0.0   0:00.31 [loop21]
+23203 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop20]
+23396 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop4]
+25518 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/3:1-mm_]
+25540 root      20   0 1429204  86516  47840 S   0.0  0.5   4:43.31 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+26387 root      20   0       0      0      0 I   0.0  0.0   0:27.94 [kworker/5:1-eve]
+27001 andrew    20   0   22960   5424   3564 S   0.0  0.0   0:00.15 bash
+28482 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/2:1-eve]
+29252 gdm       20   0  187776    992    476 S   0.0  0.0   0:00.00 /usr/lib/dconf/dconf-service
+30337 root      20   0       0      0      0 I   0.0  0.0   0:00.37 [kworker/4:2-eve]
+30349 root      20   0       0      0      0 I   0.0  0.0   0:01.42 [kworker/u16:2-i]
+30352 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop0]
+30557 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 [loop17]
+30635 andrew    20   0 20.570g 189692 100672 S   0.0  1.2   0:09.04 /opt/google/chrome/chrome --type=renderer --enable-crashpad --crashpad-handler-pid=3585 --enable-crash-reporter=bd1bb0aa-8fb8-4303-9c9+
+31594 root     -51   0       0      0      0 S   0.0  0.0   0:00.00 [irq/128-mei_me]
+31887 root      20   0   25988   6260   4976 S   0.0  0.0   0:00.01 /sbin/dhclient -d -q -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /run/dhclient-wlp2s0.pid -lf /var/lib/NetworkManager/dhclient-e3a5+
+32198 root      20   0   25988   6460   5160 S   0.0  0.0   0:00.00 /sbin/dhclient -d -q -6 -N -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /run/dhclient6-wlp2s0.pid -lf /var/lib/NetworkManager/dhclie+
+32395 root      20   0       0      0      0 I   0.0  0.0   0:00.00 [kworker/6:2-eve]
