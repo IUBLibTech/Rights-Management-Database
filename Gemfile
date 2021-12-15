@@ -25,8 +25,6 @@ gem 'edtf-humanize'
 
 gem 'pundit'
 
-gem 'nokogiri', ">= 1.10.8"
-
 # handle ADS group lookup through LDAP
 gem 'ldap_groups_lookup'
 
@@ -45,8 +43,6 @@ gem 'jquery-ui-rails'
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem for utilizing the solr server
 # gem 'rsolr'
@@ -59,6 +55,14 @@ gem 'delayed_job_active_record'
 gem "daemons"
 # Handles background jobs for ingest of Avalon records - based on delayed_job but extended to handle recurring tasks
 gem 'delayed_job_recurring'
+
+# dependabot updates
+gem "puma", ">= 5.5.1"
+# backported fixes for rack
+gem 'rack', '~> 1.6.13', git: 'https://github.com/rails-lts/rack.git', branch: 'lts-1-6-stable'
+gem "nokogiri", ">= 1.12.5"
+gem "json", ">= 2.3.0"
+
 
 
 
@@ -82,6 +86,5 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'puma'
 end
 
