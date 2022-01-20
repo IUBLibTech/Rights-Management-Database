@@ -96,10 +96,35 @@ span.avalon_item_title {
 
 div.access_div {
     float: left;
-    width: 20%;
+    width: 18%;
+    overflow: auto;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
 }
+div.access_reason_div {
+    float: left;
+    width: 35%;
+    margin-right: 20px;
+}
+#access_save_buttons {
+    display: none;
+}
+#access_determination_save {
+}
+
+div.reasons_div {
+    display: none;
+}
+
+
 div.access_div > select {
     max-width: 85%;
+}
+b.access_warning {
+    color: #900;
+    font-weight: bold;
+    font-size: 0.9em;
 }
 div.calced_access_div {
     float: left;
@@ -108,6 +133,9 @@ div.calced_access_div {
 div#history_div {
     float: left;
     width: 15%;
+    padding-left: 180px;
+    padding-top: 9px;
+}
 }
 div.legal {
     float: left;
@@ -134,3 +162,72 @@ div.contract {
     margin-bottom: .5rem;
 }
 
+/* toggle slider css */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+#toggle_text {
+    position: relative;
+    display: inline-block;
+    width: 2-0px;
+    height: 34px;
+    font-size: 1.2em;
+    float: left;
+    top: 10px;
+    margin-right: 5px;
+}
+/* end toggle css */
+
+.foo2 {
+    clear: both;
+    margin-bottom: 20px;
+    overflow: auto;
+}

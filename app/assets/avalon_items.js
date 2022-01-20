@@ -771,10 +771,6 @@ function hookAvalonNoteButton() {
     });
 }
 function hookAccessSelects() {
-    $("#access").unbind("change").change(function() {
-        let val = $(this).find("option:selected").attr('value');
-        ajaxAccess(val);
-    });
     $('.performance_access_select').unbind("change").change(function() {
         let id = $(this).attr('data-performance-id');
         let val = $(this).find("option:selected").attr('value');

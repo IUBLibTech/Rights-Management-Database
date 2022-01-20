@@ -37,25 +37,60 @@ class AvalonItemsController < ApplicationController
   end
 
   def ajax_post_access_decision
-    @avalon_item = AvalonItem.find(params[:id])
+    @avalon_item = AvalonItem.find(params[:avalon_item_id])
     if @avalon_item
       last_decision = @avalon_item.last_copyright_librarian_access_decision
+      # for an access determination to be successfully set it must
+      # a) if being set by a Collection Manager, determination must be equal to or more restrictive than the last access
+      #    determination made by a copyright librarian
+      # b) if determination is restricted or worldwide access, it must also have at least one "reason" selected
       if is_more_restrictive_than?(params[:access], last_decision&.decision) || User.current_user_copyright_librarian?
-        pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
-        @avalon_item.past_access_decisions << pad
-        # someone reset the review status on the item and has initiated a re-review
-        if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
-          @avalon_item.update_attributes!(review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
-        # someone set some access determination other than Default (not reviewed) so mark record reviewed
+        can_save = false
+        failure_message = "Something went wrong..."
+        if params[:access] == AccessDeterminationHelper::RESTRICTED_ACCESS
+          can_save = params[:restricted].size > 0
+          failure_message = "Access Determination was not saved. At least one Reason is required for Restricted Access" unless can_save
+        elsif params[:access] == AccessDeterminationHelper::WORLD_WIDE_ACCESS
+          can_save = params[:worldwide].size > 0
+          failure_message = "Access Determination was not saved. At least one Reason is required for Worldwide Access" unless can_save
         else
-          @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_ACCESS_DETERMINED)
+          can_save = true
         end
-        render text: "success"
+        if can_save
+          AvalonItem.transaction do
+            # clear all previously set reasons
+            @avalon_item.clear_all_reasons
+            pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
+            @avalon_item.past_access_decisions << pad
+            # someone reset the review status on the item and has initiated a re-review
+            if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
+              @avalon_item.update_attributes!(review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
+              # someone set some access determination other than Default (not reviewed) so mark record reviewed
+            else
+              if pad.decision == AccessDeterminationHelper::RESTRICTED_ACCESS
+                @avalon_item. reason_feature_film = !params[:restricted][:reason_feature_film].nil?
+                @avalon_item.reason_licensing_restriction = !params[:restricted][:reason_licensing_restriction].nil?
+                @avalon_item.reason_ethical_privacy_considerations = !params[:restricted][:reason_ethical_privacy_considerations].nil?
+              elsif pad.decision == AccessDeterminationHelper::WORLD_WIDE_ACCESS
+                @avalon_item.reason_iu_owned_produced = !params[:worldwide][:reason_iu_owned_produced].nil?
+                @avalon_item.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
+                @avalon_item.reason_license = !params[:worldwide][:reason_license].nil?
+              elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
+                @avalon_item.reason_in_copyright = !params[:iu][:reason_in_copyright].nil?
+              end
+              @avalon_item.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+              @avalon_item.save
+            end
+          end
+          render json: { "msg" => "Access Determination Saved" }.to_json
+        else
+          render json: { "msg" => failure_message  }, status: 400
+        end
       else
-        render text: "Cannot set access to something less restrictive than last Copyright Librarian access determination", status: 400
+        render json: { "msg" => "Cannot set access to something less restrictive than last Copyright Librarian access determination" }, status: 400
       end
     else
-      render text: "Could not find Avalon Item with ID: #{params[:id]}", status: 400
+      render json: { "msg" =>  "Could not find Avalon Item with ID: #{params[:id]}" }, status: 400
     end
   end
 

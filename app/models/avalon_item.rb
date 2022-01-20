@@ -82,6 +82,20 @@ class AvalonItem < ActiveRecord::Base
     ai.results
   end
 
+  # this function sets all reason_* booleans to false. It DOES NOT save the record, only changes what is in memory
+  def clear_all_reasons
+    # public domain reasons
+    reason_iu_owned_produced = false
+    reason_license = false
+    reason_public_domain = false
+    # restricted reasons
+    reason_feature_film = false
+    reason_licensing_restriction = false
+    reason_ethical_privacy_considerations = false
+    # iu only reasons
+    reason_in_copyright = false
+  end
+
   def has_rmd_metadata?
     recordings.collect{|r| r.performances.size}.inject(0){|sum, x| sum + x} > 0
   end
@@ -92,6 +106,23 @@ class AvalonItem < ActiveRecord::Base
 
   def last_copyright_librarian_access_decision
     past_access_decisions.where(copyright_librarian: true).last
+  end
+
+  def checked_reasons
+    checked = []
+    case access_determination
+    when AccessDeterminationHelper::RESTRICTED_ACCESS
+      checked << "restricted_reason_ethical_privacy_considerations" if reason_ethical_privacy_considerations
+      checked << "restricted_reason_feature_film" if reason_feature_film
+      checked << "restricted_reasons_licensing_restriction" if reason_licensing_restriction
+    when AccessDeterminationHelper::WORLD_WIDE_ACCESS
+      checked << "worldwide_reason_iu_owned_produced" if reason_iu_owned_produced
+      checked << "worldwide_reason_license" if reason_license
+      checked << "worldwide_reason_public_domain" if reason_public_domain
+    when AccessDeterminationHelper::IU_ACCESS
+      checked << "iu_reason_in_copyright" if reason_in_copyright
+    end
+    checked
   end
 
   def allowed_access_determinations

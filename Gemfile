@@ -56,8 +56,11 @@ gem "daemons"
 # Handles background jobs for ingest of Avalon records - based on delayed_job but extended to handle recurring tasks
 gem 'delayed_job_recurring'
 
+gem 'rake', '13.0.6'
+
 # dependabot updates
 gem "puma", ">= 5.5.1"
+gem "rdoc", ">= 6.3.1"
 # backported fixes for rack
 gem 'rack', '~> 1.6.13', git: 'https://github.com/rails-lts/rack.git', branch: 'lts-1-6-stable'
 gem "nokogiri", ">= 1.12.5"
