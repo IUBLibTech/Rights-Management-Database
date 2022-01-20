@@ -96,7 +96,7 @@ span.avalon_item_title {
 
 div.access_div {
     float: left;
-    width: 18%;
+    width: 20%;
     overflow: auto;
     margin-bottom: 10px;
     margin-right: 10px;
@@ -104,8 +104,7 @@ div.access_div {
 }
 div.access_reason_div {
     float: left;
-    width: 35%;
-    margin-right: 20px;
+    width: 30%;
 }
 #access_save_buttons {
     display: none;
@@ -132,8 +131,6 @@ div.calced_access_div {
 }
 div#history_div {
     float: left;
-    width: 15%;
-    padding-left: 180px;
     padding-top: 9px;
 }
 }
