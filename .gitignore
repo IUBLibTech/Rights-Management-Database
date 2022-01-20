@@ -39,3 +39,5 @@ db/schema.rb
 passenger.*
 public/
 .byebug_history
+
+.ruby-version
