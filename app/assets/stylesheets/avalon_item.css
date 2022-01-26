@@ -55,24 +55,7 @@ ul.conversation {
     visibility: visible;
     opacity: 1;
 }
-#access_div {
-    width: 50%;
-}
-#access_div > * {
-    float: left;
-    overflow: auto;
-}
-#access_div div:nth-child(1) {
-    width: 400px;
-    margin-right: 1.5rem;
-}
-#access_div div:nth-child(2) {
-    width: 400px;
-}
-#access_div div:nth-child(3) {
-    float: left;
-    width: 25%;
-}
+
 #note_div {
     overflow: auto;
     clear: both;
@@ -104,7 +87,8 @@ div.access_div {
 }
 div.access_reason_div {
     float: left;
-    width: 30%;
+    width: 20%;
+    min-height: 185px;
 }
 #access_save_buttons {
     display: none;
@@ -127,31 +111,44 @@ b.access_warning {
 }
 div.calced_access_div {
     float: left;
-    width: 20%;
 }
 div#history_div {
     float: left;
     padding-top: 9px;
-}
+    min-height: 185px;
+    margin-right: 20px;
+    width: 15%;
 }
 div.legal {
     float: left;
-    width: 45%;
+    width: 35%;
     overflow: auto;
+    margin-left: 40px;
 }
 div.legal > h2 {
     padding: .5rem;
 }
+button.newContractButton {
+    margin-top: 3px;
+}
 div.contracts {
-    /*max-width: 890px;*/
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
+    margin-top: 5px;
+    border-top: 2px solid gray;
+    overflow-y: auto;
+    max-height: 267px;
 }
 div.contract {
-    width: 400px;
+    width: 47%;
     padding-right: 1rem;
     float: left;
-    height: 275px;
+    height: 230px;
+    background: whitesmoke;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    margin: 5px;
+}
+div.contract > button:first-of-type {
+    margin-left: 15px;
 }
 #contract_notes, .contract_notes {
     overflow: auto;

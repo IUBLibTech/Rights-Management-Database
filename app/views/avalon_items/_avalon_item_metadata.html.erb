@@ -55,6 +55,12 @@
     <div class="access_div">
       <label for=access>Access Determination:</label>
       <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
+      <div class="calced_access_div">
+        <label for=access><i>System Calculated Access Determination:</i></label><br>
+        <span id="sys_acc">
+          <i><%= @avalon_item.calc_access %></i>
+        </span>
+      </div>
       <div id="access_save_buttons">
         <button type="submit" form="access_reason_form" class="rvt-button rvt-button--small rvt-button--full-width" id="access_determination_save" >Save Access Determination/Reason(s)</button>
         <button type="reset" form="access_reason_form" class="rvt-m-top-xs rvt-button rvt-button--small rvt-button--secondary rvt-button--full-width" id="access_determination_cancel" >Cancel</button>
@@ -128,12 +134,4 @@
     </div>
   </div>
   <%= render partial: 'avalon_items/contracts' %>
-</div>
-<div class="foo2">
-  <div class="calced_access_div">
-    <label for=access><i>System Calculated Access Determination:</i></label><br>
-    <span id="sys_acc">
-      <i><%= @avalon_item.calc_access %></i>
-    </span>
-  </div>
 </div>

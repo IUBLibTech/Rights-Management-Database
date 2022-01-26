@@ -13,6 +13,8 @@ class AvalonItem < ActiveRecord::Base
 
   accepts_nested_attributes_for :performances
 
+  before_save :check_structure_modified
+
   REVIEW_STATE_DEFAULT = 0
   REVIEW_STATE_REVIEW_REQUESTED = 1
   REVIEW_STATE_WAITING_ON_CM = 2
@@ -82,6 +84,29 @@ class AvalonItem < ActiveRecord::Base
     ai.results
   end
 
+  # called before_save
+  def check_structure_modified
+    # structure is considered "modified" when any metadata for a single item in the hierarchy has been modified (updates_at != created_at)
+    # OR hierarchy has been added to or removed (add/delete performances or tracks)
+    # OR works or people have been associated anywhere in the hierarchy
+    # This operation is very expensive so short circuit if the structure is already marked as modified
+    unless structure_modified
+      if self.recordings.any? {|r| (r.created_at != r.updated_at) || (r.people.size > 0) }
+        self.structure_modified = true
+      else
+        performances = recordings.collect { |r| r.performances }.flatten
+        if performances.size != recordings.size || performances.any? {|p| p.created_at != p.updated_at }
+          self.structure_modified = true
+        else
+          tracks = performances.collect { |p| p.tracks }.flatten
+          if tracks.size != performances.size || tracks.any?{ |t| t.people.size > 0 || t.works.size > 0}
+            self.structure_modified = true
+          end
+        end
+      end
+    end
+  end
+
   # this function sets all reason_* booleans to false. It DOES NOT save the record, only changes what is in memory
   def clear_all_reasons
     # public domain reasons
@@ -101,7 +126,11 @@ class AvalonItem < ActiveRecord::Base
   end
 
   def access_determination
-    past_access_decisions.last.decision
+    if  past_access_decisions.size > 0
+      past_access_decisions.last.decision
+    else
+      AccessDeterminationHelper::DEFAULT_ACCESS
+    end
   end
 
   def last_copyright_librarian_access_decision

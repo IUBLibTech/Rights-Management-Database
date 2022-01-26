@@ -1,3 +1,7 @@
+<% if flash[:warning] || flash.now[:warning] %>
+  <p class="warning"><%= flash[:warning].html_safe %></p>
+<% else %>
+
 <div id="adder_overlay" data-animation-offscreen="true">
   <i id="adder_close" class="fa fa-window-close" style="font-size:30px;float: right;"><span class=sr-only>close menu</span></i>
   <div id="adder_content"></div>
@@ -168,7 +172,10 @@
 <script type="text/javascript" charset="utf-8">
     let avalon_item_id = <%= @avalon_item.id %>;
     let original_access = "<%= @avalon_item.access_determination %>"
-    let checked = <%= @avalon_item.checked_reasons.to_json.to_s.html_safe %>
+    let checked = <%= @avalon_item.checked_reasons.to_json.to_s.html_safe %>;
+    let legal_agreements = <%= @avalon_item.contracts.size %>;
+		let structure_modified = <%= @avalon_item.structure_modified? ? true : false %>;
+
 		const reasons_selector_map = {
       "<%= AccessDeterminationHelper::RESTRICTED_ACCESS %>": "#restricted_reasons",
       "<%= AccessDeterminationHelper::IU_ACCESS %>": "#iu_reasons",
@@ -184,6 +191,12 @@
       //hookReviewCommentSlide();
       hookAvalonNoteButton();
       hookAccessSelects();
+	    <% if @avalon_item.structure_modified %>
+        $("#toggle_input").prop("checked", true);
+        $("#recordings_div").show(200);
+        $('#toggle_text').text("Hide Structured Hierarchy");
+	    <% end %>
+
       $('#toggle_input').change( function() {
         if (this.checked) {
           $("#recordings_div").show(200);
@@ -193,18 +206,18 @@
           $('#toggle_text').text("Show Structured Hierarchy");
         }
       });
-      selectReasonsDiv(false, false);
+      selectReasonsDiv(false, false, false);
 			$("#access_determination_cancel").click(function() {
 				$("#access_save_buttons").hide();
       })
       $(".reason_checkbox").change(function() {
-				selectReasonsDiv(true, false);
+				selectReasonsDiv(true, false, false);
       })
 			$("#access_reason_form").on("reset", function() {
 				// necessary so that the reason div is displayed AFTER the form resets
         setTimeout(function() {
 	        recheckChecked();
-					selectReasonsDiv(false, false);
+					selectReasonsDiv(false, false, false);
         })
 			}).submit(function (e) {
 				if (!reasonsSelected()) {
@@ -222,8 +235,7 @@
 		      title: 'Updated Record',
 		      text: data["msg"]
 	      }).then(function (){
-		      selectReasonsDiv(false, false);
-
+		      selectReasonsDiv(false, false, false);
 	      })
       }).on("ajax:error", function(event, xhr, status, error) {
 	      swal.fire({
@@ -254,14 +266,12 @@
 				$(selector).prop('checked', true);
       }
     }
-		function selectReasonsDiv(showSave, clearChecked) {
+		function selectReasonsDiv(showSave, clearChecked, prompt_worldwide) {
 			let access = $( "#access option:selected" ).text();
-
 			//clear previous reasons on access level change
       if (clearChecked) {
         $('.reason_checkbox').removeAttr("checked");
       }
-
 			if (showSave) {
 				// show save if the showSave is true AND the change in access determination is different from original_access
         // if the change is back to the original access determination, we don't show need to re-check any previously checked reason.
@@ -302,10 +312,19 @@
             text: "Access was set to unknown value: "+access
           });
         }
-
+      // finally, prompt user for necessary metadata if setting to Worlwide access and structure has not been modified OR
+      // there are 0 legal agreements for the object
+      if (prompt_worldwide && access === '<%= AccessDeterminationHelper::WORLD_WIDE_ACCESS %>' && !structure_modified && legal_agreements === 0) {
+				swal.fire({
+          title: "Provide Metadata!",
+          html: "<p>Make sure to provide <i><b>all</b></i> metadata that supports a Worldwide Access Determination. Access Determination Reasons alone are not sufficient. " +
+            "You must detail any legal agreements that permit Worldiwde Access, or describe... <i>what boiler plate do we want here???</i></p>",
+          icon: 'warning'
+        })
+      }
     }
 
-		// this should be called #access_determination_save is called
+		// this should be called when #access_determination_save is called
     function ajaxAccess() {
 			let decision = $("#access :selected").text();
       $.ajax({
@@ -321,7 +340,7 @@
             text: "This Avalon Item's Access Determination was successfully updated."
           }).then(function (){
             $("#ajax_metadata").html(response);
-            selectReasonsDiv(false, false);
+            selectReasonsDiv(false, false, false);
             // need to add listeners again for re-render portion of the page
             hookNeedsReview();
             hookNewContractButton();
@@ -416,3 +435,4 @@
     }
 
 </script>
+<% end %>

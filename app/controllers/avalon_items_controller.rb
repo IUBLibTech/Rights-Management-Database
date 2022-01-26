@@ -13,11 +13,20 @@ class AvalonItemsController < ApplicationController
 
   def show
     @avalon_item = AvalonItem.includes(:recordings).find(params[:id])
-    read_json(@avalon_item)
-    @json = JSON.parse(@avalon_item.json)
-    @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
-    @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
-    redirect_to avalon_items_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
+    # Read data from MCO - if this fails it probably means Avalon Identifiers have changed in MCO and this is a BAD thing in production
+    begin
+      success = read_json(@avalon_item)
+      if success
+        @json = JSON.parse(@avalon_item.json)
+        @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
+        @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
+      else
+        flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+      end
+    rescue
+      flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+    end
+    redirect_to root_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
   end
 
   def edit
@@ -76,7 +85,8 @@ class AvalonItemsController < ApplicationController
                 @avalon_item.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
                 @avalon_item.reason_license = !params[:worldwide][:reason_license].nil?
               elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
-                @avalon_item.reason_in_copyright = !params[:iu][:reason_in_copyright].nil?
+                # this field is optional so it may not be present in the params hash
+                @avalon_item.reason_in_copyright = !params[:iu]&[:reason_in_copyright].nil?
               end
               @avalon_item.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
               @avalon_item.save

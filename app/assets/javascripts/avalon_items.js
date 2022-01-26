@@ -638,6 +638,8 @@ function hookNewContractButton() {
 								$('.contracts').prepend(result)
 								hookRemoveContractButtons();
 								hookEditContractButtons();
+                // increment the javascript number of legal_agreements for this Avalon Item
+                  legal_agreements++;
 							},
 							error: function (xhr, status, error) {
 								swal.fire({
@@ -728,7 +730,9 @@ function hookRemoveContractButtons() {
 					url: '/contracts/' + contractId,
 					method: 'DELETE',
 					success: function (result) {
-						$('div.contract[data-contract-id='+contractId+']').remove();
+              $('div.contract[data-contract-id='+contractId+']').remove();
+              // decrement the javascript number of contracts
+              legal_agreements--;
 					},
 					error: function (xhr, status, error) {
 						swal.fire({
@@ -772,7 +776,7 @@ function hookAvalonNoteButton() {
 }
 function hookAccessSelects() {
     $("#access").unbind("change").change(function() {
-        selectReasonsDiv(true, true);
+        selectReasonsDiv(true, true, true);
     });
     $('.performance_access_select').unbind("change").change(function() {
         let id = $(this).attr('data-performance-id');
