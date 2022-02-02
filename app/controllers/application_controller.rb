@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include ApplicationHelper
 
-  before_action :signed_in_user
+  before_action :signed_in_user, except: :access_determination
   around_filter :scope_current_username
   before_filter :set_browser_no_cache
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
