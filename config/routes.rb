@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get '/atom_tester/json/:id', to: 'atom_feed_reader#read_json', as: 'atom_feed_read_json'
   get '/atom_tester/load_avalon_record/:id', to: 'atom_feed_reader#load_avalon_record', as: 'load_avalon_record'
 
+  get '/people/new/entity/', to: 'people#new_entity', as: 'new_entity'
+
   # # specify single barcode
   # post '/services/access_decision_by_barcode/:mdpi_barcode', to: 'services#access_decision_by_barcode', as: 'access_decision_by_barcode'
   # # specify json array of barcodes in request body
@@ -97,6 +99,7 @@ Rails.application.routes.draw do
 
   get 'recordings/ajax/edit/:id', to: 'recordings#ajax_edit', as: 'ajax_edit_recording'
   get 'recordings/ajax/show/:id', to: 'recordings#ajax_show', as: 'ajax_show_recording'
+
 
   get '/people/ajax/new', to: 'people#ajax_new_person', as: 'ajax_new_person'
   get '/people/ajax/autocomplete', to: 'people#ajax_autocomplete', as: 'people_ajax_autocomplete'

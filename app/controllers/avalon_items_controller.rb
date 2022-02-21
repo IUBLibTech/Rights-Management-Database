@@ -457,7 +457,8 @@ class AvalonItemsController < ApplicationController
       @avalon_item = AvalonItem.find(params[:id])
       @work = Work.find(params[:work][:id])
       Work.transaction do
-        @updated = @work.update(work_params)
+        # works are no longer updated through this AJAX call, only the tracks that they appear on are updated
+        # @updated = @work.update(work_params)
         # Tracks: get all the track associations for the AvalonItem first
         existing_tracks = @avalon_item.recordings.collect{|r| r.performances }.flatten.collect{|p| p.tracks }.flatten
         # determine which tracks have the specified work performed on them.
@@ -474,10 +475,10 @@ class AvalonItemsController < ApplicationController
         delete.each do |tid|
           TrackWork.where(track_id: tid, work_id: @work.id).delete_all
         end
-        # process people:
-        # need to re-save @work as any NEW people are enqueued into @work.work_contributor_people and the save results in the
-        # new work contributor people persisting in the database
-        process_work_contributors
+        # people are no longer associated with Works in this AJAX call.
+        # process_work_contributors
+
+        # this will cascade saves to the associated tracks this work appears on.
         @updated = @work.save
       end
       if @updated

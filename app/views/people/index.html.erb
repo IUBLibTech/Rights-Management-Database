@@ -1,5 +1,5 @@
 <p id="notice"><%= flash[:notice]&.html_safe %></p>
-<h1>Listing People</h1>
+<h2>Listing People <%= button_to "Create New Person", new_person_path, method: :get %></h2>
 <table>
   <thead>
     <tr>
@@ -16,7 +16,7 @@
   <tbody>
     <% @people.each_with_index do |person, i| %>
       <tr class=<%= "#{i.odd? ? 'odd' : 'even'}" %>>
-        <td><%= person.name %></td>
+        <td><%= link_to  person.full_name_last_first, person, target: "_blank" %></td>
         <td><%= person.date_of_birth %></td>
         <td><%= person.date_of_death %></td>
         <td><%= person.place_of_birth %></td>
@@ -25,18 +25,16 @@
         <td></td>
         <td>
           <%= link_to 'Show', person %>
+          <%= link_to "Edit", person %>
           <% if person.avalon_items.size > 0 %>
-            <span style="color: #111">Destroy</span> |
-            <%= link_to "Try Anyway", person, method: :delete  %>
-          <% else %>
-            <%= link_to 'Destroy', person, method: :delete%>
+            <%= link_to "Delete", person, method: :delete %>
           <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<h1>Listing Entities</h1>
+<h2 class="rvt-m-top-xl">Listing Entities <%= button_to "Create New Entity", new_entity_path, method: :get %></h2>
 <table>
   <thead>
   <tr>
@@ -58,10 +56,8 @@
       <td></td>
       <td>
         <%= link_to 'Show', person %>
+        <%= link_to "Edit", edit_person_path(person) %>
         <% if person.avalon_items.size > 0 %>
-          <span style="color: #111">Destroy</span> |
-          <%= link_to "Try Anyway", person, method: :delete  %>
-        <% else %>
           <%= link_to 'Destroy', person, method: :delete %>
         <% end %>
       </td>

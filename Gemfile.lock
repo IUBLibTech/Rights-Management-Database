@@ -221,6 +221,7 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   nested_form
   net-scp
+  net-ssh
   nokogiri (>= 1.12.5)
   pagy
   progress_bar

@@ -33,6 +33,9 @@ gem 'pagy'
 
 gem 'net-scp'
 
+# gem for connecting through ssh tunnel
+gem 'net-ssh'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # jquery UI asset pipeline
