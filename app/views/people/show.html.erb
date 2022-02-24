@@ -15,7 +15,11 @@
       </tr>
       <tr>
         <th>Authority Source URL</th>
-        <td><%= link_to "#{@person.authority_source_url}", authority_source_url, target: '_blank' unless @person.authority_source_url.blank? %></td>
+        <td>
+          <% unless @person.authority_source_url.blank? %>
+            <%= link_to "#{@person.authority_source_url}", @person.authority_source_url, target: '_blank' unless @person.authority_source_url.blank? %>
+          <% end %>
+        </td>
       </tr>
     </tbody>
   </table>

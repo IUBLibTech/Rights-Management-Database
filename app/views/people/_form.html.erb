@@ -96,7 +96,8 @@
   <% end %>
   <% unless @ajax %>
     <div class="actions">
-      <%= f.submit {"class" ""} %><%= button_to "Cancel", @person, method: :get %>
+      <% verb = action_name == "new" ? "Create" : "Update" %>
+      <%= f.submit "#{@person.entity? ? verb+" Entity" : verb+" Person" }" %><%= button_to "Cancel", @person, method: :get %>
     </div>
   <% end %>
 <% end %>
