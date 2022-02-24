@@ -13,7 +13,7 @@
       <div class="rvt-grid rvt-m-top-xxs person_attributes">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Search by Last Name</label>
-          <%= pf.text_field :last_name, {type: "search", class: "autocomplete", autocomplete: "off"} %>
+          <%= pf.text_field :last_name, {type: "search", class: "autocomplete",  style: "border: 3px solid #006298;", autocomplete: "off"} %>
           <%= render partial: 'people/autocomplete_person_tooltip' %>
         </div>
         <div class="rvt-grid__item-4-md-up">
@@ -42,7 +42,7 @@
       <div class="rvt-grid entity_attributes">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Search by Company Name</label>
-          <%= pf.text_field :company_name, {type: "text", 'aria-describedby': "company name", class: "autocomplete_company", autocomplete: "off"} %>
+          <%= pf.text_field :company_name, {type: "text", 'aria-describedby': "company name", class: "autocomplete_company", style: "border: 3px solid #006298;", autocomplete: "off"} %>
           <%= render partial: 'people/autocomplete_entity_tooltip' %>
         </div>
         <div class="rvt-grid__item-4-md-up">

@@ -26,7 +26,6 @@ class WorksController < ApplicationController
   # POST /works.json
   def create
     @work = Work.new(work_params)
-    debugger
     process_work_contributors
     respond_to do |format|
       if @work.save
