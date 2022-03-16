@@ -611,56 +611,60 @@ function hookButtons() {
     hookRemoveContractButtons();
 }
 function hookNewContractButton() {
-	$('.newContractButton').click( function() {
-		$.ajax({
-			url: '/contracts/ajax/new/'+avalon_item_id,
-			method: 'GET',
-			success: function(response) {
-				Swal.fire({
-					title: 'New Agreement',
-					html: response,
-					showCancelButton: true,
-					preConfirm: () => {
-						const avalon_item_id = $('#contract_avalon_item_id').val()
-						const contract_type = $("#contract_contract_type").val()
-						const date_edtf_text = $('#contract_date_edtf_text').val();
-						const perpetual = $('#contract_perpetual').val();
-						const contract_notes = $('#contract_notes').val();
-						return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
-					}
-				}).then((result) => {
-					if (result.value) {
-						$.ajax({
-							url: '/contracts/ajax/create',
-							method: 'POST',
-							data: {contract: result.value},
-							success: function (result) {
-								$('.contracts').prepend(result)
-								hookRemoveContractButtons();
-								hookEditContractButtons();
-                // increment the javascript number of legal_agreements for this Avalon Item
-                  legal_agreements++;
-							},
-							error: function (xhr, status, error) {
-								swal.fire({
-									icon: '',
-									title: "Ajax Error trying to create a new Agreement",
-									text: xhr.responseText
-								})
-							}
-						})
-					}
-				})
-			},
-			error: function (xhr, status, error) {
-				swal.fire({
-					icon: '',
-					title: "Ajax Error trying to add a new Agreement",
-					text: xhr.responseText
-				})
-			}
-		});
-	});
+    $('.newContractButton').click( function() {
+        $.ajax({
+            url: '/contracts/ajax/new/'+avalon_item_id,
+            method: 'GET',
+            success: function(response) {
+                Swal.fire({
+                    title: 'New Agreement',
+                    html: response,
+                    showCancelButton: true,
+                    onOpen: () => {
+                        $('#contract_date_edtf_text').on('input', edtfValidate);
+                    },
+                    preConfirm: () => {
+                        const avalon_item_id = $('#contract_avalon_item_id').val();
+                        const contract_type = $("#contract_contract_type").val();
+                        const date_edtf_text = $('#contract_date_edtf_text').val();
+                        const perpetual = $('#contract_perpetual').val();
+                        const contract_notes = $('#contract_notes').val();
+                        return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+                    }
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '/contracts/ajax/create',
+                            method: 'POST',
+                            data: {contract: result.value},
+                            success: function (result) {
+                                $('.contracts').prepend(result)
+                                hookRemoveContractButtons();
+                                hookEditContractButtons();
+                                // increment the javascript number of legal_agreements for this Avalon Item
+                                legal_agreements++;
+                                legal_agreement_count++;
+                            },
+                            error: function (xhr, status, error) {
+                                swal.fire({
+                                    icon: '',
+                                    title: "Ajax Error trying to create a new Agreement",
+                                    text: xhr.responseText
+                                })
+                            }
+                        })
+                    }
+                })
+            },
+            error: function (xhr, status, error) {
+                swal.fire({
+                    icon: '',
+                    title: "Ajax Error trying to add a new Agreement",
+                    text: xhr.responseText
+                })
+            }
+        });
+    });
 }
 
 function hookEditContractButtons() {
@@ -733,6 +737,7 @@ function hookRemoveContractButtons() {
               $('div.contract[data-contract-id='+contractId+']').remove();
               // decrement the javascript number of contracts
               legal_agreements--;
+              legal_agreement_count--;
 					},
 					error: function (xhr, status, error) {
 						swal.fire({
@@ -894,6 +899,7 @@ function cancelRecordingEdit(recordingId) {
 }
 function submitRecordingEditResponse(recordingId, e, data, status, xhr) {
     $(".recording_div[data-recording-id="+recordingId+"]").replaceWith(xhr.responseText);
+    structure_modified = true;
     rehookButtons();
     rehookAccordion();
     loadCalcedAccess();

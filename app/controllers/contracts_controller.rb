@@ -1,6 +1,7 @@
 class ContractsController < ApplicationController
   before_action :set_contract, except: [:ajax_new, :new, :create, :ajax_create]
 
+
   def ajax_show
     render partial: 'avalon_items/contract_show', locals: {c: @contract}
   end
@@ -23,10 +24,11 @@ class ContractsController < ApplicationController
   def new
 
   end
+
   def create
-    track = Contract.new(contract_params)
+    contract = Contract.new(contract_params)
     respond_to do |format|
-      if track.save!
+      if contract.save!
         format.js
       else
         render text: "failure", status: 501
@@ -62,4 +64,5 @@ class ContractsController < ApplicationController
       :avalon_item_id, :date_edtf_text, :contract_type, :notes, :perpetual
     )
   end
+
 end

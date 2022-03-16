@@ -15,7 +15,8 @@ gem 'sidekiq'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# this version: https://sweetalert2.github.io/
+# this gem hasn't been updated since 2018... it bundles sweet alert 2, but an older version 9.x. I think... when checking
+# the sweet alert documentation make sure to look at older versions
 gem 'sweetalert2'
 
 gem 'mysql2', '~> 0.5'

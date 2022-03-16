@@ -70,7 +70,7 @@
       <label for=access>Access Determination Reason</label><br>
       <div class="reasons_panels">
         <div id="restricted_reasons" class="reasons_div">
-          <b class="access_warning">You must select one or more reasons below to save you Access Determination.</b>
+          <b class="access_warning">You must select one or more reasons below to save your Access Determination.</b>
           <ul class="rvt-plain-list" id="reasons_restricted">
             <li>
               <%= check_box_tag "restricted[reason_ethical_privacy_considerations]", "", @avalon_item.reason_ethical_privacy_considerations, { class: "reason_checkbox restricted_reason" } %>
@@ -97,7 +97,7 @@
         <div id="default_reasons" class="reasons_div">
         </div>
         <div id="worldwide_reasons" class="reasons_div">
-          <b class="access_warning">You must select one or more reasons below to save you Access Determination.</b>
+          <b class="access_warning">You must select one or more reasons below to save your Access Determination.</b>
           <ul class="rvt-plain-list" id="reasons_worldwide">
             <li>
               <%= check_box_tag "worldwide[reason_iu_owned_produced]", "", @avalon_item.reason_iu_owned_produced, { class: "reason_checkbox worldwide_reason" } %>
@@ -105,7 +105,7 @@
             </li>
             <li>
               <%= check_box_tag "worldwide[reason_license]", "", @avalon_item.reason_license, { class: "reason_checkbox worldwide_reason" } %>
-              <label for="worldwide_reason_license">License</label>
+              <label for="worldwide_reason_license">Licensing Agreement</label>
             </li>
             <li>
               <%= check_box_tag "worldwide[reason_public_domain]", "", @avalon_item.reason_public_domain, { class: "reason_checkbox worldwide_reason" } %>
