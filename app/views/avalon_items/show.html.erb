@@ -17,7 +17,7 @@
   </div>
 
   <div class="toggle_div">
-    <label id="toggle_text">Show Structured Hierarchy</label>
+    <label id="toggle_text">Show Structured Metata</label>
     <label class="switch" id="toggle_label">
       <input type="checkbox" id="toggle_input">
       <span class="slider" id="toggle_slider"></span>
@@ -195,16 +195,16 @@
       <% if @avalon_item.structure_modified %>
         $("#toggle_input").prop("checked", true);
         $("#recordings_div").show(200);
-        $('#toggle_text').text("Hide Structured Hierarchy");
+        $('#toggle_text').text("Hide Structured Metadata");
       <% end %>
 
       $('#toggle_input').change( function() {
         if (this.checked) {
           $("#recordings_div").show(200);
-          $('#toggle_text').text("Hide Structured Hierarchy");
+          $('#toggle_text').text("Hide Structured Metadata");
         } else {
           $("#recordings_div").hide(200);
-          $('#toggle_text').text("Show Structured Hierarchy");
+          $('#toggle_text').text("Show Structured Metadata");
         }
       });
       selectReasonsDiv(false, false, false);
@@ -259,7 +259,7 @@
 				if (this.checked && !structure_modified) {
           swal.fire({
             title: "Metadata Required",
-            html: "You must enter metadata in the structured hierarchy that supports a Worldwide Access level"
+            html: "You must enter metadata in the structured metadata that supports a Worldwide Access level"
           })
         }
       });
