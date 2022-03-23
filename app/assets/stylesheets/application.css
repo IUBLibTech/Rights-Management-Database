@@ -878,4 +878,7 @@ span.active {
     display: none;
 }
 
+li > form {
+    z-index: 0;
+}
 

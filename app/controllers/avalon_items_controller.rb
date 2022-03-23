@@ -271,7 +271,7 @@ class AvalonItemsController < ApplicationController
         #
         # contributions to Recordings/Performances/Tracks are role based. The role is stored at the xyzContributorPerson
         # object as a boolean (RecordingContributorPerson.depositor for instance). Since HTML does not post unchecked checkboxes
-        # and I was unable to figure out how to get the Rails to do this for nested nested nested nested associations, this
+        # and I was unable to figure out how to get Rails to do this for nested-nested-nested-nested associations, this
         # is done by manually creating input type=checkbox HTML rather than relying on the Rails form builder helpers.
         # To check for unchecked checkboxes we have to see what's missing from the form. At each
         # level of the AvalonItem hierarchy (Recording/Performance/Track), we need to do the following:

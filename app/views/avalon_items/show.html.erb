@@ -225,13 +225,22 @@
               text: "You must specify one or more Reasons for Restricted or Worldwide Access Determinations."
             }
           )
-        } else if ($("worldwide_reason_public_domain").is(":checked") && !structure_modified) {
+        } else if ($("#worldwide_reason_public_domain").is(":checked") && !structure_modified) {
 	        e.preventDefault();
 	        e.stopPropagation();
 	        swal.fire({
 			        icon: "error",
 			        title: "Metadata Required",
 			        text: "You must enter structured metadata that supports this Avalon Item being in the Public Domain."
+		        }
+	        )
+        } else if ($("#worldwide_reason_license").is(":checked") && legal_agreement_count < 1) {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        swal.fire({
+			        icon: "error",
+			        title: "Metadata Required",
+			        text: "You must enter Legal Agreement metadata that supports Worldwide Access."
 		        }
 	        )
         }
@@ -267,7 +276,7 @@
 		    if (this.checked && legal_agreement_count < 1) {
 			    swal.fire({
 				    title: "Legal Agreement Required",
-				    html: "You must enter all available information in the Legal Agreements section that support a Worldwide Access level"
+				    html: "You must enter all available information in the Legal Agreements section that support Worldwide Access."
 			    })
 		    }
 	    });
