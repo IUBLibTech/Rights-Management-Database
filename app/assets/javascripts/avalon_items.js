@@ -53,7 +53,7 @@ function addPerson(e) {
 }
 function addPersonForm(e) {
     let text = getTextSelection(e);
-    if (e.target === $('#add_person_button')[0]) {
+    if (e===null || e.target === $('#add_person_button')[0]) {
         // no-op
     } else if (text === null || text.length === 0) {
         text = adder_event_target.textContent;
@@ -108,12 +108,15 @@ function setPerson(person_id, warn) {
         setPersonForm(person_id);
     }
 }
+// used to determine if a person has been selected from autocomplete suggestions (see clearPersonForm for uses)
+let person_autocompleted = false;
 function setPersonForm(person_id) {
     $.ajax({
         url: "./"+avalon_item_id+"/ajax_people_setter/"+person_id,
         success: function(result) {
             let el = $( "#adder_overlay" );
             $('#adder_content').html(result);
+            $(".readonlyable").attr("readonly", true);
             $('.peopleButtonAdderCancel').click(function(){
                 hideOverlay();
             });
@@ -127,6 +130,7 @@ function setPersonForm(person_id) {
             hookPeopleEntity();
             hookMassAssigners();
             hookEdtfValidation();
+            person_autocompleted = true;
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -136,6 +140,39 @@ function setPersonForm(person_id) {
             })
         }
     })
+}
+/**
+ * The person slide out form does double duty in both creating new people AND selection existing people from the last name
+ * autocomplete input. It does this by initiating the form from the "Add Person" button which makes an AJAX call for the form.
+ * It returns a form with the action equaling add_person (a new person). However, when an autocomplete selection
+ * is made of an existing person, another AJAX call happens with the return being a prepopulated form with the form action
+ * equaling set_person (setting an EXISTING person instead of add a new person). Because a user can decide to create
+ * a new person AFTER selecting an autocompleted person, we need to be able to differentiate this use case from a set_person
+ * action. The ajax_people_setter_post action in avalon_items_controller should use the absence of the person_id VALUE as the
+ * indication that a new person should be created.
+ */
+function clearPersonForm() {
+    $("#person_id").val("")
+    $(".readonlyable").val("").attr("readonly", false);
+    if (person_autocompleted) {
+        $("#person_company_name").autocomplete("destroy").val("");
+        $("#person_last_name").autocomplete("destroy").val("");
+        person_autocompleted = false;
+        hookPeopleAutocomplete();
+    }
+}
+
+/**
+ * See the comments for clearPersonForm() for why this is necessary
+ */
+function clearWorkForm() {
+    $("#work_id").val("");
+    $(".readonlyable").val("").attr("readonly", false);
+    if (work_autocompleted) {
+        $("#work_title").autocomplete("destroy").val("");
+        work_autocompleted = false;
+        hookWorkAutocomplete();
+    }
 }
 
 function hookMassAssigners() {
@@ -197,6 +234,9 @@ function hookPeopleAutocomplete() {
                 }
             });
         },
+        open: function() {
+            clearPersonForm();
+        },
         focus: function (event, person) {
             $('#ac_full_name').text(person.item.label);
             $('#ac_dob').text(person.item.date_of_birth_edtf);
@@ -219,7 +259,6 @@ function hookPeopleAutocomplete() {
                 el.toggle();
             }
             setPerson(person.item.id, false);
-            return false;
         }
     });
     $('#person_last_name').focusout(function(event) {
@@ -230,8 +269,7 @@ function hookPeopleAutocomplete() {
     }).focusin(function(event) {
         $(this).autocomplete("search");
         return false;
-    });
-
+    })
     // autocomplete for the Company Name field
     $('.autocomplete_company').autocomplete({
         minLength: 2,
@@ -257,6 +295,8 @@ function hookPeopleAutocomplete() {
                     });
                 }
             });
+        }, open: function() {
+            clearPersonForm();
         },
         focus: function (event, person) {
             $('#ac_company_name').text(person.item.label);
@@ -390,6 +430,7 @@ function setWork(work_id, warn) {
         setWorkForm(work_id);
     }
 }
+let work_autocompleted = false;
 function setWorkForm(work_id) {
     $.ajax({
         url: "./"+avalon_item_id+"/ajax_work_setter/"+work_id,
@@ -408,6 +449,7 @@ function setWorkForm(work_id) {
             hookWorkAutocomplete();
             hookWorkPeopleRemoval();
             hookEdtfValidation();
+            work_autocompleted = true;
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -455,6 +497,8 @@ function hookWorkAutocomplete() {
                     });
                 }
             });
+        }, open: function() {
+          clearWorkForm();
         },
         focus: function (event, work) {
             $("#ac_title").text(work.item.title);
@@ -548,7 +592,7 @@ function hookWorkAutocomplete() {
 function addWorkPerson(person) {
 	let el = $('div.people');
 	$.ajax({
-		url: "../ajax/people/ajax_work_person_form",
+		url: base_url + "/ajax/people/ajax_work_person_form",
 		data: {"id": person.id},
 		success: function (result) {
 			$('#work_people_div').append(result);

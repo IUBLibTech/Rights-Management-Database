@@ -18,25 +18,25 @@
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">First Name</label>
-          <%= pf.text_field :first_name, {type: "text", 'aria-describedby': "first name", readonly: true} %>
+          <%= pf.text_field :first_name, {type: "text", 'aria-describedby': "first name",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Middle Name</label>
-          <%= pf.text_field :middle_name, {type: "text", 'aria-describedby': "middle name", readonly: true} %>
+          <%= pf.text_field :middle_name, {type: "text", 'aria-describedby': "middle name",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid person_attributes">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Birth</label>
-          <%= pf.text_field :date_of_birth_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)', readonly: true}  %>
+          <%= pf.text_field :date_of_birth_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)',class: "readonlyable"}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Death</label>
-          <%= pf.text_field :date_of_death_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)', readonly: true}  %>
+          <%= pf.text_field :date_of_death_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)',class: "readonlyable"}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Place of Birth</label>
-          <%= pf.text_field :place_of_birth, {type: "text", 'aria-describedby': "first name", readonly: true} %>
+          <%= pf.text_field :place_of_birth, {type: "text", 'aria-describedby': "first name",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid entity_attributes">
@@ -47,25 +47,25 @@
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Nationality</label>
-          <%= pf.text_field :entity_nationality, {type: "text", 'aria-describedby': "nationality", class: "", readonly: true} %>
+          <%= pf.text_field :entity_nationality, {type: "text", 'aria-describedby': "nationality", class: "",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Authority Source</label>
-          <%= pf.text_field :authority_source, {type: "text", 'aria-describedby': "authority source", readonly: true} %>
+          <%= pf.text_field :authority_source, {type: "text", 'aria-describedby': "authority source",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Authority Source URL</label>
-          <%= pf.text_field :authority_source_url, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator", readonly: true} %>
+          <%= pf.text_field :authority_source_url, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">AKA</label>
-          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "also know as", readonly: true} %>
+          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "also know as",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-12">
           <label for="personNotes">Notes</label>
-          <%= pf.text_area :notes, {class: "noBorder", readonly: true} %>
+          <%= pf.text_area :notes, {class: "noBorder",class: "readonlyable"} %>
         </div>
       </div>
       <div>

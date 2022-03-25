@@ -16,6 +16,7 @@
   <%= render partial: 'layouts/footer' %>
 </body>
 <script type="text/javascript" charset="utf-8">
+  let base_url = "<%= request.base_url %>";
   let copyright_librarian = <%= User.current_user_copyright_librarian? %>;
   $(document).ready(function() {
       setJqUiTooltips();

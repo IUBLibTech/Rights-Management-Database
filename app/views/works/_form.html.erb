@@ -115,7 +115,7 @@
 				if (el.is(":visible")) {
 					el.toggle();
 				}
-				let url = "<%= Rails.root + "/people/ajax/autocomplete" %>";
+				let url = "<%= request.base_url + "/people/ajax/autocomplete" %>";
 				$.ajax({
 					url: url,
 					dataType: "json",
