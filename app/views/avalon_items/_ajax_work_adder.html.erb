@@ -9,7 +9,7 @@
       <div class="rvt-grid rvt-m-top-xxs">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Search by Title</label>
-          <%= f.text_field :title, {type: "text", 'aria-describedby': "title", style: "border: 3px solid #006298"} %>
+          <%= f.text_field :title, {type: "search", class: "autocomplete",  style: "border: 3px solid #006298;", autocomplete: "off"} %>
           <%= render partial: 'works/autocomplete_work_tooltip' %>
         </div>
         <div class="rvt-grid__item-4-md-up">
