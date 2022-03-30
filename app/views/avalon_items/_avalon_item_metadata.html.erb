@@ -54,7 +54,7 @@
     <%= hidden_field_tag "avalon_item_id", @avalon_item.id %>
     <div class="access_div">
       <label for=access>Access Determination:</label>
-      <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination) %>
+      <%= select_tag :access, options_for_select(@avalon_item.allowed_access_determinations.collect{|a| [a,a]}, @avalon_item.access_determination), {"autocomplete":"off"} %>
       <div class="calced_access_div">
         <label for=access><i>System Calculated Access Determination:</i></label><br>
         <span id="sys_acc">

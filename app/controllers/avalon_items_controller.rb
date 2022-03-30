@@ -77,7 +77,7 @@ class AvalonItemsController < ApplicationController
               # someone set some access determination other than Default (not reviewed) so mark record reviewed
             else
               if pad.decision == AccessDeterminationHelper::RESTRICTED_ACCESS
-                @avalon_item. reason_feature_film = !params[:restricted][:reason_feature_film].nil?
+                @avalon_item.reason_feature_film = !params[:restricted][:reason_feature_film].nil?
                 @avalon_item.reason_licensing_restriction = !params[:restricted][:reason_licensing_restriction].nil?
                 @avalon_item.reason_ethical_privacy_considerations = !params[:restricted][:reason_ethical_privacy_considerations].nil?
               elsif pad.decision == AccessDeterminationHelper::WORLD_WIDE_ACCESS
