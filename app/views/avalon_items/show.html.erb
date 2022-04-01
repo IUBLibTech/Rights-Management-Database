@@ -251,16 +251,11 @@
           selectReasonsDiv(false, false, false);
         })
       }).on("ajax:success", function(event, data, status, xhr) {
-        swal.fire({
-          title: 'Updated Record',
-          text: data["msg"]
-        }).then(function (){
-          selectReasonsDiv(false, false, false);
-        })
+        reloadPage();
       }).on("ajax:error", function(event, xhr, status, error) {
         swal.fire({
           title: 'Update Failed',
-          text: xhr.responseText
+          html: xhr.responseText
         })
       })
 
@@ -387,7 +382,7 @@
           })
         },
         error: function(jqXHR, textStatus, errorThrown) {
-          reloadPage("Error","An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>")
+          reloadPageWithError("An error occurred while trying to update the access determination:<br/><pre>"+ jqXHR.responseText +"</pre>")
         }
       })
     }
@@ -407,7 +402,7 @@
               })
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              reloadPage("Error", "An error occurred while trying to update the Performance's access determination. Please contact Andrew Albrecht")
+              reloadPageWithError("An error occurred while trying to update the Performance's access determination. Please contact Andrew Albrecht")
             }
         })
     }
@@ -427,7 +422,7 @@
               })
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              reloadPage("Error", "An error occurred while trying to set this Track's access determination. Please contact Andrew Albrecht")
+              reloadPageWithError("An error occurred while trying to set this Track's access determination. Please contact Andrew Albrecht")
             }
         })
     }
@@ -457,7 +452,7 @@
                     }).then(response => {
                         response.text().then(function(text) {
                             if (response.ok) {
-                                location.reload();
+                                reloadPage();
                             } else {
                                 swal.fire({
                                     type: 'error',

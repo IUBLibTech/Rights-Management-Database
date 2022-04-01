@@ -85,14 +85,13 @@ class AvalonItemsController < ApplicationController
                 @avalon_item.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
                 @avalon_item.reason_license = !params[:worldwide][:reason_license].nil?
               elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
-                # this field is optional so it may not be present in the params hash
-                @avalon_item.reason_in_copyright = !params[:iu]&[:reason_in_copyright].nil?
+                @avalon_item.reason_in_copyright = !params[:iu][:reason_in_copyright].nil? unless params[:iu].nil?
               end
               @avalon_item.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
               @avalon_item.save
             end
           end
-          render json: { "msg" => "Access Determination Saved" }.to_json
+          render partial: 'avalon_items/avalon_item_metadata'
         else
           render json: { "msg" => failure_message  }, status: 400
         end

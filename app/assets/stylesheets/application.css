@@ -881,4 +881,37 @@ span.active {
 li > form {
     z-index: 0;
 }
+.load_animation > h4 {
+    text-align: center;
+    display: none;
+    margin-bottom: 700px;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: -50%;
+    bottom: -30%;
+    right: -100%;
+    left: -100%;
+    margin: auto;
+    z-index: 0;
+    display: none;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 

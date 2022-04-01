@@ -110,15 +110,15 @@ class AvalonItem < ActiveRecord::Base
   # this function sets all reason_* booleans to false. It DOES NOT save the record, only changes what is in memory
   def clear_all_reasons
     # public domain reasons
-    reason_iu_owned_produced = false
-    reason_license = false
-    reason_public_domain = false
+    self.reason_iu_owned_produced = false
+    self.reason_license = false
+    self.reason_public_domain = false
     # restricted reasons
-    reason_feature_film = false
-    reason_licensing_restriction = false
-    reason_ethical_privacy_considerations = false
+    self.reason_feature_film = false
+    self.reason_licensing_restriction = false
+    self.reason_ethical_privacy_considerations = false
     # iu only reasons
-    reason_in_copyright = false
+    self.reason_in_copyright = false
   end
 
   def has_rmd_metadata?

@@ -177,3 +177,11 @@ function validYear(year) {
     let yearFormat = /^[0-9]{4}$/
     return year.match(yearFormat);
 }
+
+function reloadPage() {
+    $("#main_content").remove();
+    $(".load_animation").css("display", "block");
+    $(".load_animation > h4").css("display", "block");
+    $(".loader").css("display", "block");
+    location.reload();
+}

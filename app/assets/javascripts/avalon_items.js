@@ -1227,14 +1227,14 @@ function loadCalcedAccess() {
 			$('#sys_acc').html(result);
 		},
 		error: function(xhr, status, error) {
-			reloadPage("Error", "An error occurred while trying to load the System Calculated Access Determination. Please contact Andrew Albrecht.")
+			reloadPageWithError("An error occurred while trying to load the System Calculated Access Determination. Please contact Andrew Albrecht.")
 		}
 	})
 }
-function reloadPage(title='Reloading', msg="The Avalon Item will reload.", prompt) {
+function reloadPageWithError( msg="The Avalon Item will reload.", prompt) {
 	if (prompt) {
 		swal.fire({
-			title: title,
+			title: "Error",
 			html: msg
 		}).then(function() {
 			$('body').fadeOut("400", function() {
