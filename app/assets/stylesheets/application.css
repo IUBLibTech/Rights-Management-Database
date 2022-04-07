@@ -528,7 +528,7 @@ select {
     font-weight: 700;
 }
 a:link, a:focus, a:visited, a:active {
-    outline: none; !important;
+    outline: none !important;
 }
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
