@@ -23,12 +23,24 @@ class SessionsController < ActionController::Base
     "https://idp-stg.login.iu.edu/idp/profile"
   end
 
+  def iu_login
+    "https://idp.login.iu.edu/idp/profile"
+  end
+
+  def which_iu_login
+    if Rails.env == "production"
+      iu_login
+    else
+      iu_login_staging
+    end
+  end
+
   def new
     new_iu_login
   end
 
   def new_iu_login
-    url = "#{iu_login_staging}/cas/login?service=#{root_url}sessions/validate_login"
+    url = "#{which_iu_login}/cas/login?service=#{root_url}sessions/validate_login"
     logger.warn "Redirecting to IU Login for authentication: #{url}"
     redirect_to(url)
   end
@@ -36,14 +48,16 @@ class SessionsController < ActionController::Base
   def validate_login
     @casticket=params[:ticket]
     logger.warn "Returning from IU Login, cas ticket: #{params}"
-    url = "#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}"
+    use =
+      url = "#{which_iu_login}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}"
     uri = URI.parse(url)
     request = Net::HTTP.new(uri.host, uri.port)
     request.use_ssl = true
     request.verify_mode = OpenSSL::SSL::VERIFY_PEER
     request.ssl_version = :TLSv1_2
-    response = request.get("#{iu_login_staging}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}sessions/validate_login")
+    response = request.get("#{which_iu_login}/cas/serviceValidate?ticket=#{@casticket}&service=#{root_url}sessions/validate_login")
     @resp = response.body
+    logger.warn "Response from IU Login: #{@resp}"
     user = extract_username(@resp)
     if User.authenticate(user)
       sign_in(user)
