@@ -13,11 +13,20 @@ class AvalonItemsController < ApplicationController
 
   def show
     @avalon_item = AvalonItem.includes(:recordings).find(params[:id])
-    read_json(@avalon_item)
-    @json = JSON.parse(@avalon_item.json)
-    @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
-    @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
-    redirect_to avalon_items_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
+    # Read data from MCO - if this fails it probably means Avalon Identifiers have changed in MCO and this is a BAD thing in production
+    begin
+      success = read_json(@avalon_item)
+      if success
+        @json = JSON.parse(@avalon_item.json)
+        @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
+        @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
+      else
+        flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+      end
+    rescue
+      flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+    end
+    redirect_to root_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
   end
 
   def edit
@@ -37,25 +46,60 @@ class AvalonItemsController < ApplicationController
   end
 
   def ajax_post_access_decision
-    @avalon_item = AvalonItem.find(params[:id])
+    @avalon_item = AvalonItem.find(params[:avalon_item_id])
     if @avalon_item
       last_decision = @avalon_item.last_copyright_librarian_access_decision
+      # for an access determination to be successfully set it must
+      # a) if being set by a Collection Manager, determination must be equal to or more restrictive than the last access
+      #    determination made by a copyright librarian
+      # b) if determination is restricted or worldwide access, it must also have at least one "reason" selected
       if is_more_restrictive_than?(params[:access], last_decision&.decision) || User.current_user_copyright_librarian?
-        pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
-        @avalon_item.past_access_decisions << pad
-        # someone reset the review status on the item and has initiated a re-review
-        if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
-          @avalon_item.update_attributes!(review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
-        # someone set some access determination other than Default (not reviewed) so mark record reviewed
+        can_save = false
+        failure_message = "Something went wrong..."
+        if params[:access] == AccessDeterminationHelper::RESTRICTED_ACCESS
+          can_save = params[:restricted] && params[:restricted].size > 0
+          failure_message = "Access Determination was not saved. At least one Reason is required for Restricted Access" unless can_save
+        elsif params[:access] == AccessDeterminationHelper::WORLD_WIDE_ACCESS
+          can_save = params[:worldwide] && params[:worldwide].size > 0
+          failure_message = "Access Determination was not saved. At least one Reason is required for Worldwide Access" unless can_save
         else
-          @avalon_item.update_attributes!(review_state: AvalonItem::REVIEW_STATE_ACCESS_DETERMINED)
+          can_save = true
         end
-        render text: "success"
+        if can_save
+          AvalonItem.transaction do
+            # clear all previously set reasons
+            @avalon_item.clear_all_reasons
+            pad = PastAccessDecision.new(avalon_item: @avalon_item, changed_by: User.current_username, copyright_librarian: User.current_user_copyright_librarian?, decision: params[:access])
+            @avalon_item.past_access_decisions << pad
+            # someone reset the review status on the item and has initiated a re-review
+            if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
+              @avalon_item.update_attributes!(review_state: AccessDeterminationHelper::DEFAULT_ACCESS)
+              # someone set some access determination other than Default (not reviewed) so mark record reviewed
+            else
+              if pad.decision == AccessDeterminationHelper::RESTRICTED_ACCESS
+                @avalon_item.reason_feature_film = !params[:restricted][:reason_feature_film].nil?
+                @avalon_item.reason_licensing_restriction = !params[:restricted][:reason_licensing_restriction].nil?
+                @avalon_item.reason_ethical_privacy_considerations = !params[:restricted][:reason_ethical_privacy_considerations].nil?
+              elsif pad.decision == AccessDeterminationHelper::WORLD_WIDE_ACCESS
+                @avalon_item.reason_iu_owned_produced = !params[:worldwide][:reason_iu_owned_produced].nil?
+                @avalon_item.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
+                @avalon_item.reason_license = !params[:worldwide][:reason_license].nil?
+              elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
+                @avalon_item.reason_in_copyright = !params[:iu][:reason_in_copyright].nil? unless params[:iu].nil?
+              end
+              @avalon_item.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+              @avalon_item.save
+            end
+          end
+          render partial: 'avalon_items/avalon_item_metadata'
+        else
+          render json: { "msg" => failure_message  }, status: 400
+        end
       else
-        render text: "Cannot set access to something less restrictive than last Copyright Librarian access determination", status: 400
+        render json: { "msg" => "Cannot set access to something less restrictive than last Copyright Librarian access determination" }, status: 400
       end
     else
-      render text: "Could not find Avalon Item with ID: #{params[:id]}", status: 400
+      render json: { "msg" =>  "Could not find Avalon Item with ID: #{params[:id]}" }, status: 400
     end
   end
 
@@ -217,137 +261,142 @@ class AvalonItemsController < ApplicationController
 
 
   def ajax_people_setter_post
-    respond_to do |format|
-      @avalon_item = AvalonItem.find(params[:id])
-      @person = Person.find(params[:person][:id])
-      Person.transaction do
-        @updated = @person.update(person_params)
-        # this is a complicated mess of logic because, the internet plus rails plus IU Rivet...
-        #
-        # contributions to Recordings/Performances/Tracks are role based. The role is stored at the xyzContributorPerson
-        # object as a boolean (RecordingContributorPerson.depositor for instance). Since HTML does not post unchecked checkboxes
-        # and I was unable to figure out how to get the Rails to do this for nested nested nested nested associations, this
-        # is done by manually creating input type=checkbox HTML rather than relying on the Rails form builder helpers.
-        # To check for unchecked checkboxes we have to see what's missing from the form. At each
-        # level of the AvalonItem hierarchy (Recording/Performance/Track), we need to do the following:
-        # 1) determine the Recording/Performance/Track ids of all items currently associated with the AvalonItem
-        # 2) determine the Recording/Performance/Track ids that were submitted in the form on a role by role basis
-        # 3) determine what ids are NOT PRESENT in the form for a specific role, but ARE PRESENT in existing for that role.
-        # These ids represent the User unchecking that role and need to be set to false
-        # 4) determine what ids ARE PRESENT in the form for a specific role but are NOT PRESENT in existing for that role.
-        # These are roles that the User is adding to the association and need to be set to true or (see below) created in
-        # the xyzContributePerson object
-        # 6) if a user contributes a role to the object but there is no xyzContributorPerson object for that
-        # pairing, create the object and set the associated role(s) to true
+    # see assets/javascripts/avalon_item.js and the function clearPersonForm() for why this is necessary
+    if params[:person] && params[:person][:id].blank?
+      ajax_people_adder_post
+    else
+      respond_to do |format|
+        @avalon_item = AvalonItem.find(params[:id])
+        @person = Person.find(params[:person][:id])
+        Person.transaction do
+          @updated = @person.update(person_params)
+          # this is a complicated mess of logic because, the internet plus rails plus IU Rivet...
+          #
+          # contributions to Recordings/Performances/Tracks are role based. The role is stored at the xyzContributorPerson
+          # object as a boolean (RecordingContributorPerson.depositor for instance). Since HTML does not post unchecked checkboxes
+          # and I was unable to figure out how to get Rails to do this for nested-nested-nested-nested associations, this
+          # is done by manually creating input type=checkbox HTML rather than relying on the Rails form builder helpers.
+          # To check for unchecked checkboxes we have to see what's missing from the form. At each
+          # level of the AvalonItem hierarchy (Recording/Performance/Track), we need to do the following:
+          # 1) determine the Recording/Performance/Track ids of all items currently associated with the AvalonItem
+          # 2) determine the Recording/Performance/Track ids that were submitted in the form on a role by role basis
+          # 3) determine what ids are NOT PRESENT in the form for a specific role, but ARE PRESENT in existing for that role.
+          # These ids represent the User unchecking that role and need to be set to false
+          # 4) determine what ids ARE PRESENT in the form for a specific role but are NOT PRESENT in existing for that role.
+          # These are roles that the User is adding to the association and need to be set to true or (see below) created in
+          # the xyzContributePerson object
+          # 6) if a user contributes a role to the object but there is no xyzContributorPerson object for that
+          # pairing, create the object and set the associated role(s) to true
 
-        recording_ids = @avalon_item.recordings.pluck(:id)
-        # all RecordingContributorPerson entries for this AvalonItem's Recordings, that @person is associated with. This
-        # may not be an assigned role as unchecking a role does not remove the RecordingContributorPerson, it only sets
-        # the boolean to false. It's possible to have previously created entries end up with all roles as null or false
-        existing_recordings = RecordingContributorPerson.where(recording_id: recording_ids, person_id: @person.id)
-        # all EXISTING RecordingContributorPersons that @person contributes to as a Depositor
-        existing_depositors = existing_recordings.where(recording_depositor: true)
-        # what is originally there but NOT in the form submission, remove these roles
-        remove_depositor_ids = existing_depositors.pluck(:id) - recording_depositor_ids
-        existing_depositors.where(id: remove_depositor_ids).update_all(recording_depositor: false)
-        # what is originally there but NOT in the form submission, remove these roles
-        existing_producers = existing_recordings.where(recording_producer: true)
-        remove_producer_ids =  existing_producers.pluck(:id) - recording_producer_ids
-        existing_producers.where(id: remove_producer_ids).update_all(recording_producer: false)
+          recording_ids = @avalon_item.recordings.pluck(:id)
+          # all RecordingContributorPerson entries for this AvalonItem's Recordings, that @person is associated with. This
+          # may not be an assigned role as unchecking a role does not remove the RecordingContributorPerson, it only sets
+          # the boolean to false. It's possible to have previously created entries end up with all roles as null or false
+          existing_recordings = RecordingContributorPerson.where(recording_id: recording_ids, person_id: @person.id)
+          # all EXISTING RecordingContributorPersons that @person contributes to as a Depositor
+          existing_depositors = existing_recordings.where(recording_depositor: true)
+          # what is originally there but NOT in the form submission, remove these roles
+          remove_depositor_ids = existing_depositors.pluck(:id) - recording_depositor_ids
+          existing_depositors.where(id: remove_depositor_ids).update_all(recording_depositor: false)
+          # what is originally there but NOT in the form submission, remove these roles
+          existing_producers = existing_recordings.where(recording_producer: true)
+          remove_producer_ids =  existing_producers.pluck(:id) - recording_producer_ids
+          existing_producers.where(id: remove_producer_ids).update_all(recording_producer: false)
 
-        # a RecordingContributorPerson may or may not exist yet for new checks (see above),
-        # so we need to identify those and create new RecordingContributorPeople for each
-        add_depositor_ids = recording_depositor_ids - existing_depositors.pluck(:id) # everything that needs to be set to true but not necessarily existing as yet
-        add_producer_ids = recording_producer_ids
-        add_depositor_ids.each do |r_id|
-          rcp = existing_recordings.where(recording_id: r_id).first
-          if rcp.nil?
-            rcp = RecordingContributorPerson.new(recording_id: r_id, person_id: @person.id)
-            rcp.save!
+          # a RecordingContributorPerson may or may not exist yet for new checks (see above),
+          # so we need to identify those and create new RecordingContributorPeople for each
+          add_depositor_ids = recording_depositor_ids - existing_depositors.pluck(:id) # everything that needs to be set to true but not necessarily existing as yet
+          add_producer_ids = recording_producer_ids
+          add_depositor_ids.each do |r_id|
+            rcp = existing_recordings.where(recording_id: r_id).first
+            if rcp.nil?
+              rcp = RecordingContributorPerson.new(recording_id: r_id, person_id: @person.id)
+              rcp.save!
+            end
+            rcp.update!(recording_depositor: true)
           end
-          rcp.update!(recording_depositor: true)
-        end
-        add_producer_ids.each do |r_id|
-          rcp = existing_recordings.where(recording_id: r_id).first
-          if rcp.nil?
-            rcp = RecordingContributorPerson.new(recording_id: r_id, person_id: @person.id)
-            rcp.save!
+          add_producer_ids.each do |r_id|
+            rcp = existing_recordings.where(recording_id: r_id).first
+            if rcp.nil?
+              rcp = RecordingContributorPerson.new(recording_id: r_id, person_id: @person.id)
+              rcp.save!
+            end
+            rcp.update!(recording_producer: true)
           end
-          rcp.update!(recording_producer: true)
-        end
 
-        # PERFORMANCE associations no longer exists, those roles have been moved into TrackContributorPerson but we
-        # still need to grab all the tracks for all the performances
-        existing_performances = Recording.where(id: recording_ids)
-        all_performance_ids = existing_performances.collect { |r| r.performances.collect{|p| p.id} }.flatten
+          # PERFORMANCE associations no longer exists, those roles have been moved into TrackContributorPerson but we
+          # still need to grab all the tracks for all the performances
+          existing_performances = Recording.where(id: recording_ids)
+          all_performance_ids = existing_performances.collect { |r| r.performances.collect{|p| p.id} }.flatten
 
-        # Track associations
-        all_track_ids = Performance.where(id: all_performance_ids).collect{|p| p.tracks.pluck(:id) }.flatten
-        existing_tcp = TrackContributorPerson.where(track_id: all_track_ids, person_id: @person.id)
+          # Track associations
+          all_track_ids = Performance.where(id: all_performance_ids).collect{|p| p.tracks.pluck(:id) }.flatten
+          existing_tcp = TrackContributorPerson.where(track_id: all_track_ids, person_id: @person.id)
 
-        # now remove any associations the User deselected in the form
-        # interviewer role
-        existing_interviewers = existing_tcp.where(interviewer: true)
-        remove_interviewer_ids = existing_interviewers.pluck(:id) - track_interviewer_ids
-        existing_interviewers.where(id: remove_interviewer_ids).update_all(interviewer: false)
-        # interviewee (the person interviewed)
-        existing_interviewees = existing_tcp.where(interviewee: true)
-        remove_interviewee_ids = existing_interviewees.pluck(:id) - track_interviewee_ids
-        existing_interviewees.where(id: remove_interviewee_ids).update_all(interviewee: false)
-        # performers
-        existing_performers = existing_tcp.where(performer: true)
-        remove_performer_ids = existing_performers.pluck(:id) - track_performer_ids
-        existing_performers.where(id: remove_performer_ids).update_all(performer: false)
-        # conductors
-        existing_conductors = existing_tcp.where(conductor: true)
-        remove_conductor_ids = existing_conductors.pluck(:id) - track_conductor_ids
-        existing_conductors.where(id: remove_conductor_ids).update_all(conductor: false)
-        # now add any associations that were not already checked in the form, this entails first looking up whether a
-        # PerformanceContributorPerson exists or creating one, then setting the boolean
-        add_interviewer_ids = track_interviewer_ids
-        add_interviewer_ids.each do |i|
-          e = existing_tcp.where(track_id: i).first
-          if e.nil?
-            e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
-            e.save!
+          # now remove any associations the User deselected in the form
+          # interviewer role
+          existing_interviewers = existing_tcp.where(interviewer: true)
+          remove_interviewer_ids = existing_interviewers.pluck(:id) - track_interviewer_ids
+          existing_interviewers.where(id: remove_interviewer_ids).update_all(interviewer: false)
+          # interviewee (the person interviewed)
+          existing_interviewees = existing_tcp.where(interviewee: true)
+          remove_interviewee_ids = existing_interviewees.pluck(:id) - track_interviewee_ids
+          existing_interviewees.where(id: remove_interviewee_ids).update_all(interviewee: false)
+          # performers
+          existing_performers = existing_tcp.where(performer: true)
+          remove_performer_ids = existing_performers.pluck(:id) - track_performer_ids
+          existing_performers.where(id: remove_performer_ids).update_all(performer: false)
+          # conductors
+          existing_conductors = existing_tcp.where(conductor: true)
+          remove_conductor_ids = existing_conductors.pluck(:id) - track_conductor_ids
+          existing_conductors.where(id: remove_conductor_ids).update_all(conductor: false)
+          # now add any associations that were not already checked in the form, this entails first looking up whether a
+          # PerformanceContributorPerson exists or creating one, then setting the boolean
+          add_interviewer_ids = track_interviewer_ids
+          add_interviewer_ids.each do |i|
+            e = existing_tcp.where(track_id: i).first
+            if e.nil?
+              e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
+              e.save!
+            end
+            e.update!(interviewer: true)
           end
-          e.update!(interviewer: true)
-        end
-        add_interviewee_ids = track_interviewee_ids - existing_interviewees.pluck(:id)
-        add_interviewee_ids.each do |i|bugs
+          add_interviewee_ids = track_interviewee_ids - existing_interviewees.pluck(:id)
+          add_interviewee_ids.each do |i|bugs
 
-          e = existing_tcp.where(track_id: i).first
-          if e.nil?
-            e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
-            e.save!
+            e = existing_tcp.where(track_id: i).first
+            if e.nil?
+              e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
+              e.save!
+            end
+            e.update!(interviewee: true)
           end
-          e.update!(interviewee: true)
-        end
-        add_performer_ids = track_performer_ids - existing_performers.pluck(:id)
-        add_performer_ids.each do |i|
-          e = existing_tcp.where(track_id: i).first
-          if e.nil?
-            e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
-            e.save!
+          add_performer_ids = track_performer_ids - existing_performers.pluck(:id)
+          add_performer_ids.each do |i|
+            e = existing_tcp.where(track_id: i).first
+            if e.nil?
+              e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
+              e.save!
+            end
+            e.update!(performer: true)
           end
-          e.update!(performer: true)
-        end
-        add_conductor_ids = track_conductor_ids - existing_conductors.pluck(:id)
-        add_conductor_ids.each do |i|
-          e = existing_tcp.where(track_id: i).first
-          if e.nil?
-            e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
-            e.save!
+          add_conductor_ids = track_conductor_ids - existing_conductors.pluck(:id)
+          add_conductor_ids.each do |i|
+            e = existing_tcp.where(track_id: i).first
+            if e.nil?
+              e = TrackContributorPerson.new(track_id: i, person_id: @person.id)
+              e.save!
+            end
+            e.update!(conductor: true)
           end
-          e.update!(conductor: true)
         end
-      end
-      if @updated
-        format.html { redirect_to @avalon_item, notice: 'Person/Entity successfully updated' }
-        format.js   {}
-        format.json { render json: @avalon_item, status: :created, location: @avalon_item }
-      else
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        if @updated
+          format.html { redirect_to @avalon_item, notice: 'Person/Entity successfully updated' }
+          format.js   {}
+          format.json { render json: @avalon_item, status: :created, location: @avalon_item }
+        else
+          format.json { render json: @person.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -412,7 +461,8 @@ class AvalonItemsController < ApplicationController
       @avalon_item = AvalonItem.find(params[:id])
       @work = Work.find(params[:work][:id])
       Work.transaction do
-        @updated = @work.update(work_params)
+        # works are no longer updated through this AJAX call, only the tracks that they appear on are updated
+        # @updated = @work.update(work_params)
         # Tracks: get all the track associations for the AvalonItem first
         existing_tracks = @avalon_item.recordings.collect{|r| r.performances }.flatten.collect{|p| p.tracks }.flatten
         # determine which tracks have the specified work performed on them.
@@ -429,10 +479,10 @@ class AvalonItemsController < ApplicationController
         delete.each do |tid|
           TrackWork.where(track_id: tid, work_id: @work.id).delete_all
         end
-        # process people:
-        # need to re-save @work as any NEW people are enqueued into @work.work_contributor_people and the save results in the
-        # new work contributor people persisting in the database
+
         process_work_contributors
+
+        # this will cascade saves to the associated tracks this work appears on.
         @updated = @work.save
       end
       if @updated

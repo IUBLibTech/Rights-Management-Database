@@ -104,6 +104,7 @@ class ServicesController < ApplicationController
       response[:status] = "success"
       response[:avalon_identifier] = avalon_item.avalon_id
       response[:accessDetermination] = AccessDeterminationHelper.avalon_access_level(avalon_item.access_determination)
+      response[:rmd_url] = request.base_url+"/avalon_items/"+avalon_item.id.to_s
     else
       response[:status] = "failure"
       response[:avalon_identifier] = "#{params[:avalon_identifier]}"

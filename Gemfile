@@ -15,7 +15,8 @@ gem 'sidekiq'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# this version: https://sweetalert2.github.io/
+# this gem hasn't been updated since 2018... it bundles sweet alert 2, but an older version 9.x. I think... when checking
+# the sweet alert documentation make sure to look at older versions
 gem 'sweetalert2'
 
 gem 'mysql2', '~> 0.5'
@@ -32,6 +33,9 @@ gem 'ldap_groups_lookup'
 gem 'pagy'
 
 gem 'net-scp'
+
+# gem for connecting through ssh tunnel
+gem 'net-ssh'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -56,8 +60,11 @@ gem "daemons"
 # Handles background jobs for ingest of Avalon records - based on delayed_job but extended to handle recurring tasks
 gem 'delayed_job_recurring'
 
+gem 'rake', '13.0.6'
+
 # dependabot updates
 gem "puma", ">= 5.5.1"
+gem "rdoc", ">= 6.3.1"
 # backported fixes for rack
 gem 'rack', '~> 1.6.13', git: 'https://github.com/rails-lts/rack.git', branch: 'lts-1-6-stable'
 gem "nokogiri", ">= 1.12.5"

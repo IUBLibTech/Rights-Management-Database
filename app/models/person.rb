@@ -21,6 +21,8 @@ class Person < ActiveRecord::Base
   has_many :work_contributor_people
   has_many :works, through: :work_contributor_people
 
+  before_save :clear_person_entity
+
 # for json population
 #   attr_accessor :value
 #   attr_accessor :label
@@ -54,6 +56,9 @@ class Person < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+  def full_name_last_first
+    "#{last_name}, #{first_name}#{middle_name.blank? ? '' : " #{middle_name}"}"
   end
   def full_name
     "#{first_name}#{middle_name.blank? ? '' : " "+middle_name} #{last_name}"
@@ -105,13 +110,23 @@ class Person < ActiveRecord::Base
   # This method ensures that when an EDTF text date is modified (added, changed or removed), that the underlying
   # DB Date reflects that
   def edtf_dates
-    date = Date.edtf(date_of_birth_edtf.gsub('/', '-'))
+    date = Date.edtf(date_of_birth_edtf&.gsub('/', '-'))
     self.date_of_birth = date
     puts "Set date_of_birth to #{date}, calling self.date_of_birth: #{self.date_of_birth}"
 
-    date = Date.edtf(date_of_death_edtf.gsub('/', '-'))
+    date = Date.edtf(date_of_death_edtf&.gsub('/', '-'))
     self.date_of_death = date
     puts "Set date_of_death to #{date}, calling self.date_of_death: #{self.date_of_death}"
+  end
+
+# if a person is changed to an entity, or vice versa, clear the no-longer-relevant fields
+  def clear_person_entity
+    if self.entity?
+      first_name = middle_name = last_name = date_of_birth = date_of_death = date_of_birth_edtf =
+        date_of_death_edtf = place_of_birth = nil
+    else
+      company_name = entity_nationality = nil
+    end
   end
 
 

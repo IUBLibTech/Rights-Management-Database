@@ -4,8 +4,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.where(entity: false)
-    @entities = Person.where(entity: true)
+    @people = Person.where(entity: false).order(:last_name)
+    @entities = Person.where(entity: true).order(:company_name)
   end
 
   # GET /people/1
@@ -17,7 +17,12 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new
+    @person = Person.new(entity: false)
+  end
+
+  def new_entity
+    @person = Person.new(entity: true)
+    render 'people/new'
   end
 
   # GET /people/1/edit
@@ -43,6 +48,8 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    # hidden field tag for entity is sent as text so person_params does not correctly assign it.
+    @person.entity = params["entity"] == "true"
     respond_to do |format|
       if @person.save
         if params[:avalon_item_id]

@@ -68,9 +68,19 @@ module AfrHelper
 
   # responsible for reading the JSON record for an item in MCO
   def read_json(avalon_item)
-    uri = URI.parse avalon_item.atom_feed_read.json_url
-    json_text = read_uri(uri).body
-    avalon_item.update_attributes(json: json_text)
+    begin
+      uri = URI.parse avalon_item.atom_feed_read.json_url
+      something = read_uri(uri)
+      if something.kind_of? Net::HTTPSuccess
+        json_text = something.body
+        avalon_item.update_attributes(json: json_text)
+        true
+      else
+        false
+      end
+    rescue
+      false
+    end
   end
 
   # responsible for creating the RMD Avalon Item as a result of read_json

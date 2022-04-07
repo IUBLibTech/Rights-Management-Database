@@ -2,86 +2,53 @@ class CollectionsController < ApplicationController
   include AccessDeterminationHelper
 
   def index
-    @collection_names = User.user_collections
+    @collection_names = AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username)).order(:collection).group(:collection).count
   end
 
   def assign_access
     selected = params[:collections]&.keys
+
     if !selected || selected.size == 0
-      flash.now[:warn] = "<p class=\"rvt-alert__message\">You did not select any Collections</p>".html_safe
+      flash.now[:warning] = "<p>You did not select any Collections</p>".html_safe
     elsif selected.size > 0
-      if params[:access].blank? && params[:contract_type].blank? && params[:notes].blank?
-        flash.now[:warn] = "<p class=\"rvt-alert__message\">You must specify at least an Access Determination, Contract Type, and/or Note</p>".html_safe
+      if params[:access].blank? && params[:contract_type].blank? && params[:note].blank?
+        flash.now[:warning] = "<p>You must specify at least an Access Determination, Contract Type, and/or Note</p>".html_safe
       else
-        if params[:access]
-          @access = PastAccessDecision.new(decision: params[:access], changed_by: User.current_username, copyright_librarian: false)
-        end
-        if params[:contract_type]
-          @contract = Contract.new(
-            contract_type: params[:contract_type],
-            date_edtf_text: (params[:end_date].blank? ? nil : params[:end_date]),
-            perpetual: params[:perpetual].blank? ? nil : params[:perpetual],
-            notes: params[:agreement_notes].blank? ? nil : params[:agreement_notes])
-        end
-        if params[:note]
-          @note = AvalonItemNote.new(text: params[:note], creator: User.current_username)
-        end
-        # dup and save everything
-        ais = User.user_collection_ais(selected)
-        bad_access = []
         AvalonItem.transaction do
-          ais.each do |ai|
-            # access can only be set more restrictively than the last Copyright Librarian determination
-            if @access
-              pad = @access.dup
-              last = ai.last_copyright_librarian_access_decision
-              if last.nil? || is_more_restrictive_than?(pad.decision, last.decision)
-                pad.avalon_item = ai
-                ai.current_access_determination = pad
-                pad.save
-                if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
-                  ai.review_state = AccessDeterminationHelper::DEFAULT_ACCESS
-                else
-                  ai.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
-                end
-                ai.save
-              else
-                bad_access << ai
-              end
-            end
-            if @contract
-              con = @contract.dup
-              con.avalon_item = ai
-              con.save
-            end
-            if @note
-              note = @note.dup
-              note.avalon_item = ai
-              note.save
+          ais = User.user_collection_ais(selected)
+          @bad_ais = []
+          @a =  process_access(ais)
+          @b = process_legal_agreement(ais)
+          @c = process_note(ais)
+          if @a || @b || @c
+            ais.each do |ai|
+              ai.save!
             end
           end
         end
-        if @access
-          flash.now[:notice] = "<p class='rvt-alert rvt-alert--success'>The Access Determination for the selected Collections has been updated to #{params[:access]}</p>".html_safe
-          if bad_access.size > 0
-            flash.now[:notice] << "<p class='rvt-alert__message'>The Access Determination could not be set for the following "+
-              "Avalon #{pluralize bad_access.size, "Item"} because #{params[:access]} is less restrictive than the last determination "+
-              "made by the Copyright Librarian.<ul class='rvt-plain-list'>".html_safe
-            bad_access.each do |a|
-              flash.now[:notice] << "<li><a href='' target='_blank'>#{a.title}</a></li>".html_safe
-            end
-            flash.now[:notice] << "</ul></p>".html_safe
-          end
+        if @bad_ais.size > 0
+          flash.now[:warning] = "" if flash.now[:warning].nil?
+          flash.now[:warning] << "<p>The following avalon items could not have their access determination set because it would be <b><i>less restrictive</i></b> than set by the copyright librarian</p>".html_safe
+          flash.now[:warning] << "<p>#{@bad_ais.collect { |ba| ba.title }.join(" | ")}</p>".html_safe
         end
-        if @contract
-          flash.now[:notice] << "<p class='rvt-alert rvt-alert--success'>The specified Legal Agreement has been assigned to each Avalon Item in the selected Collections</p>".html_safe
+        if @a
+          create_flash_now_notice
+          flash.now[:notice] << "<p>The access determination was updated for all avalon items in the selected collection(s)</p>".html_safe
         end
-        if @note
-          flash.now[:notice] << "<p class='rvt-alert rvt-alert--success'>An Avalon Item Note has been added to each item in the selected Collections</p>".html_safe
+        if @b
+          create_flash_now_notice
+          flash.now[:notice] << "<p>The specified legal agreement has been added to all avalon items in the selected collection(s)</p>".html_safe
+        end
+        if @c
+          create_flash_now_notice
+          flash.now[:notice] << "<p>The specified note was added to all avalon items in the selected collection(s)</p>".html_safe
         end
       end
     end
-    @collection_names = User.user_collections
+
+
+
+    @collection_names = AvalonItem.where(pod_unit: UnitsHelper.human_readable_units_search(User.current_username)).order(:collection).group(:collection).count
     render "index"
   end
   def collection_list
@@ -89,5 +56,81 @@ class CollectionsController < ApplicationController
     @people = []
     @works = []
     render 'nav/search'
+  end
+
+  private
+  # parses the params hash and if an access determination is present, assigned it to the list of avalon_items, barring
+  # any business logic rules, and returns true. Returns false if no access determination is present in the params hash or
+  # an access determination could not be created because of business logic rules.
+  def process_access(avalon_items)
+    # lots to be done here: first check that collection manager is not trying to set access wider than copyright librarian has set
+    if params[:access]
+      @access = PastAccessDecision.new(decision: params[:access], changed_by: User.current_username, copyright_librarian: false)
+      avalon_items.each do |ai|
+        begin
+          pad = @access.dup
+          last = ai.last_copyright_librarian_access_decision
+          # this comparison currently raises an exception when the access determination is less restrictive
+          # FIXME: change this so that it returns true/false and does not raise the exception
+          if last.nil? || is_more_restrictive_than?(pad, last)
+            pad.avalon_item = ai
+            ai.current_access_determination = pad
+            ai.clear_all_reasons
+            if pad.decision == AccessDeterminationHelper::RESTRICTED_ACCESS
+              ai.reason_feature_film = !params[:restricted][:reason_feature_film].nil?
+              ai.reason_licensing_restriction = !params[:restricted][:reason_licensing_restriction].nil?
+              ai.reason_ethical_privacy_considerations = !params[:restricted][:reason_ethical_privacy_considerations].nil?
+            elsif pad.decision == AccessDeterminationHelper::WORLD_WIDE_ACCESS
+              ai.reason_iu_owned_produced = !params[:worldwide][:reason_iu_owned_produced].nil?
+              ai.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
+            ai.reason_license = !params[:worldwide][:reason_license].nil?
+            elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
+              ai.reason_in_copyright = !params[:iu][:reason_in_copyright].nil?
+            end
+            if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
+              ai.review_state = AccessDeterminationHelper::DEFAULT_ACCESS
+            else
+              ai.review_state = AvalonItem::REVIEW_STATE_ACCESS_DETERMINED
+            end
+            pad.save
+          end
+        rescue => e
+          @bad_ais << ai
+        end
+      end
+      true
+    end
+    false
+  end
+
+  def process_legal_agreement(avalon_items)
+    unless params[:contract_type].blank?
+      @contract = Contract.new(
+        contract_type: params[:contract_type],
+        date_edtf_text: (params[:end_date].blank? ? nil : params[:end_date]),
+        perpetual: params[:perpetual].blank? ? nil : params[:perpetual],
+        notes: params[:agreement_notes].blank? ? nil : params[:agreement_notes])
+
+      avalon_items.each do |ai|
+        con = @contract.dup
+        con.avalon_item = ai
+        con.save
+      end
+    end
+  end
+
+  def process_note(avalon_items)
+    if params[:note]
+      @note = AvalonItemNote.new(text: params[:note], creator: User.current_username)
+      avalon_items.each do |ai|
+        note = @note.dup
+        note.avalon_item = ai
+        note.save
+      end
+    end
+  end
+
+  def create_flash_now_notice
+    flash.now[:notice] = "" if flash.now[:notice].nil?
   end
 end

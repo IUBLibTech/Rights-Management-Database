@@ -1,5 +1,5 @@
 <p id="notice"><%= flash[:notice]&.html_safe %></p>
-<h1>Listing Works</h1>
+<h1>Listing Works <%= button_to "New Work", new_work_path, method: :get %></h1>
 <table class="rvt-table-compact">
   <thead>
     <tr>

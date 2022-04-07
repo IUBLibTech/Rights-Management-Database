@@ -12,60 +12,60 @@
       </div>
       <div class="rvt-grid rvt-m-top-xxs person_attributes">
         <div class="rvt-grid__item-4-md-up">
+          <label for="recordingTitle">Search by Last Name</label>
+          <%= pf.text_field :last_name, {type: "search", class: "autocomplete",  style: "border: 3px solid #006298;", autocomplete: "off"} %>
+          <%= render partial: 'people/autocomplete_person_tooltip' %>
+        </div>
+        <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">First Name</label>
-          <%= pf.text_field :first_name, {type: "text", 'aria-describedby': "first name"} %>
+          <%= pf.text_field :first_name, {type: "text", 'aria-describedby': "first name",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Middle Name</label>
-          <%= pf.text_field :middle_name, {type: "text", 'aria-describedby': "middle name"} %>
-        </div>
-        <div class="rvt-grid__item-4-md-up">
-          <label for="recordingTitle">Last Name</label>
-          <%= pf.text_field :last_name, {type: "search", class: "autocomplete", autocomplete: "off"} %>
-          <%= render partial: 'people/autocomplete_person_tooltip' %>
+          <%= pf.text_field :middle_name, {type: "text", 'aria-describedby': "middle name",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid person_attributes">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Birth</label>
-          <%= pf.text_field :date_of_birth_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'}  %>
+          <%= pf.text_field :date_of_birth_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)',class: "readonlyable"}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Date of Death</label>
-          <%= pf.text_field :date_of_death_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)'}  %>
+          <%= pf.text_field :date_of_death_edtf,  {class: 'edtf', placeholder: 'YYYY/MM/DD (EDTF)',class: "readonlyable"}  %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Place of Birth</label>
-          <%= pf.text_field :place_of_birth, {type: "text", 'aria-describedby': "first name"} %>
+          <%= pf.text_field :place_of_birth, {type: "text", 'aria-describedby': "first name",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid entity_attributes">
         <div class="rvt-grid__item-4-md-up">
-          <label for="recordingTitle">Company Name</label>
-          <%= pf.text_field :company_name, {type: "text", 'aria-describedby': "company name", class: "autocomplete_company", autocomplete: "off"} %>
+          <label for="recordingTitle">Search by Company Name</label>
+          <%= pf.text_field :company_name, {type: "text", 'aria-describedby': "company name", class: "autocomplete_company", style: "border: 3px solid #006298;", autocomplete: "off"} %>
           <%= render partial: 'people/autocomplete_entity_tooltip' %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Nationality</label>
-          <%= pf.text_field :entity_nationality, {type: "text", 'aria-describedby': "nationality", class: ""} %>
+          <%= pf.text_field :entity_nationality, {type: "text", 'aria-describedby': "nationality", class: "",class: "readonlyable"} %>
         </div>
       </div>
       <div class="rvt-grid">
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Authority Source</label>
-          <%= pf.text_field :authority_source, {type: "text", 'aria-describedby': "authority source"} %>
+          <%= pf.text_field :authority_source, {type: "text", 'aria-describedby': "authority source",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">Authority Source URL</label>
-          <%= pf.text_field :authority_source_url, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator"} %>
+          <%= pf.text_field :authority_source_url, {type: "text", 'aria-describedby': "authority source url", class: "decodeURI urlValidator",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-4-md-up">
           <label for="recordingTitle">AKA</label>
-          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "also know as"} %>
+          <%= pf.text_field :aka, {type: "text", 'aria-describedby': "also know as",class: "readonlyable"} %>
         </div>
         <div class="rvt-grid__item-12">
           <label for="personNotes">Notes</label>
-          <%= pf.text_area :notes, {class: "noBorder"} %>
+          <%= pf.text_area :notes, {class: "noBorder",class: "readonlyable"} %>
         </div>
       </div>
       <div>

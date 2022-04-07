@@ -31,113 +31,6 @@ function hideMenu() {
     }
 }
 
-function addPerson(e) {
-    hideMenu();
-    if (overlayOnscreen()) {
-        Swal.fire({
-            title: 'Discard Edits?',
-            text: "The Add Person/Work form is currently open. If you continue, your new/edited data will be lost. Are you sure you want to continue?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Yes',
-            cancelBUttonText: 'No'
-        }).then((result) => {
-            if (result.value) {
-                addPersonForm(e);
-            }
-        })
-    } else {
-        addPersonForm(e)
-    }
-}
-function addPersonForm(e) {
-    let text = getTextSelection(e);
-    if (e.target === $('#add_person_button')[0]) {
-        // no-op
-    } else if (text === null || text.length === 0) {
-        text = adder_event_target.textContent;
-    }
-    $.ajax({
-        url: "./"+avalon_item_id+"/ajax_people_adder",
-        data: {text: text},
-        success: function(result) {
-            let el = $( "#adder_overlay" );
-            $('#adder_content').html(result);
-            $('.peopleButtonAdderCancel').click(function(){
-                hideOverlay();
-            });
-            $('.peopleButtonAdderCreate').click(function(event) {
-                validatePerson(event);
-            });
-            if (!overlayOnscreen()) {
-                showOverlay();
-            }
-            hookPeopleAutocomplete();
-            hookPeopleEntity();
-            hookMassAssigners();
-            hookEdtfValidation();
-        },
-        error: function(xhr, status, error) {
-            swal.fire({
-                icon: '',
-                title: "Ajax Error trying to get the 'adder' Form",
-                text: xhr.responseText
-            })
-        }
-    })
-}
-/** Sets the Person right slide menu to a specific person */
-function setPerson(person_id, warn) {
-    hideMenu();
-    if (overlayOnscreen() && warn) {
-        Swal.fire({
-            title: 'Discard Edits?',
-            text: "The Add Person/Work form is currently open. If you continue, your new/edited data will be lost. Are you sure you want to continue?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Yes',
-            cancelBUttonText: 'No'
-        }).then((result) => {
-            if (result.value) {
-                setPersonForm(person_id);
-            }
-        })
-    } else {
-        setPersonForm(person_id);
-    }
-}
-function setPersonForm(person_id) {
-    $.ajax({
-        url: "./"+avalon_item_id+"/ajax_people_setter/"+person_id,
-        success: function(result) {
-            let el = $( "#adder_overlay" );
-            $('#adder_content').html(result);
-            $('.peopleButtonAdderCancel').click(function(){
-                hideOverlay();
-            });
-            $('.peopleButtonAdderCreate').click(function(event) {
-                validatePerson(event)
-            });
-            if (! overlayOnscreen()) {
-                showOverlay();
-            }
-            hookPeopleAutocomplete();
-            hookPeopleEntity();
-            hookMassAssigners();
-            hookEdtfValidation();
-        },
-        error: function(xhr, status, error) {
-            swal.fire({
-                icon: '',
-                title: "Ajax Error trying to load a form for an existing Person/Entity",
-                text: xhr.responseText
-            })
-        }
-    })
-}
-
 function hookMassAssigners() {
     $('.mass_interviewer').click(function() {
         let p_id = $(this).attr('data-performance-id');
@@ -197,6 +90,9 @@ function hookPeopleAutocomplete() {
                 }
             });
         },
+        open: function() {
+            clearPersonForm();
+        },
         focus: function (event, person) {
             $('#ac_full_name').text(person.item.label);
             $('#ac_dob').text(person.item.date_of_birth_edtf);
@@ -219,7 +115,6 @@ function hookPeopleAutocomplete() {
                 el.toggle();
             }
             setPerson(person.item.id, false);
-            return false;
         }
     });
     $('#person_last_name').focusout(function(event) {
@@ -230,8 +125,7 @@ function hookPeopleAutocomplete() {
     }).focusin(function(event) {
         $(this).autocomplete("search");
         return false;
-    });
-
+    })
     // autocomplete for the Company Name field
     $('.autocomplete_company').autocomplete({
         minLength: 2,
@@ -257,6 +151,8 @@ function hookPeopleAutocomplete() {
                     });
                 }
             });
+        }, open: function() {
+            clearPersonForm();
         },
         focus: function (event, person) {
             $('#ac_company_name').text(person.item.label);
@@ -292,6 +188,140 @@ function hookPeopleAutocomplete() {
     });
 }
 
+function addPerson(e) {
+    hideMenu();
+    if (overlayOnscreen()) {
+        Swal.fire({
+            title: 'Discard Edits?',
+            text: "The Add Person/Work form is currently open. If you continue, your new/edited data will be lost. Are you sure you want to continue?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes',
+            cancelBUttonText: 'No'
+        }).then((result) => {
+            if (result.value) {
+                addPersonForm(e);
+            }
+        })
+    } else {
+        addPersonForm(e)
+    }
+}
+function addPersonForm(e) {
+    let text = getTextSelection(e);
+    if (e===null || e.target === $('#add_person_button')[0]) {
+        // no-op
+    } else if (text === null || text.length === 0) {
+        text = adder_event_target.textContent;
+    }
+    $.ajax({
+        url: "./"+avalon_item_id+"/ajax_people_adder",
+        data: {text: text},
+        success: function(result) {
+            let el = $( "#adder_overlay" );
+            $('#adder_content').html(result);
+            $('.peopleButtonAdderCancel').click(function(){
+                hideOverlay();
+            });
+            $('.peopleButtonAdderCreate').click(function(event) {
+                validatePerson(event);
+            });
+            if (!overlayOnscreen()) {
+                showOverlay();
+            }
+            hookPeopleAutocomplete();
+            hookPeopleEntity();
+            hookMassAssigners();
+            hookEdtfValidation();
+        },
+        error: function(xhr, status, error) {
+            swal.fire({
+                icon: '',
+                title: "Ajax Error trying to get the 'adder' Form",
+                text: xhr.responseText
+            })
+        }
+    })
+}
+
+/** Sets the Person right slide menu to a specific person */
+function setPerson(person_id, warn) {
+    hideMenu();
+    if (overlayOnscreen() && warn) {
+        Swal.fire({
+            title: 'Discard Edits?',
+            text: "The Add Person/Work form is currently open. If you continue, your new/edited data will be lost. Are you sure you want to continue?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.value) {
+                setPersonForm(person_id);
+            }
+        })
+    } else {
+        setPersonForm(person_id);
+    }
+}
+// used to determine if a person has been selected from autocomplete suggestions (see clearPersonForm for uses)
+let person_autocompleted = false;
+function setPersonForm(person_id) {
+    $.ajax({
+        url: "./"+avalon_item_id+"/ajax_people_setter/"+person_id,
+        success: function(result) {
+            let el = $( "#adder_overlay" );
+            $('#adder_content').html(result);
+            $(".readonlyable").attr("readonly", true);
+            $('.peopleButtonAdderCancel').click(function(){
+                hideOverlay();
+            });
+            $('.peopleButtonAdderCreate').click(function(event) {
+                validatePerson(event)
+            });
+            if (! overlayOnscreen()) {
+                showOverlay();
+            }
+            hookPeopleAutocomplete();
+            hookPeopleEntity();
+            hookMassAssigners();
+            hookEdtfValidation();
+            person_autocompleted = true;
+        },
+        error: function(xhr, status, error) {
+            swal.fire({
+                icon: '',
+                title: "Ajax Error trying to load a form for an existing Person/Entity",
+                text: xhr.responseText
+            })
+        }
+    })
+}
+/**
+ * The person slide out form does double duty in both creating new people AND selection existing people from the last name
+ * autocomplete input. It does this by initiating the form from the "Add Person" button which makes an AJAX call for the form.
+ * It returns a form with the action equaling add_person (a new person). However, when an autocomplete selection
+ * is made of an existing person, another AJAX call happens with the return being a prepopulated form with the form action
+ * equaling set_person (setting an EXISTING person instead of add a new person). Because a user can decide to create
+ * a new person AFTER selecting an autocompleted person, we need to be able to differentiate this use case from a set_person
+ * action. The ajax_people_setter_post action in avalon_items_controller should use the absence of the person_id VALUE as the
+ * indication that a new person should be created.
+ */
+function clearPersonForm() {
+    $("#person_id").val("")
+    $(".readonlyable").val("").attr("readonly", false);
+    if (person_autocompleted) {
+        $("#person_company_name").autocomplete("destroy").val("");
+        $("#person_last_name").autocomplete("destroy").val("");
+        person_autocompleted = false;
+        hookPeopleAutocomplete();
+    }
+}
+
+
+
 function hookPeopleEntity() {
     // based on initial state of the Person/Entity we need to hide/show the relevant attributes
     let el = $('#person_entity');
@@ -316,6 +346,163 @@ function showPersonAttributes() {
     $('.person_attributes').show();
     $('.entity_attributes').hide();
 }
+
+function validateWork(event) {
+    if ($('#work_title').val().length === 0) {
+        event.preventDefault();
+        swal.fire({
+            title: "Missing Required Fields",
+            text: "You must specify a Title for a Work",
+            icon: 'warning'
+        })
+    } else {
+        showOverlay();
+    }
+}
+
+function hookWorkAutocomplete() {
+    $('.autocomplete').autocomplete({
+        minLength: 2,
+        source: function(request, response) {
+            let el = $('#work_autocomplete_summary');
+            if (el.is(":visible")) {
+                el.toggle();
+            }
+            let url = "../work/ajax/autocomplete_title";
+            $.ajax({
+                url: url,
+                dataType: "json",
+                data: {
+                    term: request.term,
+                },
+                success: function(data) {
+                    response(data)
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    swal({
+                        title: 'Ajax Error',
+                        text: 'An error occurred while auto-completing a Work Title. If this problem persists, please contact Sherri Michaels or Andrew Albrecht.'
+                    });
+                }
+            });
+        },
+        open: function() {
+          clearWorkForm();
+        },
+        focus: function (event, work) {
+            $("#ac_title").text(work.item.title);
+            $("#ac_traditional").text(work.item.traditional);
+            $("#ac_work_in_copyright").text(work.item.contemporary_work_in_copyright);
+            $("#ac_restored_copyright").text(work.item.restored_copyright);
+            $("#ac_alt_title").text(work.item.alternative_titles);
+            $("#ac_pub_year").text(work.item.publication_date_edtf);
+            $("#ac_auth").text(work.item.authority_source);
+            $('#ac_notes').text(work.item.notes);
+            $("#ac_access_determination").text(work.item.access_determination);
+            $("#ac_enters_public_domain").text(work.item.copyright_end_date_edtf);
+            $("#ac_auth_url").text(work.item.authority_source_url);
+            $("#ac_copyright_renewed").text(work.item.copyright_renewed);
+            let el = $('#work_autocomplete_summary');
+            if (el.is(":hidden")) {
+                el.toggle();
+            }
+            return false;
+        },
+        select: function (event, work) {
+            let el = $('#work_autocomplete_summary');
+            if (el.is(":visible")) {
+                el.toggle();
+            }
+            setWork(work.item.id, false);
+        }
+    });
+    $("#work_title").focus(function() {
+       workTitleFocus();
+    });
+    $('#work_people_autocomplete').autocomplete({
+	    minLength: 2,
+	    source: function(request, response) {
+		    let el = $('#work_people_autocomplete_summary');
+		    if (el.is(":visible")) {
+			    el.toggle();
+		    }
+		    let url = "../people/ajax/autocomplete";
+		    $.ajax({
+			    url: url,
+			    dataType: "json",
+			    data: {
+				    term: request.term,
+			    },
+			    success: function(data) {
+				    response(data)
+			    },
+			    error: function(jqXHR, textStatus, errorThrown) {
+				    swal({
+					    title: 'Ajax Error',
+					    text: 'An error occurred while auto-completing the Last Name field. If this problem persists, please contact Sherri Michaels or Andrew Albrecht.'
+				    });
+			    }
+		    });
+	    },
+	    focus: function (event, person) {
+		    $('#ac_full_name').text(person.item.label);
+		    $('#ac_dob').text(person.item.date_of_birth_edtf);
+		    $('#ac_dod').text(person.item.date_of_death_edtf);
+		    $('#ac_pob').text(person.item.place_of_birth);
+		    $('#ac_aka').text(person.item.aka);
+		    $('#ac_auth').text(person.item.authority_source);
+		    $('#ac_auth_url').text(person.item.authority_source_url);
+		    $('#ac_notes').text(person.item.notes);
+
+		    let el = $('#autocomplete_work_person_summary');
+		    if (el.is(":hidden")) {
+			    el.toggle();
+		    }
+		    return false;
+	    },
+	    select: function (event, person) {
+		    let el = $('#autocomplete_work_person_summary');
+		    if (el.is(":visible")) {
+			    el.toggle();
+		    }
+		    addWorkPerson(person.item);
+		    $(this).val('');
+		    return false;
+	    }
+    })
+    $('#title').focusout(function(event) {
+        let el = $('#work_autocomplete_summary');
+        if (el.is(":visible")) {
+            el.toggle();
+        }
+    }).focusin(function(event) {
+        $(this).autocomplete("search");
+        return false;
+    });
+}
+
+/**
+ * Not sure why this is necessary for works but not people...
+ */
+function workTitleFocus() {
+    if (work_autocompleted) {
+        clearWorkForm();
+    }
+}
+/**
+ * See the comments for clearPersonForm() for why this is necessary
+ */
+function clearWorkForm() {
+    $("#work_id").val("");
+    $(".readonlyable").val("").attr("readonly", false);
+    if (work_autocompleted) {
+        $("#work_title").autocomplete("destroy").val("");
+        work_autocompleted = false;
+        hookWorkAutocomplete();
+    }
+}
+
+
 function addWork(e) {
     hideMenu();
     if (overlayOnscreen()) {
@@ -390,12 +577,14 @@ function setWork(work_id, warn) {
         setWorkForm(work_id);
     }
 }
+let work_autocompleted = false;
 function setWorkForm(work_id) {
     $.ajax({
         url: "./"+avalon_item_id+"/ajax_work_setter/"+work_id,
         success: function(result) {
             let el = $( "#adder_overlay" );
             $('#adder_content').html(result);
+            $(".readonlyable").attr("readonly", true);
             $('.workButtonAdderCancel').click(function(){
                 hideOverlay();
             });
@@ -408,6 +597,7 @@ function setWorkForm(work_id) {
             hookWorkAutocomplete();
             hookWorkPeopleRemoval();
             hookEdtfValidation();
+            work_autocompleted = true;
         },
         error: function(xhr, status, error) {
             swal.fire({
@@ -418,137 +608,11 @@ function setWorkForm(work_id) {
         }
     })
 }
-function validateWork(event) {
-    if ($('#work_title').val().length === 0) {
-        event.preventDefault();
-        swal.fire({
-            title: "Missing Required Fields",
-            text: "You must specify a Title for a Work",
-            icon: 'warning'
-        })
-    } else {
-        showOverlay();
-    }
-}
-function hookWorkAutocomplete() {
-    $('#work_title').autocomplete({
-        minLength: 2,
-        source: function(request, response) {
-            let el = $('#work_autocomplete_summary');
-            if (el.is(":visible")) {
-                el.toggle();
-            }
-            let url = "../work/ajax/autocomplete_title";
-            $.ajax({
-                url: url,
-                dataType: "json",
-                data: {
-                    term: request.term,
-                },
-                success: function(data) {
-                    response(data)
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    swal({
-                        title: 'Ajax Error',
-                        text: 'An error occurred while auto-completing a Work Title. If this problem persists, please contact Sherri Michaels or Andrew Albrecht.'
-                    });
-                }
-            });
-        },
-        focus: function (event, work) {
-            $("#ac_title").text(work.item.title);
-            $("#ac_traditional").text(work.item.traditional);
-            $("#ac_work_in_copyright").text(work.item.contemporary_work_in_copyright);
-            $("#ac_restored_copyright").text(work.item.restored_copyright);
-            $("#ac_alt_title").text(work.item.alternative_titles);
-            $("#ac_pub_year").text(work.item.publication_date_edtf);
-            $("#ac_auth").text(work.item.authority_source);
-            $('#ac_notes').text(work.item.notes);
-            $("#ac_access_determination").text(work.item.access_determination);
-            $("#ac_enters_public_domain").text(work.item.copyright_end_date_edtf);
-            $("#ac_auth_url").text(work.item.authority_source_url);
-            $("#ac_copyright_renewed").text(work.item.copyright_renewed);
-            let el = $('#work_autocomplete_summary');
-            if (el.is(":hidden")) {
-                el.toggle();
-            }
-            return false;
-        },
-        select: function (event, work) {
-            let el = $('#work_autocomplete_summary');
-            if (el.is(":visible")) {
-                el.toggle();
-            }
-            setWork(work.item.id, false);
-            return false;
-        }
-    });
-    $('#work_people_autocomplete').autocomplete({
-	    minLength: 2,
-	    source: function(request, response) {
-		    let el = $('#work_people_autocomplete_summary');
-		    if (el.is(":visible")) {
-			    el.toggle();
-		    }
-		    let url = "../people/ajax/autocomplete";
-		    $.ajax({
-			    url: url,
-			    dataType: "json",
-			    data: {
-				    term: request.term,
-			    },
-			    success: function(data) {
-				    response(data)
-			    },
-			    error: function(jqXHR, textStatus, errorThrown) {
-				    swal({
-					    title: 'Ajax Error',
-					    text: 'An error occurred while auto-completing the Last Name field. If this problem persists, please contact Sherri Michaels or Andrew Albrecht.'
-				    });
-			    }
-		    });
-	    },
-	    focus: function (event, person) {
-		    $('#ac_full_name').text(person.item.label);
-		    $('#ac_dob').text(person.item.date_of_birth_edtf);
-		    $('#ac_dod').text(person.item.date_of_death_edtf);
-		    $('#ac_pob').text(person.item.place_of_birth);
-		    $('#ac_aka').text(person.item.aka);
-		    $('#ac_auth').text(person.item.authority_source);
-		    $('#ac_auth_url').text(person.item.authority_source_url);
-		    $('#ac_notes').text(person.item.notes);
 
-		    let el = $('#autocomplete_work_person_summary');
-		    if (el.is(":hidden")) {
-			    el.toggle();
-		    }
-		    return false;
-	    },
-	    select: function (event, person) {
-		    let el = $('#autocomplete_work_person_summary');
-		    if (el.is(":visible")) {
-			    el.toggle();
-		    }
-		    addWorkPerson(person.item);
-		    $(this).val('');
-		    return false;
-	    }
-    })
-    $('#title').focusout(function(event) {
-        let el = $('#work_autocomplete_summary');
-        if (el.is(":visible")) {
-            el.toggle();
-        }
-    }).focusin(function(event) {
-        $(this).autocomplete("search");
-        return false;
-    });
-}
 function addWorkPerson(person) {
 	let el = $('div.people');
 	$.ajax({
-		url: "../ajax/people/ajax_work_person_form",
+		url: base_url + "/ajax/people/ajax_work_person_form",
 		data: {"id": person.id},
 		success: function (result) {
 			$('#work_people_div').append(result);
@@ -563,6 +627,8 @@ function addWorkPerson(person) {
 		}
 	});
 }
+
+
 
 function hookWorkPeopleRemoval() {
 	$('.workPersonRemover').off('click').click(function(event) {
@@ -611,54 +677,60 @@ function hookButtons() {
     hookRemoveContractButtons();
 }
 function hookNewContractButton() {
-	$('.newContractButton').click( function() {
-		$.ajax({
-			url: '/contracts/ajax/new/'+avalon_item_id,
-			method: 'GET',
-			success: function(response) {
-				Swal.fire({
-					title: 'New Agreement',
-					html: response,
-					showCancelButton: true,
-					preConfirm: () => {
-						const avalon_item_id = $('#contract_avalon_item_id').val()
-						const contract_type = $("#contract_contract_type").val()
-						const date_edtf_text = $('#contract_date_edtf_text').val();
-						const perpetual = $('#contract_perpetual').val();
-						const contract_notes = $('#contract_notes').val();
-						return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
-					}
-				}).then((result) => {
-					if (result.value) {
-						$.ajax({
-							url: '/contracts/ajax/create',
-							method: 'POST',
-							data: {contract: result.value},
-							success: function (result) {
-								$('.contracts').prepend(result)
-								hookRemoveContractButtons();
-								hookEditContractButtons();
-							},
-							error: function (xhr, status, error) {
-								swal.fire({
-									icon: '',
-									title: "Ajax Error trying to create a new Agreement",
-									text: xhr.responseText
-								})
-							}
-						})
-					}
-				})
-			},
-			error: function (xhr, status, error) {
-				swal.fire({
-					icon: '',
-					title: "Ajax Error trying to add a new Agreement",
-					text: xhr.responseText
-				})
-			}
-		});
-	});
+    $('.newContractButton').click( function() {
+        $.ajax({
+            url: '/contracts/ajax/new/'+avalon_item_id,
+            method: 'GET',
+            success: function(response) {
+                Swal.fire({
+                    title: 'New Agreement',
+                    html: response,
+                    showCancelButton: true,
+                    onOpen: () => {
+                        $('#contract_date_edtf_text').on('input', edtfValidate);
+                    },
+                    preConfirm: () => {
+                        const avalon_item_id = $('#contract_avalon_item_id').val();
+                        const contract_type = $("#contract_contract_type").val();
+                        const date_edtf_text = $('#contract_date_edtf_text').val();
+                        const perpetual = $('#contract_perpetual').val();
+                        const contract_notes = $('#contract_notes').val();
+                        return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+                    }
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '/contracts/ajax/create',
+                            method: 'POST',
+                            data: {contract: result.value},
+                            success: function (result) {
+                                $('.contracts').prepend(result)
+                                hookRemoveContractButtons();
+                                hookEditContractButtons();
+                                // increment the javascript number of legal_agreements for this Avalon Item
+                                legal_agreements++;
+                                legal_agreement_count++;
+                            },
+                            error: function (xhr, status, error) {
+                                swal.fire({
+                                    icon: '',
+                                    title: "Ajax Error trying to create a new Agreement",
+                                    text: xhr.responseText
+                                })
+                            }
+                        })
+                    }
+                })
+            },
+            error: function (xhr, status, error) {
+                swal.fire({
+                    icon: '',
+                    title: "Ajax Error trying to add a new Agreement",
+                    text: xhr.responseText
+                })
+            }
+        });
+    });
 }
 
 function hookEditContractButtons() {
@@ -728,7 +800,10 @@ function hookRemoveContractButtons() {
 					url: '/contracts/' + contractId,
 					method: 'DELETE',
 					success: function (result) {
-						$('div.contract[data-contract-id='+contractId+']').remove();
+              $('div.contract[data-contract-id='+contractId+']').remove();
+              // decrement the javascript number of contracts
+              legal_agreements--;
+              legal_agreement_count--;
 					},
 					error: function (xhr, status, error) {
 						swal.fire({
@@ -772,8 +847,7 @@ function hookAvalonNoteButton() {
 }
 function hookAccessSelects() {
     $("#access").unbind("change").change(function() {
-        let val = $(this).find("option:selected").attr('value');
-        ajaxAccess(val);
+        selectReasonsDiv(true, true, true);
     });
     $('.performance_access_select').unbind("change").change(function() {
         let id = $(this).attr('data-performance-id');
@@ -891,6 +965,7 @@ function cancelRecordingEdit(recordingId) {
 }
 function submitRecordingEditResponse(recordingId, e, data, status, xhr) {
     $(".recording_div[data-recording-id="+recordingId+"]").replaceWith(xhr.responseText);
+    structure_modified = true;
     rehookButtons();
     rehookAccordion();
     loadCalcedAccess();
@@ -1152,14 +1227,14 @@ function loadCalcedAccess() {
 			$('#sys_acc').html(result);
 		},
 		error: function(xhr, status, error) {
-			reloadPage("Error", "An error occurred while trying to load the System Calculated Access Determination. Please contact Andrew Albrecht.")
+			reloadPageWithError("An error occurred while trying to load the System Calculated Access Determination. Please contact Andrew Albrecht.")
 		}
 	})
 }
-function reloadPage(title='Reloading', msg="The Avalon Item will reload.", prompt) {
+function reloadPageWithError( msg="The Avalon Item will reload.", prompt) {
 	if (prompt) {
 		swal.fire({
-			title: title,
+			title: "Error",
 			html: msg
 		}).then(function() {
 			$('body').fadeOut("400", function() {

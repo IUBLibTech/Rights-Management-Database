@@ -26,12 +26,9 @@ class WorksController < ApplicationController
   # POST /works.json
   def create
     @work = Work.new(work_params)
+    process_work_contributors
     respond_to do |format|
       if @work.save
-        if params[:avalon_item_id]
-          @avalon_item = AvalonItem.find(params[:avalon_item_id])
-          AvalonItemWork.new(work_id: @work.id, avalon_item_id: params[:avalon_item_id].to_i).save
-        end
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
         format.json { render text: "success"}
       else
@@ -46,6 +43,7 @@ class WorksController < ApplicationController
   def update
     respond_to do |format|
       if @work.update(work_params)
+        process_work_contributors
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
         format.json { render :show, status: :ok, location: @work }
       else
@@ -108,5 +106,28 @@ class WorksController < ApplicationController
           :copyright_end_date_edtf, :access_determination, :notes
 
       )
+    end
+
+    def process_work_contributors
+      # now handle any additions/subtractions from the work contributors
+      existing_contributors = @work.people
+      existing_contributor_ids = existing_contributors.collect{|p| p.id}
+      form_people_ids = params[:work_people].blank? ? [] : params[:work_people].keys.map(&:to_i)
+      # people ids that appear in the form but are not already associated with the work
+      new_people_ids = form_people_ids - existing_contributor_ids
+      new_people_ids.each do |pid|
+        roles = params[:work_people][pid.to_s]
+        wc = WorkContributorPerson.new(work_id: @work.id, person_id: pid, principle_creator: roles.keys.include?("principle_creator"), contributor: roles.keys.include?("contributor"))
+        @work.work_contributor_people << wc
+      end
+      # people ids that appear in the form AND currently exist on the work may have had their roles change
+      existing_people_ids = existing_contributor_ids & form_people_ids
+      existing_people_ids.each do |pid|
+        roles = params[:work_people][pid.to_s]
+        WorkContributorPerson.where(work_id: @work.id, person_id: pid).update_all(principle_creator: roles.keys.include?("principle_creator"), contributor: roles.keys.include?("contributor"))
+      end
+      # existing contributors that DO NOT appear in the form have had their associations remove, delete these
+      remove_contributors = existing_contributor_ids - form_people_ids
+      WorkContributorPerson.where(work_id: @work.id, person_id: remove_contributors).delete_all
     end
 end
