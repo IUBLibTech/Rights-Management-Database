@@ -7,3 +7,11 @@ development:
   password: pickledHerring
   host: localhost
 
+production:
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: rmd_dev
+  username: rmd_dev
+  password: pickledHerring
+  host: localhost
