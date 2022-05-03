@@ -28,7 +28,7 @@ class SessionsController < ActionController::Base
   end
 
   def which_iu_login
-    if Rails.env == "production"
+    if Rails.env == "production" || Rails.application.secrets.use_prod_cas
       iu_login
     else
       iu_login_staging
