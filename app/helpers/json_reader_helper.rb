@@ -2,6 +2,7 @@ module JsonReaderHelper
   require 'nokogiri'
   require 'net/http'
   require 'uri'
+  include AvalonItemsHelper
 
   @@logger ||= Logger.new("#{Rails.root}/log/json_reader_delayed_job")
   READ_TIMEOUT_SECONDS = 180
