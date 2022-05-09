@@ -3,7 +3,7 @@ class AtomFeedReaderController < ApplicationController
   before_action :set_atom_feed_read, only: [:read_json, :load_avalon_record]
 
   def index
-    @atom_feed_reads = AtomFeedRead.where(successfully_read: false).order('avalon_last_updated ASC').limit(100)
+      @atom_feed_reads = AtomFeedRead.where(successfully_read: false).order('avalon_last_updated ASC').limit(100)
   end
 
   # action for pre loading the first (oldest) recordings in MCO

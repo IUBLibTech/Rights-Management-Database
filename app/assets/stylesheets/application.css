@@ -567,7 +567,7 @@ a:link, a:focus, a:visited, a:active {
     background: #c9ecff;
 }
 .badEdtf, .badYear, .badFullDate, .badUrl, .badHms {
-    color: red;
+    color: #900;
     font-weight: bold;
 }
 .aiJsonMenu {
@@ -913,5 +913,18 @@ li > form {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+div.legal_agreement > select, div.legal_agreement > input {
+    display: inline;
+    max-width: 90%;
+}
+div.legal_agreement > label {
+    display: block;
+}
+
+.req {
+    font-weight: bold;
+    display: none;
 }
 

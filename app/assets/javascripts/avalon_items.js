@@ -695,7 +695,12 @@ function hookNewContractButton() {
                         const date_edtf_text = $('#contract_date_edtf_text').val();
                         const perpetual = $('#contract_perpetual').val();
                         const contract_notes = $('#contract_notes').val();
-                        return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+                        if (contract_type !== "" && validEdtfDate(date_edtf_text) && perpetual !== "") {
+                            return {contract_type: contract_type, date_edtf_text: date_edtf_text, perpetual: perpetual, notes: contract_notes, avalon_item_id: avalon_item_id}
+                        } else {
+                            $(".req").show();
+                            return false;
+                        }
                     }
                 }).then((result) => {
                     if (result.value) {
