@@ -7,8 +7,6 @@ class JsonReaderTask
   run_at Time.now
   queue 'json-reader'
 
-  READ_TIMEOUT_SECONDS = 180
-
   def perform
     # see JsonReaderHelper for this
     read_json

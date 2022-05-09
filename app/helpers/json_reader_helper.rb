@@ -4,6 +4,7 @@ module JsonReaderHelper
   require 'uri'
 
   @@logger ||= Logger.new("#{Rails.root}/log/json_reader_delayed_job")
+  READ_TIMEOUT_SECONDS = 180
 
   def read_json
     @@logger.info "Checking for new JSON records"
