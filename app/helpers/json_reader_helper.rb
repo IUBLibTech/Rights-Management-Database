@@ -36,7 +36,7 @@ module JsonReaderHelper
     json_text = read_avalon_json(afr.json_url)
     @atom_feed_read = afr
     save_json(json_text)
-    afr.update_attributes(successfully_read: true)
+    afr.update_attributes(successfully_read: true, json_failed: false, json_error_message: '')
   end
 
   private
