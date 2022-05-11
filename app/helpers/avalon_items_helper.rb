@@ -12,6 +12,7 @@ module AvalonItemsHelper
   def pod_metadata_unit(mdpi_barcode)
     # this is not Java... Strings are full fledged objects and unless you .dup or .clone the secret val, you are changing
     # the value stored at Rails.application.secrets... NOT GOOD
+    debugger
     u = Rails.application.secrets[:pod_full_metadata_url].dup.gsub!(':mdpi_barcode', mdpi_barcode)
     uri = URI.parse(u)
     http = Net::HTTP.new(uri.host, uri.port)

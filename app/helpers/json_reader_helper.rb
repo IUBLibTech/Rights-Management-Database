@@ -33,10 +33,11 @@ module JsonReaderHelper
 
   def load_single(afr)
     @@logger.info "\n\n\n\n\nReading JSON for #{afr.avalon_id}\n\n\n\n\n\n"
+    debugger
     json_text = read_avalon_json(afr.json_url)
     @atom_feed_read = afr
     save_json(json_text)
-    afr.update_attributes(successfully_read: true)
+    afr.update_attributes(successfully_read: true, json_failed: false, json_error_message: '')
   end
 
   private
@@ -94,6 +95,7 @@ module JsonReaderHelper
     collection = json["collection"]
     publication_date = json["publication_date"]
     summary = json["summary"]
+    debugger
     barcodes = json["fields"]["other_identifier"].select{|i| i.match(/4[0-9]{13}/) }
     unit = pod_metadata_unit(barcodes.first)
     avalon_item = AvalonItem.new(avalon_id: json["id"], title: title, collection: collection, json: json_text, pod_unit: unit, review_state: AvalonItem::REVIEW_STATE_DEFAULT)
