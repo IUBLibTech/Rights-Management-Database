@@ -44,6 +44,10 @@ class NavController < ApplicationController
     @works = Work.solr_search(params[:search])
   end
 
+  def user_guide
+    render 'user_guide'
+  end
+
   # Search is no longer based on MDPI barcodes, eventually it will entail fedora ids and free text
   # def mdpi_barcode_search
   #   @recording = Recording.where(mdpi_barcode: params[:mdpi_barcode]).first

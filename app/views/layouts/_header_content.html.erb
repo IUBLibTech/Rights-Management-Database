@@ -39,13 +39,13 @@
           <% end %>
         </li>
         <% end %>
-        <li>
-          <% if controller_name == 'avalon_items' && action_name == 'index' %>
-            <%= link_to "Avalon Items", avalon_items_path, "aria-current":"page" %>
-          <% else %>
-            <%= link_to link_to "Avalon Items", avalon_items_path %>
-          <% end %>
-        </li>
+<!--        <li>-->
+          <%# if controller_name == 'avalon_items' && action_name == 'index' %>
+            <%#= link_to "Avalon Items", avalon_items_path, "aria-current":"page" %>
+          <%# else %>
+            <%#= link_to link_to "Avalon Items", avalon_items_path %>
+          <%# end %>
+<!--        </li>-->
         <li>
           <% if controller_name == 'people' && action_name == 'index' %>
             <%= link_to "People/Entities", people_path, "aria-current":"page" %>
@@ -60,20 +60,13 @@
             <%= link_to "Works", works_path %>
           <% end %>
         </li>
-<!--        <li>-->
-          <%# if controller_name == 'user' &&  action_name == 'index' %>
-            <%#= link_to "Users", users_path, "aria-current":'page' %>
-          <%# else %>
-            <%#= link_to "Users", users_path %>
-          <%# end %>
-<!--        </li>-->
-<!--        <li>-->
-          <%# if controller_name == 'atom_feed_reader' && action_name == 'index' %>
-            <%#= link_to 'Atom Feed', atom_feed_tester_path, "aria-current":'page' %>
-          <%# else %>
-            <%#= link_to "Atom Feed", atom_feed_tester_path %>
-          <%# end %>
-<!--        </li>-->
+        <li>
+          <% if controller_name == 'nav' and action_name == 'user_guide' %>
+            <%= link_to "User Guide", user_guide_path, "aria-current":"page" %>
+          <% else %>
+            <%= link_to "User Guide", user_guide_path %>
+          <% end %>
+        </li>
       </ul>
     </nav>
     <div class="rvt-header-id">

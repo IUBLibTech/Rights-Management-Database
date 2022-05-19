@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post '/date_search', to: 'nav#date_search_post', as: 'date_search_post'
 
   get '/nav/test', to: 'nav#test', as: 'nav_test'
+  get '/user_guide', to: 'nav#user_guide', as: 'user_guide'
   get '/atom_tester/search', to: 'atom_feed_reader#search', as: 'atom_feed_search'
 
   get '/atom_tester', to: 'atom_feed_reader#index', as: 'atom_feed_tester'
