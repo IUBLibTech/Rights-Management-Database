@@ -64,7 +64,7 @@ class CollectionsController < ApplicationController
   # an access determination could not be created because of business logic rules.
   def process_access(avalon_items)
     # lots to be done here: first check that collection manager is not trying to set access wider than copyright librarian has set
-    if params[:access]
+    unless params[:access].blank?
       @access = PastAccessDecision.new(decision: params[:access], changed_by: User.current_username, copyright_librarian: false)
       avalon_items.each do |ai|
         begin
@@ -85,7 +85,7 @@ class CollectionsController < ApplicationController
               ai.reason_public_domain = !params[:worldwide][:reason_public_domain].nil?
             ai.reason_license = !params[:worldwide][:reason_license].nil?
             elsif pad.decision == AccessDeterminationHelper::IU_ACCESS
-              ai.reason_in_copyright = !params[:iu][:reason_in_copyright].nil?
+              ai.reason_in_copyright = !params[:iu].nil? && !params[:iu][:reason_in_copyright].nil?
             end
             if pad.decision == AccessDeterminationHelper::DEFAULT_ACCESS
               ai.review_state = AccessDeterminationHelper::DEFAULT_ACCESS
@@ -99,8 +99,9 @@ class CollectionsController < ApplicationController
         end
       end
       true
+    else
+      false
     end
-    false
   end
 
   def process_legal_agreement(avalon_items)
@@ -120,7 +121,7 @@ class CollectionsController < ApplicationController
   end
 
   def process_note(avalon_items)
-    if params[:note]
+    unless params[:note].blank?
       @note = AvalonItemNote.new(text: params[:note], creator: User.current_username)
       avalon_items.each do |ai|
         note = @note.dup

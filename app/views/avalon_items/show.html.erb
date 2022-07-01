@@ -1,6 +1,6 @@
 <% if flash[:warning] || flash.now[:warning] %>
   <p class="warning"><%= flash[:warning].html_safe %></p>
-<% else %>
+<% end %>
 
 <div id="adder_overlay" data-animation-offscreen="true">
   <i id="adder_close" class="fa fa-window-close" style="font-size:30px;float: right;"><span class=sr-only>close menu</span></i>
@@ -31,7 +31,11 @@
     <% end %>
   </div>
 </div>
-<div class="">
+
+<% if @json.nil? || @avalon_item.json.nil? %>
+  <p class="warning"><b>An error occurred while trying to read the most recent MCO metadata for this record. </b></p>
+<% else %>
+<div class="json">
   <h3 class="accordion accordion-title active accordion-trigger" aria-expanded=true>MCO Metadata
     <span class="accordion-icon"></span></h3>
   <div class="rvt-grid m-fadeIn">
@@ -154,6 +158,7 @@
     </table>
   </div>
 </div>
+
 <% if User.current_username == '' %>
 <div>
   <h3 class="accordion accordion-title active accordion-trigger" aria-expanded="true">JSON<span class="accordion-icon"></span></h3>
@@ -163,7 +168,8 @@
     </pre>
   </div>
 </div>
-  <% end %>
+
+<% end %>
 <!--<div class="rvt-dropdown__menu aiJsonMenu" id="dropdown-navigation" aria-hidden="true" role="menu">-->
 <!--  <button id="addPersonButton">Add Person/Entity</button>-->
 <!--  <button id="addWorkButton">Add Work</button>-->

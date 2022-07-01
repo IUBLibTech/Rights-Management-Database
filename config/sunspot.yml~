@@ -1,0 +1,7 @@
+development:
+  solr:
+    # LIT solr rmd_devel instance
+    hostname: possum.dlib.indiana.edu
+    port: 8216
+    log_level: WARNING
+    path: /solr/rmd-devel

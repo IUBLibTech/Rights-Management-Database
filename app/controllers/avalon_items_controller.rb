@@ -21,10 +21,10 @@ class AvalonItemsController < ApplicationController
         @mdpi_barcodes = parse_bc(@json["fields"]["other_identifier"])
         @atom_feed_read = AtomFeedRead.where("avalon_id like '%#{@avalon_item.avalon_id}'").first
       else
-        flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+        flash[:warning] = json_flash_error_message
       end
     rescue
-      flash[:warning] ="<b>An error occurred trying to read the JSON record from MCO for id: #{@avalon_item.avalon_id}. If the Avalon service is currently <u>online</u>, contact (???) immediately!</b>".html_safe
+      flash[:warning] = json_flash_error_message
     end
     redirect_to root_path unless User.belongs_to_unit?(@avalon_item.pod_unit) || User.current_user_copyright_librarian?
   end
@@ -533,6 +533,9 @@ class AvalonItemsController < ApplicationController
   end
 
   private
+  def json_flash_error_message
+    "<b>An error occurred trying to read JSON from MCO for id: #{@avalon_item.avalon_id}. MCO metadata is currently unavailable.</b>".html_safe
+  end
   def parse_bc(ids)
     ids.select{|id| id.match(/4[\d]{13}/)}
   end

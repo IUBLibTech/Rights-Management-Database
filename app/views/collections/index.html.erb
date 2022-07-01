@@ -3,7 +3,8 @@
     <h1 class="rvt-alert__title" id="danger-alert-title">Invalid Select</h1>
     <%= flash.now[:warning].html_safe %>
   </div>
-<% elsif flash.now[:notice] %>
+<% end %>
+<% if flash.now[:notice] %>
   <div class="rvt-alert rvt-alert--success rvt-m-bottom-md" role="alertdialog" aria-labelledby="success-alert-title">
     <h1 class="rvt-alert__title" id="success-alert-title">The following updates were successful:</h1>
     <%= flash.now[:notice].html_safe %>

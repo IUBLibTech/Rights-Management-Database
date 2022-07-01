@@ -1,0 +1,6 @@
+Database setup:
+Host: dragon.dlib.indiana.edu
+Port: 3306
+User: app_rmd
+Password: Moroccos@nun>envenomed333
+DB: app_rmd_prod, app_rmd_devel, app_rmd_test
