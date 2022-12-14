@@ -92,7 +92,7 @@ GEM
     json (2.6.1)
     ldap_groups_lookup (0.7.0)
       net-ldap
-    loofah (2.5.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -121,7 +121,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
-    racc (1.6.0)
+    racc (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.11.3)
